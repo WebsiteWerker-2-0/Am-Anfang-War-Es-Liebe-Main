@@ -1180,14 +1180,19 @@ a:hover {
   padding-block-start: var(--space-5);
 }
 
-.logo-placeholder {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 3.5rem;
-  padding: var(--space-2) var(--space-4);
-  border: 1px dashed rgb(255 255 255 / 0.6);
-  margin-block-end: var(--space-3);
+/* Förderlogo auf weißer Fläche, weil das Logo schwarze Schrift auf transparentem Grund hat */
+.funding-logo {
+  width: fit-content;
+  max-width: 100%;
+  background: var(--c-paper);
+  padding: var(--space-4) var(--space-5);
+}
+
+.funding-logo img {
+  display: block;
+  width: 22rem;
+  max-width: 100%;
+  height: auto;
 }
 
 .draft-note {

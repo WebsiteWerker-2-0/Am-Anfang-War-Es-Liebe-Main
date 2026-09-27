@@ -45,4 +45,4 @@ Im Code mit `OFFEN:` markiert. Die wichtigsten Punkte:
 - Übersetzungen (AR, RU, EN, TR) sind nur eine Hinweisseite und brauchen Freigabe
 - Impressum und Datenschutzerklärung sind Platzhalter
 - Nutzungsrechte der Broschüren-Illustrationen (fien-design) für das Web klären
-- Förderlogo MKJFGFI (Z-11)
+- Förderlogo MKJFGFI ist eingebaut, Größe und Platzierung nach den Fördervorgaben prüfen (Z-11)

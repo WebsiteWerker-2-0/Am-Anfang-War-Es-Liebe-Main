@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import fundingLogo from "@/assets/logos/mkjfgfi-nrw.png";
 import { PhoneLink } from "./PhoneLink";
 
 export function SiteFooter() {
@@ -45,12 +47,15 @@ export function SiteFooter() {
           </ul>
         </nav>
         <div className="site-footer__funding stack">
-          {/* Förderhinweis. OFFEN: Logo gemäß Fördervorgaben (Z-11) */}
-          <span className="logo-placeholder">Logo MKJFGFI NRW (folgt)</span>
-          <p>
-            Gefördert vom Ministerium für Kinder, Jugend, Familie, Gleichstellung, Flucht und Integration des Landes
-            Nordrhein-Westfalen.
-          </p>
+          {/* Förderhinweis. OFFEN: Größe und Schutzzone des Logos nach Fördervorgaben prüfen (Z-11) */}
+          <p>Gefördert durch</p>
+          <div className="funding-logo">
+            <Image
+              src={fundingLogo}
+              alt="Ministerium für Kinder, Jugend, Familie, Gleichstellung, Flucht und Integration des Landes Nordrhein-Westfalen"
+              sizes="22rem"
+            />
+          </div>
           <p className="draft-note">
             Entwurf, Stand 27.09.2026. Inhalte und Gestaltung sind noch nicht freigegeben. Illustrationen: fien-design,
             Höxter.
