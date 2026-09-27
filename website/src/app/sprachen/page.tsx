@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { NotausgangLink } from "@/components/Notausgang";
-import { Seitenkopf } from "@/components/Seitenkopf";
+import { QuickExitLink } from "@/components/QuickExit";
+import { PageHeader } from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Sprachen",
@@ -8,71 +8,71 @@ export const metadata: Metadata = {
 };
 
 // OFFEN: Übersetzungen fachlich vom AG freigeben lassen (Abschnitt 13, Punkt 3)
-const texte = [
+const languageVersions = [
   {
     code: "ar",
     dir: "rtl" as const,
-    titel: "العربية",
+    title: "العربية",
     text: "يجري حاليًا إعداد هذا الموقع باللغة العربية. حتى ذلك الحين: يقدّم خط المساعدة «العنف ضد المرأة» استشارة مجانية وسرية على مدار الساعة بـ 18 لغة.",
-    notfall: "في حالات الطوارئ اتصلي بالشرطة:",
-    hilfetelefon: "خط المساعدة:",
+    emergency: "في حالات الطوارئ اتصلي بالشرطة:",
+    helpline: "خط المساعدة:",
     exit: "مغادرة الصفحة",
   },
   {
     code: "ru",
     dir: "ltr" as const,
-    titel: "Русский",
+    title: "Русский",
     text: "Русская версия сайта готовится. А пока: телефон доверия «Насилие в отношении женщин» круглосуточно, бесплатно и конфиденциально консультирует на 18 языках.",
-    notfall: "В экстренном случае звоните в полицию:",
-    hilfetelefon: "Телефон доверия:",
+    emergency: "В экстренном случае звоните в полицию:",
+    helpline: "Телефон доверия:",
     exit: "Покинуть страницу",
   },
   {
     code: "en",
     dir: "ltr" as const,
-    titel: "English",
+    title: "English",
     text: "An English version of this website is being prepared. Until then: the helpline “Violence against Women” offers free and confidential advice around the clock in 18 languages.",
-    notfall: "In an emergency, call the police:",
-    hilfetelefon: "Helpline:",
+    emergency: "In an emergency, call the police:",
+    helpline: "Helpline:",
     exit: "Leave this page",
   },
   {
     code: "tr",
     dir: "ltr" as const,
-    titel: "Türkçe",
+    title: "Türkçe",
     text: "Bu web sitesinin Türkçe sürümü hazırlanıyor. O zamana kadar: „Kadına Yönelik Şiddet“ yardım hattı günün her saatinde 18 dilde ücretsiz ve gizli danışmanlık sunuyor.",
-    notfall: "Acil durumda polisi arayın:",
-    hilfetelefon: "Yardım hattı:",
+    emergency: "Acil durumda polisi arayın:",
+    helpline: "Yardım hattı:",
     exit: "Sayfadan çık",
   },
 ];
 
-export default function SprachenSeite() {
+export default function LanguagesPage() {
   return (
     <>
-      <Seitenkopf
-        titel="Sprachen"
-        einleitung="Die Übersetzungen der Website sind in Arbeit. Das Hilfetelefon berät schon heute in 18 Sprachen."
+      <PageHeader
+        title="Sprachen"
+        intro="Die Übersetzungen der Website sind in Arbeit. Das Hilfetelefon berät schon heute in 18 Sprachen."
       />
       <div className="wide">
-        {texte.map((t) => (
-          <section key={t.code} id={t.code} lang={t.code} dir={t.dir} className="sprache measure stack">
-            <h2>{t.titel}</h2>
-            <p>{t.text}</p>
+        {languageVersions.map((version) => (
+          <section key={version.code} id={version.code} lang={version.code} dir={version.dir} className="language measure stack">
+            <h2>{version.title}</h2>
+            <p>{version.text}</p>
             <p>
-              {t.hilfetelefon}{" "}
+              {version.helpline}{" "}
               <a href="tel:116016" className="tel" dir="ltr">
                 116&#8239;016
               </a>
             </p>
             <p>
-              {t.notfall}{" "}
+              {version.emergency}{" "}
               <a href="tel:110" className="tel" dir="ltr">
                 110
               </a>
             </p>
             <p>
-              <NotausgangLink label={t.exit} />
+              <QuickExitLink label={version.exit} />
             </p>
           </section>
         ))}

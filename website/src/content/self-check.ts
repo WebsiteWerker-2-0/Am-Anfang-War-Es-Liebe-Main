@@ -1,6 +1,6 @@
 // Aussagen des Selbstchecks, übernommen von der Altseite.
 // OFFEN: Textfreigabe durch den AG (Z-02).
-export const aussagen = [
+export const statements = [
   "macht Sie verantwortlich für seinen Frust und Ärger und gibt Ihnen die Schuld",
   "beleidigt Sie, wertet Sie vor Freunden und Familie ab und macht Sie lächerlich",
   "isoliert Sie, ist stark eifersüchtig und verbietet Ihnen, Freunde, Verwandte oder Kollegen zu treffen",

@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic, Literata, Noto_Naskh_Arabic } from "next/font/google";
-import { Fuss } from "@/components/Fuss";
-import { Kopf } from "@/components/Kopf";
-import { NotausgangLink, NotausgangVerhalten } from "@/components/Notausgang";
+import { QuickExitBehavior, QuickExitLink } from "@/components/QuickExit";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
 
 // Schriften werden von next/font beim Build geladen und vom eigenen Server
-// ausgeliefert, der Browser fragt nie bei Google an (Abschnitt 0, Regel 1).
+// ausgeliefert, der Browser fragt nie bei Google an (ADR-0002).
 // Vorgeladen wird nur Latein; Kyrillisch und Arabisch kommen per unicode-range.
 const literata = Literata({
   subsets: ["latin"],
@@ -65,13 +65,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${literata.variable} ${plex.variable} ${naskh.variable} ${plexArabic.variable}`}
     >
       <body>
-        <NotausgangVerhalten />
-        <Kopf />
+        <QuickExitBehavior />
+        <SiteHeader />
         <main id="inhalt" tabIndex={-1}>
           {children}
         </main>
-        <Fuss />
-        <NotausgangLink fixed />
+        <SiteFooter />
+        <QuickExitLink fixed />
       </body>
     </html>
   );

@@ -13,21 +13,23 @@ npm run dev
 
 ## Aufbau
 
+Bezeichner im Code sind die englischen Entsprechungen aus [`../CONTEXT.md`](../CONTEXT.md), URLs und Anker bleiben deutsch.
+
 | Pfad | Inhalt |
 |---|---|
 | `src/app/` | Seiten: Start, Hilfe, Selbstcheck, Aktuelles, Kurse, Infos, Arbeitskreis, Kontakt, Internetspuren, Sprachen, Impressum, Datenschutz |
-| `src/components/` | Hilfeleiste mit Notausgang, Selbstcheck, Ausstellungs-Slider, Anlaufstelle, Kontaktformular |
-| `src/content/` | Inhalte als Daten: Anlaufstellen, Selbstcheck, Ausstellung, Navigation, Beiträge |
-| `src/content/beitraege.json` | Beiträge der Altseite, erzeugt mit `python3 ../altseite/beitraege-uebernehmen.py` |
-| `src/assets/` | Broschüren-Illustrationen und Ausstellungstafeln (über `next/image` als AVIF/WebP) |
+| `src/components/` | Hilfeleiste und Notausgang (`SiteHeader`, `QuickExit`), Selbstcheck (`SelfCheckForm`), Wanderausstellung (`ExhibitionSlider`), Anlaufstelle (`SupportServiceSection`), Beiträge (`PostList`), Kontaktformular (`ContactForm`) |
+| `src/content/` | Inhalte als Daten: Anlaufstellen (`support-services.ts`), Aussagen des Selbstchecks, Tafeln, Navigation, Beiträge |
+| `src/content/posts.json` | Beiträge der Altseite, erzeugt mit `python3 ../altseite/import-posts.py`, später aus dem CMS (ADR-0001) |
+| `src/assets/` | Broschüren-Illustrationen (`illustrations/`, `band-pNN` = Broschürenseite) und Tafeln der Wanderausstellung (`exhibition/`) |
 | `public/medien/` | Bilder und Videos aus den Beiträgen der Altseite |
-| `public/downloads/` | Broschüre, Flyer, Plakat |
+| `public/downloads/` | Dokumente: Broschüre, Flyer, Plakat |
 
 ## Umgesetzt nach Vorgabe
 
-- Keine externen Ressourcen: Schriften über `next/font` selbst gehostet, keine Embeds, kein Tracking, keine Cookies
+- Keine externen Ressourcen (ADR-0002): Schriften über `next/font` selbst gehostet, keine Embeds, kein Tracking, keine Cookies
 - Notausgang auf jeder Seite (Hilfeleiste, mobil zusätzlich fixiert), zweimal Esc, `Referrer-Policy: no-referrer`
-- Selbstcheck ohne Speicherung, Zurücksetzen beim Zurücknavigieren
+- Selbstcheck ohne Speicherung, Zurücksetzen beim Zurücknavigieren (ADR-0003)
 - Anlaufstellen mit fester Datenreihenfolge, weitere Stellen in nativen `<details>`
 - Wanderausstellung als Slider mit `scroll-snap`, ohne Autoplay
 - Sicherheits-Header in `next.config.ts`, CSP vorerst als Report-Only

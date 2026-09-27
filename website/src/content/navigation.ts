@@ -1,4 +1,4 @@
-export const hauptnavigation = [
+export const mainNavigation = [
   { href: "/hilfe", label: "Hilfe" },
   { href: "/selbstcheck", label: "Selbstcheck" },
   { href: "/aktuelles", label: "Aktuelles" },
@@ -8,8 +8,8 @@ export const hauptnavigation = [
   { href: "/kontakt", label: "Kontakt" },
 ];
 
-// Sprachen in Eigenschreibung, ohne Flaggen (Abschnitt 6.1)
-export const sprachen = [
+// Sprachfassungen in Eigenschreibung, ohne Flaggen (Abschnitt 6.1)
+export const languages = [
   { code: "de", label: "Deutsch", href: "/" },
   { code: "ar", label: "العربية", href: "/sprachen#ar" },
   { code: "ru", label: "Русский", href: "/sprachen#ru" },
@@ -18,4 +18,4 @@ export const sprachen = [
 ];
 
 // Ziel des Notausgangs (Abschnitt 6.2)
-export const EXIT_URL = "https://www.google.com/search?q=wetter";
+export const QUICK_EXIT_URL = "https://www.google.com/search?q=wetter";

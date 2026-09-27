@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
-import band from "@/assets/illustrationen/band-06-b.jpg";
-import { Seitenkopf } from "@/components/Seitenkopf";
+import band from "@/assets/illustrations/band-p06.jpg";
+import { PageHeader } from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Selbstverteidigung und Selbstbehauptung",
   description: "Krav Maga und WenDo: Kurse für Frauen, Mädchen und Kinder im Kreis Höxter.",
 };
 
-export default function KurseSeite() {
+export default function CoursesPage() {
   return (
     <>
-      <Seitenkopf
-        titel="Selbstverteidigung und Selbstbehauptung"
+      <PageHeader
+        title="Selbstverteidigung und Selbstbehauptung"
         band={band}
-        einleitung="Mit einer Förderung des Landes NRW bietet der Arbeitskreis Kurse für Frauen, Mädchen und Kinder an. Wer weiß, wie man Grenzen setzt und sich wehrt, geht sicherer durchs Leben."
+        intro="Mit einer Förderung des Landes NRW bietet der Arbeitskreis Kurse für Frauen, Mädchen und Kinder an. Wer weiß, wie man Grenzen setzt und sich wehrt, geht sicherer durchs Leben."
       />
       <div className="wide stack-lg">
-        <div className="hinweis measure">
+        <div className="notice measure">
           <p>
             <strong>Termine 2026:</strong> folgen. Die Anmeldung ist künftig direkt hier auf der Website möglich.
           </p>
         </div>
 
-        <section className="anlaufstelle" aria-labelledby="krav-maga">
+        <section className="service" aria-labelledby="krav-maga">
           <h2 id="krav-maga">Krav Maga für Frauen, Mädchen und Kinder</h2>
           <div className="measure stack">
             <p>In Zusammenarbeit mit SAMI-X Krav Maga TC Höxter.</p>
@@ -33,7 +33,7 @@ export default function KurseSeite() {
             </p>
             <h3>Für Frauen und Mädchen ab 15 Jahren</h3>
             <p>
-              Die Seminare bereiten auf bedrohliche Situationen und sexuelle Übergriffe vor. Sie lernen einfache,
+              Die Kurse bereiten auf bedrohliche Situationen und sexuelle Übergriffe vor. Sie lernen einfache,
               wirksame Techniken und wie Sie sich in Gefahrensituationen taktisch richtig verhalten. Auf Wunsch können
               Sie Situationen realitätsnah an einem Trainer in voller Schutzausrüstung üben.
             </p>
@@ -42,7 +42,7 @@ export default function KurseSeite() {
               Fit und stark fürs Leben: Im Mittelpunkt stehen Freude an der Bewegung, Selbstbewusstsein und Grenzen
               setzen. Dazu gehören:
             </p>
-            <ul className="liste-punkte">
+            <ul className="list-bullets">
               <li>Vorbeugen: Was kann ich tun, damit ich nicht in gefährliche Situationen gerate?</li>
               <li>Laut werden: schreien, Nein sagen</li>
               <li>Hilfe holen</li>
@@ -56,7 +56,7 @@ export default function KurseSeite() {
           </div>
         </section>
 
-        <section className="anlaufstelle" aria-labelledby="wendo">
+        <section className="service" aria-labelledby="wendo">
           <h2 id="wendo">WenDo für Frauen und Mädchen</h2>
           <div className="measure stack">
             <p>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Seitenkopf } from "@/components/Seitenkopf";
+import { PageHeader } from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Internetspuren löschen",
@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 };
 
 // OFFEN: Anleitungen vor Livegang gegen aktuelle Browserversionen prüfen
-export default function InternetspurenSeite() {
+export default function BrowsingTracesPage() {
   return (
     <>
-      <Seitenkopf
-        titel="Internetspuren löschen"
-        einleitung="Wenn Sie nicht möchten, dass jemand sieht, dass Sie auf dieser Seite waren, helfen diese Schritte."
+      <PageHeader
+        title="Internetspuren löschen"
+        intro="Wenn Sie nicht möchten, dass jemand sieht, dass Sie auf dieser Seite waren, helfen diese Schritte."
       />
       <div className="wide stack-lg">
         <section className="measure stack" aria-labelledby="notausgang">
@@ -22,7 +22,7 @@ export default function InternetspurenSeite() {
             Er bringt Sie sofort zu einer Wettervorhersage bei Google. Mit der Tastatur geht es noch schneller:
             Drücken Sie <strong>zweimal kurz hintereinander die Esc-Taste</strong>.
           </p>
-          <p className="hinweis">
+          <p className="notice">
             Wichtig: Der Knopf ersetzt nur die aktuelle Seite. Andere Seiten dieser Website, die Sie vorher angesehen
             haben, stehen weiter im Verlauf. Löschen Sie deshalb danach Ihren Verlauf, wie unten beschrieben.
           </p>
@@ -34,7 +34,7 @@ export default function InternetspurenSeite() {
             In einem privaten Fenster speichert der Browser keinen Verlauf. Sobald Sie es schließen, sind die Spuren
             weg.
           </p>
-          <ul className="liste-punkte">
+          <ul className="list-bullets">
             <li>Chrome und Edge: Strg + Umschalt + N (Mac: Cmd + Umschalt + N)</li>
             <li>Firefox: Strg + Umschalt + P (Mac: Cmd + Umschalt + P)</li>
             <li>Safari auf dem Mac: Cmd + Umschalt + N</li>
@@ -45,7 +45,7 @@ export default function InternetspurenSeite() {
         <section className="measure stack" aria-labelledby="loeschen">
           <h2 id="loeschen">Verlauf nachträglich löschen</h2>
           <h3>Chrome, Edge und Firefox am Computer</h3>
-          <ol className="liste-schritte">
+          <ol className="list-steps">
             <li>
               <span>Drücken Sie Strg + Umschalt + Entf (Mac: Cmd + Umschalt + Entf).</span>
             </li>
@@ -57,7 +57,7 @@ export default function InternetspurenSeite() {
             </li>
           </ol>
           <h3>Safari am Mac</h3>
-          <ol className="liste-schritte">
+          <ol className="list-steps">
             <li>
               <span>Öffnen Sie oben im Menü „Verlauf“ und wählen Sie „Verlauf löschen …“.</span>
             </li>
@@ -66,7 +66,7 @@ export default function InternetspurenSeite() {
             </li>
           </ol>
           <h3>iPhone und iPad</h3>
-          <ol className="liste-schritte">
+          <ol className="list-steps">
             <li>
               <span>Öffnen Sie die Einstellungen und dann Apps, Safari.</span>
             </li>
@@ -75,7 +75,7 @@ export default function InternetspurenSeite() {
             </li>
           </ol>
           <h3>Android mit Chrome</h3>
-          <ol className="liste-schritte">
+          <ol className="list-steps">
             <li>
               <span>Tippen Sie oben rechts auf die drei Punkte und dann auf „Verlauf“.</span>
             </li>
@@ -87,7 +87,7 @@ export default function InternetspurenSeite() {
 
         <section className="measure stack" aria-labelledby="mehr">
           <h2 id="mehr">Was Sie außerdem bedenken sollten</h2>
-          <ul className="liste-punkte">
+          <ul className="list-bullets">
             <li>Anrufe bei Beratungsstellen stehen in der Anrufliste Ihres Telefons. Löschen Sie sie bei Bedarf.</li>
             <li>
               Ein gemeinsam genutzter Computer oder ein Handy, zu dem jemand anderes das Passwort kennt, ist nicht

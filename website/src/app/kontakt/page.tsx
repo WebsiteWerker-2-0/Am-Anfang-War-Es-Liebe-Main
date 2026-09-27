@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { Kontaktformular } from "@/components/Kontaktformular";
-import { Seitenkopf } from "@/components/Seitenkopf";
-import { Telefon } from "@/components/Telefon";
+import { ContactForm } from "@/components/ContactForm";
+import { PageHeader } from "@/components/PageHeader";
+import { PhoneLink } from "@/components/PhoneLink";
 
 export const metadata: Metadata = {
   title: "Kontakt",
   description: "So erreichen Sie den Arbeitskreis gegen Gewalt an Frauen und Kindern im Kreis Höxter.",
 };
 
-export default function KontaktSeite() {
+export default function ContactPage() {
   return (
     <>
-      <Seitenkopf
-        titel="Kontakt"
-        einleitung="Sie haben eine Frage an den Arbeitskreis oder möchten eine Veranstaltung anfragen? Schreiben Sie uns oder rufen Sie an."
+      <PageHeader
+        title="Kontakt"
+        intro="Sie haben eine Frage an den Arbeitskreis oder möchten eine Veranstaltung anfragen? Schreiben Sie uns oder rufen Sie an."
       />
       <div className="wide stack-lg">
-        <div className="notfall measure" role="note">
+        <div className="emergency measure" role="note">
           <p>
             <strong>Brauchen Sie jetzt Hilfe?</strong> Das Formular ist nicht für Notfälle gedacht. Rufen Sie im
-            Notfall die Polizei unter <Telefon nummer="110" /> oder das Hilfetelefon unter <Telefon nummer="116 016" />{" "}
+            Notfall die Polizei unter <PhoneLink number="110" /> oder das Hilfetelefon unter <PhoneLink number="116 016" />{" "}
             an.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function KontaktSeite() {
             37671 Höxter
           </p>
           <p>
-            Telefon <Telefon nummer="05271 9659904" />
+            Telefon <PhoneLink number="05271 9659904" />
             <br />
             E-Mail <a href="mailto:gleichstellung@kreis-hoexter.de">gleichstellung@kreis-hoexter.de</a>
           </p>
@@ -44,7 +44,7 @@ export default function KontaktSeite() {
 
         <section className="stack" aria-labelledby="formular">
           <h2 id="formular">Nachricht schreiben</h2>
-          <Kontaktformular />
+          <ContactForm />
         </section>
       </div>
     </>

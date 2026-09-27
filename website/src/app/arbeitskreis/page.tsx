@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import band from "@/assets/illustrationen/band-13.jpg";
-import { Seitenkopf } from "@/components/Seitenkopf";
+import band from "@/assets/illustrations/band-p13.jpg";
+import { PageHeader } from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Der Arbeitskreis",
@@ -8,33 +8,33 @@ export const metadata: Metadata = {
 };
 
 // OFFEN: Mitgliederliste von der Altseite, vom AG aktualisieren lassen
-const mitglieder = [
-  { name: "Anna Lütkefend", rolle: "Gleichstellungsbeauftragte des Kreises Höxter" },
-  { name: "Nadine Nolte", rolle: "Gleichstellungsbeauftragte der Stadt Höxter" },
-  { name: "Karin Apel", rolle: "Gleichstellungsbeauftragte der Stadt Beverungen" },
-  { name: "Frauenberatungsstelle der AWO", rolle: "Beratungsstelle gegen Gewalt an Frauen, Kreis Höxter" },
-  { name: "Frauen- und Kinderschutzhaus im Kreis Höxter", rolle: "Sozialdienst katholischer Frauen e.V., Warburg" },
-  { name: "Isabell Schröder", rolle: "AWO Migrationsberatung Kreis Höxter" },
-  { name: "Mareike Stöver", rolle: "AWO Beratungsstellen für Schwangerschaft, Partnerschaft und Sexualität" },
-  { name: "Daniela Resem und Sandra Pflug", rolle: "Caritas Beratungszentrum Brakel, Beratung für Eltern, Kinder und Jugendliche" },
-  { name: "M. Merschbrock", rolle: "Caritas Beratungszentrum Brakel, Ehe-, Familien- und Lebensberatung" },
-  { name: "Judith Fabeck", rolle: "Kreispolizeibehörde Höxter, Opferschutzbeauftragte" },
-  { name: "Stephanie Werk-Ferber", rolle: "Kreis Höxter, Abteilung Kinder, Jugend und Familie" },
-  { name: "Fachberatung Kinderschutz", rolle: "Kreis Höxter" },
-  { name: "Britta Kukuk", rolle: "Kreissportbund Höxter e.V." },
-  { name: "Christiane Tewes-Assauer", rolle: "Lebenshilfe Höxter, Werkstätten am Grünen Berg" },
-  { name: "Eleonore Horst", rolle: "Weisser Ring, Außenstelle Höxter" },
-  { name: "Ingrid Roland", rolle: "Ehrenamtliche Mitarbeiterin" },
-  { name: "Martina Weskamp-Dittmann", rolle: "Ehrenamtliche Mitarbeiterin" },
+const members = [
+  { name: "Anna Lütkefend", role: "Gleichstellungsbeauftragte des Kreises Höxter" },
+  { name: "Nadine Nolte", role: "Gleichstellungsbeauftragte der Stadt Höxter" },
+  { name: "Karin Apel", role: "Gleichstellungsbeauftragte der Stadt Beverungen" },
+  { name: "Frauenberatungsstelle der AWO", role: "Beratungsstelle gegen Gewalt an Frauen, Kreis Höxter" },
+  { name: "Frauen- und Kinderschutzhaus im Kreis Höxter", role: "Sozialdienst katholischer Frauen e.V., Warburg" },
+  { name: "Isabell Schröder", role: "AWO Migrationsberatung Kreis Höxter" },
+  { name: "Mareike Stöver", role: "AWO Beratungsstellen für Schwangerschaft, Partnerschaft und Sexualität" },
+  { name: "Daniela Resem und Sandra Pflug", role: "Caritas Beratungszentrum Brakel, Beratung für Eltern, Kinder und Jugendliche" },
+  { name: "M. Merschbrock", role: "Caritas Beratungszentrum Brakel, Ehe-, Familien- und Lebensberatung" },
+  { name: "Judith Fabeck", role: "Kreispolizeibehörde Höxter, Opferschutzbeauftragte" },
+  { name: "Stephanie Werk-Ferber", role: "Kreis Höxter, Abteilung Kinder, Jugend und Familie" },
+  { name: "Fachberatung Kinderschutz", role: "Kreis Höxter" },
+  { name: "Britta Kukuk", role: "Kreissportbund Höxter e.V." },
+  { name: "Christiane Tewes-Assauer", role: "Lebenshilfe Höxter, Werkstätten am Grünen Berg" },
+  { name: "Eleonore Horst", role: "Weisser Ring, Außenstelle Höxter" },
+  { name: "Ingrid Roland", role: "Ehrenamtliche Mitarbeiterin" },
+  { name: "Martina Weskamp-Dittmann", role: "Ehrenamtliche Mitarbeiterin" },
 ];
 
-export default function ArbeitskreisSeite() {
+export default function WorkingGroupPage() {
   return (
     <>
-      <Seitenkopf
-        titel="Der Arbeitskreis"
+      <PageHeader
+        title="Der Arbeitskreis"
         band={band}
-        einleitung="Der Arbeitskreis „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“ hat sich im Juni 1997 auf Initiative des Frauen- und Kinderschutzhauses gegründet, um dem öffentlichen Schweigen etwas entgegenzusetzen."
+        intro="Der Arbeitskreis „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“ hat sich im Juni 1997 auf Initiative des Frauen- und Kinderschutzhauses gegründet, um dem öffentlichen Schweigen etwas entgegenzusetzen."
       />
       <div className="wide stack-lg">
         <section className="measure stack" aria-labelledby="ziele">
@@ -43,7 +43,7 @@ export default function ArbeitskreisSeite() {
             Im Arbeitskreis arbeiten Fachfrauen aus Beratungsstellen, Behörden, Polizei und Ehrenamt zusammen. Wir
             treffen uns alle zwei Monate, tauschen Erfahrungen aus und planen Aktionen und Veranstaltungen. Wir wollen:
           </p>
-          <ul className="liste-punkte">
+          <ul className="list-bullets">
             <li>Gewalt gegen Frauen und Kinder im Kreis Höxter wahrnehmen, ernst nehmen und sichtbar machen</li>
             <li>Bürgerinnen und Bürger informieren und sensibilisieren, etwa mit Aktionen und Ausstellungen</li>
             <li>betroffene Frauen und Kinder unterstützen</li>
@@ -61,12 +61,12 @@ export default function ArbeitskreisSeite() {
           <h2 id="mitglieder" style={{ marginBlockEnd: "var(--space-4)" }}>
             Wer im Arbeitskreis mitarbeitet
           </h2>
-          <ul className="personen">
-            {mitglieder.map((m) => (
-              <li key={m.name}>
-                <strong>{m.name}</strong>
+          <ul className="people">
+            {members.map((member) => (
+              <li key={member.name}>
+                <strong>{member.name}</strong>
                 <br />
-                <span className="muted">{m.rolle}</span>
+                <span className="muted">{member.role}</span>
               </li>
             ))}
           </ul>

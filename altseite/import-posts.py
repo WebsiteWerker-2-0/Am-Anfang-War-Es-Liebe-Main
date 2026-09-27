@@ -2,9 +2,9 @@
 
 Liest altseite/json/posts.json, bereinigt das WordPress-HTML, kopiert die
 verwendeten Medien nach website/public/medien/ und schreibt
-website/src/content/beitraege.json. Einmalig bzw. nach Änderungen ausführen:
+website/src/content/posts.json. Einmalig bzw. nach Änderungen ausführen:
 
-    python3 altseite/beitraege-uebernehmen.py
+    python3 altseite/import-posts.py
 """
 import html, json, os, re, shutil, unicodedata
 from bs4 import BeautifulSoup, Comment
@@ -14,7 +14,7 @@ SITE = os.path.join(ROOT, "..", "website")
 UPLOADS = re.compile(r"https?://(?:www\.)?am-anfang-war-es-liebe\.de/wp-content/uploads/([^\"'\s?#]+)")
 
 # Interne Links der Altseite auf die neue Struktur umbiegen
-INTERN = {
+INTERNAL_LINKS = {
     "hilfen": "/hilfe", "kontaktformular": "/kontakt", "kontakt": "/kontakt",
     "aktuelles": "/aktuelles", "der-selbstcheck": "/selbstcheck", "": "/",
     "infos": "/infos", "downloads": "/infos", "der-arbeitskreis": "/arbeitskreis",
@@ -53,7 +53,7 @@ def fix_href(href):
         return media(href)
     m = re.match(r"https?://(?:www\.)?(?:am-anfang-war-es-liebe\.de|localhost/wordpress)/?([^?#]*?)/?$", href)
     if m:
-        return INTERN.get(m.group(1).split("/")[-1], "/")
+        return INTERNAL_LINKS.get(m.group(1).split("/")[-1], "/")
     return href
 
 
@@ -119,6 +119,6 @@ for p in sorted(posts, key=lambda p: p["date"], reverse=True):
 
 slugs = [b["slug"] for b in out]
 assert len(slugs) == len(set(slugs)), "doppelte Slugs"
-with open(os.path.join(SITE, "src", "content", "beitraege.json"), "w") as f:
+with open(os.path.join(SITE, "src", "content", "posts.json"), "w") as f:
     json.dump(out, f, ensure_ascii=False, indent=2)
 print(len(out), "Beiträge übernommen")

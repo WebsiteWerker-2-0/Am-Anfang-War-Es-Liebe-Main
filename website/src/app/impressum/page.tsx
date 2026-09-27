@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Seitenkopf } from "@/components/Seitenkopf";
-import { Telefon } from "@/components/Telefon";
+import { PageHeader } from "@/components/PageHeader";
+import { PhoneLink } from "@/components/PhoneLink";
 
 export const metadata: Metadata = { title: "Impressum" };
 
 // OFFEN: Impressum nach DDG mit dem AG abstimmen. Angaben von der Altseite.
-export default function ImpressumSeite() {
+export default function LegalNoticePage() {
   return (
     <>
-      <Seitenkopf titel="Impressum" />
+      <PageHeader title="Impressum" />
       <div className="wide measure stack">
         <p>
           Arbeitskreis „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“
@@ -20,13 +20,13 @@ export default function ImpressumSeite() {
           37671 Höxter
         </p>
         <p>
-          Telefon <Telefon nummer="05271 9659904" />
+          Telefon <PhoneLink number="05271 9659904" />
           <br />
           E-Mail <a href="mailto:gleichstellung@kreis-hoexter.de">gleichstellung@kreis-hoexter.de</a>
         </p>
         <h2>Gestaltung</h2>
         <p>Illustrationen und Gestaltung der Broschüre: fien-design, Höxter</p>
-        <p className="hinweis small">
+        <p className="notice small">
           Entwurf: Das vollständige Impressum wird vor der Veröffentlichung mit dem Arbeitskreis abgestimmt.
         </p>
       </div>
