@@ -14,3 +14,5 @@ Wenn wir etwas für das Design der Website festlegen:
 4. Committen und pushen, damit der andere den Stand hat. Vorher `git pull`, weil wir zu zweit arbeiten.
 
 Vor Design-Arbeit an der Website zuerst `knowledgebase/design/` lesen und die Festlegungen einhalten.
+
+@knowledgebase/design/DESIGN-UND-ENTWICKLUNG.md
