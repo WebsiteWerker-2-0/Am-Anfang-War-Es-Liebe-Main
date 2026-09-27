@@ -1,0 +1,137 @@
+[
+    {
+        "id": 4,
+        "count": 4,
+        "description": "",
+        "link": "https://www.am-anfang-war-es-liebe.de/category/aktuelles/",
+        "name": "Aktuelles",
+        "slug": "aktuelles",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "_links": {
+            "self": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/categories/4",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/posts?categories=4"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 1,
+        "count": 15,
+        "description": "",
+        "link": "https://www.am-anfang-war-es-liebe.de/category/allgemein/",
+        "name": "Allgemein",
+        "slug": "allgemein",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "_links": {
+            "self": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/categories/1",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/posts?categories=1"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 12,
+        "count": 0,
+        "description": "",
+        "link": "https://www.am-anfang-war-es-liebe.de/category/selbstverteidigungs-selbstbehauptungskurse/",
+        "name": "Selbstverteidigungs-/Selbstbehauptungskurse",
+        "slug": "selbstverteidigungs-selbstbehauptungskurse",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "_links": {
+            "self": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/categories/12",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "https://www.am-anfang-war-es-liebe.de/wp-json/wp/v2/posts?categories=12"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    }
+]
