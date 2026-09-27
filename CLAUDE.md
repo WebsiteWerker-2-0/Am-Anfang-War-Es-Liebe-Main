@@ -4,9 +4,16 @@
 
 Die eigentliche Website (Next.js) liegt in `website/` — das ist auch das bei Vercel hinterlegte Root Directory. Alle Code-Änderungen an der Website (Seiten, Komponenten, Styles, Konfiguration) gehören ausschließlich in diesen Ordner, nicht ins Repo-Root. `knowledgebase/` ist nur für Dokumentation/Entscheidungen, nicht für Website-Code.
 
-## Deployment
+**Stack-Entscheidung (überschreibt Abschnitt 10 der Design-Doku):** Next.js, nicht WordPress. Die in der Design-Doku unter Abschnitt 10 beschriebene WordPress-Architektur (Block-Theme, CPTs, Polylang) gilt **nicht mehr**. Fachliche Anforderungen aus der Design-Doku (Notausgang, Selbstcheck ohne Speicherung, Anlaufstellen, Mediathek, Veranstaltungen, Mehrsprachigkeit) bleiben bestehen und werden in Next.js umgesetzt.
 
-Mit diesem Repository ist eine Vercel-Seite verbunden (Root Directory `website`, Branch `main`). Jeder Push nach `main` löst automatisch ein Deployment aus. Nach Code-Änderungen an der Website deshalb immer committen und pushen, damit wir das Ergebnis live auf Vercel sehen — nicht nur lokal lassen.
+**Blog-Bereich:** Die Auftraggeber sollen Blog-Inhalte selbst pflegen können. Next.js hat kein eigenes Redaktions-Interface, braucht also ein CMS im Hintergrund. Wahl noch offen (siehe unten) — solange ungeklärt, keinen Blog-Code fest an einen Anbieter binden.
+
+## Hosting & Deployment
+
+- **Zielhosting (produktiv):** Hostinger.
+- **Aktuell / Preview:** Vercel (Root Directory `website`, Branch `main`). Jeder Push nach `main` löst automatisch ein Vercel-Deployment aus — dient aktuell der Vorschau, nicht dem finalen Hosting.
+- Nach Code-Änderungen an der Website immer committen und pushen, damit das Ergebnis auf Vercel sichtbar wird — nicht nur lokal lassen.
+- Vor dem Umzug auf Hostinger prüfen: Hostinger-Plan mit Node.js/Next.js-Unterstützung nötig (reines PHP-Hosting reicht nicht).
 
 ## Knowledgebase
 
