@@ -4,6 +4,10 @@
 
 Die eigentliche Website (Next.js) liegt in `website/` — das ist auch das bei Vercel hinterlegte Root Directory. Alle Code-Änderungen an der Website (Seiten, Komponenten, Styles, Konfiguration) gehören ausschließlich in diesen Ordner, nicht ins Repo-Root. `knowledgebase/` ist nur für Dokumentation/Entscheidungen, nicht für Website-Code.
 
+## Deployment
+
+Mit diesem Repository ist eine Vercel-Seite verbunden (Root Directory `website`, Branch `main`). Jeder Push nach `main` löst automatisch ein Deployment aus. Nach Code-Änderungen an der Website deshalb immer committen und pushen, damit wir das Ergebnis live auf Vercel sehen — nicht nur lokal lassen.
+
 ## Knowledgebase
 
 Die Wissensbasis liegt in `knowledgebase/` (Markdown). Einstieg: `knowledgebase/README.md`.
