@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Website am-anfang-war-es-liebe.de
 
-## Getting Started
+Erster Entwurf der neuen Website des Arbeitskreises „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“. Next.js (App Router), statisch erzeugt, Deployment über Vercel mit Root Directory `website/`.
 
-First, run the development server:
+Verbindliche Vorgaben: [`../knowledgebase/design/DESIGN-UND-ENTWICKLUNG.md`](../knowledgebase/design/DESIGN-UND-ENTWICKLUNG.md).
+
+## Starten
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Aufbau
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Pfad | Inhalt |
+|---|---|
+| `src/app/` | Seiten: Start, Hilfe, Selbstcheck, Aktuelles, Kurse, Infos, Arbeitskreis, Kontakt, Internetspuren, Sprachen, Impressum, Datenschutz |
+| `src/components/` | Hilfeleiste mit Notausgang, Selbstcheck, Ausstellungs-Slider, Anlaufstelle, Kontaktformular |
+| `src/content/` | Inhalte als Daten: Anlaufstellen, Selbstcheck, Ausstellung, Navigation, Beiträge |
+| `src/content/beitraege.json` | Beiträge der Altseite, erzeugt mit `python3 ../altseite/beitraege-uebernehmen.py` |
+| `src/assets/` | Broschüren-Illustrationen und Ausstellungstafeln (über `next/image` als AVIF/WebP) |
+| `public/medien/` | Bilder und Videos aus den Beiträgen der Altseite |
+| `public/downloads/` | Broschüre, Flyer, Plakat |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Umgesetzt nach Vorgabe
 
-## Learn More
+- Keine externen Ressourcen: Schriften über `next/font` selbst gehostet, keine Embeds, kein Tracking, keine Cookies
+- Notausgang auf jeder Seite (Hilfeleiste, mobil zusätzlich fixiert), zweimal Esc, `Referrer-Policy: no-referrer`
+- Selbstcheck ohne Speicherung, Zurücksetzen beim Zurücknavigieren
+- Anlaufstellen mit fester Datenreihenfolge, weitere Stellen in nativen `<details>`
+- Wanderausstellung als Slider mit `scroll-snap`, ohne Autoplay
+- Sicherheits-Header in `next.config.ts`, CSP vorerst als Report-Only
+- `noindex` für den Entwurf
 
-To learn more about Next.js, take a look at the following resources:
+## Offen im Entwurf
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Im Code mit `OFFEN:` markiert. Die wichtigsten Punkte:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Markenfarben sind aus der Web-PDF der Broschüre abgetastet und damit vorläufig, bis die Druckdaten (Z-06) da sind
+- Alle Nummern, Zeiten und Adressen stammen von der Altseite bzw. Broschüre 2016 und müssen vom AG bestätigt werden (Z-03)
+- Kontaktformular hat noch keinen Versand (Zustellweg ohne Speicherung klären, AVV)
+- Übersetzungen (AR, RU, EN, TR) sind nur eine Hinweisseite und brauchen Freigabe
+- Impressum und Datenschutzerklärung sind Platzhalter
+- Nutzungsrechte der Broschüren-Illustrationen (fien-design) für das Web klären
+- Förderlogo MKJFGFI (Z-11)
