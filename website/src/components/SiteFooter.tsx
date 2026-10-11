@@ -57,7 +57,7 @@ export function SiteFooter() {
             />
           </div>
           <p className="draft-note">
-            Entwurf, Stand 27.09.2026. Inhalte und Gestaltung sind noch nicht freigegeben. Illustrationen: fien-design,
+            Entwurf, Stand 11.10.2026. Inhalte und Gestaltung sind noch nicht freigegeben. Illustrationen: fien-design,
             Höxter.
           </p>
         </div>

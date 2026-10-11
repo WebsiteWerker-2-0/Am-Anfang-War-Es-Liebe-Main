@@ -58,7 +58,7 @@ const counselling: SupportService = {
     "AWO Beratungsstellen, Caspar-Heinrich-Straße 7, 33014 Bad Driburg",
     "AWO Familienstützpunkt, Pyrmonter Straße 8, 32839 Steinheim",
   ],
-  email: "fbs@awo-hoexter.de",
+  email: "frauenberatungsstelle@awo-hoexter.de", // vom AG bestätigt 11.10.2026
   website: {
     url: "https://awo-hx.de/einrichtungen/beratungsstellen/frauenberatung/",
     label: "awo-hx.de",

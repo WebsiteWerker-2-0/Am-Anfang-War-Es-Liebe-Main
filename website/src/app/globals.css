@@ -1208,3 +1208,41 @@ a:hover {
     grid-column: 1 / -1;
   }
 }
+
+/* ------------------------------------------------------------------
+   Fotos
+   ------------------------------------------------------------------ */
+.photo img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-control);
+}
+
+.photo figcaption {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-muted);
+  margin-block-start: var(--space-2);
+}
+
+/* ------------------------------------------------------------------
+   Kampagne
+   ------------------------------------------------------------------ */
+.campaign {
+  display: grid;
+  gap: var(--space-6);
+  max-width: var(--measure);
+}
+
+.campaign__poster {
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+}
+
+@media (min-width: 64em) {
+  .campaign {
+    max-width: none;
+    grid-template-columns: minmax(0, var(--measure)) 22rem;
+    align-items: start;
+  }
+}

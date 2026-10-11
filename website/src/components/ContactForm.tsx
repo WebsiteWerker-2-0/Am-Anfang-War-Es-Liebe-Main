@@ -1,15 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
-const concerns = [
-  "Ich brauche Hilfe für mich",
-  "Ich mache mir Sorgen um eine andere Person",
-  "Ich habe eine Frage an den Arbeitskreis",
-  "Etwas anderes",
-];
+import { concerns } from "@/content/contact";
 
 // Kontaktanfrage (F-04) als Entwurf: Oberfläche vollständig, Versand noch nicht angebunden.
+// Das Anliegen bestimmt das Postfach (siehe content/contact.ts).
 // OFFEN: Zustellweg ohne Speicherung klären (ADR-0003)
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -38,9 +33,9 @@ export function ContactForm() {
         <fieldset>
           <legend>Worum geht es?</legend>
           {concerns.map((concern, index) => (
-            <label className="radio" key={concern}>
-              <input type="radio" name="concern" value={concern} defaultChecked={index === 0} />
-              {concern}
+            <label className="radio" key={concern.label}>
+              <input type="radio" name="concern" value={concern.label} defaultChecked={index === 0} />
+              {concern.label}
             </label>
           ))}
         </fieldset>

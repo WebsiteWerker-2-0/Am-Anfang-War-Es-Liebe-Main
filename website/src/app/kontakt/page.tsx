@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { PageHeader } from "@/components/PageHeader";
 import { PhoneLink } from "@/components/PhoneLink";
+import { mailboxes } from "@/content/contact";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -37,9 +38,25 @@ export default function ContactPage() {
           </p>
           <p>
             Telefon <PhoneLink number="05271 9659904" />
-            <br />
-            E-Mail <a href="mailto:gleichstellung@kreis-hoexter.de">gleichstellung@kreis-hoexter.de</a>
           </p>
+        </section>
+
+        <section className="measure stack" aria-labelledby="e-mail">
+          <h2 id="e-mail">E-Mail</h2>
+          <dl className="facts">
+            <dt>{mailboxes.help.label}</dt>
+            <dd>
+              <a href={`mailto:${mailboxes.help.email}`}>{mailboxes.help.email}</a>
+              <br />
+              <span className="small muted">Frauenberatungsstelle der AWO für den Kreis Höxter</span>
+            </dd>
+            <dt>{mailboxes.information.label}</dt>
+            <dd>
+              <a href={`mailto:${mailboxes.information.email}`}>{mailboxes.information.email}</a>
+              <br />
+              <span className="small muted">Gleichstellungsstelle des Kreises Höxter</span>
+            </dd>
+          </dl>
         </section>
 
         <section className="stack" aria-labelledby="formular">

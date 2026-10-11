@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import band from "@/assets/illustrations/band-p13.jpg";
+import groupPhoto from "@/assets/photos/working-group.jpg";
 import { PageHeader } from "@/components/PageHeader";
 
 export const metadata: Metadata = {
@@ -7,7 +9,7 @@ export const metadata: Metadata = {
   description: "Seit 1997 setzt sich der Arbeitskreis gegen Gewalt an Frauen und Kindern im Kreis Höxter ein.",
 };
 
-// OFFEN: Mitgliederliste von der Altseite, vom AG aktualisieren lassen
+// OFFEN: Mitgliederliste von der Altseite. Der AG schickt nach dem Treffen am 13.10.2026 die aktuelle Liste in einheitlichem Format
 const members = [
   { name: "Anna Lütkefend", role: "Gleichstellungsbeauftragte des Kreises Höxter" },
   { name: "Nadine Nolte", role: "Gleichstellungsbeauftragte der Stadt Höxter" },
@@ -32,28 +34,85 @@ export default function WorkingGroupPage() {
   return (
     <>
       <PageHeader
-        title="Der Arbeitskreis"
+        title="Gemeinsam gegen Gewalt an Frauen und Kindern"
         band={band}
-        intro="Der Arbeitskreis „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“ hat sich im Juni 1997 auf Initiative des Frauen- und Kinderschutzhauses gegründet, um dem öffentlichen Schweigen etwas entgegenzusetzen."
+        intro="Gewalt gegen Frauen und Kinder findet überall statt, auch im Kreis Höxter. Sie betrifft Personen aller kulturellen und sozialen Hintergründe."
       />
       <div className="wide stack-lg">
+        {/* Text vom AG, Lieferung 11.10.2026 (Z-01) */}
+        <section className="measure stack" aria-label="Über den Arbeitskreis">
+          <p>
+            Die Gewalt findet häufig im Verborgenen statt. Viel zu häufig bleibt sie unsichtbar. Genau hier setzt der
+            Arbeitskreis „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“ an.
+          </p>
+          <p>
+            Auf Initiative des Frauen- und Kinderschutzhauses wurde der Arbeitskreis im Juni 1997 gegründet. Seitdem
+            arbeiten Expertinnen aus unterschiedlichen Einrichtungen und Institutionen gemeinsam daran, Gewalt sichtbar zu
+            machen, Ursachen zu diskutieren und Veränderungen anzustoßen.
+          </p>
+          <p>
+            Der Arbeitskreis beschäftigt sich mit unterschiedlichen Formen von Gewalt gegen Frauen und Kinder und nimmt
+            dabei auch die gesellschaftlichen Aspekte der strukturellen Gewalt gegen Frauen in den Blick. Gemeinsam werden
+            aktuelle Entwicklungen diskutiert, Erfahrungen ausgetauscht und konkrete Aktionen und Veranstaltungen auf den
+            Weg gebracht.
+          </p>
+        </section>
+
+        {/* OFFEN: Bildunterschrift mit Namen nur, wenn der AG sie liefert und alle Abgebildeten einverstanden sind (Z-08) */}
+        <figure className="photo">
+          <Image
+            src={groupPhoto}
+            alt="Gruppenfoto: rund zwanzig Frauen aus dem Arbeitskreis stehen auf einer Treppe vor einem Fachwerkhaus."
+            sizes="(min-width: 72rem) 72rem, 100vw"
+            placeholder="blur"
+          />
+          <figcaption>Der Arbeitskreis „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“</figcaption>
+        </figure>
+
         <section className="measure stack" aria-labelledby="ziele">
           <h2 id="ziele">Was wir tun</h2>
-          <p>
-            Im Arbeitskreis arbeiten Fachfrauen aus Beratungsstellen, Behörden, Polizei und Ehrenamt zusammen. Wir
-            treffen uns alle zwei Monate, tauschen Erfahrungen aus und planen Aktionen und Veranstaltungen. Wir wollen:
-          </p>
+          <p>Die Vertreterinnen des Arbeitskreises kommen regelmäßig zusammen, um:</p>
           <ul className="list-bullets">
-            <li>Gewalt gegen Frauen und Kinder im Kreis Höxter wahrnehmen, ernst nehmen und sichtbar machen</li>
-            <li>Bürgerinnen und Bürger informieren und sensibilisieren, etwa mit Aktionen und Ausstellungen</li>
-            <li>betroffene Frauen und Kinder unterstützen</li>
-            <li>vorbeugen, zum Beispiel mit Fachveranstaltungen und Selbstbehauptungskursen</li>
-            <li>Lücken in Information und Beratung im Kreis aufdecken und schließen</li>
-            <li>notwendige politische Veränderungen anregen</li>
+            <li>
+              die verschiedenen Formen und Anzeichen von Gewalt gegen Frauen und Kinder im Kreis Höxter ernst zu nehmen
+              und sichtbar zu machen
+            </li>
+            <li>die Öffentlichkeit zu diversen Aspekten der Gewalt gegen Frauen und Kinder zu informieren und zu sensibilisieren</li>
+            <li>betroffene Frauen und Kinder zu unterstützen</li>
+            <li>Prävention zu stärken, beispielsweise durch Fachtage und andere Veranstaltungen</li>
+            <li>Beratungs- und Informationsdefizite im Kreis Höxter aufzudecken und deren Abbau zu unterstützen</li>
+            <li>notwendige politische Änderungen anzuregen.</li>
           </ul>
+        </section>
+
+        <section className="measure stack" aria-labelledby="sichtbar">
+          <h2 id="sichtbar">Gemeinsam sichtbar werden</h2>
           <p>
-            Wir betrachten Gewalt aus der Perspektive von Frauen und haben deshalb vor allem die Belange von Frauen und
-            Mädchen im Blick.
+            Gewalt ist keine Privatsache. Sie geht uns alle an. Deshalb ist Vernetzung ein zentraler Bestandteil unserer
+            Arbeit. Im Arbeitskreis kommen unterschiedliche Fachstellen und Institutionen zusammen, bündeln ihre
+            Erfahrungen und entwickeln gemeinsame Ideen. So entsteht ein Netzwerk, das nicht nur reagiert, sondern auch
+            präventiv arbeitet und neue Impulse setzt.
+          </p>
+          <p>
+            Ein besonderer Schwerpunkt liegt auf der Öffentlichkeitsarbeit: Wir wollen Wissen vermitteln, Aufmerksamkeit
+            für dieses wichtige Thema schaffen und dazu beitragen, dass Betroffene Unterstützung finden, ohne Angst, Scham
+            oder Vorurteile.
+          </p>
+        </section>
+
+        <section className="measure stack" aria-labelledby="austausch">
+          <h2 id="austausch">Im Austausch bleiben</h2>
+          <p>
+            Der Arbeitskreis trifft sich regelmäßig alle zwei Monate. Wir planen Veranstaltungen und Aktionen, besprechen
+            aber auch aktuelle Probleme, fachliche Fragen oder akute Notfälle.
+          </p>
+          <p>
+            Der Arbeitskreis arbeitet aus der Perspektive der betroffenen Frauen und richtet seinen Blick deshalb besonders
+            auf die Belange und Lebensrealitäten von Frauen und Mädchen.
+          </p>
+          <p className="lead">
+            Seit 1997 gilt dabei: Wir schauen hin, wir vernetzen uns und setzen uns gemeinsam dafür ein, Gewalt gegen
+            Frauen und Kinder im Kreis Höxter in all ihren Formen entgegenzuwirken.
           </p>
         </section>
 
