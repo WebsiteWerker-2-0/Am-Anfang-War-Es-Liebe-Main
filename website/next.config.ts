@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 // Sicherheits-Header nach DESIGN-UND-ENTWICKLUNG.md, Abschnitt 10.5.
 // Die CSP läuft im Entwurf als Report-Only, bis sie auf Staging geprüft ist.
@@ -28,11 +29,31 @@ const securityHeaders = [
   { key: "X-Robots-Tag", value: "noindex, nofollow" },
 ];
 
+// Redaktionsbereich (/backend): nie indexieren, nie zwischenspeichern.
+// Die Admin-Oberfläche von Payload braucht Inline-Skripte und -Styles, daher gilt
+// die CSP der Website dort nicht.
+const backendHeaders = [
+  { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+  { key: "Cache-Control", value: "no-store" },
+];
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Eigene 404-Seite trotz zweier Root-Layouts (Website und Backend), siehe src/app/global-not-found.tsx
+  experimental: { globalNotFound: true },
+  // Für die Vorschau auf Vercel: die Bestandsdateien müssen im Backend lesbar sein (CMS_SEED_ON_START)
+  outputFileTracingIncludes: {
+    "/backend/[[...segments]]": ["./public/medien/**/*", "./public/downloads/**/*"],
+    "/backend/api/[...slug]": ["./public/medien/**/*", "./public/downloads/**/*"],
+  },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    const withoutCsp = securityHeaders.filter((header) => header.key !== "Content-Security-Policy-Report-Only");
+    return [
+      // Website: alle Adressen außer /backend
+      { source: "/((?!backend(?:/|$)).*)", headers: securityHeaders },
+      { source: "/backend/:path*", headers: [...withoutCsp, ...backendHeaders] },
+    ];
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);

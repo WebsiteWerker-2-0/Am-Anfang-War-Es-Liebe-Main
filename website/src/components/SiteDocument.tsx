@@ -1,9 +1,8 @@
-import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic, Literata, Noto_Naskh_Arabic } from "next/font/google";
+import type { ReactNode } from "react";
 import { QuickExitBehavior, QuickExitLink } from "@/components/QuickExit";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import "./globals.css";
 
 // Schriften werden von next/font beim Build geladen und vom eigenen Server
 // ausgeliefert, der Browser fragt nie bei Google an (ADR-0002).
@@ -37,27 +36,9 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   preload: false,
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Am Anfang war es Liebe … | Hilfe bei Gewalt im Kreis Höxter",
-    template: "%s | Am Anfang war es Liebe …",
-  },
-  description:
-    "Hilfe bei häuslicher Gewalt im Kreis Höxter: Selbstcheck, Anlaufstellen und Informationen des Arbeitskreises gegen Gewalt an Frauen und Kindern.",
-  // Entwurf: nicht indexieren (Abschnitt 10.6)
-  robots: { index: false, follow: false },
-  referrer: "no-referrer",
-  formatDetection: { telephone: false },
-};
-
-// Kein maximum-scale, Zoom bleibt erlaubt (Abschnitt 9)
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  colorScheme: "light",
-};
-
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// Gemeinsames Gerüst der Website. Es wird vom Root-Layout (site) und von
+// global-not-found.tsx genutzt, damit auch die 404-Seite Kopf, Fuß und Notausgang hat.
+export function SiteDocument({ children }: { children: ReactNode }) {
   return (
     <html
       lang="de"
