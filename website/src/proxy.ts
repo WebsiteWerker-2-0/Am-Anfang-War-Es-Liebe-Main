@@ -5,12 +5,16 @@ import { NextResponse, type NextRequest } from "next/server";
 // Normalweg: `npm run cms:create-admin` auf dem Server.
 const FIRST_USER_PATHS = ["/backend/create-first-user", "/backend/api/users/first-register"];
 
+const text = (message: string, status: number) =>
+  new NextResponse(message, { status, headers: { "Content-Type": "text/plain; charset=utf-8" } });
+
 export function proxy(request: NextRequest) {
+  // Ohne geheimen Schlüssel kann das Backend nicht starten: klare Meldung statt Serverfehler
+  if (!process.env.PAYLOAD_SECRET) {
+    return text("Der Redaktionsbereich ist noch nicht eingerichtet: PAYLOAD_SECRET fehlt in den Umgebungsvariablen.", 503);
+  }
   if (process.env.CMS_ALLOW_FIRST_USER !== "true" && FIRST_USER_PATHS.includes(request.nextUrl.pathname)) {
-    return new NextResponse("Der Redaktionsbereich ist noch nicht eingerichtet.", {
-      status: 404,
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
-    });
+    return text("Der Redaktionsbereich ist noch nicht eingerichtet.", 404);
   }
   return NextResponse.next();
 }
