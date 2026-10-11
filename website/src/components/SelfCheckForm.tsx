@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 // Selbstcheck ohne Speicherung (ADR-0003): keine Requests, kein Web Storage,
 // keine Cookies. Beim Zurücknavigieren (Back-Forward-Cache) wird alles geleert.
-export function SelfCheckForm({ statements }: { statements: string[] }) {
+export function SelfCheckForm({ legend, statements }: { legend: string; statements: string[] }) {
   const form = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export function SelfCheckForm({ statements }: { statements: string[] }) {
   return (
     <form id="self-check" className="self-check" ref={form} autoComplete="off" onSubmit={(e) => e.preventDefault()}>
       <fieldset>
-        <legend>Ihr (Ex-)Partner, (Ex-)Ehemann oder eine andere Person …</legend>
+        <legend>{legend}</legend>
         <ul className="self-check__list">
           {statements.map((statement, index) => (
             <li key={statement}>

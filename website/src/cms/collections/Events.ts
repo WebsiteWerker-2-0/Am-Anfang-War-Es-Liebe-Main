@@ -3,6 +3,8 @@ import { isLoggedIn, publishedOrLoggedIn } from "../access";
 import { documentsField } from "../fields/documents";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
 import { slugField } from "../fields/slug";
+import { bodyEditor } from "../editors";
+import { revalidateSite } from "../revalidate";
 
 // Veranstaltungen und Termine (F-06). Die Plätze sind die Grundlage für den
 // Zähler bei der Anmeldung (F-11).
@@ -22,7 +24,11 @@ export const Events: CollectionConfig = {
     update: isLoggedIn,
     delete: isLoggedIn,
   },
-  hooks: { beforeChange: [syncArchivedAt] },
+  hooks: {
+    beforeChange: [syncArchivedAt],
+    afterChange: [() => revalidateSite()],
+    afterDelete: [() => revalidateSite()],
+  },
   fields: [
     { name: "title", type: "text", label: "Titel", required: true },
     {
@@ -40,7 +46,7 @@ export const Events: CollectionConfig = {
     },
     { name: "location", type: "text", label: "Ort" },
     { name: "image", type: "upload", relationTo: "media", label: "Bild" },
-    { name: "description", type: "richText", label: "Beschreibung" },
+    { name: "description", type: "richText", label: "Beschreibung", editor: bodyEditor },
     {
       type: "row",
       fields: [

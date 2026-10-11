@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { concerns } from "@/content/contact";
 
 // Kontaktanfrage (F-04) als Entwurf: Oberfläche vollständig, Versand noch nicht angebunden.
-// Das Anliegen bestimmt das Postfach (siehe content/contact.ts).
+// Das Anliegen bestimmt das Postfach (Seite „Kontakt“ im CMS).
 // OFFEN: Zustellweg ohne Speicherung klären (ADR-0003)
-export function ContactForm() {
+export function ContactForm({ concerns }: { concerns: { label: string }[] }) {
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {

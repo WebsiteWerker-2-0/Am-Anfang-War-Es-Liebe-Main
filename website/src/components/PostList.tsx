@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { dateParts, type Post } from "@/content/posts";
+import type { PostData } from "@/content/model";
+import { dateParts } from "@/content/posts";
 
 // Liste von Beiträgen mit Datumsspalte (Abschnitt 6.7)
-export function PostList({ posts, headingLevel = 2 }: { posts: Post[]; headingLevel?: 2 | 3 }) {
+export function PostList({ posts, headingLevel = 2 }: { posts: PostData[]; headingLevel?: 2 | 3 }) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   return (
     <ul className="post-list">

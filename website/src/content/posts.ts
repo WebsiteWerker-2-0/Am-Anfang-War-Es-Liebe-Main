@@ -1,24 +1,4 @@
-import data from "./posts.json";
-
-export type Post = {
-  slug: string;
-  title: string;
-  date: string;
-  categories: string[];
-  excerpt: string;
-  image: string | null;
-  html: string;
-  source: string;
-};
-
-// Beiträge der Altseite, erzeugt mit altseite/import-posts.py.
-// Wird durch das CMS ersetzt (ADR-0001).
-export const posts = data as Post[];
-
-export function findPost(slug: string) {
-  return posts.find((p) => p.slug === slug);
-}
-
+// Datumsformate der Beiträge (Zeitzone Berlin)
 const TIME_ZONE = "Europe/Berlin";
 const longDate = new Intl.DateTimeFormat("de-DE", {
   day: "numeric",

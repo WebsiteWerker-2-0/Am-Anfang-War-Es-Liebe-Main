@@ -41,10 +41,11 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Eigene 404-Seite trotz zweier Root-Layouts (Website und Backend), siehe src/app/global-not-found.tsx
   experimental: { globalNotFound: true },
-  // Für die Vorschau auf Vercel: die Bestandsdateien müssen im Backend lesbar sein (CMS_SEED_ON_START)
+  // Das Einspielen des Standardinhalts ins CMS liest Bilder (src/assets) und Dateien (public) zur Laufzeit.
+  // Auf Vercel gehören sie deshalb ausdrücklich zu den Backend-Funktionen.
   outputFileTracingIncludes: {
-    "/backend/[[...segments]]": ["./public/medien/**/*", "./public/downloads/**/*"],
-    "/backend/api/[...slug]": ["./public/medien/**/*", "./public/downloads/**/*"],
+    "/backend/[[...segments]]": ["./public/medien/**/*", "./public/downloads/**/*", "./src/assets/**/*"],
+    "/backend/api/[...slug]": ["./public/medien/**/*", "./public/downloads/**/*", "./src/assets/**/*"],
   },
   async headers() {
     const withoutCsp = securityHeaders.filter((header) => header.key !== "Content-Security-Policy-Report-Only");

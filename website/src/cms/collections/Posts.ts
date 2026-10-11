@@ -3,6 +3,8 @@ import { isLoggedIn, publishedOrLoggedIn } from "../access";
 import { documentsField } from "../fields/documents";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
 import { slugField } from "../fields/slug";
+import { bodyEditor } from "../editors";
+import { revalidateSite } from "../revalidate";
 
 // Aktuelles (F-05): Beiträge des Arbeitskreises.
 export const Posts: CollectionConfig = {
@@ -22,7 +24,11 @@ export const Posts: CollectionConfig = {
     update: isLoggedIn,
     delete: isLoggedIn,
   },
-  hooks: { beforeChange: [syncArchivedAt] },
+  hooks: {
+    beforeChange: [syncArchivedAt],
+    afterChange: [() => revalidateSite()],
+    afterDelete: [() => revalidateSite()],
+  },
   fields: [
     { name: "title", type: "text", label: "Titel", required: true },
     {
@@ -35,7 +41,7 @@ export const Posts: CollectionConfig = {
     },
     { name: "excerpt", type: "textarea", label: "Kurzfassung", admin: { description: "Erscheint in der Liste unter dem Titel." } },
     { name: "image", type: "upload", relationTo: "media", label: "Titelbild" },
-    { name: "content", type: "richText", label: "Text" },
+    { name: "content", type: "richText", label: "Text", editor: bodyEditor },
     {
       name: "gallery",
       type: "upload",

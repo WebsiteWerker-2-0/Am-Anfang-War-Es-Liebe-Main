@@ -3,17 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
-import { languages, mainNavigation } from "@/content/navigation";
+import type { SiteData } from "@/content/model";
 import { QuickExitLink } from "./QuickExit";
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
-function NavigationList({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+function NavigationList({
+  items,
+  pathname,
+  onNavigate,
+}: {
+  items: SiteData["navigation"];
+  pathname: string;
+  onNavigate?: () => void;
+}) {
   return (
     <ul>
-      {mainNavigation.map((item) => (
+      {items.map((item) => (
         <li key={item.href}>
           <Link
             href={item.href}
@@ -28,7 +36,7 @@ function NavigationList({ pathname, onNavigate }: { pathname: string; onNavigate
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ site }: { site: Pick<SiteData, "navigation" | "languages" | "helpline"> }) {
   const pathname = usePathname();
   const mobileMenu = useRef<HTMLDetailsElement>(null);
 
@@ -44,7 +52,7 @@ export function SiteHeader() {
           <QuickExitLink />
           <nav className="help-bar__languages" aria-label="Sprache">
             <ul>
-              {languages.map((language) => (
+              {site.languages.map((language) => (
                 <li key={language.code}>
                   <a
                     href={language.href}
@@ -60,8 +68,9 @@ export function SiteHeader() {
             </ul>
           </nav>
           <p className="help-bar__phone">
-            Hilfetelefon <a href="tel:116016">116&#8239;016</a>
-            <span className="wide-only">, rund um die Uhr</span>
+            Hilfetelefon{" "}
+            <a href={`tel:${site.helpline.number.replace(/[^\d+]/g, "")}`}>{site.helpline.number.replace(/ /g, "\u202f")}</a>
+            {site.helpline.suffix && <span className="wide-only">{site.helpline.suffix}</span>}
           </p>
         </div>
       </div>
@@ -76,13 +85,17 @@ export function SiteHeader() {
           </Link>
 
           <nav className="nav-desktop" aria-label="Hauptnavigation">
-            <NavigationList pathname={pathname} />
+            <NavigationList items={site.navigation} pathname={pathname} />
           </nav>
 
           <details className="nav-mobile" ref={mobileMenu}>
             <summary>Menü</summary>
             <nav aria-label="Hauptnavigation">
-              <NavigationList pathname={pathname} onNavigate={() => mobileMenu.current?.removeAttribute("open")} />
+              <NavigationList
+                items={site.navigation}
+                pathname={pathname}
+                onNavigate={() => mobileMenu.current?.removeAttribute("open")}
+              />
             </nav>
           </details>
         </div>

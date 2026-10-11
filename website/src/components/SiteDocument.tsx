@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { QuickExitBehavior, QuickExitLink } from "@/components/QuickExit";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { getSite } from "@/lib/content";
 
 // Schriften werden von next/font beim Build geladen und vom eigenen Server
 // ausgeliefert, der Browser fragt nie bei Google an (ADR-0002).
@@ -38,7 +39,8 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 
 // Gemeinsames Gerüst der Website. Es wird vom Root-Layout (site) und von
 // global-not-found.tsx genutzt, damit auch die 404-Seite Kopf, Fuß und Notausgang hat.
-export function SiteDocument({ children }: { children: ReactNode }) {
+export async function SiteDocument({ children }: { children: ReactNode }) {
+  const site = await getSite();
   return (
     <html
       lang="de"
@@ -47,7 +49,7 @@ export function SiteDocument({ children }: { children: ReactNode }) {
     >
       <body>
         <QuickExitBehavior />
-        <SiteHeader />
+        <SiteHeader site={site} />
         <main id="inhalt" tabIndex={-1}>
           {children}
         </main>

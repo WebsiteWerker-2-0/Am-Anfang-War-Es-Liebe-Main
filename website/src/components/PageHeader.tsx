@@ -1,4 +1,5 @@
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
+import type { Img } from "@/content/model";
 
 export function PageHeader({
   title,
@@ -9,7 +10,7 @@ export function PageHeader({
   title: string;
   intro?: React.ReactNode;
   /** Illustrationsband aus der Broschüre über der Überschrift */
-  band?: StaticImageData;
+  band?: Img;
   children?: React.ReactNode;
 }) {
   return (

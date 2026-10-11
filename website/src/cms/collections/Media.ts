@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { isLoggedIn } from "../access";
 import { uploadDir } from "../env";
+import { revalidateSite } from "../revalidate";
 
 // Mediathek (F-07): Bilder, Dokumente und Videos für Beiträge und Veranstaltungen.
 export const Media: CollectionConfig = {
@@ -32,6 +33,7 @@ export const Media: CollectionConfig = {
     adminThumbnail: "thumbnail",
   },
   hooks: {
+    afterChange: [() => revalidateSite()],
     beforeValidate: [
       ({ data, req }) => {
         // Ohne Titel den Dateinamen übernehmen

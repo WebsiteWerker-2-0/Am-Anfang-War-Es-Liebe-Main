@@ -18,48 +18,51 @@ Bezeichner im Code sind die englischen Entsprechungen aus [`../CONTEXT.md`](../C
 | Pfad | Inhalt |
 |---|---|
 | `src/app/` | Seiten: Start, Hilfe, Selbstcheck, Aktuelles, Kurse, Infos, Arbeitskreis, Kontakt, Internetspuren, Sprachen, Impressum, Datenschutz |
-| `src/components/` | Hilfeleiste und Notausgang (`SiteHeader`, `QuickExit`), Selbstcheck (`SelfCheckForm`), Wanderausstellung (`ExhibitionSlider`), Anlaufstelle (`SupportServiceSection`), Beiträge (`PostList`), Kontaktformular (`ContactForm`) |
-| `src/content/` | Inhalte als Daten: Anlaufstellen (`support-services.ts`), Aussagen des Selbstchecks, Tafeln, Navigation, Beiträge |
+| `src/components/` | Seitenblöcke (`blocks/`, `CmsPage`), Hilfeleiste und Notausgang (`SiteHeader`, `QuickExit`), Selbstcheck (`SelfCheckForm`), Wanderausstellung (`ExhibitionSlider`), Anlaufstelle (`SupportServiceSection`), Beiträge (`PostList`), Kontaktformular (`ContactForm`) |
+| `src/content/` | Standardinhalt: alle Seiten (`pages/`), Seitenrahmen (`site.ts`), Anlaufstellen (`support-services.ts`), Beiträge der Altseite (`posts.json`). Vorlage für das CMS und Ersatz, wenn es nicht erreichbar ist. |
 | `src/payload.config.ts`, `src/cms/` | Redaktionsbereich (Payload CMS): Konfiguration, Collections, Zugriffsregeln, Import der Altseite |
 | `src/app/(payload)/` | Oberfläche und Schnittstelle des Redaktionsbereichs unter `/backend` (eigenes Root-Layout) |
 | `src/migrations/` | Datenbank-Migrationen des CMS |
-| `src/content/posts.json` | Beiträge der Altseite, erzeugt mit `python3 ../altseite/import-posts.py`, später aus dem CMS (ADR-0001) |
 | `src/assets/` | Broschüren-Illustrationen (`illustrations/`, `band-pNN` = Broschürenseite) und Tafeln der Wanderausstellung (`exhibition/`) |
 | `public/medien/` | Bilder und Videos aus den Beiträgen der Altseite |
 | `public/downloads/` | Dokumente: Broschüre, Flyer, Plakat |
 
 ## Redaktionsbereich (`/backend`)
 
-Der Arbeitskreis pflegt Aktuelles, Veranstaltungen, Seitentexte und Dateien selbst (F-05 bis F-07). Der Bereich ist von der Website aus nirgends verlinkt, für Suchmaschinen gesperrt und nur mit Konto erreichbar. Es gibt keine Registrierung und keine voreingestellten Zugangsdaten.
+Der Arbeitskreis pflegt die Website selbst: alle Seiten, Aktuelles, Veranstaltungen, Anlaufstellen, Dateien sowie Menü und Fuß. Der Bereich ist von der Website aus nirgends verlinkt, für Suchmaschinen gesperrt und nur mit Konto erreichbar. Es gibt keine Registrierung und keine voreingestellten Zugangsdaten.
+
+**Aufbau im Backend = Aufbau der Website**
+
+| Menü im Backend | Inhalt |
+|---|---|
+| Seiten | Die 12 Seiten der Website. Jede Seite hat Überschrift, Einleitung, Illustrationsband und eine Liste von Blöcken (Textabschnitt, Hinweiskasten, Dokumentenliste, Foto, Kontaktformular …) in der Reihenfolge der Seite. Seiten lassen sich bearbeiten, aber nicht anlegen oder löschen. |
+| Beiträge (Aktuelles) | Titel, Datum, Kurzfassung, Titelbild, Text, weitere Bilder, Dokumente zum Download, Status (Entwurf, Veröffentlicht, Archiviert), Position per Ziehen in der Liste |
+| Veranstaltungen | Titel, Beginn, Ende, Ort, Bild, Beschreibung, Plätze, „Anmeldung offen“, Dokumente, Status, Position (noch nicht auf der Website angebunden) |
+| Anlaufstellen | Hauptanlaufstellen und aufklappbare Gruppen der Hilfeseite, mit Schnellzugriff für die Startseite |
+| Kopf und Fuß der Seite | Menü, Sprachwahl, Hilfetelefon in der Hilfeleiste, Postfächer, Fußbereich |
+| Dateien | Bilder, PDFs, Videos mit Titel, Alternativtext und Öffentlich-Schalter. Öffentliche Dateien liegen unter `/dateien/<Name>`. |
+| Redakteur:innen | Rollen „Redaktion“ und „Admin“ (nur Admins verwalten Konten) |
+
+Archivierte oder als Entwurf gespeicherte Beiträge sind öffentlich nicht sichtbar. Änderungen erscheinen sofort auf der Website. Der Notausgang (Ziel und Beschriftung) ist bewusst nicht im Backend änderbar.
+
+**Woher die Seiten ihre Inhalte nehmen:** aus dem CMS. Ist das CMS aus oder nicht erreichbar (kein `PAYLOAD_SECRET`, Fehler), zeigt die Website den **Standardinhalt** aus `src/content/pages/`, der dem Inhalt der bisherigen Website entspricht. Dieselben Dateien füllen ein leeres CMS beim ersten Start. Die Website ist also nie vom CMS abhängig.
 
 **Lokal starten**
 
 ```bash
 cp .env.example .env.local        # PAYLOAD_SECRET eintragen (z. B. openssl rand -hex 32)
+npm install
 npm run dev
-npm run cms:seed                  # Beiträge der Altseite einspielen (optional)
 ADMIN_EMAIL=… ADMIN_PASSWORD=… npm run cms:create-admin   # erstes Konto, Passwort mind. 12 Zeichen
 ```
 
-Dann `http://localhost:3000/backend` öffnen.
+Dann `http://localhost:3000/backend` öffnen. Beim ersten Start füllt sich das CMS mit Seiten, Anlaufstellen, Kopf/Fuß und den 18 Beiträgen der Altseite.
 
-**Inhalte**
+**Inhalte oder Aufbau einer Seite im Code ändern:** Standardinhalt in `src/content/pages/`, Darstellung in `src/components/blocks/`, Felder im Backend in `src/cms/`. Nach Änderungen an den Feldern `npm run cms:types`, `npm run cms:importmap` und `npm run cms:migrate:create -- <name>` ausführen und die erzeugten Dateien committen. Auf dem Server laufen Migrationen beim Start.
 
-| Bereich | Felder |
-|---|---|
-| Beiträge (Aktuelles) | Titel, Datum, Kurzfassung, Titelbild, Text, weitere Bilder, Dokumente zum Download, Status (Entwurf, Veröffentlicht, Archiviert), Position per Ziehen in der Liste |
-| Veranstaltungen | Titel, Beginn, Ende, Ort, Bild, Beschreibung, Plätze, Anmeldung offen, Dokumente, Status, Position |
-| Seitentexte | Titel, Einleitung, Text in DE, AR, RU, EN, TR, Status |
-| Dateien | Bilder, PDFs, Videos mit Titel, Alternativtext und Öffentlich-Schalter |
-| Redakteur:innen | Rollen „Redaktion“ und „Admin“ (nur Admins verwalten Konten) |
+**Hostinger**: Die App liegt in `website/`, Hostinger erwartet sie im Hauptordner. Deshalb erzeugt `.github/workflows/hostinger-branch.yml` aus `website/` den Branch `deploy`. In hPanel unter *Websites → Node.js web app → Import Git repository* dieses Repository und den Branch `deploy` wählen, Node 22. Umgebungsvariablen in hPanel anlegen: `PAYLOAD_SECRET` und `CMS_DATA_DIR` (absoluter Pfad außerhalb des App-Ordners, damit Deployments Datenbank und Uploads nicht überschreiben). Danach per SSH im App-Ordner das erste Konto anlegen: `ADMIN_EMAIL=… ADMIN_PASSWORD=… npm run cms:create-admin`. Hostinger setzt `output: "standalone"` selbst; getestet ist der Standalone-Start mit Datenbank, Uploads und Backend. Noch zu klären ist, ob der Tarif Dateien im App-Ordner zwischen Deployments behält (daher `CMS_DATA_DIR`).
 
-Archivierte Inhalte bleiben erhalten, sind aber öffentlich nicht mehr abrufbar. Die öffentlichen Seiten lesen noch aus `src/content/` und sind noch nicht mit dem CMS verbunden.
-
-**Datenbank ändern**: Nach Änderungen an den Collections `npm run cms:types`, `npm run cms:importmap` und `npm run cms:migrate:create -- <name>` ausführen und die erzeugten Dateien committen. Auf dem Server laufen Migrationen beim Start.
-
-**Hostinger**: `CMS_DATA_DIR` auf einen absoluten Pfad außerhalb des Deploy-Ordners setzen (Datenbank und Uploads), `PAYLOAD_SECRET` in hPanel anlegen, danach per SSH `npm run cms:create-admin`. Ob der Tarif dauerhaften Dateispeicher bietet, ist vor dem Umzug zu klären.
-
-**Vercel-Vorschau**: Dort ist nur `/tmp` beschreibbar. Daten sind flüchtig und je Instanz getrennt. Mit `PAYLOAD_SECRET`, `CMS_SEED_ON_START=true` und `CMS_ALLOW_FIRST_USER=true` zeigt die Vorschau die Oberfläche mit den Bestandsbeiträgen. Für eine dauerhafte Vorschau `DATABASE_URL` auf einen libSQL-Server setzen.
+**Vercel-Vorschau**: Dort ist nur `/tmp` beschreibbar, Datenbank und Uploads sind flüchtig und je Instanz getrennt. Deshalb zeigt die Vorschau die Website mit dem Standardinhalt (`CMS_CONTENT` nicht gesetzt). Das Backend läuft trotzdem, zum Ansehen der Oberfläche in Vercel (Preview) `PAYLOAD_SECRET` und `CMS_ALLOW_FIRST_USER=true` setzen und das erste Konto im Browser anlegen. Änderungen im Backend erscheinen dort nicht auf der Website. Zum Ausprobieren des Bearbeitens eignen sich lokaler Start oder Hostinger.
 
 ## Umgesetzt nach Vorgabe
 

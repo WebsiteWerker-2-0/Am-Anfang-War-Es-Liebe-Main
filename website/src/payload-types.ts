@@ -67,9 +67,10 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    pages: Page;
     posts: Post;
     events: Event;
-    pages: Page;
+    services: Service;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -79,9 +80,10 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
-    pages: PagesSelect<false> | PagesSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -92,15 +94,14 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale:
-    | ('false' | 'none' | 'null')
-    | false
-    | null
-    | ('de' | 'ar' | 'ru' | 'en' | 'tr')
-    | ('de' | 'ar' | 'ru' | 'en' | 'tr')[];
-  globals: {};
-  globalsSelect: {};
-  locale: 'de' | 'ar' | 'ru' | 'en' | 'tr';
+  fallbackLocale: null;
+  globals: {
+    site: Site;
+  };
+  globalsSelect: {
+    site: SiteSelect<false> | SiteSelect<true>;
+  };
+  locale: null;
   widgets: {
     collections: CollectionsWidget;
   };
@@ -126,6 +127,506 @@ export interface UserAuthOperations {
   unlock: {
     email: string;
     password: string;
+  };
+}
+/**
+ * Alle Seiten der Website, so aufgebaut wie auf der Website. Zum Ändern eine Seite öffnen.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  intro?: string | null;
+  band?: (number | null) | Media;
+  blocks?:
+    | (
+        | {
+            heading?: string | null;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            variant: 'stack' | 'service' | 'plain';
+            /**
+             * Nur für Sprungziele auf den ganzen Abschnitt, selten nötig.
+             */
+            sectionId?: string | null;
+            /**
+             * Nur, wenn der Abschnitt keine Zwischenüberschrift hat.
+             */
+            ariaLabel?: string | null;
+            items?:
+              | (
+                  | {
+                      /**
+                       * Absätze, Zwischenüberschriften, Listen und Nummerierungen.
+                       */
+                      content: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: any;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      };
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'rich';
+                    }
+                  | {
+                      text: string;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'lead';
+                    }
+                  | {
+                      content: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: any;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      };
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'note';
+                    }
+                  | {
+                      kind: 'notice' | 'emergency';
+                      content: {
+                        root: {
+                          type: string;
+                          children: {
+                            type: any;
+                            version: number;
+                            [k: string]: unknown;
+                          }[];
+                          direction: ('ltr' | 'rtl') | null;
+                          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                          indent: number;
+                          version: number;
+                        };
+                        [k: string]: unknown;
+                      };
+                      /**
+                       * Zum Beispiel 110.
+                       */
+                      number?: string | null;
+                      small?: boolean | null;
+                      measure?: boolean | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'callout';
+                    }
+                  | {
+                      label: string;
+                      /**
+                       * Zum Beispiel /hilfe
+                       */
+                      href: string;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'button';
+                    }
+                  | {
+                      entries: {
+                        /**
+                         * Bei einem Postfach leer lassen, dann erscheint dessen Name.
+                         */
+                        term?: string | null;
+                        value?: string | null;
+                        phone?: string | null;
+                        mailbox?: ('help' | 'information') | null;
+                        note?: string | null;
+                        id?: string | null;
+                      }[];
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'facts';
+                    }
+                  | {
+                      entries: {
+                        term: string;
+                        text: string;
+                        id?: string | null;
+                      }[];
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'definitions';
+                    }
+                )[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'section';
+          }
+        | {
+            kind: 'notice' | 'emergency';
+            content: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * Zum Beispiel 110.
+             */
+            number?: string | null;
+            small?: boolean | null;
+            measure?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callout';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'supportServices';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            note?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'serviceGroups';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            items?:
+              | {
+                  title: string;
+                  file: number | Media;
+                  /**
+                   * Zum Beispiel PDF, 2,1 MB · Deutsch · Stand: 2016
+                   */
+                  meta?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            note?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'documentList';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            topics?:
+              | {
+                  title: string;
+                  links?:
+                    | {
+                        label: string;
+                        url: string;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'topicLinks';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            people?:
+              | {
+                  name: string;
+                  role?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'peopleList';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            lead?: string | null;
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            download?: {
+              label?: string | null;
+              file?: (number | null) | Media;
+              /**
+               * Zum Beispiel (PDF, 2,7 MB)
+               */
+              meta?: string | null;
+            };
+            poster?: (number | null) | Media;
+            posterAlt?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'campaign';
+          }
+        | {
+            image: number | Media;
+            alt?: string | null;
+            caption?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'photo';
+          }
+        | {
+            legend: string;
+            statements?:
+              | {
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'selfCheck';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            concerns?:
+              | {
+                  label: string;
+                  mailbox: 'help' | 'information';
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactForm';
+          }
+        | {
+            versions?:
+              | {
+                  /**
+                   * ar, ru, en, tr
+                   */
+                  code: string;
+                  direction: 'ltr' | 'rtl';
+                  title: string;
+                  text: string;
+                  helplineLabel: string;
+                  emergencyLabel: string;
+                  exitLabel: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'languageVersions';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            intro?: string | null;
+            panels?:
+              | {
+                  image: number | Media;
+                  title: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'exhibition';
+          }
+        | {
+            variant: 'page' | 'teaser';
+            heading?: string | null;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            linkLabel?: string | null;
+            count?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsList';
+          }
+        | {
+            title: string;
+            paths?:
+              | {
+                  reason: string;
+                  target: string;
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            image?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'entry';
+          }
+        | {
+            items?:
+              | {
+                  title: string;
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'promises';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            linkLabel: string;
+            linkUrl: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'quickAccess';
+          }
+        | {
+            heading: string;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            lead: string;
+            privacyNote?: string | null;
+            buttonLabel: string;
+            buttonUrl: string;
+            image?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'teaserBand';
+          }
+      )[]
+    | null;
+  /**
+   * Leer lassen, dann gilt die Überschrift der Seite.
+   */
+  metaTitle?: string | null;
+  description?: string | null;
+  /**
+   * Die Adresse der Seite ist festgelegt.
+   */
+  slug: string;
+  /**
+   * Bestimmt Breite und Abstände. Nur im Notfall ändern.
+   */
+  layout: 'home' | 'stack-lg' | 'measure-stack' | 'wide';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Bilder, PDFs und Videos. Dateien, die nicht mehr öffentlich sein sollen, auf „nicht öffentlich“ stellen.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  title: string;
+  /**
+   * Für Bilder: kurze Beschreibung für Screenreader und wenn das Bild nicht lädt.
+   */
+  alt?: string | null;
+  description?: string | null;
+  isPublic?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
 }
 /**
@@ -184,43 +685,6 @@ export interface Post {
   createdAt: string;
 }
 /**
- * Bilder, PDFs und Videos. Dateien, die nicht mehr öffentlich sein sollen, auf „nicht öffentlich“ stellen.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  title: string;
-  /**
-   * Für Bilder: kurze Beschreibung für Screenreader und wenn das Bild nicht lädt.
-   */
-  alt?: string | null;
-  description?: string | null;
-  isPublic?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
  * Termine und Kurse. Vergangene Termine bleiben erhalten und lassen sich archivieren.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -274,36 +738,67 @@ export interface Event {
   createdAt: string;
 }
 /**
- * Texte der festen Seiten, je Sprache. Oben rechts die Sprache wählen.
+ * Beratungsstellen, Schutzhaus, Polizei und weitere Hilfen. Die Reihenfolge lässt sich in der Liste per Ziehen ändern.
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
+ * via the `definition` "services".
  */
-export interface Page {
+export interface Service {
   id: number;
-  title: string;
-  intro?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  _order?: string | null;
+  name: string;
   /**
-   * Teil der Internetadresse. Wird beim Speichern aus dem Titel erzeugt, wenn das Feld leer ist.
+   * Kurzer Name ohne Leerzeichen, auch als Sprungmarke genutzt.
    */
-  slug: string;
-  status: 'draft' | 'published' | 'archived';
-  archivedAt?: string | null;
+  serviceId: string;
+  placement: 'main' | 'group';
+  /**
+   * Überschrift der aufklappbaren Gruppe, zum Beispiel „Telefonische Beratung“.
+   */
+  groupTitle?: string | null;
+  /**
+   * Nur bei Hauptanlaufstellen, zum Beispiel „Was kann die Polizei für Sie tun?“.
+   */
+  question?: string | null;
+  provider?: string | null;
+  phones?:
+    | {
+        label?: string | null;
+        number: string;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  availability?: string | null;
+  addresses?:
+    | {
+        address: string;
+        id?: string | null;
+      }[]
+    | null;
+  email?: string | null;
+  website?: {
+    url?: string | null;
+    label?: string | null;
+  };
+  description?: string | null;
+  offers?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Nur ausfüllen, wenn die Stelle im Block „Hier bekommen Sie sofort Hilfe“ erscheinen soll.
+   */
+  quick?: {
+    label?: string | null;
+    note?: string | null;
+    /**
+     * Kleine Zahl steht zuerst.
+     */
+    order?: number | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -360,6 +855,10 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
         relationTo: 'posts';
         value: number | Post;
       } | null)
@@ -368,8 +867,8 @@ export interface PayloadLockedDocument {
         value: number | Event;
       } | null)
     | ({
-        relationTo: 'pages';
-        value: number | Page;
+        relationTo: 'services';
+        value: number | Service;
       } | null)
     | ({
         relationTo: 'media';
@@ -420,6 +919,341 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  intro?: T;
+  band?: T;
+  blocks?:
+    | T
+    | {
+        section?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              variant?: T;
+              sectionId?: T;
+              ariaLabel?: T;
+              items?:
+                | T
+                | {
+                    rich?:
+                      | T
+                      | {
+                          content?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    lead?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    note?:
+                      | T
+                      | {
+                          content?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    callout?:
+                      | T
+                      | {
+                          kind?: T;
+                          content?: T;
+                          number?: T;
+                          small?: T;
+                          measure?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    button?:
+                      | T
+                      | {
+                          label?: T;
+                          href?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    facts?:
+                      | T
+                      | {
+                          entries?:
+                            | T
+                            | {
+                                term?: T;
+                                value?: T;
+                                phone?: T;
+                                mailbox?: T;
+                                note?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    definitions?:
+                      | T
+                      | {
+                          entries?:
+                            | T
+                            | {
+                                term?: T;
+                                text?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        callout?:
+          | T
+          | {
+              kind?: T;
+              content?: T;
+              number?: T;
+              small?: T;
+              measure?: T;
+              id?: T;
+              blockName?: T;
+            };
+        supportServices?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        serviceGroups?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              note?: T;
+              id?: T;
+              blockName?: T;
+            };
+        documentList?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    file?: T;
+                    meta?: T;
+                    id?: T;
+                  };
+              note?: T;
+              id?: T;
+              blockName?: T;
+            };
+        topicLinks?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              topics?:
+                | T
+                | {
+                    title?: T;
+                    links?:
+                      | T
+                      | {
+                          label?: T;
+                          url?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        peopleList?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              people?:
+                | T
+                | {
+                    name?: T;
+                    role?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        campaign?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              lead?: T;
+              body?: T;
+              download?:
+                | T
+                | {
+                    label?: T;
+                    file?: T;
+                    meta?: T;
+                  };
+              poster?: T;
+              posterAlt?: T;
+              id?: T;
+              blockName?: T;
+            };
+        photo?:
+          | T
+          | {
+              image?: T;
+              alt?: T;
+              caption?: T;
+              id?: T;
+              blockName?: T;
+            };
+        selfCheck?:
+          | T
+          | {
+              legend?: T;
+              statements?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        contactForm?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              concerns?:
+                | T
+                | {
+                    label?: T;
+                    mailbox?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        languageVersions?:
+          | T
+          | {
+              versions?:
+                | T
+                | {
+                    code?: T;
+                    direction?: T;
+                    title?: T;
+                    text?: T;
+                    helplineLabel?: T;
+                    emergencyLabel?: T;
+                    exitLabel?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        exhibition?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              intro?: T;
+              panels?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        newsList?:
+          | T
+          | {
+              variant?: T;
+              heading?: T;
+              anchor?: T;
+              linkLabel?: T;
+              count?: T;
+              id?: T;
+              blockName?: T;
+            };
+        entry?:
+          | T
+          | {
+              title?: T;
+              paths?:
+                | T
+                | {
+                    reason?: T;
+                    target?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        promises?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        quickAccess?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              linkLabel?: T;
+              linkUrl?: T;
+              id?: T;
+              blockName?: T;
+            };
+        teaserBand?:
+          | T
+          | {
+              heading?: T;
+              anchor?: T;
+              lead?: T;
+              privacyNote?: T;
+              buttonLabel?: T;
+              buttonUrl?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  metaTitle?: T;
+  description?: T;
+  slug?: T;
+  layout?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -476,15 +1310,52 @@ export interface EventsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
+ * via the `definition` "services_select".
  */
-export interface PagesSelect<T extends boolean = true> {
-  title?: T;
-  intro?: T;
-  content?: T;
-  slug?: T;
-  status?: T;
-  archivedAt?: T;
+export interface ServicesSelect<T extends boolean = true> {
+  _order?: T;
+  name?: T;
+  serviceId?: T;
+  placement?: T;
+  groupTitle?: T;
+  question?: T;
+  provider?: T;
+  phones?:
+    | T
+    | {
+        label?: T;
+        number?: T;
+        note?: T;
+        id?: T;
+      };
+  availability?: T;
+  addresses?:
+    | T
+    | {
+        address?: T;
+        id?: T;
+      };
+  email?: T;
+  website?:
+    | T
+    | {
+        url?: T;
+        label?: T;
+      };
+  description?: T;
+  offers?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  quick?:
+    | T
+    | {
+        label?: T;
+        note?: T;
+        order?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -587,6 +1458,180 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Erscheint auf jeder Seite: Menü, Sprachwahl, Hilfetelefon und Fußbereich.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site".
+ */
+export interface Site {
+  id: number;
+  navigation?:
+    | {
+        label: string;
+        /**
+         * Zum Beispiel /hilfe
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  languages?:
+    | {
+        code: string;
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  helpline: {
+    number: string;
+    /**
+     * Zum Beispiel „, rund um die Uhr“. Erscheint nur auf breiten Bildschirmen.
+     */
+    suffix?: string | null;
+  };
+  /**
+   * Werden auf der Kontaktseite angezeigt und für die Zustellung des Formulars genutzt.
+   */
+  mailboxes: {
+    help: {
+      label: string;
+      email: string;
+    };
+    information: {
+      label: string;
+      email: string;
+    };
+  };
+  footer: {
+    organisation: string;
+    address: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    emergency: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    serviceLinks?:
+      | {
+          label: string;
+          href: string;
+          id?: string | null;
+        }[]
+      | null;
+    legalLinks?:
+      | {
+          label: string;
+          href: string;
+          id?: string | null;
+        }[]
+      | null;
+    fundingLabel?: string | null;
+    fundingLogo?: (number | null) | Media;
+    fundingAlt?: string | null;
+    /**
+     * Leer lassen, sobald die Website freigegeben ist.
+     */
+    draftNote?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site_select".
+ */
+export interface SiteSelect<T extends boolean = true> {
+  navigation?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  languages?:
+    | T
+    | {
+        code?: T;
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  helpline?:
+    | T
+    | {
+        number?: T;
+        suffix?: T;
+      };
+  mailboxes?:
+    | T
+    | {
+        help?:
+          | T
+          | {
+              label?: T;
+              email?: T;
+            };
+        information?:
+          | T
+          | {
+              label?: T;
+              email?: T;
+            };
+      };
+  footer?:
+    | T
+    | {
+        organisation?: T;
+        address?: T;
+        emergency?: T;
+        serviceLinks?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        legalLinks?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        fundingLabel?: T;
+        fundingLogo?: T;
+        fundingAlt?: T;
+        draftNote?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
