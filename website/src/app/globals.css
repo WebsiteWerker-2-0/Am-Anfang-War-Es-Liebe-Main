@@ -29,6 +29,7 @@
   --font-display: var(--font-literata), var(--font-naskh), Georgia, serif;
   --font-text: var(--font-plex), var(--font-plex-arabic), system-ui, sans-serif;
 
+  --fs-xs: 0.833rem;
   --fs-sm: 0.889rem;
   --fs-base: 1.125rem;
   --fs-md: clamp(1.25rem, 1.1rem + 0.6vw, 1.406rem);
@@ -189,9 +190,11 @@ a:hover {
   transform: none;
 }
 
+/* Sandfläche setzt die Hilfeleiste vom weißen Kopf ab (farben.md: Hinweisflächen) */
 .help-bar {
-  border-block-end: 1px solid var(--c-line);
-  font-size: var(--fs-sm);
+  background: var(--c-brand-surface);
+  color: var(--c-ink-muted);
+  font-size: var(--fs-xs);
 }
 
 .help-bar__inner {
@@ -211,6 +214,7 @@ a:hover {
 }
 
 .help-bar__phone a {
+  color: var(--c-ink);
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
@@ -231,12 +235,14 @@ a:hover {
 }
 
 .help-bar__languages a {
+  color: inherit;
   text-decoration: none;
   display: inline-block;
   padding-block: var(--space-2);
 }
 
 .help-bar__languages a[aria-current="true"] {
+  color: var(--c-ink);
   font-weight: 600;
   text-decoration: underline;
 }

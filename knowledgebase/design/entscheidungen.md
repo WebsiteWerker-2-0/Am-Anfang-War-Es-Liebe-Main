@@ -2,6 +2,12 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-13 – Hilfeleiste auf Sand, Schrift eine Stufe kleiner
+- **Entscheidung:** Die Hilfeleiste steht auf einer Fläche in `--c-brand-surface` (Sand) statt auf Weiß mit Trennlinie. Schrift `--fs-xs` (0.833rem, neu) statt `--fs-sm`. Gestufte Textfarben: Beschriftungen und nicht aktive Sprachen in `--c-ink-muted`, Rufnummer und aktive Sprache in `--c-ink` und fett. Der Notausgang behält Größe und Farbe.
+- **Begründung:** Leiste, Logo und Überschrift standen alle dunkel auf Weiß, die Leiste hob sich nicht vom Kopf ab. Sand ist laut farben.md für Hinweisflächen vorgesehen, also keine neue Farbe (harte Regel 2). Kontraste: `--c-ink` auf Sand 11,73:1, `--c-ink-muted` auf Sand 5,39:1. Cyan als Fläche wäre zu laut gewesen, eine dunkle Leiste hätte den dunklen Notausgang verschluckt.
+- **Betrifft:** komponenten.md, farben.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 4.2, `website/src/app/globals.css` (`.help-bar`, `--fs-xs`)
+- **Von:** Enrico (mit Claude)
+
 ## 2026-10-13 – Seitenkopf: Titel und Illustration in einem Band
 - **Entscheidung:** Seiten mit Broschüren-Band (Hilfe, Kurse, Infos, Arbeitskreis, Aktuelles) zeigen Titel und Einleitung links auf Weiß, rechts eine Farbfläche (52vw) mit gewellter Kante und der Illustration unten rechts. Mobil steht die Fläche oben mit gewellter Unterkante. Unter dem Titel ein kurzer Balken in der Seitenfarbe (Orange bzw. Magenta), keine Wellenlinie. Entwurf im Claude-Design-Canvas „AAWEL Seitenbanner Redesign".
 - **Begründung:** Das alte Band war eine leere Fläche über der Überschrift und schnitt Figuren ab. Text nie auf der Farbe, weil Magenta keinen Textkontrast erreicht. Bildhöhe auf 19rem gedeckelt, weil die Bänder nur 254 px hoch sind. Flächenfarbe je Band aus dem JPG gemessen, sonst ist das Bildrechteck zu sehen.

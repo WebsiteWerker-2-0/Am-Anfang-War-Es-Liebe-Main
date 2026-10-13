@@ -2,6 +2,12 @@
 
 <!-- Pro Komponente ein Abschnitt: Aussehen, Zustände (hover/aktiv/deaktiviert), Einsatz -->
 
+## Hilfeleiste
+
+- Fläche in Sand (`--c-brand-surface`), keine Trennlinie zum Kopf.
+- Schrift `--fs-xs`; Beschriftungen und nicht aktive Sprachen `--c-ink-muted`, Rufnummer und aktive Sprache `--c-ink` fett.
+- Notausgang unverändert (`--fs-sm`, `--c-exit-bg`), hebt sich als einzige dunkle Fläche ab.
+
 ## Seitenkopf mit Broschüren-Band
 
 - Desktop (ab 64em): Titel und Einleitung links auf Weiß, Farbfläche rechts (52vw) mit gewellter Kante, Illustration unten rechts, max. 19rem hoch.

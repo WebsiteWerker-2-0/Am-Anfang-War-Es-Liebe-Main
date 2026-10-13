@@ -168,6 +168,7 @@ Fluide Skala, Verhältnis 1,25, Grundgröße 18 px. Keine Schriftgrößenknöpfe
 
 | Token | Wert | Einsatz |
 |---|---|---|
+| `--fs-xs` | `0.833rem` | Hilfeleiste im Kopf |
 | `--fs-sm` | `0.889rem` | Metadaten, Bildunterschriften |
 | `--fs-base` | `1.125rem` | Fließtext |
 | `--fs-md` | `clamp(1.25rem, 1.1rem + 0.6vw, 1.406rem)` | Lead, h4 |
