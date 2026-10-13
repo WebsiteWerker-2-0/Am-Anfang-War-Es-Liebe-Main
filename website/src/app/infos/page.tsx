@@ -141,10 +141,6 @@ export default function InfoPage() {
               </li>
             ))}
           </ul>
-          <p className="small muted measure" style={{ marginBlockStart: "var(--space-4)" }}>
-            Die Broschüre stammt von 2016. Einige Angaben, etwa Telefonnummern und Öffnungszeiten, haben sich
-            inzwischen geändert. Aktuelle Kontakte finden Sie unter <a href="/hilfe">Hilfe</a>.
-          </p>
         </section>
 
         <section aria-labelledby="links">
