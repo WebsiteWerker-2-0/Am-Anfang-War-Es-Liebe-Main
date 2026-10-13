@@ -2,6 +2,12 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-13 – Seitenkopf: Titel und Illustration in einem Band
+- **Entscheidung:** Seiten mit Broschüren-Band (Hilfe, Kurse, Infos, Arbeitskreis, Aktuelles) zeigen Titel und Einleitung links auf Weiß, rechts eine Farbfläche (52vw) mit gewellter Kante und der Illustration unten rechts. Mobil steht die Fläche oben mit gewellter Unterkante. Unter dem Titel ein kurzer Balken in der Seitenfarbe (Orange bzw. Magenta), keine Wellenlinie. Entwurf im Claude-Design-Canvas „AAWEL Seitenbanner Redesign".
+- **Begründung:** Das alte Band war eine leere Fläche über der Überschrift und schnitt Figuren ab. Text nie auf der Farbe, weil Magenta keinen Textkontrast erreicht. Bildhöhe auf 19rem gedeckelt, weil die Bänder nur 254 px hoch sind. Flächenfarbe je Band aus dem JPG gemessen, sonst ist das Bildrechteck zu sehen.
+- **Betrifft:** komponenten.md, `website/src/components/PageHeader.tsx`, `website/src/content/page-bands.ts`, `website/src/app/globals.css` (`.page-hero`)
+- **Von:** Enrico (mit Claude)
+
 ## 2026-10-13 – Förderlogo: unten weniger Polsterung
 - **Entscheidung:** Die weiße Fläche um das MKJFGFI-Logo im Fuß hat unten 0.75rem statt 1rem Polsterung (oben 1rem, seitlich 1.5rem). Das Logo selbst bleibt unverändert (offizielle Datei, geprüft gegen bra.nrw.de).
 - **Begründung:** Im offiziellen Logo steht der Text oben bündig am Wappen, das Wappen reicht weiter nach unten. Bei gleicher Polsterung wirkt unten mehr Weiß; optischer Ausgleich.

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import band from "@/assets/illustrations/band-p15.jpg";
 import { PageHeader } from "@/components/PageHeader";
+import { pageBands } from "@/content/page-bands";
 import { PostList } from "@/components/PostList";
 import { posts } from "@/content/posts";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function NewsPage() {
   return (
     <>
-      <PageHeader title="Aktuelles" band={band} intro="Aktionen, Ausstellungen und Beiträge des Arbeitskreises." />
+      <PageHeader title="Aktuelles" band={pageBands.news} intro="Aktionen, Ausstellungen und Beiträge des Arbeitskreises." />
       <div className="wide">
         <PostList posts={posts} />
       </div>

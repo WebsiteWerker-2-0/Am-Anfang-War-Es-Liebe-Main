@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import band from "@/assets/illustrations/band-p06.jpg";
 import { PageHeader } from "@/components/PageHeader";
+import { pageBands } from "@/content/page-bands";
 
 export const metadata: Metadata = {
   title: "Selbstverteidigung und Selbstbehauptung",
@@ -12,7 +12,7 @@ export default function CoursesPage() {
     <>
       <PageHeader
         title="Selbstverteidigung und Selbstbehauptung"
-        band={band}
+        band={pageBands.courses}
         intro="Mit einer Förderung des Landes NRW bietet der Arbeitskreis Kurse für Frauen, Mädchen und Kinder an. Wer weiß, wie man Grenzen setzt und sich wehrt, geht sicherer durchs Leben."
       />
       <div className="wide stack-lg">

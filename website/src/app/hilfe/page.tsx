@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import band from "@/assets/illustrations/band-p07.jpg";
 import { SupportServiceSection } from "@/components/SupportService";
 import { PageHeader } from "@/components/PageHeader";
+import { pageBands } from "@/content/page-bands";
 import { PhoneLink } from "@/components/PhoneLink";
 import { mainServices, serviceGroups } from "@/content/support-services";
 
@@ -15,7 +15,7 @@ export default function HelpPage() {
     <>
       <PageHeader
         title="Hilfe im Kreis Höxter"
-        band={band}
+        band={pageBands.help}
         intro="Frauen und Kinder, die Gewalt erleben oder erlebt haben, können sich an diese Stellen wenden. Das gilt auch für alle, die Betroffenen helfen möchten."
       />
 

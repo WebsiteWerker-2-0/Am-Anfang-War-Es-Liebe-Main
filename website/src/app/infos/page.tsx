@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import poster from "@/assets/campaigns/anonymous-evidence-collection-poster.jpg";
-import band from "@/assets/illustrations/band-p12.jpg";
 import { PageHeader } from "@/components/PageHeader";
+import { pageBands } from "@/content/page-bands";
 import { PhoneLink } from "@/components/PhoneLink";
 
 export const metadata: Metadata = {
@@ -64,7 +64,7 @@ export default function InfoPage() {
     <>
       <PageHeader
         title="Infos und Dokumente"
-        band={band}
+        band={pageBands.info}
         intro="Die Broschüre des Arbeitskreises, Flyer zum Mitnehmen und weiterführende Informationen."
       />
       <div className="wide stack-lg">

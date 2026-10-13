@@ -2,6 +2,14 @@
 
 <!-- Pro Komponente ein Abschnitt: Aussehen, Zustände (hover/aktiv/deaktiviert), Einsatz -->
 
+## Seitenkopf mit Broschüren-Band
+
+- Desktop (ab 64em): Titel und Einleitung links auf Weiß, Farbfläche rechts (52vw) mit gewellter Kante, Illustration unten rechts, max. 19rem hoch.
+- Mobil: Farbfläche oben über volle Breite mit gewellter Unterkante, Text darunter.
+- Unter dem Titel ein kurzer Balken (3rem × 0.25rem) in Orange bzw. Magenta.
+- Flächenfarbe = gemessener Grund des JPGs (`content/page-bands.ts`), Bildausschnitt je Band einstellbar.
+- [ ] Bänder in höherer Auflösung aus den Druckdaten (Z-06) neu exportieren, dann Farben neu abgleichen
+
 ## Förderhinweis im Fuß
 
 - MKJFGFI-Logo (offizielle Datei, unverändert) auf weißer Fläche, weil die Schrift schwarz auf transparentem Grund ist.

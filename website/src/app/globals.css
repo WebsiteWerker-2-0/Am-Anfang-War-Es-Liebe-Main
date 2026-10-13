@@ -647,12 +647,123 @@ a:hover {
 /* ------------------------------------------------------------------
    Seitenkopf mit Broschüren-Band
    ------------------------------------------------------------------ */
-.page-band {
-  display: block;
-  width: 100%;
-  height: clamp(7rem, 16vw, 13rem);
+/* Mobil: Farbfläche mit Illustration oben, gewellte Unterkante, Text darunter.
+   Ab Desktop: Text links auf Weiß, Farbfläche rechts mit gewellter Seitenkante.
+   Der Text steht nie auf der Farbe, weil Magenta keinen Textkontrast erreicht. */
+/* --hero-field setzt PageHeader aus dem gemessenen Grund des Bands (content/page-bands.ts) */
+.page-hero {
+  --hero-accent: var(--c-brand-secondary);
+  --hero-field-width: 52vw;
+  position: relative;
+}
+
+.page-hero--magenta {
+  --hero-accent: var(--c-brand-accent);
+}
+
+.page-hero__field {
+  position: relative;
+  block-size: clamp(11rem, 50vw, 16rem);
+  background: var(--hero-field);
+}
+
+/* Die Bänder sind nur 254 px hoch. Höhe deckeln, damit die Illustration nicht unscharf
+   hochskaliert wird; sie sitzt unten in der Fläche wie in der Broschüre. */
+.page-hero__image {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  inline-size: 100%;
+  block-size: min(100%, 19rem);
   object-fit: cover;
-  object-position: right center;
+}
+
+.page-hero__edge {
+  position: absolute;
+  display: block;
+  fill: var(--hero-field);
+  z-index: 1;
+}
+
+.page-hero__edge--bottom {
+  inset-inline: 0;
+  inset-block-end: calc(-1.5rem + 2px);
+  inline-size: 100%;
+  block-size: 1.5rem;
+}
+
+.page-hero__edge--side {
+  display: none;
+}
+
+.page-hero__text {
+  padding-block: var(--space-7) var(--space-5);
+}
+
+.page-hero__copy {
+  max-inline-size: var(--measure);
+}
+
+/* Kurzer Balken in der Seitenfarbe als Abschluss der Überschrift */
+.page-hero h1::after {
+  content: "";
+  display: block;
+  inline-size: 3rem;
+  block-size: 0.25rem;
+  border-radius: 2px;
+  margin-block-start: var(--space-4);
+  background: var(--hero-accent);
+}
+
+.page-hero h1 {
+  margin-block-end: var(--space-4);
+}
+
+.page-hero .lead {
+  color: var(--c-ink-muted);
+}
+
+@media (min-width: 64em) {
+  .page-hero {
+    display: flex;
+    align-items: center;
+    min-block-size: 22rem;
+  }
+
+  .page-hero__field {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    inline-size: var(--hero-field-width);
+    block-size: auto;
+  }
+
+  .page-hero__edge--bottom {
+    display: none;
+  }
+
+  .page-hero__edge--side {
+    display: block;
+    inset-block: 0;
+    inset-inline-start: calc(-3rem + 2px);
+    inline-size: 3rem;
+    block-size: 100%;
+  }
+
+  .page-hero__edge--side:dir(rtl) {
+    transform: scaleX(-1);
+  }
+
+  .page-hero__text {
+    position: relative;
+    padding-block: var(--space-8);
+  }
+
+  /* Der Text endet vor der Farbfläche samt Welle: halbe Containerbreite minus
+     Überstand der Fläche über die Mitte (2vw bei 52vw) und Abstand */
+  .page-hero__copy {
+    max-inline-size: calc(min(36rem, 50vw - var(--space-5)) - 2vw - var(--space-8));
+  }
 }
 
 .page-header {

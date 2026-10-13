@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import band from "@/assets/illustrations/band-p13.jpg";
 import groupPhoto from "@/assets/photos/working-group.jpg";
 import { PageHeader } from "@/components/PageHeader";
+import { pageBands } from "@/content/page-bands";
 
 export const metadata: Metadata = {
   title: "Der Arbeitskreis",
@@ -35,7 +35,7 @@ export default function WorkingGroupPage() {
     <>
       <PageHeader
         title="Gemeinsam gegen Gewalt an Frauen und Kindern"
-        band={band}
+        band={pageBands.workingGroup}
         intro="Gewalt gegen Frauen und Kinder findet überall statt, auch im Kreis Höxter. Sie betrifft Personen aller kulturellen und sozialen Hintergründe."
       />
       <div className="wide stack-lg">
