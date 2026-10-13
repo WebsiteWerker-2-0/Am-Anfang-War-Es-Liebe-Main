@@ -1186,6 +1186,8 @@ a:hover {
   max-width: 100%;
   background: var(--c-paper);
   padding: var(--space-4) var(--space-5);
+  /* Optischer Ausgleich: Im offiziellen Logo steht der Text oben bündig am Wappen, unten wirkt sonst mehr Weiß */
+  padding-block-end: var(--space-3);
 }
 
 .funding-logo img {

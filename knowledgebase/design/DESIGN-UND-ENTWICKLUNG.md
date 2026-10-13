@@ -490,7 +490,7 @@ Das Repository `WebsiteWerker-2-0/Am-Anfang-War-Es-Liebe-Main` ist privat und wa
 - [ ] Web-Nutzungsrechte an den Broschüren-Illustrationen (fien-design.de) klären
 - [ ] Farbe des Notausgangs festlegen (Broschürenfarbe oder neutral)
 - [ ] Hilfetelefon-Nummer für alle Sprachfassungen verifizieren (116 016)
-- [ ] Gendersprache festlegen (Broschüre nutzt Binnen-I; Vorgabe der Gleichstellungsstelle erfragen)
+- [x] Gendersprache: Gendersternchen (Freund*innen), von der Gleichstellungsstelle bestätigt am 13.10.2026. Neutrale Formen bevorzugen; Texte des AG und archivierte Beiträge bleiben im Wortlaut
 - [ ] Veraltete Broschüreninhalte markieren, z. B. „Arbeitslosengeld II“ (seit 2023 Bürgergeld), Öffnungszeiten, Nummern; Korrektur durch AG
 - [ ] Plugin für F-11 (Anmeldeportal mit frei definierbaren Feldern) auswählen und auf Datenflüsse prüfen
 - [ ] Leichte Sprache: nicht beauftragt; ggf. als Change Request anbieten

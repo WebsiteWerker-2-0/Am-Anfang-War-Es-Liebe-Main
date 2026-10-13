@@ -124,7 +124,7 @@ export default function HelpPage() {
         </section>
 
         <section className="service" id="angehoerige" aria-labelledby="angehoerige-titel">
-          <h2 id="angehoerige-titel">Was können Nachbarn, Angehörige und Freunde tun?</h2>
+          <h2 id="angehoerige-titel">Was können Nachbar*innen, Angehörige und Freund*innen tun?</h2>
           <div className="measure stack">
             <p>
               Oft sind es die Nachbarin, die Freundin oder der Kollege, die als Erste etwas bemerken. Ihre Reaktion
