@@ -132,7 +132,7 @@ export interface UserAuthOperations {
   };
 }
 /**
- * Meldungen für den Bereich Aktuelles auf der Website. Mit „Speichern“ erscheint der Beitrag sofort. Wollen Sie ihn noch nicht zeigen, wählen Sie rechts den Status „Entwurf“. Mit dem Auge-Symbol oben sehen Sie die Vorschau.
+ * Meldungen für den Bereich Aktuelles auf der Website. Mit „Speichern“ erscheint der Beitrag sofort ganz oben. Soll er noch nicht erscheinen, wählen Sie rechts den Status „Entwurf“. Das Auge-Symbol zeigt die Vorschau. Die Reihenfolge ändern Sie in der Liste per Ziehen.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
@@ -148,7 +148,7 @@ export interface Post {
   excerpt?: string | null;
   image?: (number | null) | Media;
   /**
-   * Datei oder Bild an einer bestimmten Stelle einfügen: Klicken Sie im Text an die gewünschte Stelle, dann in der Leiste ganz links auf das erste Symbol und wählen „Datei oder Bild“.
+   * Datei oder Bild an einer bestimmten Stelle einfügen: im Text an die Stelle klicken, dann in der Leiste ganz links auf das erste Symbol und „Datei oder Bild“ wählen.
    */
   content?: {
     root: {
@@ -165,14 +165,25 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Altes Feld. Neue Bilder bitte direkt in den Text setzen. Leeren Sie das Feld, verschwindet es.
+   */
   gallery?: (number | Media)[] | null;
   /**
-   * PDFs, Flyer, Plakate oder Videos, die unter dem Text verlinkt werden.
+   * Zeigt unter dem Text eine Liste mit PDFs zum Herunterladen.
+   */
+  showDownloads?: boolean | null;
+  /**
+   * Nur PDF-Dateien. Die Reihenfolge ändern Sie per Ziehen.
    */
   documents?:
     | {
         label: string;
         file: number | Media;
+        /**
+         * Zum Beispiel ein Bild der Titelseite. Ohne Bild erscheint ein PDF-Symbol.
+         */
+        preview?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -440,11 +451,13 @@ export interface PostsSelect<T extends boolean = true> {
   image?: T;
   content?: T;
   gallery?: T;
+  showDownloads?: T;
   documents?:
     | T
     | {
         label?: T;
         file?: T;
+        preview?: T;
         id?: T;
       };
   legacyHtml?: T;

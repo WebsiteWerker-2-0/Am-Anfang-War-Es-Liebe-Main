@@ -175,7 +175,18 @@ export type PostData = {
   /** Text: HTML (Altbestand ohne CMS) oder Lexical */
   content: Rich;
   gallery: { image: Img; alt?: string }[];
-  documents: { label: string; file: FileValue }[];
+  /** Download-Bereich unter dem Text (nur bei eingeschaltetem „Download-Bereich anzeigen“) */
+  documents: PostDocument[];
+  /** Archiviert: steht eingeklappt im Archiv unten auf „Aktuelles“ */
+  archived?: boolean;
+};
+
+export type PostDocument = {
+  label: string;
+  file: FileValue;
+  /** Kurzangabe wie „PDF, 1,2 MB“ */
+  meta?: string;
+  preview?: Img | null;
 };
 
 export type SiteData = {

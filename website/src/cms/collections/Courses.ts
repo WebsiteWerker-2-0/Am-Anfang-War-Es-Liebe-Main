@@ -180,6 +180,6 @@ export const Courses: CollectionConfig = {
     },
     { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },
     hiddenSlugField,
-    ...publicationFields,
+    ...publicationFields(),
   ],
 };

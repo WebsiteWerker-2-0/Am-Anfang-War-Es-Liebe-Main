@@ -18,6 +18,7 @@ html[data-theme="light"] {
   --aal-primary: #1d1d1f; /* wichtigste Aktion: Kontrast zu weißer Schrift > 15:1 */
   --aal-primary-text: #ffffff;
   --aal-primary-glow: rgba(0, 0, 0, 0.28);
+  --aal-solid: #ffffff; /* Menüs und Auswahllisten: nie durchscheinend */
   --aal-glass: rgba(255, 255, 255, 0.58);
   --aal-glass-strong: rgba(255, 255, 255, 0.78);
   --aal-glass-edge: rgba(255, 255, 255, 0.85);
@@ -38,6 +39,7 @@ html[data-theme="dark"] {
   --aal-primary: #f5f5f7;
   --aal-primary-text: #111114;
   --aal-primary-glow: rgba(255, 255, 255, 0.2);
+  --aal-solid: #24262c;
   --aal-glass: rgba(44, 46, 54, 0.5);
   --aal-glass-strong: rgba(60, 63, 74, 0.7);
   --aal-glass-edge: rgba(255, 255, 255, 0.16);
@@ -405,4 +407,55 @@ select:focus-visible,
 .fixed-toolbar svg {
   inline-size: 20px;
   block-size: 20px;
+}
+
+/* ---- Menüs, Auswahllisten, Einfügen-Menü und „/“-Befehle: immer undurchsichtig und gut lesbar ----
+   Payload nutzt für sie die Hintergrundfarbe der Eingabefelder, die hier durchscheint. */
+.popup__content,
+.popup__scroll-container,
+.rs__menu,
+.rs__menu-list,
+.slash-menu-popup,
+.inline-toolbar-popup,
+.toolbar-popup__dropdown-items,
+.floating-select-toolbar-popup,
+.react-datepicker,
+.react-datepicker__header,
+.react-datepicker__time-container,
+.react-datepicker__time {
+  background: var(--aal-solid) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  opacity: 1;
+}
+
+.popup__content,
+.rs__menu,
+.slash-menu-popup,
+.inline-toolbar-popup,
+.toolbar-popup__dropdown-items {
+  border: 1px solid var(--aal-glass-line);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  color: var(--aal-ink);
+}
+
+.rs__option,
+.slash-menu-popup__item,
+.toolbar-popup__dropdown-item,
+.popup-button-list__button {
+  font-size: 15px;
+  min-block-size: 40px;
+}
+
+.rs__option--is-focused,
+.slash-menu-popup__item--selected,
+.toolbar-popup__dropdown-item:hover,
+.popup-button-list__button:hover {
+  background: color-mix(in srgb, var(--aal-ink) 10%, var(--aal-solid)) !important;
+}
+
+.rs__option--is-selected {
+  background: var(--aal-primary) !important;
+  color: var(--aal-primary-text) !important;
 }

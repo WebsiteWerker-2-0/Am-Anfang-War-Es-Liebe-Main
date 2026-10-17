@@ -95,3 +95,5 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 - Migration `20261017_142156_veranstaltung_text` **von Hand gekürzt** auf zwei `ALTER TABLE … ADD`: Payload wollte wegen des geänderten Standardwerts `posts` und `courses` per `DROP TABLE` neu bauen (Gefahr von Datenverlust, siehe Fallstrick 2). Der Standardwert gilt nur in der Anwendung. Geprüft an einer Datenbank im Serverstand.
 - `push: false` im SQLite-Adapter: Auch lokal ändert sich das Schema nur über Migrationen. Nach einer neuen Migration lokal einmal im Produktionsmodus starten (z. B. `npm run cms:seed`), dann läuft sie.
 - `npx payload migrate` meldet nichts und wendet nichts an; die Migrationen laufen beim Start (`prodMigrations`).
+- Migration `20261017_151620_downloads_bildposition` ebenfalls von Hand auf `ADD COLUMN` gekürzt (Payload wollte `posts_documents` per `DROP TABLE` neu bauen). Setzt `show_downloads` für Beiträge, die schon Dokumente haben. Geprüft: alter Stand per `git worktree` mit Daten erzeugt, dann mit neuem Stand gestartet.
+- Archiv: `getPosts` liefert nur Veröffentlichtes, `getArchivedPosts` das Archiv, `getPost` beides (`src/lib/content.ts`).

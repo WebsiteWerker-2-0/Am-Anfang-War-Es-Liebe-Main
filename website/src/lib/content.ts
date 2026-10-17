@@ -30,14 +30,14 @@ const defaultPosts: PostData[] = posts.map((post) => ({
   documents: [],
 }));
 
-/** Veröffentlichte Beiträge in der Reihenfolge der Position (Standard: neueste zuerst) */
-export const getPosts = cache(async (): Promise<PostData[]> => {
+/** Veröffentlichte und archivierte Beiträge in der Reihenfolge der Position (neue stehen oben) */
+const getAllPosts = cache(async (): Promise<PostData[]> => {
   const cms = await getCms();
   if (!cms) return defaultPosts;
   try {
     const result = await cms.find({
       collection: "posts",
-      where: { status: { equals: "published" } },
+      where: { status: { in: ["published", "archived"] } },
       depth: 1,
       limit: 500,
       pagination: false,
@@ -55,8 +55,15 @@ export const getPosts = cache(async (): Promise<PostData[]> => {
   }
 });
 
+/** Beiträge für die Liste auf „Aktuelles“ und der Startseite */
+export const getPosts = cache(async (): Promise<PostData[]> => (await getAllPosts()).filter((post) => !post.archived));
+
+/** Archivierte Beiträge (eingeklappt unten auf „Aktuelles“) */
+export const getArchivedPosts = cache(async (): Promise<PostData[]> => (await getAllPosts()).filter((post) => post.archived));
+
+/** Ein Beitrag, auch archiviert (aus dem Archiv verlinkt) */
 export async function getPost(slug: string) {
-  return (await getPosts()).find((post) => post.slug === slug) ?? null;
+  return (await getAllPosts()).find((post) => post.slug === slug) ?? null;
 }
 
 /** Veröffentlichte Veranstaltungen mit freien Plätzen; ohne CMS gibt es keine */

@@ -1,7 +1,7 @@
 import type { CollectionBeforeChangeHook, CollectionConfig } from "payload";
 import { generateKeyBetween } from "payload/shared";
 import { isLoggedIn, publishedOrLoggedIn } from "../access";
-import { documentsField } from "../fields/documents";
+import { documentsFields } from "../fields/documents";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
 import { hiddenSlugField } from "../fields/slug";
 import { bodyEditor } from "../editors";
@@ -83,8 +83,14 @@ export const Posts: CollectionConfig = {
       relationTo: "media",
       hasMany: true,
       label: "Weitere Bilder",
+      // Entfällt: Bilder gehören direkt in den Text (Baustein „Datei oder Bild“).
+      // Sichtbar bleibt das Feld nur, wo die Altseite schon Bilder eingetragen hat.
+      admin: {
+        condition: (data) => Array.isArray(data?.gallery) && data.gallery.length > 0,
+        description: "Altes Feld. Neue Bilder bitte direkt in den Text setzen. Leeren Sie das Feld, verschwindet es.",
+      },
     },
-    documentsField,
+    ...documentsFields,
     {
       name: "legacyHtml",
       type: "textarea",
@@ -98,6 +104,6 @@ export const Posts: CollectionConfig = {
     },
     { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },
     hiddenSlugField,
-    ...publicationFields,
+    ...publicationFields("Archiviert (eingeklappt im Archiv unten auf Aktuelles)"),
   ],
 };

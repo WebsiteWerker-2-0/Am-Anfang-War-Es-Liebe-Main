@@ -15,6 +15,10 @@ Die Redaktion des Arbeitskreises soll im Backend nur das Nötigste ändern könn
 
 - **Speichern heißt veröffentlichen:** Neue Beiträge und Veranstaltungen starten mit Status „Veröffentlicht“, neue Beiträge kommen an die erste Stelle (Hook `newPostsFirst` in `Posts.ts`). Vorher waren neue Beiträge Entwurf und standen am Ende; die Redaktion hielt sie für verloren.
 - **Text:** fett, kursiv, unterstrichen, Zwischenüberschrift, Listen, Links und der Baustein „Datei oder Bild“ (`src/cms/blocks/datei.ts`) an beliebiger Stelle. Keine Schriftarten, Größen oder Farben. Veranstaltungen haben dafür das Feld „Ausführlicher Text“ (`details`).
+- **Bilder im Text:** Der Baustein „Datei oder Bild“ hat eine Position (mittig volle Breite, links/rechts halbe Breite im Format 3:2, Text daneben). Die Größe hängt nie von der Auflösung der Datei ab (`.figure` in `globals.css`). Das Feld „Weitere Bilder“ ist nur noch sichtbar, wo es schon Bilder enthält.
+- **Downloads:** einblendbar (`showDownloads`), nur PDFs (Auswahlfilter, die bisher gewählte Datei bleibt erlaubt), je Dokument Name und optional Vorschaubild. Eine echte Vorschau der ersten PDF-Seite bräuchte eine PDF-Bibliothek auf dem Server und ist bewusst nicht gebaut.
+- **Archiv:** Archivierte Beiträge stehen eingeklappt unten auf „Aktuelles“ und bleiben aufrufbar. Bei Veranstaltungen bleibt „Archiviert“ nicht öffentlich.
+- **Menüs undurchsichtig:** Auswahllisten, Einfügen-Menü und „/“-Befehle haben einen festen Hintergrund (`--aal-solid`).
 - **Vorschau:** Live-Vorschau von Payload (Auge-Symbol) zeigt `/vorschau/aktuelles/<id>` bzw. `/vorschau/veranstaltungen/<id>`, nur für Angemeldete, lädt nach dem Speichern neu (`@payloadcms/live-preview-react`).
 
 ## Folgen

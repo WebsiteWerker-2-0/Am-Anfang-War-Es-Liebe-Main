@@ -5,7 +5,7 @@ import type { CalloutBlock, PageBlock, SectionItem } from "@/content/model";
 import { QUICK_EXIT_HINTS } from "@/content/navigation";
 import { TEXTS } from "@/content/self-check-tree";
 import { toImg } from "@/lib/images";
-import { getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
+import { getArchivedPosts, getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
 import { Rich, RichInline } from "@/lib/rich";
 import { ContactForm } from "../ContactForm";
 import { CourseList } from "../CourseList";
@@ -360,7 +360,21 @@ async function CourseListBlock({ block }: { block: Block<"courseList"> }) {
 async function NewsList({ block }: { block: Block<"newsList"> }) {
   const posts = await getPosts();
   if (block.variant === "page") {
-    return <PostList posts={posts} />;
+    const archived = await getArchivedPosts();
+    return (
+      <>
+        <PostList posts={posts} />
+        {archived.length > 0 && (
+          // Archivierte Beiträge: eingeklappt am Ende der Seite
+          <details className="group archive">
+            <summary>Archiv ({archived.length})</summary>
+            <div className="group__content">
+              <PostList posts={archived} headingLevel={3} />
+            </div>
+          </details>
+        )}
+      </>
+    );
   }
   return (
     <section className="section wide" aria-labelledby={block.anchor}>

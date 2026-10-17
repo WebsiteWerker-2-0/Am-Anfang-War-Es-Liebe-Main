@@ -1350,6 +1350,59 @@ a:hover {
   margin-block: var(--space-6);
 }
 
+/* Bilder aus dem Backend (Baustein „Datei oder Bild“, Titelbild): feste Breite, egal wie groß die Datei ist.
+   Mittig = volle Textbreite im natürlichen Format. Links/rechts = halbe Breite im Format 3:2 (zugeschnitten),
+   damit zwei Bilder nebeneinander gleich hoch sind; Text und Listen fließen daneben. Mobil volle Breite. */
+.prose .figure img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.prose .figure--center {
+  clear: both;
+}
+
+@media (min-width: 40em) {
+  .prose .figure--left,
+  .prose .figure--right {
+    inline-size: calc(50% - var(--space-5));
+    margin-block: var(--space-1) var(--space-4);
+  }
+  .prose .figure--left {
+    float: inline-start;
+    margin-inline-end: var(--space-5);
+  }
+  .prose .figure--right {
+    float: inline-end;
+    margin-inline-start: var(--space-5);
+  }
+  .prose .figure--left img,
+  .prose .figure--right img {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  /* Listen neben einem Bild: Aufzählungszeichen bleiben neben dem Bild statt darunter */
+  .prose ul,
+  .prose ol {
+    display: flow-root;
+  }
+}
+
+.prose h2,
+.prose::after {
+  clear: both;
+}
+
+.prose::after {
+  content: "";
+  display: block;
+}
+
+.prose .file-link a {
+  font-weight: 600;
+}
+
 .prose figcaption {
   font-size: var(--fs-sm);
   color: var(--c-ink-muted);
@@ -1512,6 +1565,72 @@ a:hover {
 
 .documents a {
   font-weight: 600;
+}
+
+/* ------------------------------------------------------------------
+   Downloads unter einem Beitrag
+   ------------------------------------------------------------------ */
+.downloads {
+  margin-block-start: var(--space-7);
+}
+
+.downloads h2 {
+  margin-block-end: var(--space-4);
+}
+
+.downloads__list {
+  border-block-start: 1px solid var(--c-ink);
+}
+
+.download {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: var(--space-3) var(--space-4);
+  align-items: center;
+  padding-block: var(--space-4);
+  border-block-end: 1px solid var(--c-line);
+}
+
+.download__preview {
+  display: flex;
+  justify-content: center;
+  color: var(--c-ink);
+}
+
+.download__preview img {
+  inline-size: 3rem;
+  block-size: 4rem;
+  object-fit: cover;
+  border: 1px solid var(--c-line);
+}
+
+.download__text {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.download__name {
+  font-weight: 600;
+}
+
+.download__button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  gap: var(--space-2);
+}
+
+@media (min-width: 40em) {
+  .download {
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+  }
+  .download__button {
+    grid-column: auto;
+  }
+}
+
+/* Archiv unten auf „Aktuelles“ */
+.archive {
+  margin-block-start: var(--space-7);
 }
 
 /* ------------------------------------------------------------------

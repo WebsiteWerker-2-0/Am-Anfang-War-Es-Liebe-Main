@@ -24,11 +24,15 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 6. **Speichern** (der dunkle Knopf oben rechts, er bleibt beim Scrollen sichtbar). Der Beitrag steht danach **ganz oben** in Aktuelles.
 7. **Vorschau:** Das **Auge-Symbol** neben „Speichern“ zeigt rechts, wie der Beitrag auf der Website aussieht, auch bei Entwürfen. Nach jedem Speichern aktualisiert sie sich.
 
-**Datei oder Bild mitten im Text:** Im Text an die gewünschte Stelle klicken, in der Leiste über dem Text ganz links auf das erste Symbol klicken und **Datei oder Bild** wählen. Dann eine Datei aus dem Archiv wählen oder neu hochladen, optional eine Beschriftung eintragen. Bilder erscheinen als Bild, PDFs und andere Dateien als Download-Link genau an dieser Stelle.
+**Datei oder Bild mitten im Text:** Im Text an die gewünschte Stelle klicken, in der Leiste über dem Text ganz links auf das erste Symbol klicken und **Datei oder Bild** wählen. Dann eine Datei aus dem Archiv wählen oder neu hochladen, optional eine Beschriftung eintragen. Bilder erscheinen als Bild, PDFs und andere Dateien als Download-Link genau an dieser Stelle. Bei Bildern wählen Sie die **Position**: **Mittig** (volle Breite), **Links** oder **Rechts** (halbe Breite, Text und Listen stehen daneben). Zwei Bilder „Links“ direkt hintereinander stehen nebeneinander. Die Größe legt die Website fest, egal wie groß die Datei ist; links und rechts wird das Bild auf das Format 3:2 zugeschnitten.
 
 **Text gestalten:** fett, kursiv, unterstrichen, Zwischenüberschrift, Listen, Links. Schriftart, Größe und Farbe legt die Website fest, damit alles einheitlich aussieht.
 
-**Reihenfolge ändern:** In der Liste „Aktuelles“ die Zeilen am Griff links ziehen. **Dokument anhängen:** im Beitrag unter „Dokumente zum Download“ eine Datei wählen oder hochladen.
+**Reihenfolge ändern:** In der Liste „Aktuelles“ die Zeilen am Griff links ziehen.
+
+**Downloads unter dem Beitrag:** Haken bei **Download-Bereich mit Dokumenten anzeigen** setzen. Dann je Dokument einen Namen und eine **PDF-Datei** wählen, auf Wunsch ein kleines Vorschaubild (sonst erscheint ein PDF-Symbol). Auf der Website steht unten eine Liste „Downloads“ mit Knopf zum Herunterladen. Andere Dateitypen als PDF sind hier nicht möglich.
+
+**Archiv:** Steht ein Beitrag auf **Archiviert**, verschwindet er aus der Liste und steht eingeklappt im **Archiv** ganz unten auf der Seite Aktuelles. Er bleibt aufrufbar.
 
 ## Eine Veranstaltung anlegen
 

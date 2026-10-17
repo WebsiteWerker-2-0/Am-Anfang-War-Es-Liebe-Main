@@ -20,6 +20,22 @@ export const FileBlock: Block = {
       },
     },
     {
+      name: "position",
+      type: "radio",
+      label: "Position (nur für Bilder)",
+      defaultValue: "center",
+      options: [
+        { label: "Mittig, volle Breite", value: "center" },
+        { label: "Links, Text daneben", value: "left" },
+        { label: "Rechts, Text daneben", value: "right" },
+      ],
+      admin: {
+        layout: "horizontal",
+        description:
+          "Links und rechts ist das Bild halb so breit, Text und Listen stehen daneben. Zwei Bilder „Links“ hintereinander stehen nebeneinander.",
+      },
+    },
+    {
       name: "label",
       type: "text",
       label: "Beschriftung (freiwillig)",

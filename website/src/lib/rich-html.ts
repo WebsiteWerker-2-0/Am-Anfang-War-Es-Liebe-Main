@@ -3,6 +3,7 @@ import {
   type HTMLConvertersFunction,
 } from "@payloadcms/richtext-lexical/html";
 import { mediaUrl } from "./cms-content";
+import { figureClass } from "./figure";
 
 // Formatierter Text aus dem CMS als HTML-Text, für Teile der Website, die im Browser erzeugt werden
 // (Veranstaltungsliste). Dieselben Bausteine wie in rich.tsx, die Klassen kommen aus .prose.
@@ -28,7 +29,7 @@ const converters: HTMLConvertersFunction = ({ defaultConverters }) => ({
       const url = escape(mediaUrl(file));
       if (String(file.mimeType).startsWith("image/")) {
         const alt = escape(String(file.alt ?? ""));
-        return `<figure><img src="${url}" alt="${alt}" loading="lazy"${file.width ? ` width="${file.width}" height="${file.height}"` : ""}>${fields.label ? `<figcaption>${label}</figcaption>` : ""}</figure>`;
+        return `<figure class="${figureClass(fields.position)}"><img src="${url}" alt="${alt}" loading="lazy"${file.width ? ` width="${file.width}" height="${file.height}"` : ""}>${fields.label ? `<figcaption>${label}</figcaption>` : ""}</figure>`;
       }
       return `<p class="file-link"><a href="${url}" download>${label}</a></p>`;
     },

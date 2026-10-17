@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 17.10.2026 – Bilder im Beitrag, Downloads, Archiv auf Aktuelles
+
+- **Entscheidung:** Bilder im Text mittig in voller Textbreite oder links/rechts in halber Breite (3:2 zugeschnitten, Text daneben, mobil volle Breite), unabhängig von der Auflösung der Datei. Downloads als Liste unter dem Beitrag: Vorschaubild oder PDF-Symbol, Name, „PDF, Größe“, dunkler Knopf „Download“. Archivierte Beiträge eingeklappt („Archiv (n)“) am Ende von Aktuelles, im Stil der Anlaufstellen-Gruppen.
+- **Begründung:** Wunsch des Auftraggebers; einheitliches Bild, egal was hochgeladen wird; Downloads sofort erkennbar.
+- **Datei:** `website/src/app/(site)/globals.css` (`.figure`, `.downloads`, `.archive`)
+- **Von:** Steffen (mit Claude)
+
 ## 17.10.2026 – Redaktionsbereich farblos, nächster Schritt hervorgehoben
 
 - **Entscheidung:** Das Backend bleibt Liquid Glass, aber ohne Farben (Grautöne). Die wichtigste Aktion jeder Seite ist die einzige dunkle, kräftige Fläche; „Speichern“ bleibt beim Scrollen sichtbar.
