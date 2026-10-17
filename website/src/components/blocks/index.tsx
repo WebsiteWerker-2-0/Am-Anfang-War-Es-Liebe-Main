@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import type { CalloutBlock, PageBlock, SectionItem } from "@/content/model";
 import { QUICK_EXIT_HINTS } from "@/content/navigation";
+import { TEXTS } from "@/content/self-check-tree";
 import { toImg } from "@/lib/images";
 import { getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
 import { Rich, RichInline } from "@/lib/rich";
@@ -440,6 +441,39 @@ async function QuickAccess({ block }: { block: Block<"quickAccess"> }) {
   );
 }
 
+function LockIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+      <rect x="4" y="9" width="12" height="9" rx="1.5" fill="none" stroke="currentColor" strokeWidth="2" />
+      <path d="M7 9V6.5a3 3 0 0 1 6 0V9" fill="none" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
+
+// Der Selbstcheck steht auf einem eigenen Band in Cyan, wie das Band „Gewalt hat viele Gesichter“
+// auf der Startseite, von dem man herkommt. Die Illustration hat denselben Grund.
+function SelfCheckStage({ block }: { block: Block<"selfCheck"> }) {
+  const image = toImg({ asset: "illustrations/thoughts" });
+  return (
+    <section className="self-check-stage" aria-label="Selbstcheck">
+      <div className="self-check-stage__inner">
+        <div className="self-check-stage__main stack">
+          <p className="privacy-note">
+            <LockIcon />
+            {TEXTS.privacyNote}
+          </p>
+          <SelfCheck legend={block.legend} statements={block.statements.map((statement) => statement.text)} />
+        </div>
+        {image && (
+          <div className="self-check-stage__image">
+            <Image src={image} alt="" sizes="(min-width: 64em) 24rem, 0px" />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function TeaserBand({ block }: { block: Block<"teaserBand"> }) {
   const image = toImg(block.image);
   return (
@@ -450,10 +484,7 @@ function TeaserBand({ block }: { block: Block<"teaserBand"> }) {
           <p className="lead measure">{block.lead}</p>
           {block.privacyNote && (
             <p className="privacy-note">
-              <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-                <rect x="4" y="9" width="12" height="9" rx="1.5" fill="none" stroke="currentColor" strokeWidth="2" />
-                <path d="M7 9V6.5a3 3 0 0 1 6 0V9" fill="none" stroke="currentColor" strokeWidth="2" />
-              </svg>
+              <LockIcon />
               {block.privacyNote}
             </p>
           )}
@@ -497,11 +528,7 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
           case "photo":
             return <Photo key={index} block={block} />;
           case "selfCheck":
-            return (
-              <div key={index} className="measure">
-                <SelfCheck legend={block.legend} statements={block.statements.map((statement) => statement.text)} />
-              </div>
-            );
+            return <SelfCheckStage key={index} block={block} />;
           case "contactForm":
             return (
               <section key={index} className="stack" aria-labelledby={block.anchor}>

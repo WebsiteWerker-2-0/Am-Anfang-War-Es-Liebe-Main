@@ -12,7 +12,7 @@ Eine Frage pro Schritt, keine eigene Adresse und kein Verlaufseintrag je Frage.
 4. Die Aussagen des Bereichs einzeln: Ja / Nein / Weiß nicht, dazu „Überspringen“. Nach einem Bereich: weitere Bereiche oder „Zum Ergebnis“.
 5. Ergebnis als Ampel mit Hilfe passend zu den Bereichen, in denen etwas zutraf.
 
-Immer da: „Zurück“ und „Neu beginnen“, darüber „Frage n“ (kein Fortschrittsbalken, die Äste sind unterschiedlich lang). Bei jedem Schritt springt der Fokus auf die neue Frage, beim Laden der Seite nicht.
+Immer da: „Zurück“ und „Neu beginnen“. Über jeder Aussage stehen der Bereich und je Aussage ein Punkt: erledigt gefüllt, aktuell als gefüllter Strich, offen als Ring (für Screenreader „Aussage n von m“). Kein Fortschritt über den ganzen Baum, weil die Äste unterschiedlich lang sind. Bei jedem Schritt springt der Fokus auf die neue Frage, beim Laden der Seite nicht.
 
 ## Ampel
 
@@ -31,11 +31,12 @@ Immer da: „Zurück“ und „Neu beginnen“, darüber „Frage n“ (kein For
 
 ## Gestaltung
 
-- Farben: Grün `--c-success` (#1b6e3a, 6,3:1 zu Weiß), Gelb `--c-warning` (#8a5a00, 5,9:1, neu), Rot `--c-exit-bg` (#b00020, 7,3:1). Funktionsfarben nach der Entscheidung „UI-bedingte Farbabweichungen sind zulässig“.
-- Farbe nur als Kante (0.5rem, inline-start) und als Etikett mit weißer Schrift. Die Stufe steht immer als Text da, dazu ein Symbol: Kreis mit Haken, Dreieck, Achteck (WCAG 1.4.1). Fläche des Ergebnisses in Sand.
-- Damit ist der Notausgang nicht mehr die einzige rote Fläche. Das rote Etikett ist aber kein Knopf (kein Hover, kein Icon wie beim Notausgang).
-- Antworten als Knöpfe `.button--secondary` (weiß mit dunklem Rand), mindestens 48 px hoch. „Überspringen“, „Zurück“ und „Neu beginnen“ als `.link-button`.
-- Bereichswahl als volle Breite `.choice` mit Bezeichnung und kurzer Beschreibung.
+- **Band:** Der Selbstcheck steht auf einem eigenen Band in Cyan (`--c-brand-primary`) über die volle Breite, mit gewellter Kante oben und unten. Es ist dasselbe Band wie „Gewalt hat viele Gesichter“ auf der Startseite, von dem man herkommt. Ab 64em steht rechts unten die Illustration „thoughts“, deren Grund dasselbe Cyan ist; mobil entfällt sie, damit die Frage oben bleibt. Der Hinweis „wird nicht gespeichert“ steht mit Schloss oben im Band.
+- **Nur Tinte auf Cyan:** `--c-ink` erreicht 5,3:1. Gedämpfte Schrift, Fokusblau, Weiß und die Ampelfarben erreichen dort nur 2 bis 2,9:1, deshalb im Band keine gedämpfte Schrift und Fokusring in Tinte.
+- **Fragen** in Literata `--fs-lg`, die Einleitung der Aussage („Ihr (Ex-)Partner …“) in Plex darüber.
+- **Antworten** als Knöpfe `.button--secondary` (weiß mit dunklem Rand), mindestens 48 px hoch. „Überspringen“, „Zurück“ und „Neu beginnen“ als `.link-button`. Bereichswahl als `.choice` über volle Breite mit kurzer Beschreibung.
+- **Ergebnis:** eine gezeichnete Ampel (weißes Gehäuse mit Tintenrand, drei Lichter, nur eines leuchtet) neben der Stufe als Überschrift in Literata `--fs-xl`. Keine Etiketten, keine Karten, keine farbigen Kanten: Die Ampel ist die einzige farbige Stelle. Lichter Grün `--c-success` (6,3:1 auf Weiß), Gelb `--c-warning` (#8a5a00, 5,9:1), Rot `--c-exit-bg` (7,3:1), aus `--c-line`. Die Grafik ist `aria-hidden`, die Stufe steht als Text da (WCAG 1.4.1), für Screenreader mit „Ergebnis:“ davor.
+- Darunter der Text der Stufe als Einleitung, bei Rot die Warnzeichen als Liste mit Linien, dann „Wer Ihnen helfen kann“ wie die Anlaufstellen (Nummern groß in Literata) und der Hinweis „keine fachliche Einschätzung“.
 
 ## Datenschutz (ADR-0003)
 

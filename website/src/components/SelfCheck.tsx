@@ -67,11 +67,13 @@ function SelfCheckTree() {
   }
 
   const { step } = state;
-  const isQuestion = step.kind !== "dangerHelp" && step.kind !== "result";
   const subject = state.subject ?? "self";
 
   let title: React.ReactNode;
   let body: React.ReactNode;
+  // Über der Überschrift: Fortschritt im Bereich. Neben der Überschrift: die Ampel beim Ergebnis.
+  let before: React.ReactNode = null;
+  let aside: React.ReactNode = null;
 
   switch (step.kind) {
     case "danger":
@@ -151,6 +153,17 @@ function SelfCheckTree() {
     case "statement": {
       const area = getArea(step.area);
       const statement = area.statements[step.index];
+      before = (
+        <p className="self-check-tree__progress">
+          {area.label}
+          <span className="self-check-tree__dots" aria-hidden="true">
+            {area.statements.map((item, index) => (
+              <span key={item.id} data-state={index < step.index ? "done" : index === step.index ? "current" : undefined} />
+            ))}
+          </span>
+          <span className="visually-hidden">, {TEXTS.progress(step.index + 1, area.statements.length)}</span>
+        </p>
+      );
       title = (
         <>
           <span className="self-check-tree__legend">{LEGENDS[subject]}</span>
@@ -159,9 +172,6 @@ function SelfCheckTree() {
       );
       body = (
         <>
-          <p className="self-check-tree__area small">
-            {area.label}, {step.index + 1} von {area.statements.length}
-          </p>
           <Answers
             options={[
               ["yes", TEXTS.answers.yes],
@@ -179,39 +189,40 @@ function SelfCheckTree() {
     case "result": {
       const result = assess(state);
       const level = LEVELS[result.level];
-      title = TEXTS.resultHeading;
+      aside = <TrafficLight level={result.level} />;
+      title = (
+        <>
+          <span className="visually-hidden">{TEXTS.resultPrefix}</span>
+          {level.label}
+        </>
+      );
       body = (
         <>
-          <div className={`self-check-result self-check-result--${result.level}`}>
-            <p className="self-check-result__level">
-              <LevelIcon level={result.level} />
-              {level.label}
-            </p>
-            <p>{result.uncertainOnly ? UNCERTAIN_TEXT[subject] : level.text[subject]}</p>
-            {result.warnings.length > 0 && (
-              <>
-                <p>{TEXTS.warningsIntro}</p>
-                <ul className="self-check-result__warnings">
-                  {result.warnings.map((statement) => (
-                    <li key={statement.id}>… {statementText(statement, subject)}</li>
-                  ))}
-                </ul>
-              </>
-            )}
+          <p className="lead">{result.uncertainOnly ? UNCERTAIN_TEXT[subject] : level.text[subject]}</p>
+          {result.warnings.length > 0 && (
+            <div className="stack">
+              <p>{TEXTS.warningsIntro}</p>
+              <ul className="self-check-result__warnings">
+                {result.warnings.map((statement) => (
+                  <li key={statement.id}>… {statementText(statement, subject)}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div className="stack">
+            <h3>{TEXTS.helpHeading}</h3>
+            <ul className="service-list">
+              {result.help.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="service-list__name">
+                    {link.label}
+                  </Link>
+                  {link.phone && <PhoneLink number={link.phone} className="service-list__number" />}
+                </li>
+              ))}
+            </ul>
           </div>
-          <h3>{TEXTS.helpHeading}</h3>
-          <ul className="service-list">
-            {result.help.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="service-list__name">
-                  {link.label}
-                </Link>
-                {link.phone && <PhoneLink number={link.phone} className="service-list__number" />}
-              </li>
-            ))}
-          </ul>
           <p className="small">{TEXTS.disclaimer}</p>
-          <p className="small">{TEXTS.privacy}</p>
         </>
       );
       break;
@@ -220,10 +231,13 @@ function SelfCheckTree() {
 
   return (
     <section className="self-check-tree" aria-labelledby={headingId}>
-      {isQuestion && <p className="self-check-tree__step">{TEXTS.step(state.asked + 1)}</p>}
-      <h2 id={headingId} ref={heading} tabIndex={-1} className="self-check-tree__question">
-        {title}
-      </h2>
+      {before}
+      <div className={aside ? "self-check-tree__head self-check-tree__head--result" : "self-check-tree__head"}>
+        {aside}
+        <h2 id={headingId} ref={heading} tabIndex={-1} className="self-check-tree__question">
+          {title}
+        </h2>
+      </div>
       {body}
       {history.length > 1 && (
         <div className="self-check-tree__nav">
@@ -279,42 +293,23 @@ function Choices({ options }: { options: { label: string; description?: string; 
   );
 }
 
-// Die Stufe steht immer auch als Text da, das Symbol hilft bei Farbsehschwäche (WCAG 1.4.1)
-function LevelIcon({ level }: { level: Level }) {
-  const paths: Record<Level, React.ReactNode> = {
-    green: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M8 12.5l2.5 2.5L16 9.5" />
-      </>
-    ),
-    yellow: (
-      <>
-        <path d="M12 3.5L21 19.5H3z" />
-        <path d="M12 10v4M12 17h.01" />
-      </>
-    ),
-    red: (
-      <>
-        <path d="M8.3 3h7.4L21 8.3v7.4L15.7 21H8.3L3 15.7V8.3z" />
-        <path d="M12 7.5v5.5M12 16.5h.01" />
-      </>
-    ),
-  };
+// Ampel mit drei Lichtern, von oben Rot, Gelb, Grün. Die Stufe steht daneben als Überschrift,
+// die Grafik ist nur Bild (WCAG 1.4.1). Weißes Gehäuse, weil die Ampelfarben auf Cyan zu wenig Kontrast haben.
+function TrafficLight({ level }: { level: Level }) {
+  const lights: Level[] = ["red", "yellow", "green"];
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width="22"
-      height="22"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {paths[level]}
+    <svg className="traffic-light" viewBox="0 0 44 112" aria-hidden="true" focusable="false">
+      <rect className="traffic-light__housing" x="1.5" y="1.5" width="41" height="109" rx="14" />
+      {lights.map((light, index) => (
+        <circle
+          key={light}
+          className={`traffic-light__lamp traffic-light__lamp--${light}`}
+          data-on={light === level ? "" : undefined}
+          cx="22"
+          cy={22 + index * 34}
+          r="12"
+        />
+      ))}
     </svg>
   );
 }
