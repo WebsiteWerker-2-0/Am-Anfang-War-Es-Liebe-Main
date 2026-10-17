@@ -2,6 +2,12 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Selbstcheck-Ampel in echten Ampelfarben
+- **Entscheidung:** Die Lichter der Ampel leuchten in echtem Rot `#ff2a2a`, Gelb `#ffcc00` und Grün `#00b050` (Tokens `--c-signal-*`). Das Gehäuse ist dunkel (`--c-ink`) wie bei einer echten Ampel statt weiß. `--c-warning` (Ocker) entfällt.
+- **Begründung:** Wunsch von Enrico: Die gedeckten Funktionsfarben wirkten nicht wie eine Ampel. Echtes Gelb erreicht auf Weiß nur 1,5:1, auf dem dunklen Gehäuse 10,2:1, Rot 4,1:1, Grün 5,4:1. Die Farben sind nur Grafik, die Stufe steht als Text daneben.
+- **Betrifft:** selbstcheck.md, farben.md, `website/src/app/(site)/globals.css` (`--c-signal-*`, `.traffic-light`), `website/src/components/SelfCheck.tsx`
+- **Von:** Enrico (mit Claude)
+
 ## 2026-10-17 – Selbstcheck: eigenes Band, Ergebnis als gezeichnete Ampel
 - **Entscheidung:** Der Selbstcheck steht auf einem Band in Cyan über die volle Breite mit Wellenkanten und der Illustration „thoughts“ (wie das Band der Startseite). Alles darin in Tinte. Das Ergebnis zeigt eine gezeichnete Ampel neben der Stufe als Überschrift statt Etikett mit Symbol und Karte mit farbiger Kante. Fortschritt als Punkte je Aussage im Bereich statt „Frage n“. Der Hinweisblock über dem Selbstcheck entfällt, der Hinweis steht oben im Band.
 - **Begründung:** Rückmeldung von Enrico: Der Selbstcheck ging im Lesefluss unter, das Ergebnis wirkte generisch. Das Band hebt ihn ab und knüpft an die Startseite an. Die Ampel zeigt, wo die Stufe auf der Skala liegt, was ein Etikett nicht kann. Cyan erlaubt nur Tinte als Schrift (5,3:1).

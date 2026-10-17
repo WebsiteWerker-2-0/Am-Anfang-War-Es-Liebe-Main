@@ -21,7 +21,11 @@
   --c-focus: #1a5fb4;
   --c-error: #b00020;
   --c-success: #1b6e3a;
-  --c-warning: #8a5a00; /* Ocker: Gelb der Selbstcheck-Ampel, Funktionsfarbe (Kontrast zu Weiß 5,9:1) */
+  /* Lichter der Selbstcheck-Ampel: echte Ampelfarben, Funktionsfarben nur für die Grafik, nie für Schrift.
+     Kontrast zum Gehäuse in --c-ink: Rot 4,1:1, Gelb 10,2:1, Grün 5,4:1 */
+  --c-signal-red: #ff2a2a;
+  --c-signal-yellow: #ffcc00;
+  --c-signal-green: #00b050;
 
   /* Notausgang: Rot, entschieden am 17.10.2026 (entscheidungen.md). UI-bedingte Abweichung, zulässig laut Entscheidung vom 17.10.2026. */
   --c-exit-bg: #b00020; /* Rot: Funktionsfarbe, bewusst nicht aus der Broschüre (Kontrast zu Weiß 7,3:1) */
@@ -1221,25 +1225,24 @@ a:hover {
 }
 
 .traffic-light__housing {
-  fill: var(--c-paper);
-  stroke: var(--c-ink);
-  stroke-width: 3;
+  fill: var(--c-ink);
 }
 
+/* Ausgeschaltete Lichter: nur leicht heller als das Gehäuse */
 .traffic-light__lamp {
-  fill: var(--c-line);
+  fill: color-mix(in srgb, var(--c-paper) 15%, var(--c-ink));
 }
 
 .traffic-light__lamp--red[data-on] {
-  fill: var(--c-exit-bg);
+  fill: var(--c-signal-red);
 }
 
 .traffic-light__lamp--yellow[data-on] {
-  fill: var(--c-warning);
+  fill: var(--c-signal-yellow);
 }
 
 .traffic-light__lamp--green[data-on] {
-  fill: var(--c-success);
+  fill: var(--c-signal-green);
 }
 
 .self-check-result__warnings {

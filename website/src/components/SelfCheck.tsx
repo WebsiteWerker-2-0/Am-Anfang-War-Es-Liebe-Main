@@ -294,7 +294,8 @@ function Choices({ options }: { options: { label: string; description?: string; 
 }
 
 // Ampel mit drei Lichtern, von oben Rot, Gelb, Grün. Die Stufe steht daneben als Überschrift,
-// die Grafik ist nur Bild (WCAG 1.4.1). Weißes Gehäuse, weil die Ampelfarben auf Cyan zu wenig Kontrast haben.
+// die Grafik ist nur Bild (WCAG 1.4.1). Dunkles Gehäuse wie bei einer echten Ampel, nur darauf
+// erreichen die echten Ampelfarben genug Kontrast (Gelb auf Weiß nur 1,5:1).
 function TrafficLight({ level }: { level: Level }) {
   const lights: Level[] = ["red", "yellow", "green"];
   return (
