@@ -50,19 +50,18 @@ Archivierte oder als Entwurf gespeicherte Beiträge sind öffentlich nicht sicht
 **Lokal starten**
 
 ```bash
-cp .env.example .env.local        # PAYLOAD_SECRET eintragen (z. B. openssl rand -hex 32)
 npm install
 npm run dev
 ADMIN_EMAIL=… ADMIN_PASSWORD=… npm run cms:create-admin   # erstes Konto, Passwort mind. 12 Zeichen
 ```
 
-Dann `http://localhost:3000/backend` öffnen. Beim ersten Start füllt sich das CMS mit Seiten, Anlaufstellen, Kopf/Fuß und den 18 Beiträgen der Altseite.
+Dann `http://localhost:3000/backend` öffnen. Die Daten liegen lokal in `./data` (nicht im Git). Beim ersten Start füllt sich das CMS mit Seiten, Anlaufstellen, Kopf/Fuß und den 18 Beiträgen der Altseite.
 
 **Inhalte oder Aufbau einer Seite im Code ändern:** Standardinhalt in `src/content/pages/`, Darstellung in `src/components/blocks/`, Felder im Backend in `src/cms/`. Nach Änderungen an den Feldern `npm run cms:types`, `npm run cms:importmap` und `npm run cms:migrate:create -- <name>` ausführen und die erzeugten Dateien committen. Auf dem Server laufen Migrationen beim Start.
 
-**Hostinger**: In hPanel unter *Websites → Node.js web app → Import Git repository* dieses Repository und den Branch `main` wählen, Node 22. Hostinger findet die App in `website/` selbst und baut bei jedem Push neu. Umgebungsvariablen in hPanel anlegen: `PAYLOAD_SECRET` und `CMS_DATA_DIR` (absoluter Pfad außerhalb des App-Ordners, damit Deployments Datenbank und Uploads nicht überschreiben). Danach per SSH im App-Ordner das erste Konto anlegen: `ADMIN_EMAIL=… ADMIN_PASSWORD=… npm run cms:create-admin`. Der Build läuft mit Webpack (`next build --webpack`) statt mit Turbopack: Turbopack bricht auf Servern mit verlinktem `node_modules` oder wenig Arbeitsspeicher mit einem „Turbopack error“ ab, Webpack braucht außerdem weniger Speicher (gemessen 0,9 statt 1,2 GB). Hostinger setzt `output: "standalone"` selbst; getestet ist der Standalone-Start mit Datenbank, Uploads und Backend. Noch zu klären ist, ob der Tarif Dateien im App-Ordner zwischen Deployments behält (daher `CMS_DATA_DIR`).
+**Hostinger**: In hPanel unter *Websites → Node.js web app → Import Git repository* dieses Repository und den Branch `main` wählen, Node 22. Hostinger findet die App in `website/` selbst und baut bei jedem Push neu. Umgebungsvariablen sind nicht nötig: Die App legt Datenbank, Uploads und ein erzeugtes Geheimnis in `~/cms-data` ab (außerhalb des App-Ordners, übersteht also Deployments). Das erste Konto: per SSH `mkdir -p ~/cms-data && touch ~/cms-data/ALLOW_FIRST_USER`, dann `/backend` im Browser öffnen und das Konto anlegen. Die Datei verschwindet danach von selbst, ein zweites erstes Konto ist nicht möglich. Der Build läuft mit Webpack (`next build --webpack`) statt mit Turbopack, weil Turbopack dort bei der CSS-Verarbeitung abbricht (eigener PostCSS-Prozess). Hostinger setzt `output: "standalone"` selbst; getestet ist der Standalone-Start mit Datenbank, Uploads und Backend. Noch zu klären ist, ob der Tarif Dateien in `~/cms-data` zwischen Deployments behält.
 
-**Vercel-Vorschau**: Dort ist nur `/tmp` beschreibbar, Datenbank und Uploads sind flüchtig und je Instanz getrennt. Deshalb zeigt die Vorschau die Website mit dem Standardinhalt (`CMS_CONTENT` nicht gesetzt). Das Backend läuft trotzdem, zum Ansehen der Oberfläche in Vercel (Preview) `PAYLOAD_SECRET` und `CMS_ALLOW_FIRST_USER=true` setzen und das erste Konto im Browser anlegen. Änderungen im Backend erscheinen dort nicht auf der Website. Zum Ausprobieren des Bearbeitens eignen sich lokaler Start oder Hostinger.
+**Vercel-Vorschau**: Dort ist nur `/tmp` beschreibbar, Datenbank und Uploads sind flüchtig und je Instanz getrennt. Deshalb zeigt die Vorschau die Website mit dem Standardinhalt (`CMS_CONTENT` nicht gesetzt). Das Backend läuft trotzdem, zum Ansehen der Oberfläche in Vercel (Preview) `CMS_ALLOW_FIRST_USER=true` setzen und das erste Konto im Browser anlegen (das Geheimnis erzeugt die App selbst). Änderungen im Backend erscheinen dort nicht auf der Website. Zum Ausprobieren des Bearbeitens eignen sich lokaler Start oder Hostinger.
 
 ## Umgesetzt nach Vorgabe
 
