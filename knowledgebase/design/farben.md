@@ -13,7 +13,11 @@ Abgetastet aus der Web-PDF der Broschüre 2016 und den Illustrationen von fien-d
 
 In der Broschüre steht weiße Schrift auf Cyan. Auf der Website steht auf Cyan dunkle Schrift, weil Weiß auf Cyan die 4,5:1 nicht erreicht.
 
+## Funktionsfarben
+
+Für die Benutzeroberfläche erforderliche Abweichungen von der Broschürenpalette sind zulässig (Entscheidung vom 17.10.2026): Notausgang-Rot `#b00020`, Fehler, Erfolg, Fokus. Sie bleiben auf Funktionen beschränkt, Flächen und Marke folgen der Broschüre.
+
 ## Offen
 
 - [ ] Farbwerte aus den Druckdaten (Z-06) farbmanagt übernehmen und diese Tabelle ersetzen
-- [ ] Farbe des Notausgangs festlegen (derzeit --c-ink)
+- [x] Farbe des Notausgangs: Rot `#b00020` (Funktionsfarbe, nicht aus der Broschüre), gedeckt durch die Entscheidung vom 17.10.2026

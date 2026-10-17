@@ -22,8 +22,8 @@
   --c-error: #b00020;
   --c-success: #1b6e3a;
 
-  /* OFFEN: Farbe des Notausgangs (Abschnitt 14) */
-  --c-exit-bg: var(--c-ink);
+  /* Notausgang: Rot, entschieden am 17.10.2026 (entscheidungen.md). UI-bedingte Abweichung, zulässig laut Entscheidung vom 17.10.2026. */
+  --c-exit-bg: #b00020; /* Rot: Funktionsfarbe, bewusst nicht aus der Broschüre (Kontrast zu Weiß 7,3:1) */
   --c-exit-fg: #ffffff;
 
   --font-display: var(--font-literata), var(--font-naskh), Georgia, serif;
@@ -296,6 +296,15 @@ a:hover {
   white-space: nowrap;
 }
 
+.quick-exit__icon {
+  flex: none;
+}
+
+/* Pfeil zeigt in Leserichtung nach außen: in RTL spiegeln (Abschnitt 5) */
+.quick-exit__icon:dir(rtl) {
+  transform: scaleX(-1);
+}
+
 .quick-exit:hover {
   text-decoration: underline;
 }
@@ -305,7 +314,7 @@ a:hover {
   inset-block-end: var(--space-4);
   inset-inline-end: var(--space-4);
   z-index: 50;
-  box-shadow: 0 2px 10px rgb(38 35 43 / 0.35);
+  box-shadow: 0 0 0 2px #ffffff, 0 2px 10px rgb(38 35 43 / 0.35);
 }
 
 @media (min-width: 64em) {

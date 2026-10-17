@@ -58,7 +58,23 @@ export function QuickExitLink({
       lang={lang}
       className={fixed ? "quick-exit quick-exit--fixed" : "quick-exit"}
     >
-      {label}
+      <svg
+        className="quick-exit__icon"
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M10 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4" />
+        <path d="M15 8l4 4-4 4M19 12H9" />
+      </svg>
+      <span>{label}</span>
     </a>
   );
 }

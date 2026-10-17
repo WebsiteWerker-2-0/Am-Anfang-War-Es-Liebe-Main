@@ -11,7 +11,7 @@ Einbindung in Claude Code: in `CLAUDE.md` die Zeilen `@PROJEKT.md` und `@DESIGN-
 ## 0. Harte Regeln (vor jeder Änderung prüfen)
 
 1. **Keine externen Ressourcen.** Keine Google Fonts, kein CDN, keine YouTube/Vimeo-Embeds, keine Karten, kein Gravatar, keine Tracking- oder Consent-Skripte. Jede Datei wird vom eigenen Server ausgeliefert.
-2. **Farbwelt der Broschüre 1:1.** Markenfarben ausschließlich aus den Druckdaten (Z-06). Keine eigenen Farbtöne erfinden. Siehe Abschnitt 3.
+2. **Farbwelt der Broschüre 1:1.** Markenfarben ausschließlich aus den Druckdaten (Z-06). Keine eigenen Farbtöne erfinden. Ausnahme: für die Benutzeroberfläche erforderliche Funktionsfarben (Notausgang, Fehler, Erfolg, Fokus), Entscheidung vom 17.10.2026. Siehe Abschnitt 3.
 3. **Kontaktformular speichert nichts.** Keine Einträge in der Datenbank, kein Entry-Logging, keine Kopie in Logs.
 4. **Selbstcheck bleibt im Browser.** Kein Request, kein `localStorage`, kein `sessionStorage`, keine Cookies.
 5. **Notausgang auf jeder Seite**, in jeder Sprache, auch in 404, Suche, Archiven.
@@ -489,7 +489,7 @@ Das Repository `WebsiteWerker-2-0/Am-Anfang-War-Es-Liebe-Main` ist privat und wa
 
 - [ ] Farbwerte aus Druckdaten (Z-06) extrahieren, Tabelle 3.3 füllen, Kontraste prüfen, Designfreigabe einholen
 - [ ] Web-Nutzungsrechte an den Broschüren-Illustrationen (fien-design.de) klären
-- [ ] Farbe des Notausgangs festlegen (Broschürenfarbe oder neutral)
+- [x] Farbe des Notausgangs: Rot `#b00020` (Funktionsfarbe), gedeckt durch die Entscheidung vom 17.10.2026
 - [ ] Hilfetelefon-Nummer für alle Sprachfassungen verifizieren (116 016)
 - [x] Gendersprache: Gendersternchen (Freund*innen), von der Gleichstellungsstelle bestätigt am 13.10.2026. Neutrale Formen bevorzugen; Texte des AG und archivierte Beiträge bleiben im Wortlaut
 - [ ] Veraltete Broschüreninhalte markieren, z. B. „Arbeitslosengeld II“ (seit 2023 Bürgergeld), Öffnungszeiten, Nummern; Korrektur durch AG
