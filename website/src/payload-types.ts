@@ -139,7 +139,10 @@ export interface Page {
   id: number;
   title: string;
   intro?: string | null;
-  band?: (number | null) | Media;
+  /**
+   * Bild aus der Broschüre neben der Überschrift. Leer: Seitenkopf ohne Bild.
+   */
+  band?: ('help' | 'courses' | 'info' | 'workingGroup' | 'news') | null;
   blocks?:
     | (
         | {

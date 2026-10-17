@@ -6,7 +6,7 @@ export const help: PageData = {
   description: "Anlaufstellen bei häuslicher Gewalt im Kreis Höxter: Beratung, Schutzhaus, Polizei und Hilfetelefon.",
   intro:
     "Frauen und Kinder, die Gewalt erleben oder erlebt haben, können sich an diese Stellen wenden. Das gilt auch für alle, die Betroffenen helfen möchten.",
-  band: { asset: "illustrations/band-p07" },
+  band: "help",
   layout: "stack-lg",
   blocks: [
     {
@@ -72,7 +72,7 @@ export const help: PageData = {
       variant: "service",
       sectionId: "angehoerige",
       anchor: "angehoerige-titel",
-      heading: "Was können Nachbarn, Angehörige und Freunde tun?",
+      heading: "Was können Nachbar*innen, Angehörige und Freund*innen tun?",
       items: [
         {
           blockType: "rich",

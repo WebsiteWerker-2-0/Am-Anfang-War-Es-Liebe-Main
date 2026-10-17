@@ -1,4 +1,5 @@
 import type { SerializedEditorState } from "lexical";
+import type { BandKey } from "./band-keys";
 
 // Gemeinsames Datenmodell der Seiten. Die Standardinhalte in `content/pages/`
 // und die Seiten aus dem CMS (`lib/cms-content.ts`) haben dieselbe Form, ein
@@ -152,7 +153,8 @@ export type PageData = {
   metaTitle?: string;
   description?: string;
   intro?: string;
-  band?: ImageValue;
+  /** Illustrationsband im Seitenkopf (Schlüssel aus content/band-keys.ts) */
+  band?: BandKey | null;
   layout: PageLayout;
   blocks: PageBlock[];
 };

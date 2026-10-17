@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { isLoggedIn } from "../access";
 import { pageBlocks } from "../blocks/page-blocks";
+import { bandOptions } from "../../content/band-keys";
 import { revalidateSite } from "../revalidate";
 
 // Die Seiten der Website, eine pro Adresse und mit demselben Aufbau wie im Frontend.
@@ -30,7 +31,13 @@ export const Pages: CollectionConfig = {
       type: "textarea",
       label: "Einleitung unter der Überschrift",
     },
-    { name: "band", type: "upload", relationTo: "media", label: "Illustrationsband über der Überschrift" },
+    {
+      name: "band",
+      type: "select",
+      label: "Illustration im Seitenkopf",
+      options: [...bandOptions],
+      admin: { description: "Bild aus der Broschüre neben der Überschrift. Leer: Seitenkopf ohne Bild." },
+    },
     { name: "blocks", type: "blocks", label: "Inhalt der Seite", blocks: pageBlocks },
     {
       type: "collapsible",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { PageData } from "@/content/model";
 import { getPage } from "@/lib/content";
-import { toImg } from "@/lib/images";
+import { pageBands } from "@/content/page-bands";
 import { PageBlocks } from "./blocks";
 import { PageHeader } from "./PageHeader";
 
@@ -34,7 +34,7 @@ export async function CmsPage({ slug }: { slug: string }) {
 
   return (
     <>
-      <PageHeader title={page.title} intro={page.intro} band={toImg(page.band) ?? undefined} />
+      <PageHeader title={page.title} intro={page.intro} band={page.band ? pageBands[page.band] : undefined} />
       <div className={WRAPPER_CLASS[page.layout]}>{blocks}</div>
     </>
   );

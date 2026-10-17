@@ -6,7 +6,7 @@ export const courses: PageData = {
   description: "Krav Maga und WenDo: Kurse für Frauen, Mädchen und Kinder im Kreis Höxter.",
   intro:
     "Mit einer Förderung des Landes NRW bietet der Arbeitskreis Kurse für Frauen, Mädchen und Kinder an. Wer weiß, wie man Grenzen setzt und sich wehrt, geht sicherer durchs Leben.",
-  band: { asset: "illustrations/band-p06" },
+  band: "courses",
   layout: "stack-lg",
   blocks: [
     {

@@ -21,8 +21,8 @@ export const home: PageData = {
           href: "/hilfe#stalking",
         },
         {
-          reason: "Sie jemanden kennen, der Gewalt erlebt",
-          target: "Hilfe für Angehörige und Freunde",
+          reason: "Sie eine Person kennen, die Gewalt erlebt",
+          target: "Hilfe für Angehörige und Freund*innen",
           href: "/hilfe#angehoerige",
         },
         {

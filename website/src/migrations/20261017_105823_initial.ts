@@ -508,17 +508,15 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`title\` text NOT NULL,
   	\`intro\` text,
-  	\`band_id\` integer,
+  	\`band\` text,
   	\`meta_title\` text,
   	\`description\` text,
   	\`slug\` text NOT NULL,
   	\`layout\` text DEFAULT 'stack-lg' NOT NULL,
   	\`updated_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
-  	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL,
-  	FOREIGN KEY (\`band_id\`) REFERENCES \`media\`(\`id\`) ON UPDATE no action ON DELETE set null
+  	\`created_at\` text DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) NOT NULL
   );
   `)
-  await db.run(sql`CREATE INDEX \`pages_band_idx\` ON \`pages\` (\`band_id\`);`)
   await db.run(sql`CREATE UNIQUE INDEX \`pages_slug_idx\` ON \`pages\` (\`slug\`);`)
   await db.run(sql`CREATE INDEX \`pages_updated_at_idx\` ON \`pages\` (\`updated_at\`);`)
   await db.run(sql`CREATE INDEX \`pages_created_at_idx\` ON \`pages\` (\`created_at\`);`)

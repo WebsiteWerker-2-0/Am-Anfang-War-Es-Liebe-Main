@@ -28,7 +28,7 @@ export const workingGroup: PageData = {
   description: "Seit 1997 setzt sich der Arbeitskreis gegen Gewalt an Frauen und Kindern im Kreis Höxter ein.",
   intro:
     "Gewalt gegen Frauen und Kinder findet überall statt, auch im Kreis Höxter. Sie betrifft Personen aller kulturellen und sozialen Hintergründe.",
-  band: { asset: "illustrations/band-p13" },
+  band: "workingGroup",
   layout: "stack-lg",
   blocks: [
     // Text vom AG, Lieferung 11.10.2026 (Z-01)

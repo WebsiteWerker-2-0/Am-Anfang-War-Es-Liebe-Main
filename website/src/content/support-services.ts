@@ -38,7 +38,7 @@ const helpline: SupportService = {
   availability: "Rund um die Uhr, anonym, kostenlos, in 18 Sprachen",
   website: { url: "https://www.hilfetelefon.de", label: "hilfetelefon.de" },
   description:
-    "Erstberatung, erste Informationen und auf Wunsch Weitervermittlung an eine passende Stelle in Ihrer Nähe. Das Hilfetelefon ist auch für Angehörige, Freundinnen und Freunde und Fachkräfte da.",
+    "Erstberatung, erste Informationen und auf Wunsch Weitervermittlung an eine passende Stelle in Ihrer Nähe. Das Hilfetelefon ist auch für Angehörige, Freund*innen und Fachkräfte da.",
   quick: {
     label: "Hilfetelefon „Gewalt gegen Frauen“",
     note: "Rund um die Uhr, anonym, kostenlos, in 18 Sprachen",
@@ -194,7 +194,7 @@ export const serviceGroups: ServiceGroup[] = [
         id: "gleichstellung",
         name: "Gleichstellungsbeauftragte des Kreises Höxter und der Städte",
         phones: [{ number: "05271 9650", note: "Vermittlung" }],
-        description: "Ansprechpartnerinnen und Rufnummern erfahren Sie bei den Städten und beim Kreis Höxter.",
+        description: "Ansprechpartner*innen und Rufnummern erfahren Sie bei den Städten und beim Kreis Höxter.",
       },
       {
         id: "weisser-ring",

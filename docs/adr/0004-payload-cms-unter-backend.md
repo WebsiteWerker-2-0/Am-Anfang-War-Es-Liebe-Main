@@ -14,5 +14,5 @@ Der Arbeitskreis pflegt die Website selbst (F-05 bis F-07). Dafür läuft Payloa
 - Seiten lassen sich bearbeiten, nicht anlegen oder löschen. Die Struktur der Website bleibt festgelegt, neue Seiten brauchen Navigation und Programmierung.
 - Öffentlich lesbar sind nur veröffentlichte Beiträge und als öffentlich markierte Dateien. Dateien erscheinen unter `/dateien/<Name>`, nie unter `/backend`.
 - Datenbank und Uploads liegen unter `CMS_DATA_DIR`, nicht im Git. Auf Vercel ist der Speicher flüchtig, dort zeigt die Vorschau den Standardinhalt. Auf Hostinger ist vor dem Umzug zu klären, ob Dateien ein Deployment überleben.
-- Hostinger erwartet `package.json` im Hauptordner: `.github/workflows/hostinger-branch.yml` erzeugt aus `website/` den Branch `deploy`.
+- Hostinger findet die App in `website/` selbst und baut `main` bei jedem Push (Node 22, `npm run build`). Der Build nutzt Webpack, weil Turbopack dort bei der CSS-Verarbeitung abbricht (eigener PostCSS-Prozess).
 - Kontaktanfragen dürfen nicht im CMS landen (ADR-0003). Veranstaltungen und Anmeldungen (F-11) sind als Felder und Sammlung angelegt, aber noch nicht auf der Website angebunden.

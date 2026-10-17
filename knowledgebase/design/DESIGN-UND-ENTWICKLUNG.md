@@ -168,6 +168,7 @@ Fluide Skala, Verhältnis 1,25, Grundgröße 18 px. Keine Schriftgrößenknöpfe
 
 | Token | Wert | Einsatz |
 |---|---|---|
+| `--fs-xs` | `0.833rem` | Hilfeleiste im Kopf |
 | `--fs-sm` | `0.889rem` | Metadaten, Bildunterschriften |
 | `--fs-base` | `1.125rem` | Fließtext |
 | `--fs-md` | `clamp(1.25rem, 1.1rem + 0.6vw, 1.406rem)` | Lead, h4 |
@@ -490,7 +491,7 @@ Das Repository `WebsiteWerker-2-0/Am-Anfang-War-Es-Liebe-Main` ist privat und wa
 - [ ] Web-Nutzungsrechte an den Broschüren-Illustrationen (fien-design.de) klären
 - [ ] Farbe des Notausgangs festlegen (Broschürenfarbe oder neutral)
 - [ ] Hilfetelefon-Nummer für alle Sprachfassungen verifizieren (116 016)
-- [ ] Gendersprache festlegen (Broschüre nutzt Binnen-I; Vorgabe der Gleichstellungsstelle erfragen)
+- [x] Gendersprache: Gendersternchen (Freund*innen), von der Gleichstellungsstelle bestätigt am 13.10.2026. Neutrale Formen bevorzugen; Texte des AG und archivierte Beiträge bleiben im Wortlaut
 - [ ] Veraltete Broschüreninhalte markieren, z. B. „Arbeitslosengeld II“ (seit 2023 Bürgergeld), Öffnungszeiten, Nummern; Korrektur durch AG
 - [ ] Plugin für F-11 (Anmeldeportal mit frei definierbaren Feldern) auswählen und auf Datenflüsse prüfen
 - [ ] Leichte Sprache: nicht beauftragt; ggf. als Change Request anbieten

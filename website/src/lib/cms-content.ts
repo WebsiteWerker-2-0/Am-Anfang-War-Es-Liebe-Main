@@ -47,7 +47,7 @@ export function normalizePage(doc: Doc): PageData {
     metaTitle: page.metaTitle as string | undefined,
     description: page.description as string | undefined,
     intro: page.intro as string | undefined,
-    band: page.band as Img | undefined,
+    band: page.band as PageData["band"],
     layout: page.layout as PageData["layout"],
     blocks: (page.blocks ?? []) as PageData["blocks"],
   };

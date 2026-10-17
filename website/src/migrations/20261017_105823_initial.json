@@ -3486,9 +3486,9 @@
           "notNull": false,
           "autoincrement": false
         },
-        "band_id": {
-          "name": "band_id",
-          "type": "integer",
+        "band": {
+          "name": "band",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -3540,13 +3540,6 @@
         }
       },
       "indexes": {
-        "pages_band_idx": {
-          "name": "pages_band_idx",
-          "columns": [
-            "band_id"
-          ],
-          "isUnique": false
-        },
         "pages_slug_idx": {
           "name": "pages_slug_idx",
           "columns": [
@@ -3569,21 +3562,7 @@
           "isUnique": false
         }
       },
-      "foreignKeys": {
-        "pages_band_id_media_id_fk": {
-          "name": "pages_band_id_media_id_fk",
-          "tableFrom": "pages",
-          "tableTo": "media",
-          "columnsFrom": [
-            "band_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -6020,6 +5999,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "9e113336-7cca-47fb-9a16-9d748fb8fd0c",
+  "id": "79f88188-6d3f-4e10-a30b-7f6608dd2fb0",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

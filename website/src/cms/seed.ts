@@ -194,7 +194,7 @@ export async function seedExistingContent(payload: Payload) {
         description: page.description,
         intro: page.intro,
         layout: page.layout,
-        band: (await importAsset(page.band)) ?? undefined,
+        band: page.band ?? undefined,
         blocks: (await Promise.all(page.blocks.map(convertBlock))) as never,
       },
     });

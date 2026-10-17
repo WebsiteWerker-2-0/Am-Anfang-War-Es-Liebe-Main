@@ -6,7 +6,7 @@ export const info: PageData = {
   title: "Infos und Dokumente",
   description: "Broschüre, Flyer und weiterführende Informationen zu Gewalt gegen Frauen und Kinder.",
   intro: "Die Broschüre des Arbeitskreises, Flyer zum Mitnehmen und weiterführende Informationen.",
-  band: { asset: "illustrations/band-p12" },
+  band: "info",
   layout: "stack-lg",
   blocks: [
     // Kampagne Anonyme Spurensicherung (F-08), Inhalt nach Flyer und Plakat 2017 vom AG.
@@ -56,7 +56,6 @@ export const info: PageData = {
           meta: "PDF, 1,5 MB · Deutsch · Stand: November 2022",
         },
       ],
-      note: `<p>Die Broschüre stammt von 2016. Einige Angaben, etwa Telefonnummern und Öffnungszeiten, haben sich inzwischen geändert. Aktuelle Kontakte finden Sie unter <a href="/hilfe">Hilfe</a>.</p>`,
     },
     {
       blockType: "topicLinks",
