@@ -2,7 +2,7 @@
 
 Was der AG (Ansprechpartnerin: Anna Lütkefend, Gleichstellungsbeauftragte des Kreises Höxter) für die neue Website noch liefern oder freigeben muss. Angefragt per WhatsApp am 17.10.2026, die Nummern entsprechen der Nachricht.
 
-Zum Abhaken mit gespeichertem Stand gibt es die Seite [Lieferungen Arbeitskreis Höxter](https://claude.ai/artifact/STxwvZZTEPQJ5WzajB5Nzs) (privat, Zugriff über Teilen). Diese Datei ist der feste Stand im Repo: Erledigtes hier mit Datum abhaken, wenn es eingearbeitet ist.
+Zum Abhaken gibt es die Seite [Lieferungen Arbeitskreis Höxter](https://claude.ai/artifact/STxwvZZTEPQJ5WzajB5Nzs) (privat, Zugriff über Teilen). Dort stehen je Punkt auch der Ablageort der gelieferten Sachen und Notizen, jeweils mit Person und Datum. Diese Datei ist der feste Stand im Repo: Erledigtes hier mit Datum abhaken, wenn es eingearbeitet ist.
 
 Zuletzt geliefert am 11.10.2026: Arbeitskreis-Text, Gruppenfoto, Postfächer (teilweise), Tafeln, Spurensicherung.
 
