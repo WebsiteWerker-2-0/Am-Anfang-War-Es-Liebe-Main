@@ -1,6 +1,6 @@
 # Selbstcheck
 
-Festlegungen für den interaktiven Selbstcheck (F-02). Entscheidungen vom 17.10.2026, siehe `entscheidungen.md`. Stand: Entwurf auf dem Branch `selbstcheck-baum`. Er geht erst live, wenn der AG Texte, Gewichte und Warnzeichen schriftlich freigegeben hat. Bis dahin ist live die Checkliste.
+Festlegungen für den interaktiven Selbstcheck (F-02). Entscheidungen vom 17.10.2026, siehe `entscheidungen.md`. **Live seit 17.10.2026, noch ohne fachliche Freigabe durch den AG** (Entscheidung Enrico). Texte, Gewichte und Warnzeichen sind ein Entwurf, die Freigabe ist nachzuholen.
 
 ## Ablauf (Entscheidungsbaum)
 
@@ -46,16 +46,14 @@ Immer da: „Zurück“ und „Neu beginnen“, darüber „Frage n“ (kein For
 
 - Inhalt: `website/src/content/self-check-tree.ts`, Ablauf und Bewertung: `website/src/lib/self-check.ts`, Oberfläche: `website/src/components/SelfCheck.tsx`.
 - Der Baum liegt im Code, nicht im CMS. `npm test` prüft, dass jeder Weg an einem Ergebnis ankommt, die Ampelregeln greifen und jeder Hilfe-Link auf einen vorhandenen Anker der Hilfeseite zeigt.
-- Ohne JavaScript erscheint die Checkliste aus dem CMS (Block „Selbstcheck“). Ihre Aussagen pflegt die Redaktion, die Aussagen des Baums pflegen wir im Code.
+- Ohne JavaScript erscheint die Checkliste (Block „Selbstcheck“ in `website/src/content/pages/self-check.ts`). Seiten stehen seit ADR-0006 nur im Code.
 - Nur auf `/selbstcheck`. Die Startseite verweist weiter mit dem Band „Gewalt hat viele Gesichter“.
 
 ## Offen (Fragen an den AG, Z-02)
 
-- [ ] Fachliche Freigabe der Ampel: Gewichte, Schwellen (2 und 6) und Warnzeichen. Entwurf nach anerkannten Risikofaktoren (u. a. Danger Assessment nach Campbell), keine validierte Gefährdungseinschätzung.
+- [ ] **Dringend, weil schon live:** Fachliche Freigabe der Ampel: Gewichte, Schwellen (2 und 6) und Warnzeichen. Entwurf nach anerkannten Risikofaktoren (u. a. Danger Assessment nach Campbell), keine validierte Gefährdungseinschätzung.
 - [ ] Texte der drei Stufen für jede Person (mich, eine Frau, die ich kenne, ein Kind), der Text für Unsicherheit und der Hinweis „keine fachliche Einschätzung“.
 - [ ] Neue Aussagen (im Code mit `added: true`): Handy kontrollieren, Würgen, Waffe, Zunahme der Gewalt, Schwangerschaft, Druck zu sexuellen Handlungen und Nacktbildern, Schulden auf den eigenen Namen, Auflauern nach der Trennung, sowie alle sechs Aussagen zu Kindern.
 - [ ] Ast „Kind oder Jugendliche*r“: Gehört er in den Selbstcheck, oder reicht ein Verweis auf Jugendamt und Nummer gegen Kummer? Wer im Arbeitskreis kann die Aussagen fachlich prüfen?
 - [ ] Hilfe je Bereich: Passt die Zuordnung der Anlaufstellen?
-- [ ] Einleitung der Seite im Backend an den neuen Ablauf anpassen (Standardinhalt ist angepasst).
 - [ ] Übersetzungen für AR, RU, EN, TR, sobald die Sprachfassungen kommen.
-- [ ] Später: Pflege des Baums im CMS.

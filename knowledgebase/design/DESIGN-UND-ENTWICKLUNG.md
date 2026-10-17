@@ -273,7 +273,7 @@ Geändert am 17.10.2026: Entscheidungsbaum mit Ampel statt Checkliste ohne Auswe
 
 - Eine Frage pro Schritt: zuerst die Gefahrenfrage (bei Ja sofort 110 und Hilfetelefon), dann um wen es geht, dann Bereiche der Gewalt mit einzelnen Aussagen. Antworten Ja / Nein / Weiß nicht, dazu Überspringen. „Zurück“ und „Neu beginnen“ jederzeit.
 - Am Ende eine Ampel Grün / Gelb / Rot aus gewichteten Aussagen. Warnzeichen (etwa Würgen, Todesdrohung, Waffe) führen immer zu Rot. Grün ist keine Entwarnung. Jede Stufe nennt passende Anlaufstellen und den Hinweis, dass der Selbstcheck keine fachliche Einschätzung ist.
-- Gewichte, Schwellen, Warnzeichen und Texte gibt der AG fachlich frei (Z-02), vorher kein Livegang.
+- Gewichte, Schwellen, Warnzeichen und Texte gibt der AG fachlich frei (Z-02). Seit 17.10.2026 live, die Freigabe ist nachzuholen.
 - Keine Speicherung: ausgewertet wird nur im Browser. Kein Web Storage, keine Cookies, keine Requests, keine Adressänderung oder Verlaufseinträge je Frage. Beim Zurücknavigieren aus dem Back-Forward-Cache beginnt der Selbstcheck neu.
 - Ohne JavaScript bleibt die Checkbox-Liste in einem `<form>` ohne `action` mit festem Text danach, `autocomplete="off"`.
 - Hinweis „Ihr Selbstcheck wird nicht gespeichert.“ direkt über dem Selbstcheck, nicht erst am Ende.

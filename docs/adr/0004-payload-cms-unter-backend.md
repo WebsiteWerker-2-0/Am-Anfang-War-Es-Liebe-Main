@@ -2,7 +2,7 @@
 
 Der Arbeitskreis pflegt die Website selbst (F-05 bis F-07). Dafür läuft Payload CMS (selbst gehostet, SQLite) als Teil der Next.js-App unter `/backend`, mit eigenem Root-Layout. Damit bleibt ein Deployment für Vercel-Vorschau und Hostinger, und es gehen keine Inhalte an Dritte (ADR-0002). Das Backend ist wie die Website aufgebaut: jede Seite ist ein Eintrag mit denselben Blöcken in derselben Reihenfolge, dazu Beiträge, Veranstaltungen, Anlaufstellen, Dateien sowie Kopf und Fuß.
 
-**Status:** angenommen, 11.10.2026
+**Status:** angenommen, 11.10.2026. **Teilweise abgelöst durch ADR-0006:** Seiten, Anlaufstellen, Menü und Fuß sind seit 17.10.2026 nicht mehr im Backend pflegbar, sondern stehen im Code. Der Rest (Payload unter `/backend`, Konten nur durch Admins, nie vom CMS abhängig, Datenordner, Zugriffsregeln) gilt weiter.
 
 ## Folgen
 

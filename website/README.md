@@ -29,26 +29,18 @@ Bezeichner im Code sind die englischen Entsprechungen aus [`../CONTEXT.md`](../C
 
 ## Redaktionsbereich (`/backend`)
 
-Der Arbeitskreis pflegt die Website selbst: alle Seiten, Aktuelles, Kurse mit Anmeldung, Anlaufstellen, Dateien sowie Menü und Fuß. Anleitung für die Redaktion: [`../docs/redaktion-handbuch.md`](../docs/redaktion-handbuch.md), Stand für Entwicklerinnen: [`../docs/uebergabe-backend.md`](../docs/uebergabe-backend.md). Der Bereich ist von der Website aus nirgends verlinkt, für Suchmaschinen gesperrt und nur mit Konto erreichbar. Es gibt keine Registrierung und keine voreingestellten Zugangsdaten.
+Der Arbeitskreis pflegt **Aktuelles** und **Veranstaltungen** selbst, mit einem **Dateiarchiv**. Mehr bekommt die Redaktion bewusst nicht (ADR-0006). Der Bereich ist von der Website aus nirgends verlinkt, für Suchmaschinen gesperrt und nur mit Konto erreichbar. Es gibt keine Registrierung und keine voreingestellten Zugangsdaten. Anleitung für die Redaktion: [`../docs/redaktion-handbuch.md`](../docs/redaktion-handbuch.md), Stand für Entwicklerinnen: [`../docs/uebergabe-backend.md`](../docs/uebergabe-backend.md).
 
-**Aufbau im Backend = Aufbau der Website**
+| Menüpunkt | Für | Inhalt |
+|---|---|---|
+| **Aktuelles** | Redaktion | Titel, Datum, Kurzfassung, Titelbild, Text, weitere Bilder, Dokumente, Status (Entwurf, Veröffentlicht, Archiviert), Position per Ziehen |
+| **Veranstaltungen** | Redaktion | Name, Termin, Ort, Plätze, Warteliste, „Anmeldung möglich“, weitere Angaben eingeklappt. Veröffentlichte Veranstaltungen erscheinen auf der Seite „Kurse“ mit freien Plätzen und Anmeldeformular. Die **Anmeldungen** stehen als Liste in der Veranstaltung (Status Angemeldet, Warteliste, Storniert). |
+| **Dateiarchiv** | Redaktion | Übersicht der hochgeladenen Bilder, PDFs und Videos (Titel, Alternativtext, Öffentlich-Schalter). Hochgeladen wird im Beitrag oder in der Veranstaltung. Öffentliche Dateien liegen unter `/dateien/<Name>`. |
+| **Verwaltung** | nur Admins | Redakteur:innen (Rollen „Redaktion“ und „Admin“), E-Mail und Anmeldungen (Empfänger, Postfach, Knopf „Test-E-Mail senden“) |
 
-| Menügruppe und Eintrag | Inhalt |
-|---|---|
-| **Aktuelles und Kurse** · Aktuelles | Titel, Datum, Kurzfassung, Titelbild, Text, weitere Bilder, Dokumente zum Download, Status (Entwurf, Veröffentlicht, Archiviert), Position per Ziehen in der Liste |
-| · Kurse | Name, Termin, Ort, Plätze, Warteliste, „Anmeldung möglich“, Empfänger je Kurs, Status mit Archiv. Veröffentlichte Kurse erscheinen auf der Seite „Kurse“ mit freien Plätzen und Anmeldeformular. |
-| · Kursanmeldungen | Anmeldungen aus dem Formular (Name, E-Mail, Telefon, Nachricht), Status Angemeldet, Warteliste, Storniert. Nur lesen und Status ändern. |
-| **Seiten der Website** · Seiten | Die 12 Seiten der Website. Jede Seite hat Überschrift, Einleitung, Illustration im Seitenkopf und eine Liste von Blöcken (Textabschnitt, Hinweiskasten, Dokumentenliste, Foto, Kursliste, Kontaktformular …) in der Reihenfolge der Seite. Seiten lassen sich bearbeiten, aber nicht anlegen oder löschen. |
-| · Anlaufstellen | Hauptanlaufstellen und aufklappbare Gruppen der Hilfeseite, mit Schnellzugriff für die Startseite |
-| · Kopf und Fuß der Seite | Menü, Sprachwahl, Hilfetelefon in der Hilfeleiste, Postfächer, Fußbereich |
-| **Dateien** · Dateien und Bilder | Bilder, PDFs, Videos mit Titel, Alternativtext und Öffentlich-Schalter. Öffentliche Dateien liegen unter `/dateien/<Name>`. |
-| **Verwaltung** (nur Admins) · Redakteur:innen, E-Mail und Anmeldungen | Konten mit Rollen „Redaktion“ und „Admin“. Empfängeradresse der Kursanmeldungen, Postfach für den Versand, Knopf „Test-E-Mail senden“. |
+**Nicht im Backend:** Seiten, Anlaufstellen, Menü, Sprachwahl, Hilfetelefon, Fußbereich. Sie stehen im Code (`src/content/`) und werden dort geändert. Der Notausgang ist ebenfalls nicht änderbar. Aktuelles und Veranstaltungen haben einen Versionsverlauf, die Startseite des Backends bietet die häufigsten Aufgaben als Schaltflächen. Archivierte oder als Entwurf gespeicherte Inhalte sind öffentlich nicht sichtbar, Änderungen erscheinen sofort auf der Website.
 
-Veranstaltungen (F-06) sind als Sammlung angelegt, im Menü aber ausgeblendet, bis die Seite gebaut ist. Seiten, Aktuelles und Kurse haben einen Versionsverlauf, die Startseite des Backends bietet die häufigsten Aufgaben als Schaltflächen.
-
-Archivierte oder als Entwurf gespeicherte Beiträge sind öffentlich nicht sichtbar. Änderungen erscheinen sofort auf der Website. Der Notausgang (Ziel und Beschriftung) ist bewusst nicht im Backend änderbar.
-
-**Woher die Seiten ihre Inhalte nehmen:** aus dem CMS. Ist das CMS aus oder nicht erreichbar (kein `PAYLOAD_SECRET`, Fehler), zeigt die Website den **Standardinhalt** aus `src/content/pages/`, der dem Inhalt der bisherigen Website entspricht. Dieselben Dateien füllen ein leeres CMS beim ersten Start. Die Website ist also nie vom CMS abhängig.
+**Woher die Inhalte kommen:** Seiten, Anlaufstellen, Menü und Fuß aus dem Code (`src/content/`). Aktuelles und Veranstaltungen aus dem CMS. Ist das CMS aus oder nicht erreichbar (kein `PAYLOAD_SECRET`, Fehler), zeigt die Website den Altbestand der Beiträge und keine Veranstaltungen. Die Website ist also nie vom CMS abhängig.
 
 **Lokal starten**
 
@@ -59,9 +51,9 @@ npm run dev
 ADMIN_EMAIL=… ADMIN_PASSWORD=… npm run cms:create-admin   # erstes Konto, Passwort mind. 12 Zeichen
 ```
 
-Dann `http://localhost:3000/backend` öffnen. Beim ersten Start füllt sich das CMS mit Seiten, Anlaufstellen, Kopf/Fuß und den 18 Beiträgen der Altseite.
+Dann `http://localhost:3000/backend` öffnen. Beim ersten Start füllt sich das CMS mit den 18 Beiträgen der Altseite.
 
-**Inhalte oder Aufbau einer Seite im Code ändern:** Standardinhalt in `src/content/pages/`, Darstellung in `src/components/blocks/`, Felder im Backend in `src/cms/`. Nach Änderungen an den Feldern `npm run cms:types`, `npm run cms:importmap` und `npm run cms:migrate:create -- <name>` ausführen und die erzeugten Dateien committen. Auf dem Server laufen Migrationen beim Start.
+**Inhalte oder Aufbau einer Seite ändern:** Standardinhalt in `src/content/pages/`, Darstellung in `src/components/blocks/`. Felder im Backend in `src/cms/`, Gestaltung des Backends in `src/app/(payload)/custom.css`. Nach Änderungen an den Feldern `npm run cms:types`, `npm run cms:importmap` und `npm run cms:migrate:create -- <name>` ausführen und die erzeugten Dateien committen. Auf dem Server laufen Migrationen beim Start.
 
 **Hostinger**: In hPanel unter *Websites → Node.js web app → Import Git repository* dieses Repository und den Branch `main` wählen, Node 22. Hostinger findet die App in `website/` selbst und baut bei jedem Push nach `main` neu (etwa 2 Minuten). Umgebungsvariablen in hPanel anlegen, Namen genau so: `PAYLOAD_SECRET` (langer Zufallswert, `openssl rand -hex 32`) und `CMS_DATA_DIR` (absoluter Pfad außerhalb des App-Ordners, damit Deployments Datenbank und Uploads nicht überschreiben). Das erste Konto: vorübergehend `CMS_ALLOW_FIRST_USER=true` setzen, `/backend` im Browser öffnen, Konto anlegen, die Variable wieder entfernen. Der Build läuft mit Webpack (`next build --webpack`), weil Turbopack dort bei der CSS-Verarbeitung abbricht. Hostinger setzt `output: "standalone"` selbst; was zur Laufzeit gelesen wird (`src/assets`, `public`), kommt über `outputFileTracingIncludes` in den Standalone-Ordner. Fehlermeldungen der laufenden App stehen in `console.log` und `stderr.log` im Arbeitsverzeichnis der App, Details in `../docs/uebergabe-backend.md`. Noch zu klären ist, ob der Tarif Dateien in `CMS_DATA_DIR` zwischen Deployments behält.
 

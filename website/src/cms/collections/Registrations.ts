@@ -6,15 +6,16 @@ import { isLoggedIn } from "../access";
 // OFFEN: Löschfrist mit dem AG festlegen (Pflichtenheft § 13); bis dahin nach dem Kurs von Hand löschen.
 export const Registrations: CollectionConfig = {
   slug: "registrations",
-  labels: { singular: "Kursanmeldung", plural: "Kursanmeldungen" },
+  labels: { singular: "Anmeldung", plural: "Anmeldungen" },
   defaultSort: "-createdAt",
   admin: {
     useAsTitle: "name",
-    group: "Aktuelles und Kurse",
+    // Nicht im Menü: die Redaktion sieht die Anmeldungen in der jeweiligen Veranstaltung
+    group: false,
     defaultColumns: ["name", "course", "status", "createdAt"],
     listSearchableFields: ["name", "email"],
     description:
-      "Anmeldungen über die Website. Sie enthalten persönliche Daten: bitte nur für den Kurs verwenden und nach dem Kurs löschen.",
+      "Anmeldungen über die Website. Sie enthalten persönliche Daten: bitte nur für die Veranstaltung verwenden und danach löschen.",
   },
   access: {
     read: isLoggedIn,
@@ -23,7 +24,7 @@ export const Registrations: CollectionConfig = {
     delete: isLoggedIn,
   },
   fields: [
-    { name: "course", type: "relationship", relationTo: "courses", label: "Kurs", required: true, admin: { readOnly: true } },
+    { name: "course", type: "relationship", relationTo: "courses", label: "Veranstaltung", required: true, admin: { readOnly: true } },
     { name: "name", type: "text", label: "Name", required: true },
     { name: "email", type: "email", label: "E-Mail", required: true },
     { name: "phone", type: "text", label: "Telefon" },

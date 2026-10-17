@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     message: body.message ? String(body.message) : undefined,
     consent: body.consent === true,
   };
-  if (!Number.isInteger(input.courseId)) return reply({ message: "Bitte wählen Sie einen Kurs." }, 400);
+  if (!Number.isInteger(input.courseId)) return reply({ message: "Bitte wählen Sie eine Veranstaltung." }, 400);
   const problem = validate(input);
   if (problem) return reply({ message: problem }, 400);
 
