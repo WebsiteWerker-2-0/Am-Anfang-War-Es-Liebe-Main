@@ -23,12 +23,13 @@ Die eigentliche Website (Next.js) liegt in `website/` — Hostinger findet die A
 
 ## Backend und Redaktionsbereich (Stand 17.10.2026)
 
-Vor Arbeiten am Backend, an Seiteninhalten oder an Veranstaltungen lesen: `docs/uebergabe-backend.md` (Architektur, Betrieb, Fallstricke, Befehle), `docs/redaktion-handbuch.md` (wie die Redaktion arbeitet), `docs/adr/0004-…` bis `0006-…`.
+Vor Arbeiten am Backend, an Seiteninhalten oder an Veranstaltungen lesen: `docs/uebergabe-backend.md` (Architektur, Betrieb, Fallstricke, Befehle), `docs/redaktion-handbuch.md` (wie die Redaktion arbeitet), `docs/adr/0004-…` bis `0007-…`.
 
 - **Die Redaktion sieht nur drei Bereiche:** Aktuelles, Veranstaltungen (mit den Anmeldungen darin) und das Dateiarchiv. Admins zusätzlich Verwaltung (Konten, E-Mail und Anmeldungen). Das Backend muss für Laien ohne Vorkenntnisse bedienbar bleiben: wenige, große, klar benannte Bereiche, deutsche Beschriftungen, Spezialfelder eingeklappt. Keine neuen Menüpunkte ohne Entscheidung des Auftraggebers.
 - **Nicht im Backend:** Seiten, Anlaufstellen, Menü, Sprachwahl, Hilfetelefon, Fuß, Postfächer der Kontaktseite, Notausgang. Sie stehen im Code unter `website/src/content/` (`pages/*.ts`, `site.ts`, `support-services.ts`) und werden dort geändert (ADR-0006). Das CMS kennt sie nicht (Sammlungen `pages`, `services`, `events` und Global `site` sind entfernt).
 - **Aktuelles und Veranstaltungen** liegen im CMS (`posts`, `courses`, `registrations`, `media`). Die Seite „Kurse“ zeigt veröffentlichte Veranstaltungen mit freien Plätzen (live) und Anmeldeformular. Anmeldungen werden gespeichert und per E-Mail an eine im Backend hinterlegte Adresse geschickt (ADR-0005). Kontaktanfragen dürfen weiterhin **nie** gespeichert werden (ADR-0003).
 - **Datenbank-Migrationen nie löschen oder neu erzeugen**, wenn sie schon irgendwo angewendet wurden (Hostinger tut das). Änderungen an Feldern: `npm run cms:types`, `npm run cms:importmap`, `npm run cms:migrate:create -- <name>`, alles committen. **SQLite-Migrationen sind nicht atomar:** jede neue Migration vorher an einer Datenbank im Zustand des Servers prüfen (Vorgehen in `docs/uebergabe-backend.md`, Fallstrick 2).
+- **Zweiter Faktor:** Das Backend verlangt nach dem Passwort einen Code per E-Mail (ADR-0007, `src/lib/two-factor*.ts`, `proxy.ts`). Notschalter `CMS_TWO_FACTOR=false` in hPanel, wenn der Versand ausfällt.
 - **CMS-Skripte** (`cms:seed`, `cms:create-admin`, `cms:migrate`) laufen im Produktionsmodus, sonst hängt der nächste Serverstart an einer Rückfrage.
 - **Gestaltung des Backends:** `website/src/app/(payload)/custom.css` (Liquid Glass, hell und dunkel, Größen in px). Die Website selbst ist davon nicht betroffen. Gestaltungsentscheidungen in `knowledgebase/design/entscheidungen.md` festhalten.
 - **`/backend` nie verlinken.** Der Notausgang muss auf jeder Seite erscheinen, auch in der 404-Seite.

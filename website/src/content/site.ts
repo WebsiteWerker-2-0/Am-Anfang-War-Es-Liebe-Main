@@ -8,7 +8,7 @@ export const defaultSite: SiteData = {
     { href: "/hilfe", label: "Hilfe" },
     { href: "/selbstcheck", label: "Selbstcheck" },
     { href: "/aktuelles", label: "Aktuelles" },
-    { href: "/kurse", label: "Kurse" },
+    { href: "/kurse", label: "Veranstaltungen" },
     { href: "/infos", label: "Infos" },
     { href: "/arbeitskreis", label: "Arbeitskreis" },
     { href: "/kontakt", label: "Kontakt" },

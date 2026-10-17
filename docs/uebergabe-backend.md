@@ -97,3 +97,6 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 - `npx payload migrate` meldet nichts und wendet nichts an; die Migrationen laufen beim Start (`prodMigrations`).
 - Migration `20261017_151620_downloads_bildposition` ebenfalls von Hand auf `ADD COLUMN` gekürzt (Payload wollte `posts_documents` per `DROP TABLE` neu bauen). Setzt `show_downloads` für Beiträge, die schon Dokumente haben. Geprüft: alter Stand per `git worktree` mit Daten erzeugt, dann mit neuem Stand gestartet.
 - Archiv: `getPosts` liefert nur Veröffentlichtes, `getArchivedPosts` das Archiv, `getPost` beides (`src/lib/content.ts`).
+- Zweiter Faktor per E-Mail-Code, siehe ADR-0007. Getestet: Signatur, Sitzungsbindung, Ablauf, Fehlversuche (Kernfunktionen mit esbuild und Node). Den ganzen Ablauf im Browser hat Steffen nach dem Deployment getestet.
+- Veranstaltungen: Vergangene Termine (Beginn bzw. Ende vor gestern) erscheinen nicht auf der Website; Hinweis am Feld „Wann beginnt es?“. Menüpunkt der Website heißt „Veranstaltungen“ (Adresse bleibt `/kurse`).
+- Kalender und Auswahllisten im Backend undurchsichtig: Payload-Variablen in den Menüs auf `--aal-solid` gesetzt (`custom.css`).

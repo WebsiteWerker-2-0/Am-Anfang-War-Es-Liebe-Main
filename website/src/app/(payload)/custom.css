@@ -459,3 +459,37 @@ select:focus-visible,
   background: var(--aal-primary) !important;
   color: var(--aal-primary-text) !important;
 }
+
+/* Kalender und alle aufklappenden Listen: Die Farbvariablen von Payload innen auf undurchsichtig setzen,
+   damit auch Teile ohne eigene Regel (Monatsansicht, Uhrzeitliste, Kopfzeile) nicht durchscheinen. */
+.react-datepicker-popper,
+.react-datepicker,
+.react-datepicker__month-container,
+.react-datepicker__time-list,
+.popup__content,
+.rs__menu,
+.slash-menu-popup,
+.toolbar-popup__dropdown-items {
+  --theme-input-bg: var(--aal-solid);
+  --theme-bg: var(--aal-solid);
+  --theme-elevation-0: var(--aal-solid);
+}
+
+.react-datepicker-popper {
+  z-index: 50;
+}
+
+.react-datepicker,
+.react-datepicker__month-container,
+.react-datepicker__time-container,
+.react-datepicker__time,
+.react-datepicker__time-box,
+.react-datepicker__time-list {
+  background: var(--aal-solid) !important;
+}
+
+.react-datepicker {
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 15px;
+}

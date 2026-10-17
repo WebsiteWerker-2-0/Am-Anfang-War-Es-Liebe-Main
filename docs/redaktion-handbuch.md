@@ -4,7 +4,9 @@ So pflegen Sie Aktuelles und Veranstaltungen selbst. Sie brauchen dafür nur ein
 
 **Anmelden:** Adresse der Website, dahinter `/backend`, zum Beispiel `https://am-anfang-war-es-liebe.de/backend`. Der Bereich ist nirgends verlinkt. Geben Sie die Adresse nur an Kolleginnen weiter, die mitarbeiten.
 
-Nach dem Anmelden sehen Sie die **Startseite** mit großen Schaltflächen für die häufigsten Aufgaben. Das Menü öffnen Sie über das Symbol oben links. Es hat nur drei Punkte:
+Nach dem Passwort schickt die Website einen **sechsstelligen Code an Ihre E-Mail-Adresse**. Geben Sie ihn ein und klicken Sie **Bestätigen**. Der Code gilt 10 Minuten. Keine E-Mail? Im Spam-Ordner nachsehen oder **Neuen Code senden**.
+
+Danach sehen Sie die **Startseite** mit großen Schaltflächen für die häufigsten Aufgaben. Das Menü öffnen Sie über das Symbol oben links. Es hat nur drei Punkte:
 
 | Menüpunkt | Wofür |
 |---|---|

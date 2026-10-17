@@ -62,7 +62,10 @@ export const Courses: CollectionConfig = {
       type: "date",
       label: "Wann beginnt es?",
       required: true,
-      admin: { date: { pickerAppearance: "dayAndTime", displayFormat: "dd.MM.yyyy HH:mm" } },
+      admin: {
+        date: { pickerAppearance: "dayAndTime", displayFormat: "dd.MM.yyyy HH:mm" },
+        description: "Vergangene Termine erscheinen nicht auf der Website (ab dem Tag nach Beginn bzw. Ende).",
+      },
     },
     { name: "location", type: "text", label: "Wo findet es statt?", admin: { placeholder: "Zum Beispiel: Kreishaus Höxter, Raum 12" } },
     {

@@ -1,0 +1,140 @@
+/* Seite des zweiten Faktors: dieselbe Anmutung wie das Backend (Glas, Grautöne, dunkle Hauptaktion) */
+:root {
+  color-scheme: light dark;
+  --tf-ink: #1d1d1f;
+  --tf-muted: #55575e;
+  --tf-glass: rgba(255, 255, 255, 0.72);
+  --tf-edge: rgba(255, 255, 255, 0.9);
+  --tf-line: rgba(30, 32, 40, 0.18);
+  --tf-primary: #1d1d1f;
+  --tf-primary-text: #ffffff;
+  --tf-error: #b00020;
+  --tf-backdrop: radial-gradient(900px 620px at 6% -4%, #fff, transparent 62%), linear-gradient(135deg, #eef0f4, #dfe2e9);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tf-ink: #f5f5f7;
+    --tf-muted: #b4b6bd;
+    --tf-glass: rgba(44, 46, 54, 0.72);
+    --tf-edge: rgba(255, 255, 255, 0.16);
+    --tf-line: rgba(255, 255, 255, 0.2);
+    --tf-primary: #f5f5f7;
+    --tf-primary-text: #111114;
+    --tf-error: #ff8a8a;
+    --tf-backdrop: radial-gradient(900px 620px at 6% -4%, rgba(120, 126, 142, 0.38), transparent 62%), linear-gradient(135deg, #16171b, #1d1f25);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.tf {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: var(--tf-backdrop);
+  background-attachment: fixed;
+  color: var(--tf-ink);
+  font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.tf__card {
+  inline-size: min(440px, 100%);
+  padding: 36px 32px;
+  border-radius: 22px;
+  background: var(--tf-glass);
+  -webkit-backdrop-filter: blur(26px) saturate(165%);
+  backdrop-filter: blur(26px) saturate(165%);
+  border: 1px solid var(--tf-edge);
+  box-shadow: 0 12px 40px rgba(30, 32, 40, 0.14);
+}
+
+.tf h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.tf p {
+  margin: 0 0 16px;
+}
+
+.tf__muted {
+  color: var(--tf-muted);
+  font-size: 15px;
+}
+
+.tf__message {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--tf-line);
+  font-size: 15px;
+}
+
+.tf__message--error {
+  border-color: var(--tf-error);
+  color: var(--tf-error);
+}
+
+.tf label {
+  display: block;
+  font-weight: 650;
+  margin-block-end: 6px;
+}
+
+.tf input {
+  inline-size: 100%;
+  min-block-size: 56px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--tf-line);
+  background: var(--tf-glass);
+  color: inherit;
+  font-size: 28px;
+  letter-spacing: 0.3em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.tf input:focus-visible,
+.tf button:focus-visible,
+.tf a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--tf-ink) 60%, transparent);
+  outline-offset: 2px;
+}
+
+.tf__primary {
+  inline-size: 100%;
+  min-block-size: 50px;
+  margin-block: 16px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tf-primary);
+  color: var(--tf-primary-text);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.tf__secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  align-items: center;
+  font-size: 15px;
+}
+
+.tf__link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
