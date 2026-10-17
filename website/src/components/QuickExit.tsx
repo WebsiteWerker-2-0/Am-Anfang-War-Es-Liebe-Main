@@ -8,9 +8,18 @@ import { QUICK_EXIT_URL } from "@/content/navigation";
 // Link trotzdem, weil er ein normaler Link auf QUICK_EXIT_URL ist.
 export function QuickExitBehavior() {
   useEffect(() => {
+    // Merker nur im Arbeitsspeicher dieser Seite, nichts wird gespeichert
+    let left = false;
     function leave() {
+      left = true;
       document.body.hidden = true;
       window.location.replace(QUICK_EXIT_URL);
+    }
+
+    // Holt der Browser die Seite nach dem Notausgang aus dem Back-Forward-Cache zurück,
+    // sofort wieder verlassen. Normales Zurück innerhalb der Website bleibt unberührt.
+    function onPageShow(e: PageTransitionEvent) {
+      if (e.persisted && left) leave();
     }
 
     function onClick(e: MouseEvent) {
@@ -32,9 +41,11 @@ export function QuickExitBehavior() {
 
     document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKeyDown);
+    window.addEventListener("pageshow", onPageShow);
     return () => {
       document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("pageshow", onPageShow);
     };
   }, []);
 

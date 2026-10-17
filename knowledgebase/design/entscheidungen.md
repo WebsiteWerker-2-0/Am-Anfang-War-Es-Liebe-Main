@@ -2,6 +2,25 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Notausgang: Hinweistext in jeder Sprachfassung
+- **Entscheidung:** Auf `/sprachen` steht unter dem Notausgang jeder Sprachfassung (AR, RU, EN, TR) ein Satz zu Ziel (Wettervorhersage bei Google) und Tastenkürzel (zweimal Esc), Schrift `.small`, mit `lang` und `dir` der Fassung. Die Texte liegen im Code (`QUICK_EXIT_HINTS`), nicht im CMS. Beschriftungen geprüft: „مغادرة الصفحة“, „Покинуть страницу“, „Leave this page“, „Sayfadan çık“; AR mit `dir="rtl"` und gespiegeltem Icon.
+- **Begründung:** Abschnitt 6.2: Das Tastenkürzel muss erklärt werden, bisher nur auf Deutsch (`/internetspuren`). Im Code statt im CMS, weil der Hinweis das Ziel beschreibt und sich mit ihm ändern muss; so gilt er auch sofort auf der laufenden Seite ohne Migration.
+- **Offen:** Übersetzungen von Claude, Freigabe durch den AG steht aus (`OFFEN:` im Code).
+- **Betrifft:** komponenten.md, `website/src/content/navigation.ts`, `website/src/components/blocks/index.tsx`
+- **Von:** Enrico (mit Claude)
+
+## 2026-10-17 – Notausgang: Back-Forward-Cache und no-store
+- **Entscheidung:** Kehrt eine Seite, die den Notausgang ausgelöst hatte, aus dem Back-Forward-Cache zurück (`pageshow` mit `event.persisted`), löst sie ihn sofort erneut aus. Der Merker liegt nur im Arbeitsspeicher der Seite. Zusätzlich senden alle Seiten `Cache-Control: no-store`, gesetzt in `src/proxy.ts`, weil Next.js den Header aus `next.config.ts` bei vorgerenderten Seiten überschreibt. Statische Dateien bleiben cachebar.
+- **Begründung:** Wer nach dem Notausgang „Zurück“ drückt, soll die Website nicht aus dem Cache wiedersehen. Bewusst nicht bei jeder Rückkehr aus dem Cache auslösen, sonst würfe schon ein normales Zurück innerhalb der Website die Besucherin hinaus. `no-store` hält die Seiten außerdem aus dem Browser-Zwischenspeicher (Internetspuren). Folge: Das Hostinger-CDN speichert die HTML-Seiten nicht mehr zwischen, jede Anfrage geht an Next.js (dort weiter mit 60-s-Cache).
+- **Betrifft:** komponenten.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 6.2, `website/src/components/QuickExit.tsx`, `website/src/proxy.ts`
+- **Von:** Enrico (mit Claude)
+
+## 2026-10-17 – Notausgang: Ziel bleibt Google-Suche „wetter“
+- **Entscheidung:** Der Notausgang führt weiter auf `https://www.google.com/search?q=wetter`. Verworfen: dwd.de.
+- **Begründung:** Wie in Abschnitt 6.2 vorgesehen; im Verlauf steht nur eine Wettersuche. Bekannter Nachteil: Ein frischer Browser zeigt zuerst Googles Cookie-Abfrage.
+- **Betrifft:** komponenten.md, `website/src/content/navigation.ts` (`QUICK_EXIT_URL`)
+- **Von:** Enrico
+
 ## 2026-10-17 – UI-bedingte Farbabweichungen sind zulässig
 - **Entscheidung:** Farbabweichungen von der Broschürenpalette, die für die Benutzeroberfläche erforderlich sind (Funktionsfarben wie Notausgang-Rot, Fehler, Erfolg, Fokus), sind in Ordnung. Markenfarben und Flächen der Gestaltung bleiben an die Broschüre gebunden (harte Regel 2).
 - **Begründung:** Funktionsfarben müssen Kontrast und Erkennbarkeit sichern, was die Broschürenpalette nicht leistet (Magenta und Orange erreichen keinen Textkontrast, Rot fehlt ganz).

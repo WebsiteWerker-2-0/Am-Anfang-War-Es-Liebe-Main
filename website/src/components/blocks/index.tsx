@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 import type { CalloutBlock, PageBlock, SectionItem } from "@/content/model";
+import { QUICK_EXIT_HINTS } from "@/content/navigation";
 import { toImg } from "@/lib/images";
 import { getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
 import { Rich, RichInline } from "@/lib/rich";
@@ -321,6 +322,7 @@ function LanguageVersions({ block }: { block: Block<"languageVersions"> }) {
           <p>
             <QuickExitLink label={version.exitLabel} lang={version.code} />
           </p>
+          {QUICK_EXIT_HINTS[version.code] && <p className="small">{QUICK_EXIT_HINTS[version.code]}</p>}
         </section>
       ))}
     </>
