@@ -17,14 +17,14 @@
     "test": "node --import tsx --test \"src/**/*.test.ts\""
   },
   "dependencies": {
-    "@payloadcms/db-sqlite": "3.90.2",
-    "@payloadcms/live-preview-react": "3.90.2",
-    "@payloadcms/next": "3.90.2",
-    "@payloadcms/richtext-lexical": "3.90.2",
+    "@payloadcms/db-sqlite": "3.91.0",
+    "@payloadcms/live-preview-react": "3.91.0",
+    "@payloadcms/next": "3.91.0",
+    "@payloadcms/richtext-lexical": "3.91.0",
     "graphql": "^16.14.2",
     "next": "16.3.8",
     "nodemailer": "10.1.2",
-    "payload": "3.90.2",
+    "payload": "3.91.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "sharp": "^0.35.5"
@@ -43,5 +43,14 @@
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5"
+  },
+  "overrides": {
+    "dompurify": "3.4.17",
+    "@payloadcms/next": {
+      "sass": "1.105.2"
+    },
+    "@esbuild-kit/core-utils": {
+      "esbuild": "0.25.12"
+    }
   }
 }
