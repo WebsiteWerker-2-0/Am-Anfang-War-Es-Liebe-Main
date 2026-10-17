@@ -307,6 +307,12 @@ select:focus-visible,
 
 .btn--style-primary,
 .list-create-new-doc__create-new-button {
+  /* Text immer mittig im Knopf, egal welche Höhe Payload innen vorgibt */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0;
+  line-height: 1.2;
   min-block-size: 46px;
   padding-inline: 26px;
   font-size: 17px;
@@ -492,4 +498,20 @@ select:focus-visible,
   border-radius: 12px;
   overflow: hidden;
   font-size: 15px;
+}
+
+.btn--style-primary .btn__content,
+.list-create-new-doc__create-new-button .btn__content,
+.btn--style-primary .btn__label,
+.list-create-new-doc__create-new-button .btn__label {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* „Neu erstellen“ steht auf der Mittellinie der Überschrift */
+.list-header__title-actions .btn {
+  margin: 0;
 }
