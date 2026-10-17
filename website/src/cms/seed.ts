@@ -44,6 +44,19 @@ async function resolveAsset(key: string) {
 }
 
 export async function seedExistingContent(payload: Payload) {
+  // Jeder Teil läuft für sich: scheitert einer (zum Beispiel wegen einer fehlenden Datei), startet das
+  // Backend trotzdem, und der nächste Start versucht den fehlenden Teil erneut.
+  const attempt = async (name: string, step: () => Promise<void>) => {
+    try {
+      await step();
+    } catch (error) {
+      payload.logger.error({
+        err: error,
+        msg: `Einspielen von „${name}“ fehlgeschlagen, wird beim nächsten Start erneut versucht.`,
+      });
+    }
+  };
+
   const editorConfig = await editorConfigFactory.default({ config: payload.config });
   const mediaByFile = new Map<string, number>();
 
@@ -84,10 +97,16 @@ export async function seedExistingContent(payload: Payload) {
   };
 
   // ---- Anlaufstellen -------------------------------------------------------
-  if ((await payload.count({ collection: "services" })).totalDocs === 0) {
-    const create = (service: SupportService, placement: "main" | "group", groupTitle?: string) => {
+  await attempt("Anlaufstellen", async () => {
+    const known = new Set(
+      (await payload.find({ collection: "services", limit: 500, pagination: false, depth: 0 })).docs.map(
+        (doc) => doc.serviceId,
+      ),
+    );
+    const create = async (service: SupportService, placement: "main" | "group", groupTitle?: string) => {
+      if (known.has(service.id)) return;
       const quickIndex = quickAccess.findIndex((entry) => entry.id === service.id);
-      return payload.create({
+      await payload.create({
         collection: "services",
         data: {
           serviceId: service.id,
@@ -108,31 +127,34 @@ export async function seedExistingContent(payload: Payload) {
       });
     };
     for (const service of mainServices) await create(service, "main");
-    for (const group of serviceGroups) for (const service of group.services) await create(service, "group", group.title);
-    payload.logger.info("Anlaufstellen eingespielt.");
-  }
+    for (const group of serviceGroups)
+      for (const service of group.services) await create(service, "group", group.title);
+    if (known.size === 0) payload.logger.info("Anlaufstellen eingespielt.");
+  });
 
   // ---- Seitenrahmen --------------------------------------------------------
-  const site = await payload.findGlobal({ slug: "site" });
-  if (!site.navigation?.length) {
-    const footer: SiteData["footer"] = defaultSite.footer;
-    await payload.updateGlobal({
-      slug: "site",
-      data: {
-        navigation: defaultSite.navigation,
-        languages: defaultSite.languages,
-        helpline: defaultSite.helpline,
-        mailboxes: defaultSite.mailboxes,
-        footer: {
-          ...footer,
-          address: lexical(footer.address) as never,
-          emergency: lexical(footer.emergency) as never,
-          fundingLogo: (await importAsset(footer.fundingLogo, footer.fundingAlt)) ?? undefined,
+  await attempt("Kopf und Fuß", async () => {
+    const site = await payload.findGlobal({ slug: "site" });
+    if (!site.navigation?.length) {
+      const footer: SiteData["footer"] = defaultSite.footer;
+      await payload.updateGlobal({
+        slug: "site",
+        data: {
+          navigation: defaultSite.navigation,
+          languages: defaultSite.languages,
+          helpline: defaultSite.helpline,
+          mailboxes: defaultSite.mailboxes,
+          footer: {
+            ...footer,
+            address: lexical(footer.address) as never,
+            emergency: lexical(footer.emergency) as never,
+            fundingLogo: (await importAsset(footer.fundingLogo, footer.fundingAlt)) ?? undefined,
+          },
         },
-      },
-    });
-    payload.logger.info("Kopf und Fuß eingespielt.");
-  }
+      });
+      payload.logger.info("Kopf und Fuß eingespielt.");
+    }
+  });
 
   // ---- Seiten --------------------------------------------------------------
   async function convertItem(item: SectionItem): Promise<unknown> {
@@ -142,7 +164,7 @@ export async function seedExistingContent(payload: Payload) {
     return item;
   }
 
-  async function convertBlock(block: PageBlock): Promise<unknown> {
+  async function convertBlock(block: PageBlock): Promise<unknown | null> {
     switch (block.blockType) {
       case "section":
         return { ...block, items: await Promise.all(block.items.map(convertItem)) };
@@ -164,15 +186,15 @@ export async function seedExistingContent(payload: Payload) {
             : undefined,
           poster: await importAsset(block.poster, block.posterAlt),
         };
-      case "photo":
-        return { ...block, image: await importAsset(block.image, block.alt) };
+      case "photo": {
+        const image = await importAsset(block.image, block.alt);
+        return image ? { ...block, image } : null;
+      }
       case "exhibition": {
         const panels = [];
         for (const panel of block.panels) {
-          panels.push({
-            title: panel.title,
-            image: await importAsset(panel.image, `Tafel der Wanderausstellung: ${panel.title}`),
-          });
+          const image = await importAsset(panel.image, `Tafel der Wanderausstellung: ${panel.title}`);
+          if (image) panels.push({ title: panel.title, image });
         }
         return { ...block, panels };
       }
@@ -195,79 +217,92 @@ export async function seedExistingContent(payload: Payload) {
         intro: page.intro,
         layout: page.layout,
         band: page.band ?? undefined,
-        blocks: (await Promise.all(page.blocks.map(convertBlock))) as never,
+        blocks: (await Promise.all(page.blocks.map(convertBlock))).filter(Boolean) as never,
       },
     });
   }
 
-  if ((await payload.count({ collection: "pages" })).totalDocs === 0) {
-    for (const page of defaultPages) await createPage(page);
-    payload.logger.info(`${defaultPages.length} Seiten eingespielt.`);
-  }
+  await attempt("Seiten", async () => {
+    const known = new Set(
+      (await payload.find({ collection: "pages", limit: 100, pagination: false, depth: 0 })).docs.map(
+        (doc) => doc.slug,
+      ),
+    );
+    for (const page of defaultPages) {
+      if (known.has(page.slug)) continue;
+      await attempt(`Seite ${page.slug}`, () => createPage(page));
+    }
+    if (known.size === 0) payload.logger.info(`${defaultPages.length} Seiten eingespielt.`);
+  });
 
   // ---- Beiträge der Altseite -----------------------------------------------
   if ((await payload.count({ collection: "posts" })).totalDocs > 0) return;
 
   for (const post of posts as LegacyPost[]) {
-    const doc = new JSDOM(`<body>${post.html}</body>`).window.document;
+    await attempt(`Beitrag ${post.slug}`, async () => {
+      const doc = new JSDOM(`<body>${post.html}</body>`).window.document;
 
-    // Bilder: das erste ist das Titelbild, weitere kommen in „Weitere Bilder“
-    const imageSources = [...new Set([...doc.querySelectorAll("img")].map((img) => img.getAttribute("src") ?? ""))]
-      .filter(Boolean)
-      .filter((src) => src !== post.image);
-    const imageAlt = new Map(
-      [...doc.querySelectorAll("img")].map((img) => [img.getAttribute("src") ?? "", img.getAttribute("alt") ?? ""]),
-    );
+      // Bilder: das erste ist das Titelbild, weitere kommen in „Weitere Bilder“
+      const imageSources = [...new Set([...doc.querySelectorAll("img")].map((img) => img.getAttribute("src") ?? ""))]
+        .filter(Boolean)
+        .filter((src) => src !== post.image);
+      const imageAlt = new Map(
+        [...doc.querySelectorAll("img")].map((img) => [img.getAttribute("src") ?? "", img.getAttribute("alt") ?? ""]),
+      );
 
-    // Dokumente: verlinkte PDFs und Videos werden zu Anhängen, der Link im Text entfällt
-    const documents: { label: string; path: string }[] = [];
-    for (const link of [...doc.querySelectorAll("a[href]")]) {
-      const href = link.getAttribute("href") ?? "";
-      if (!DOCUMENT_EXTENSION.test(href) || !href.startsWith("/")) continue;
-      if (!documents.some((entry) => entry.path === href)) {
-        documents.push({ label: link.textContent?.trim() || path.basename(href), path: href });
+      // Dokumente: verlinkte PDFs und Videos werden zu Anhängen, der Link im Text entfällt
+      const documents: { label: string; path: string }[] = [];
+      for (const link of [...doc.querySelectorAll("a[href]")]) {
+        const href = link.getAttribute("href") ?? "";
+        if (!DOCUMENT_EXTENSION.test(href) || !href.startsWith("/")) continue;
+        if (!documents.some((entry) => entry.path === href)) {
+          documents.push({ label: link.textContent?.trim() || path.basename(href), path: href });
+        }
+        link.replaceWith(...link.childNodes);
       }
-      link.replaceWith(...link.childNodes);
-    }
-    for (const video of [...doc.querySelectorAll("video[src]")]) {
-      const src = video.getAttribute("src") ?? "";
-      if (src.startsWith("/") && !documents.some((entry) => entry.path === src)) documents.push({ label: "Video", path: src });
-    }
+      for (const video of [...doc.querySelectorAll("video[src]")]) {
+        const src = video.getAttribute("src") ?? "";
+        if (src.startsWith("/") && !documents.some((entry) => entry.path === src))
+          documents.push({ label: "Video", path: src });
+      }
 
-    // Bildunterschriften werden zu Absätzen, Bilder und Videos stehen als eigene Felder
-    for (const caption of [...doc.querySelectorAll("figcaption")]) {
-      const paragraph = doc.createElement("p");
-      paragraph.innerHTML = caption.innerHTML;
-      caption.replaceWith(paragraph);
-    }
-    doc.querySelectorAll("img, video, figure:empty").forEach((el) => el.remove());
+      // Bildunterschriften werden zu Absätzen, Bilder und Videos stehen als eigene Felder
+      for (const caption of [...doc.querySelectorAll("figcaption")]) {
+        const paragraph = doc.createElement("p");
+        paragraph.innerHTML = caption.innerHTML;
+        caption.replaceWith(paragraph);
+      }
+      doc.querySelectorAll("img, video, figure:empty").forEach((el) => el.remove());
 
-    const image = post.image ? await importPublic(post.image, post.title, imageAlt.get(post.image) || post.title) : null;
-    const gallery: number[] = [];
-    for (const src of imageSources) {
-      const id = await importPublic(src, post.title, imageAlt.get(src) || post.title);
-      if (id) gallery.push(id);
-    }
-    const attachments: { label: string; file: number }[] = [];
-    for (const attachment of documents) {
-      const id = await importPublic(attachment.path, attachment.label);
-      if (id) attachments.push({ label: attachment.label, file: id });
-    }
+      const image = post.image
+        ? await importPublic(post.image, post.title, imageAlt.get(post.image) || post.title)
+        : null;
+      const gallery: number[] = [];
+      for (const src of imageSources) {
+        const id = await importPublic(src, post.title, imageAlt.get(src) || post.title);
+        if (id) gallery.push(id);
+      }
+      const attachments: { label: string; file: number }[] = [];
+      for (const attachment of documents) {
+        const id = await importPublic(attachment.path, attachment.label);
+        if (id) attachments.push({ label: attachment.label, file: id });
+      }
 
-    await payload.create({
-      collection: "posts",
-      data: {
-        title: post.title,
-        slug: post.slug,
-        date: new Date(post.date + "T12:00:00.000Z").toISOString(),
-        excerpt: post.excerpt || undefined,
-        image: image ?? undefined,
-        gallery,
-        documents: attachments,
-        content: lexical(doc.body.innerHTML) as never,
-        legacyHtml: post.html,
-        status: "published",
-      },
+      await payload.create({
+        collection: "posts",
+        data: {
+          title: post.title,
+          slug: post.slug,
+          date: new Date(post.date + "T12:00:00.000Z").toISOString(),
+          excerpt: post.excerpt || undefined,
+          image: image ?? undefined,
+          gallery,
+          documents: attachments,
+          content: lexical(doc.body.innerHTML) as never,
+          legacyHtml: post.html,
+          status: "published",
+        },
+      });
     });
   }
   payload.logger.info(`${posts.length} Beiträge der Altseite eingespielt.`);

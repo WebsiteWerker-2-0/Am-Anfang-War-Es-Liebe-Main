@@ -43,9 +43,9 @@ const nextConfig: NextConfig = {
   experimental: { globalNotFound: true },
   // Das Einspielen des Standardinhalts ins CMS liest Bilder (src/assets) und Dateien (public) zur Laufzeit.
   // Auf Vercel gehören sie deshalb ausdrücklich zu den Backend-Funktionen.
+  // Die Schlüssel sind Muster, daher ein Stern statt der Routen mit eckigen Klammern.
   outputFileTracingIncludes: {
-    "/backend/[[...segments]]": ["./public/medien/**/*", "./public/downloads/**/*", "./src/assets/**/*"],
-    "/backend/api/[...slug]": ["./public/medien/**/*", "./public/downloads/**/*", "./src/assets/**/*"],
+    "/backend/**": ["./public/medien/**/*", "./public/downloads/**/*", "./src/assets/**/*"],
   },
   async headers() {
     const withoutCsp = securityHeaders.filter((header) => header.key !== "Content-Security-Policy-Report-Only");
