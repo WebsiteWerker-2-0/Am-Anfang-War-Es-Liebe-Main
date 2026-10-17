@@ -2,7 +2,7 @@
 
 ## Website-Code
 
-Die eigentliche Website (Next.js) liegt in `website/` — das ist auch das bei Vercel hinterlegte Root Directory. Alle Code-Änderungen an der Website (Seiten, Komponenten, Styles, Konfiguration) gehören ausschließlich in diesen Ordner, nicht ins Repo-Root. `knowledgebase/` ist nur für Dokumentation/Entscheidungen, nicht für Website-Code.
+Die eigentliche Website (Next.js) liegt in `website/` — Hostinger findet die App dort selbst. Alle Code-Änderungen an der Website (Seiten, Komponenten, Styles, Konfiguration) gehören ausschließlich in diesen Ordner, nicht ins Repo-Root. `knowledgebase/` ist nur für Dokumentation/Entscheidungen, nicht für Website-Code.
 
 **Stack-Entscheidung (überschreibt Abschnitt 10 der Design-Doku):** Next.js, nicht WordPress. Die in der Design-Doku unter Abschnitt 10 beschriebene WordPress-Architektur (Block-Theme, CPTs, Polylang) gilt **nicht mehr** (Begründung: `docs/adr/0001-nextjs-statt-wordpress.md`). Fachliche Anforderungen aus der Design-Doku (Notausgang, Selbstcheck ohne Speicherung, Anlaufstellen, Mediathek, Veranstaltungen, Mehrsprachigkeit) bleiben bestehen und werden in Next.js umgesetzt.
 
@@ -15,7 +15,9 @@ Die eigentliche Website (Next.js) liegt in `website/` — das ist auch das bei V
 ## Hosting & Deployment
 
 - **Hostinger** (Node.js-Web-App) baut `main` bei **jedem Push** automatisch (Node 22, `npm run build`, etwa 2 Minuten) und startet neu. Ein Push nach `main` ist also eine Veröffentlichung: vorher `npm run lint`, `npx tsc --noEmit` und `npm run build`. Auf einem Branch arbeiten, wenn etwas größer ist, und erst nach Prüfung nach `main` bringen.
-- **Vercel** (Root Directory `website`) baut ebenfalls jede Änderung. Dort zeigt die Website den Standardinhalt, das Backend ist nur eine Demo mit flüchtigen Daten.
+- **Domains:** Die Website läuft auf der Hostinger-Testdomain `midnightblue-barracuda-110814.hostingersite.com`. Die Hauptdomain `am-anfang-war-es-liebe.de` zeigt noch die alte WordPress-Seite. DNS, Domain und Abrechnung nur nach Rücksprache ändern.
+- Den Build-Status liefert das Hostinger-Plugin (`hostinger@claude-plugins-official`). Hostinger meldet Builds nicht an GitHub zurück.
+- **Vercel läuft aus** (OFFEN: Abschalten). Bis dahin baut Vercel jede Änderung als Vorschau mit, dort nur Standardinhalt und ein Demo-Backend mit flüchtigen Daten. Nicht mehr als Ziel für Prüfungen verwenden.
 - Der Build nutzt **Webpack** (`next build --webpack`). Turbopack bricht auf Hostinger ab.
 - Zugangsdaten (SSH, hPanel, Passwörter, Secrets) stehen nie im Repository. Das Repository ist öffentlich.
 

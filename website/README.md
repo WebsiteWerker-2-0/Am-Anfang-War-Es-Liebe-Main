@@ -1,6 +1,6 @@
 # Website am-anfang-war-es-liebe.de
 
-Erster Entwurf der neuen Website des Arbeitskreises „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“. Next.js (App Router), Deployment über Vercel mit Root Directory `website/`. Die öffentlichen Seiten werden statisch erzeugt, der Redaktionsbereich unter `/backend` ist ein Payload-CMS im selben Projekt (ADR-0004).
+Erster Entwurf der neuen Website des Arbeitskreises „Gegen Gewalt an Frauen und Kindern im Kreis Höxter“. Next.js (App Router), produktiv auf Hostinger als Node.js-Web-App: Jeder Push auf `main` baut automatisch neu (Testdomain `midnightblue-barracuda-110814.hostingersite.com`, die Hauptdomain zeigt noch die alte WordPress-Seite). Vercel läuft aus. Die öffentlichen Seiten werden statisch erzeugt, der Redaktionsbereich unter `/backend` ist ein Payload-CMS im selben Projekt (ADR-0004).
 
 Verbindliche Vorgaben: [`../knowledgebase/design/DESIGN-UND-ENTWICKLUNG.md`](../knowledgebase/design/DESIGN-UND-ENTWICKLUNG.md).
 
@@ -69,12 +69,12 @@ Dann `http://localhost:3000/backend` öffnen. Beim ersten Start füllt sich das 
 
 **Skripte (`npm run cms:…`)** laufen im Produktionsmodus. Im Entwicklungsmodus schiebt Payload das Schema direkt in die Datenbank, und der nächste Start des Servers wartet auf eine Rückfrage.
 
-**Vercel-Vorschau**: Dort ist nur `/tmp` beschreibbar, Datenbank und Uploads sind flüchtig und je Instanz getrennt. Deshalb zeigt die Vorschau die Website mit dem Standardinhalt (`CMS_CONTENT` nicht gesetzt). Das Backend läuft trotzdem, zum Ansehen der Oberfläche in Vercel (Preview) `PAYLOAD_SECRET` und `CMS_ALLOW_FIRST_USER=true` setzen und das erste Konto im Browser anlegen. Änderungen im Backend erscheinen dort nicht auf der Website. Zum Ausprobieren des Bearbeitens eignen sich lokaler Start oder Hostinger.
+**Vercel-Vorschau (läuft aus)**: Dort ist nur `/tmp` beschreibbar, Datenbank und Uploads sind flüchtig und je Instanz getrennt. Deshalb zeigt die Vorschau die Website mit dem Standardinhalt (`CMS_CONTENT` nicht gesetzt). Das Backend läuft trotzdem, zum Ansehen der Oberfläche in Vercel (Preview) `PAYLOAD_SECRET` und `CMS_ALLOW_FIRST_USER=true` setzen und das erste Konto im Browser anlegen. Änderungen im Backend erscheinen dort nicht auf der Website. Zum Ausprobieren des Bearbeitens eignen sich lokaler Start oder Hostinger.
 
 ## Umgesetzt nach Vorgabe
 
 - Keine externen Ressourcen (ADR-0002): Schriften über `next/font` selbst gehostet, keine Embeds, kein Tracking, keine Cookies
-- Notausgang auf jeder Seite (Hilfeleiste, mobil zusätzlich fixiert), zweimal Esc, `Referrer-Policy: no-referrer`
+- Notausgang auf jeder Seite (Hilfeleiste, mobil zusätzlich fixiert), zweimal Esc, `Referrer-Policy: no-referrer`, erneutes Verlassen bei Rückkehr aus dem Back-Forward-Cache, Seiten mit `Cache-Control: no-store` (`src/proxy.ts`), Hinweis je Sprachfassung
 - Selbstcheck ohne Speicherung, Zurücksetzen beim Zurücknavigieren (ADR-0003)
 - Anlaufstellen mit fester Datenreihenfolge, weitere Stellen in nativen `<details>`
 - Wanderausstellung als Slider mit `scroll-snap`, ohne Autoplay
