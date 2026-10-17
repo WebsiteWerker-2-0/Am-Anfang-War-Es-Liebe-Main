@@ -4,6 +4,7 @@ import * as migration_20261017_121359_cms_verschlanken from './20261017_121359_c
 import * as migration_20261017_142156_veranstaltung_text from './20261017_142156_veranstaltung_text';
 import * as migration_20261017_151620_downloads_bildposition from './20261017_151620_downloads_bildposition';
 import * as migration_20261017_153858_verfasst_von from './20261017_153858_verfasst_von';
+import * as migration_20261017_155447_plaetze_von_hand from './20261017_155447_plaetze_von_hand';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20261017_153858_verfasst_von.up,
     down: migration_20261017_153858_verfasst_von.down,
-    name: '20261017_153858_verfasst_von'
+    name: '20261017_153858_verfasst_von',
+  },
+  {
+    up: migration_20261017_155447_plaetze_von_hand.up,
+    down: migration_20261017_155447_plaetze_von_hand.down,
+    name: '20261017_155447_plaetze_von_hand'
   },
 ];

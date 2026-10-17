@@ -30,7 +30,7 @@ export function courseState(course: { registrationOpen?: boolean | null; waitlis
   return course.waitlist === false ? "full" : "waitlist";
 }
 
-/** Anzahl belegter Plätze (Status „Angemeldet“) je Kurs */
+/** Anzahl belegter Plätze je Kurs: Anmeldungen mit Status „Angemeldet“ plus von Hand vergebene (extraBooked) */
 export async function takenSeats(payload: Payload, courseIds: number[]) {
   const taken = new Map<number, number>();
   if (!courseIds.length) return taken;
@@ -45,6 +45,18 @@ export async function takenSeats(payload: Payload, courseIds: number[]) {
   for (const doc of docs) {
     const id = typeof doc.course === "object" ? (doc.course as { id: number }).id : doc.course;
     taken.set(id, (taken.get(id) ?? 0) + 1);
+  }
+  const { docs: courses } = await payload.find({
+    collection: "courses",
+    where: { id: { in: courseIds } },
+    select: { extraBooked: true },
+    depth: 0,
+    limit: courseIds.length,
+    pagination: false,
+  });
+  for (const course of courses) {
+    const extra = Number(course.extraBooked ?? 0);
+    if (extra > 0) taken.set(course.id, (taken.get(course.id) ?? 0) + extra);
   }
   return taken;
 }

@@ -1,9 +1,20 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, PayloadRequest } from "payload";
 import { isLoggedIn, publishedOrLoggedIn } from "../access";
 import { bodyEditor } from "../editors";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
 import { hiddenSlugField } from "../fields/slug";
 import { revalidateSite } from "../revalidate";
+
+/** Plätze, die über die Website vergeben sind (Anmeldungen mit Status „Angemeldet“) */
+async function onlineSeats(courseId: unknown, req: PayloadRequest) {
+  if (!courseId) return 0;
+  const { totalDocs } = await req.payload.count({
+    collection: "registrations",
+    where: { and: [{ course: { equals: courseId } }, { status: { equals: "confirmed" } }] },
+    req,
+  });
+  return totalDocs;
+}
 
 // Veranstaltungen (Kurse und Termine) mit Plätzen und Anmeldung (F-06, F-11). Die Website zeigt
 // veröffentlichte Veranstaltungen auf der Seite „Kurse“ mit freien Plätzen und einem Anmeldeformular,
@@ -31,7 +42,17 @@ export const Courses: CollectionConfig = {
     delete: isLoggedIn,
   },
   hooks: {
-    beforeChange: [syncArchivedAt],
+    beforeChange: [
+      syncArchivedAt,
+      // „Schon angemeldet“ ist bearbeitbar: Der Teil über den Website-Anmeldungen wird als extraBooked gespeichert.
+      // Weniger als die Website-Anmeldungen geht nicht; dafür eine Anmeldung auf „Storniert“ stellen.
+      async ({ data, originalDoc, req }) => {
+        if (typeof data.booked !== "number") return data;
+        const online = await onlineSeats(originalDoc?.id, req);
+        data.extraBooked = Math.max(0, Math.round(data.booked) - online);
+        return data;
+      },
+    ],
     afterChange: [() => revalidateSite()],
     afterDelete: [() => revalidateSite()],
     beforeDelete: [
@@ -94,21 +115,20 @@ export const Courses: CollectionConfig = {
           type: "number",
           label: "Schon angemeldet",
           virtual: true,
-          admin: { readOnly: true, width: "50%", description: "Zählt das System selbst, aus den Anmeldungen unten." },
+          min: 0,
+          admin: {
+            width: "50%",
+            description:
+              "Zählt die Anmeldungen über die Website mit. Anmeldungen per Telefon oder E-Mail tragen Sie hier dazu: einfach die Zahl erhöhen.",
+          },
           hooks: {
-            afterRead: [
-              async ({ data, req }) => {
-                if (!data?.id) return 0;
-                const { totalDocs } = await req.payload.count({
-                  collection: "registrations",
-                  where: { and: [{ course: { equals: data.id } }, { status: { equals: "confirmed" } }] },
-                  req,
-                });
-                return totalDocs;
-              },
-            ],
+            // Anzeige: Anmeldungen über die Website (Status „Angemeldet“) plus von Hand vergebene Plätze
+            afterRead: [async ({ data, req }) => (await onlineSeats(data?.id, req)) + Number(data?.extraBooked ?? 0)],
+            // Speichern: was über die Website-Anmeldungen hinausgeht, merkt sich „extraBooked“ (siehe beforeChange unten)
           },
         },
+        // Von Hand vergebene Plätze (Telefon, E-Mail). Gesetzt über „Schon angemeldet“, nicht direkt sichtbar.
+        { name: "extraBooked", type: "number", defaultValue: 0, min: 0, admin: { hidden: true } },
       ],
     },
     {

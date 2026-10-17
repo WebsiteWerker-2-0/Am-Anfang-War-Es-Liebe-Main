@@ -40,7 +40,7 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 
 1. Auf der Startseite **Neue Veranstaltung anlegen** wählen.
 2. **Name**, **Wann beginnt es?** und **Wo findet es statt?** eintragen, bei **Worum geht es?** einen kurzen Text.
-3. Bei **Wie viele Plätze gibt es?** die Teilnehmerzahl eintragen. **Schon angemeldet** zählt das System selbst.
+3. Bei **Wie viele Plätze gibt es?** die Teilnehmerzahl eintragen. **Schon angemeldet** zählt die Anmeldungen über die Website selbst. Wer sich per Telefon oder E-Mail anmeldet, zählen Sie dazu, indem Sie die Zahl erhöhen. Die Website zeigt dann entsprechend weniger freie Plätze.
 4. **Warteliste anbieten** schalten Sie ein, wenn sich auch bei vollen Plätzen Interessentinnen eintragen dürfen.
 5. Bei **Ausführlicher Text** (optional) Ablauf oder Hinweise schreiben, auch mit Datei oder Bild an einer Stelle im Text (wie bei Aktuelles).
 6. **Speichern**. Der Status steht schon auf **Veröffentlicht**. Die Veranstaltung erscheint auf der Seite „Kurse“ mit den freien Plätzen und einem Anmeldeformular. Die Anzeige aktualisiert sich von selbst, wenn sich jemand anmeldet.

@@ -276,9 +276,10 @@ export interface Course {
   } | null;
   capacity: number;
   /**
-   * Zählt das System selbst, aus den Anmeldungen unten.
+   * Zählt die Anmeldungen über die Website mit. Anmeldungen per Telefon oder E-Mail tragen Sie hier dazu: einfach die Zahl erhöhen.
    */
   booked?: number | null;
+  extraBooked?: number | null;
   registrationOpen?: boolean | null;
   waitlist?: boolean | null;
   /**
@@ -333,6 +334,8 @@ export interface Registration {
   createdAt: string;
 }
 /**
+ * Neues Konto: E-Mail-Adresse, Name, Rolle und ein beliebiges Passwort eintragen. Die Person bekommt eine E-Mail mit einem Link, über den sie ihr eigenes Passwort festlegt.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -487,6 +490,7 @@ export interface CoursesSelect<T extends boolean = true> {
   details?: T;
   capacity?: T;
   booked?: T;
+  extraBooked?: T;
   registrationOpen?: T;
   waitlist?: T;
   registrationList?: T;
@@ -637,9 +641,6 @@ export interface Mail {
   smtpPort?: number | null;
   smtpSecure?: boolean | null;
   smtpUser?: string | null;
-  /**
-   * Nur Admins sehen dieses Feld.
-   */
   smtpPassword?: string | null;
   /**
    * Leer: Benutzername.
