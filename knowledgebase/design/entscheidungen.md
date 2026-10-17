@@ -2,10 +2,16 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – UI-bedingte Farbabweichungen sind zulässig
+- **Entscheidung:** Farbabweichungen von der Broschürenpalette, die für die Benutzeroberfläche erforderlich sind (Funktionsfarben wie Notausgang-Rot, Fehler, Erfolg, Fokus), sind in Ordnung. Markenfarben und Flächen der Gestaltung bleiben an die Broschüre gebunden (harte Regel 2).
+- **Begründung:** Funktionsfarben müssen Kontrast und Erkennbarkeit sichern, was die Broschürenpalette nicht leistet (Magenta und Orange erreichen keinen Textkontrast, Rot fehlt ganz).
+- **Betrifft:** farben.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 0 (Regel 2), Abschnitt 14, Eintrag „Notausgang in Rot mit Icon“
+- **Von:** Enrico
+
 ## 2026-10-17 – Notausgang in Rot mit Icon
 - **Entscheidung:** Der Notausgang ist rot (`--c-exit-bg: #b00020`, Schrift weiß) und trägt ein Icon (Tür mit Pfeil nach außen, Inline-SVG, in RTL gespiegelt). Der fixierte Mobil-Knopf hat zusätzlich einen weißen 2-px-Ring.
 - **Begründung:** Der Notausgang soll sich auf jeder Seite sofort erkennen lassen. Rot ist sonst nirgends Flächenfarbe, Kontrast zu Weiß 7,3:1, zu Sand 5,6:1.
-- **Abweichung:** Rot stammt nicht aus der Broschüre (harte Regel 2, Abschnitt 3.1 Punkt 5). Es ist eine Funktionsfarbe wie `--c-error`; die Designfreigabe des AG steht aus.
+- **Abweichung:** Rot stammt nicht aus der Broschüre (harte Regel 2). Es ist eine Funktionsfarbe wie `--c-error`. Die Abweichung ist durch die Entscheidung „UI-bedingte Farbabweichungen sind zulässig“ gedeckt (gleicher Tag).
 - **Betrifft:** komponenten.md, farben.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 14, `website/src/app/(site)/globals.css` (`--c-exit-bg`, `.quick-exit__icon`), `website/src/components/QuickExit.tsx`
 - **Von:** Enrico (mit Claude)
 

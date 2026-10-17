@@ -22,7 +22,7 @@
   --c-error: #b00020;
   --c-success: #1b6e3a;
 
-  /* Notausgang: Rot, entschieden am 17.10.2026 (entscheidungen.md). Braucht Designfreigabe des AG. */
+  /* Notausgang: Rot, entschieden am 17.10.2026 (entscheidungen.md). UI-bedingte Abweichung, zulässig laut Entscheidung vom 17.10.2026. */
   --c-exit-bg: #b00020; /* Rot: Funktionsfarbe, bewusst nicht aus der Broschüre (Kontrast zu Weiß 7,3:1) */
   --c-exit-fg: #ffffff;
 
