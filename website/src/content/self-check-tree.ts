@@ -303,13 +303,13 @@ export const TEXTS = {
   answers: { yes: "Ja", no: "Nein", unsure: "Weiß nicht", skip: "Überspringen" },
   back: "Zurück",
   restart: "Neu beginnen",
-  step: (n: number) => `Frage ${n}`,
-  resultHeading: "Ihr Ergebnis",
+  privacyNote: "Ihr Selbstcheck wird nicht gespeichert und nirgendwohin gesendet.",
+  progress: (n: number, total: number) => `Aussage ${n} von ${total}`,
+  resultPrefix: "Ergebnis: ",
   warningsIntro: "Diese Antworten weisen auf eine hohe Gefahr hin:",
   helpHeading: "Wer Ihnen helfen kann",
   disclaimer:
     "Dieser Selbstcheck ist keine fachliche Einschätzung und ersetzt keine Beratung. Wenn Sie sich bedroht fühlen, nehmen Sie das ernst, auch wenn das Ergebnis etwas anderes sagt.",
-  privacy: "Ihre Antworten werden nicht gespeichert und nirgendwohin gesendet.",
 };
 
 // Gelb nur wegen „Weiß nicht“ bei der Gefahrenfrage oder einem Warnzeichen, ohne zutreffende Aussagen

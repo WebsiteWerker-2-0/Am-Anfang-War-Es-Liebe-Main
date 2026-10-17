@@ -18,7 +18,7 @@
 
 ## Selbstcheck
 
-- Entscheidungsbaum mit Ampel, eine Frage pro Schritt. Festlegungen in `selbstcheck.md`.
+- Entscheidungsbaum mit Ampel, eine Frage pro Schritt, auf einem Band in Cyan über die volle Breite mit Wellenkanten. Ergebnis als gezeichnete Ampel neben der Stufe. Festlegungen in `selbstcheck.md`.
 - Neue Knopfstile dafür: `.button--secondary` (weiß mit dunklem Rand), `.link-button` (Knopf im Aussehen eines Links), `.choice` (Auswahl über volle Breite mit Beschreibung).
 
 ## Seitenkopf mit Broschüren-Band

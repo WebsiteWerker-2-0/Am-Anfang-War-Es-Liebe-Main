@@ -2,6 +2,12 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Selbstcheck: eigenes Band, Ergebnis als gezeichnete Ampel
+- **Entscheidung:** Der Selbstcheck steht auf einem Band in Cyan über die volle Breite mit Wellenkanten und der Illustration „thoughts“ (wie das Band der Startseite). Alles darin in Tinte. Das Ergebnis zeigt eine gezeichnete Ampel neben der Stufe als Überschrift statt Etikett mit Symbol und Karte mit farbiger Kante. Fortschritt als Punkte je Aussage im Bereich statt „Frage n“. Der Hinweisblock über dem Selbstcheck entfällt, der Hinweis steht oben im Band.
+- **Begründung:** Rückmeldung von Enrico: Der Selbstcheck ging im Lesefluss unter, das Ergebnis wirkte generisch. Das Band hebt ihn ab und knüpft an die Startseite an. Die Ampel zeigt, wo die Stufe auf der Skala liegt, was ein Etikett nicht kann. Cyan erlaubt nur Tinte als Schrift (5,3:1).
+- **Betrifft:** selbstcheck.md, komponenten.md, `website/src/components/SelfCheck.tsx`, `website/src/components/blocks/index.tsx` (`SelfCheckStage`), `website/src/app/(site)/globals.css` (`.self-check-stage`, `.traffic-light`, `html { overflow-x: clip }`), `website/src/content/pages/self-check.ts`
+- **Von:** Enrico (mit Claude)
+
 ## 2026-10-17 – Selbstcheck als Entscheidungsbaum mit Ampel
 - **Entscheidung:** Der Selbstcheck fragt eine Frage nach der anderen und verzweigt: Gefahr jetzt, um wen es geht (mich, eine Frau, die ich kenne, ein Kind), Bereich der Gewalt, dann die Aussagen einzeln (Ja / Nein / Weiß nicht / Überspringen). Am Ende steht eine Ampel Grün / Gelb / Rot aus gewichteten Aussagen. Warnzeichen führen immer zu Rot. Grün ist keine Entwarnung, jede Stufe nennt passende Hilfe und den Hinweis „keine fachliche Einschätzung“. Gelb `--c-warning: #8a5a00` ist neu (5,9:1). Der Baum liegt im Code und ist mit Tests abgesichert, ohne JavaScript bleibt die Checkliste. Auf der Startseite bleibt das Band mit Verweis.
 - **Begründung:** Wunsch nach mehr Interaktivität. Die Ampel ersetzt die Vorgabe „keine Auswertung, keine Ampel“ aus Abschnitt 6.3 bewusst. Einwand von Claude: Eine Ampel kann Frauen in Gefahr falsch beruhigen. Deshalb Warnzeichen, die immer zu Rot führen, keine Entwarnung bei Grün und Freigabe durch die Fachfrauen des AG vor dem Livegang. Die Speicherregeln (ADR-0003) gelten unverändert.

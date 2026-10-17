@@ -31,12 +31,6 @@ export const selfCheck: PageData = {
   layout: "stack-lg",
   blocks: [
     {
-      blockType: "callout",
-      kind: "notice",
-      measure: true,
-      content: `<p><strong>Ihr Selbstcheck wird nicht gespeichert.</strong> Ihre Antworten bleiben in diesem Fenster und werden nirgendwohin gesendet. Wenn Sie die Seite verlassen, sind sie weg.</p>`,
-    },
-    {
       blockType: "selfCheck",
       legend: "Ihr (Ex-)Partner, (Ex-)Ehemann oder eine andere Person …",
       statements: statements.map((text) => ({ text })),
