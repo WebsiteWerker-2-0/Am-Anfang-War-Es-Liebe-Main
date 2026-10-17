@@ -21,6 +21,11 @@
   --c-focus: #1a5fb4;
   --c-error: #b00020;
   --c-success: #1b6e3a;
+  /* Lichter der Selbstcheck-Ampel: echte Ampelfarben, Funktionsfarben nur für die Grafik, nie für Schrift.
+     Kontrast zum Gehäuse in --c-ink: Rot 4,1:1, Gelb 10,2:1, Grün 5,4:1 */
+  --c-signal-red: #ff2a2a;
+  --c-signal-yellow: #ffcc00;
+  --c-signal-green: #00b050;
 
   /* Notausgang: Rot, entschieden am 17.10.2026 (entscheidungen.md). UI-bedingte Abweichung, zulässig laut Entscheidung vom 17.10.2026. */
   --c-exit-bg: #b00020; /* Rot: Funktionsfarbe, bewusst nicht aus der Broschüre (Kontrast zu Weiß 7,3:1) */
@@ -59,6 +64,8 @@
 html {
   background: var(--c-paper);
   -webkit-text-size-adjust: 100%;
+  /* Bänder über die volle Breite (z. B. Selbstcheck) erzeugen kein waagrechtes Scrollen */
+  overflow-x: clip;
 }
 
 body {
@@ -627,6 +634,23 @@ a:hover {
   text-decoration: underline;
 }
 
+.button--secondary {
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+
+/* Knopf, der wie ein Link aussieht: Nebenhandlungen wie „Zurück“ oder „Überspringen“ */
+.link-button {
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 
 .text-link {
   font-weight: 600;
@@ -995,6 +1019,239 @@ a:hover {
   height: 1.5rem;
   margin-block-start: 0.15em;
   accent-color: var(--c-ink);
+}
+
+/* Band des Selbstchecks: volle Breite in Cyan mit gewellten Kanten wie das Band der Startseite.
+   Auf Cyan erreicht nur --c-ink genug Kontrast (5,3:1), deshalb steht hier alles in Tinte. */
+.self-check-stage {
+  --stage-line: color-mix(in srgb, var(--c-ink) 30%, transparent);
+  position: relative;
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+  background: var(--c-brand-primary);
+  color: var(--c-ink);
+}
+
+.self-check-stage::before,
+.self-check-stage::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  block-size: 1.5rem;
+  background: inherit;
+}
+
+.self-check-stage::before {
+  inset-block-end: calc(100% - 1px);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 24' preserveAspectRatio='none'%3E%3Cpath d='M0 24 L0 12 C 70 2, 130 22, 200 12 C 270 2, 330 20, 390 8 L390 24 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+}
+
+.self-check-stage::after {
+  inset-block-start: calc(100% - 1px);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 24' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L390 0 L390 10 C 330 26, 270 4, 200 14 C 130 24, 70 6, 0 16 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+}
+
+.self-check-stage .privacy-note {
+  align-items: start;
+}
+
+.self-check-stage .privacy-note svg {
+  margin-block-start: 0.2em;
+}
+
+.self-check-stage :focus-visible {
+  outline-color: var(--c-ink);
+}
+
+.self-check-stage__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.self-check-stage__main {
+  padding-block: var(--space-6) var(--space-7);
+}
+
+.self-check-stage__image {
+  display: none;
+}
+
+@media (min-width: 64em) {
+  .self-check-stage__inner {
+    grid-template-columns: minmax(0, 42rem) minmax(0, 1fr);
+  }
+  .self-check-stage__image {
+    display: block;
+    align-self: end;
+  }
+  .self-check-stage__image img {
+    inline-size: 100%;
+    max-inline-size: 26rem;
+    block-size: auto;
+    margin-inline-start: auto;
+  }
+}
+
+.self-check-stage .self-check__list li,
+.self-check-stage .service-list li {
+  border-color: var(--stage-line);
+}
+
+/* Eine Frage pro Schritt */
+.self-check-tree {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.self-check-tree__progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.self-check-tree__dots {
+  display: inline-flex;
+  gap: 0.375rem;
+}
+
+.self-check-tree__dots span {
+  inline-size: 0.625rem;
+  block-size: 0.625rem;
+  border: 2px solid var(--c-ink);
+  border-radius: 50%;
+}
+
+.self-check-tree__dots span[data-state="done"] {
+  background: var(--c-ink);
+}
+
+.self-check-tree__dots span[data-state="current"] {
+  inline-size: 1.5rem;
+  border-radius: 0.3125rem;
+  background: var(--c-ink);
+}
+
+.self-check-tree__question {
+  font-size: var(--fs-lg);
+  line-height: 1.2;
+}
+
+.self-check-tree__question:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.self-check-tree__legend {
+  display: block;
+  margin-block-end: var(--space-2);
+  font-family: var(--font-text);
+  font-size: var(--fs-base);
+  font-weight: 400;
+}
+
+.self-check-tree__answers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.self-check-tree__answers .button {
+  min-width: 7rem;
+}
+
+.self-check-tree__choices {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.choice {
+  display: grid;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-4);
+  background: var(--c-paper);
+  color: var(--c-ink);
+  border: 2px solid var(--c-ink);
+  border-radius: var(--radius-control);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.choice:hover {
+  background: var(--c-brand-surface);
+}
+
+.choice__label {
+  font-weight: 600;
+}
+
+.choice__description {
+  font-size: var(--fs-sm);
+}
+
+.self-check-tree__nav {
+  display: flex;
+  gap: var(--space-5);
+  padding-block-start: var(--space-3);
+  border-block-start: 1px solid var(--stage-line, var(--c-line));
+}
+
+/* Ergebnis: Ampel neben der Stufe als Überschrift */
+.self-check-tree__head--result {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4) var(--space-5);
+}
+
+.self-check-tree__head--result .self-check-tree__question {
+  font-size: var(--fs-xl);
+}
+
+.traffic-light {
+  inline-size: 2.5rem;
+  block-size: auto;
+}
+
+@media (min-width: 40em) {
+  .traffic-light {
+    inline-size: 3.25rem;
+  }
+}
+
+.traffic-light__housing {
+  fill: var(--c-ink);
+}
+
+/* Ausgeschaltete Lichter: nur leicht heller als das Gehäuse */
+.traffic-light__lamp {
+  fill: color-mix(in srgb, var(--c-paper) 15%, var(--c-ink));
+}
+
+.traffic-light__lamp--red[data-on] {
+  fill: var(--c-signal-red);
+}
+
+.traffic-light__lamp--yellow[data-on] {
+  fill: var(--c-signal-yellow);
+}
+
+.traffic-light__lamp--green[data-on] {
+  fill: var(--c-signal-green);
+}
+
+.self-check-result__warnings {
+  border-block-start: 1px solid var(--c-ink);
+}
+
+.self-check-result__warnings li {
+  padding-block: var(--space-3);
+  border-block-end: 1px solid var(--stage-line, var(--c-line));
 }
 
 .notice {

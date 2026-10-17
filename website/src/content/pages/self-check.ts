@@ -27,15 +27,9 @@ export const selfCheck: PageData = {
   metaTitle: "Selbstcheck",
   description: "Gewalt hat viele Gesichter. Hinterfragen Sie Ihre Situation in Ruhe, nichts wird gespeichert.",
   intro:
-    "Manchmal ist es schwer zu sagen, ob das, was man erlebt, schon Gewalt ist. Lesen Sie die Sätze in Ruhe und kreuzen Sie an, was auf Sie zutrifft.",
+    "Manchmal ist es schwer zu sagen, ob das, was man erlebt, schon Gewalt ist. Gehen Sie die Fragen in Ruhe durch. Am Ende sehen Sie, wer Ihnen helfen kann.",
   layout: "stack-lg",
   blocks: [
-    {
-      blockType: "callout",
-      kind: "notice",
-      measure: true,
-      content: `<p><strong>Ihr Selbstcheck wird nicht gespeichert.</strong> Ihre Antworten bleiben in diesem Fenster und werden nirgendwohin gesendet. Wenn Sie die Seite verlassen, sind sie weg.</p>`,
-    },
     {
       blockType: "selfCheck",
       legend: "Ihr (Ex-)Partner, (Ex-)Ehemann oder eine andere Person …",

@@ -9,6 +9,24 @@ Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzli
 - **Datei:** `website/src/app/(payload)/custom.css`
 - **Von:** Steffen (mit Claude)
 
+## 2026-10-17 – Selbstcheck-Ampel in echten Ampelfarben
+- **Entscheidung:** Die Lichter der Ampel leuchten in echtem Rot `#ff2a2a`, Gelb `#ffcc00` und Grün `#00b050` (Tokens `--c-signal-*`). Das Gehäuse ist dunkel (`--c-ink`) wie bei einer echten Ampel statt weiß. `--c-warning` (Ocker) entfällt.
+- **Begründung:** Wunsch von Enrico: Die gedeckten Funktionsfarben wirkten nicht wie eine Ampel. Echtes Gelb erreicht auf Weiß nur 1,5:1, auf dem dunklen Gehäuse 10,2:1, Rot 4,1:1, Grün 5,4:1. Die Farben sind nur Grafik, die Stufe steht als Text daneben.
+- **Betrifft:** selbstcheck.md, farben.md, `website/src/app/(site)/globals.css` (`--c-signal-*`, `.traffic-light`), `website/src/components/SelfCheck.tsx`
+- **Von:** Enrico (mit Claude)
+
+## 2026-10-17 – Selbstcheck: eigenes Band, Ergebnis als gezeichnete Ampel
+- **Entscheidung:** Der Selbstcheck steht auf einem Band in Cyan über die volle Breite mit Wellenkanten und der Illustration „thoughts“ (wie das Band der Startseite). Alles darin in Tinte. Das Ergebnis zeigt eine gezeichnete Ampel neben der Stufe als Überschrift statt Etikett mit Symbol und Karte mit farbiger Kante. Fortschritt als Punkte je Aussage im Bereich statt „Frage n“. Der Hinweisblock über dem Selbstcheck entfällt, der Hinweis steht oben im Band.
+- **Begründung:** Rückmeldung von Enrico: Der Selbstcheck ging im Lesefluss unter, das Ergebnis wirkte generisch. Das Band hebt ihn ab und knüpft an die Startseite an. Die Ampel zeigt, wo die Stufe auf der Skala liegt, was ein Etikett nicht kann. Cyan erlaubt nur Tinte als Schrift (5,3:1).
+- **Betrifft:** selbstcheck.md, komponenten.md, `website/src/components/SelfCheck.tsx`, `website/src/components/blocks/index.tsx` (`SelfCheckStage`), `website/src/app/(site)/globals.css` (`.self-check-stage`, `.traffic-light`, `html { overflow-x: clip }`), `website/src/content/pages/self-check.ts`
+- **Von:** Enrico (mit Claude)
+
+## 2026-10-17 – Selbstcheck als Entscheidungsbaum mit Ampel
+- **Entscheidung:** Der Selbstcheck fragt eine Frage nach der anderen und verzweigt: Gefahr jetzt, um wen es geht (mich, eine Frau, die ich kenne, ein Kind), Bereich der Gewalt, dann die Aussagen einzeln (Ja / Nein / Weiß nicht / Überspringen). Am Ende steht eine Ampel Grün / Gelb / Rot aus gewichteten Aussagen. Warnzeichen führen immer zu Rot. Grün ist keine Entwarnung, jede Stufe nennt passende Hilfe und den Hinweis „keine fachliche Einschätzung“. Gelb `--c-warning: #8a5a00` ist neu (5,9:1). Der Baum liegt im Code und ist mit Tests abgesichert, ohne JavaScript bleibt die Checkliste. Auf der Startseite bleibt das Band mit Verweis.
+- **Begründung:** Wunsch nach mehr Interaktivität. Die Ampel ersetzt die Vorgabe „keine Auswertung, keine Ampel“ aus Abschnitt 6.3 bewusst. Einwand von Claude: Eine Ampel kann Frauen in Gefahr falsch beruhigen. Deshalb Warnzeichen, die immer zu Rot führen, keine Entwarnung bei Grün und Freigabe durch die Fachfrauen des AG vor dem Livegang. Die Speicherregeln (ADR-0003) gelten unverändert.
+- **Offen:** Gewichte, Schwellen, Warnzeichen und Texte sind ein Entwurf von Claude. Auf Enricos Entscheidung am 17.10.2026 ohne Freigabe durch den AG live geschaltet. Die fachliche Freigabe (Z-02) ist nachzuholen.
+- **Betrifft:** selbstcheck.md (neu), komponenten.md, farben.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 6.3 und 14, CONTEXT.md (Selbstcheck, Bereich, Ampel, Warnzeichen), `website/src/content/self-check-tree.ts`, `website/src/lib/self-check.ts`, `website/src/components/SelfCheck.tsx`, `website/src/app/(site)/globals.css`
+- **Von:** Enrico (mit Claude)
 ## 2026-10-17 – Redaktionsbereich: schlank, groß, Liquid Glass
 - **Entscheidung:** Das Backend zeigt der Redaktion nur Aktuelles, Veranstaltungen und das Dateiarchiv, Admins zusätzlich Verwaltung. Seiten, Anlaufstellen, Menü und Fuß sind nicht im Backend änderbar. Gestaltung des Backends als Liquid Glass (durchscheinende Flächen, warme Verläufe in Orange und Magenta), Menüpunkte 19 px und 56 px hoch, helle und dunkle Ansicht, Startseite mit großen Schaltflächen.
 - **Begründung:** Die Redaktion bedient das Backend ohne Vorkenntnisse und soll nur das Nötigste ändern können. Die Gestaltung der Website selbst bleibt unberührt.
