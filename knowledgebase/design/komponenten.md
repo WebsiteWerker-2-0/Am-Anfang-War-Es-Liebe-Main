@@ -7,6 +7,8 @@
 - Fläche in Sand (`--c-brand-surface`), keine Trennlinie zum Kopf.
 - Schrift `--fs-xs`; Beschriftungen und nicht aktive Sprachen `--c-ink-muted`, Rufnummer und aktive Sprache `--c-ink` fett.
 - Notausgang unverändert (`--fs-sm`, `--c-exit-bg`), hebt sich als einzige dunkle Fläche ab.
+- Ab 64em sticky am oberen Rand, damit der Notausgang auf Desktop beim Scrollen erreichbar bleibt. Mobil übernimmt der fixierte Knopf unten rechts.
+- Tastenkürzel zweimal Esc in 1 s; gehaltene Taste (`e.repeat`) zählt nicht.
 
 ## Seitenkopf mit Broschüren-Band
 

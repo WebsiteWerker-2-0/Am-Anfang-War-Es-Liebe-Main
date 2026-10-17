@@ -2,6 +2,12 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Notausgang: Desktop-Leiste fixiert, Esc-Wiederholung ignoriert
+- **Entscheidung:** Ab 64em bleibt die Hilfeleiste (mit Notausgang) beim Scrollen oben stehen (`position: sticky`), `scroll-padding-block-start` verhindert verdeckte Sprungmarken. Mobil bleibt der fixierte Knopf unten rechts. Das Tastenkürzel (zweimal Esc in 1 s) ignoriert Auto-Repeat (`e.repeat`), gehaltenes Esc löst nichts aus. Der Notausgang in den Sprachfassungen auf `/sprachen` trägt das `lang` der jeweiligen Sprache.
+- **Begründung:** Grundsatz 1 (Abschnitt 2.1): Notausgang ohne Scrollen erreichbar. Auf Desktop war er nach dem Scrollen nicht mehr sichtbar. Gehaltenes Esc (z. B. beim Schließen eines Dialogs) hätte den Notausgang versehentlich ausgelöst.
+- **Betrifft:** komponenten.md, `website/src/app/(site)/globals.css` (`.help-bar`), `website/src/components/QuickExit.tsx`, `website/src/components/blocks/index.tsx`
+- **Von:** Enrico (mit Claude)
+
 ## 2026-10-13 – Hilfeleiste auf Sand, Schrift eine Stufe kleiner
 - **Entscheidung:** Die Hilfeleiste steht auf einer Fläche in `--c-brand-surface` (Sand) statt auf Weiß mit Trennlinie. Schrift `--fs-xs` (0.833rem, neu) statt `--fs-sm`. Gestufte Textfarben: Beschriftungen und nicht aktive Sprachen in `--c-ink-muted`, Rufnummer und aktive Sprache in `--c-ink` und fett. Der Notausgang behält Größe und Farbe.
 - **Begründung:** Leiste, Logo und Überschrift standen alle dunkel auf Weiß, die Leiste hob sich nicht vom Kopf ab. Sand ist laut farben.md für Hinweisflächen vorgesehen, also keine neue Farbe (harte Regel 2). Kontraste: `--c-ink` auf Sand 11,73:1, `--c-ink-muted` auf Sand 5,39:1. Cyan als Fläche wäre zu laut gewesen, eine dunkle Leiste hätte den dunklen Notausgang verschluckt.

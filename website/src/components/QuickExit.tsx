@@ -23,7 +23,8 @@ export function QuickExitBehavior() {
 
     let lastEscape = 0;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key !== "Escape") return;
+      // Gehaltene Taste (Auto-Repeat) zählt nicht als zweiter Druck
+      if (e.key !== "Escape" || e.repeat) return;
       const now = Date.now();
       if (now - lastEscape < 1000) leave();
       lastEscape = now;
