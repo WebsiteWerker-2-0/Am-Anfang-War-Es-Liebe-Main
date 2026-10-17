@@ -269,18 +269,14 @@ Das Element ist zusätzlich ein normaler Link (`<a href="https://www.google.com/
 
 ### 6.3 Selbstcheck (F-02)
 
-- Umsetzung als statische Checkbox-Liste in einem `<form>` ohne `action`, Submit-Verhalten unterbunden, `autocomplete="off"`.
-- Keine Speicherung: kein Web Storage, keine Cookies, keine Requests. Beim Zurücknavigieren (Back-Forward-Cache) Zustand zurücksetzen:
+Geändert am 17.10.2026: Entscheidungsbaum mit Ampel statt Checkliste ohne Auswertung. Einzelheiten in `selbstcheck.md`.
 
-```js
-window.addEventListener("pageshow", () => {
-  document.querySelectorAll("#selbstcheck input[type=checkbox]")
-    .forEach(cb => { cb.checked = false; });
-});
-```
-
-- Keine Auswertung, kein Score, keine Ampel. Nach der Liste ein fester Text mit Verweis auf Anlaufstellen (Text vom AG, Z-02).
-- Hinweis „Ihr Selbstcheck wird nicht gespeichert.“ direkt über der Liste, nicht erst am Ende.
+- Eine Frage pro Schritt: zuerst die Gefahrenfrage (bei Ja sofort 110 und Hilfetelefon), dann um wen es geht, dann Bereiche der Gewalt mit einzelnen Aussagen. Antworten Ja / Nein / Weiß nicht, dazu Überspringen. „Zurück“ und „Neu beginnen“ jederzeit.
+- Am Ende eine Ampel Grün / Gelb / Rot aus gewichteten Aussagen. Warnzeichen (etwa Würgen, Todesdrohung, Waffe) führen immer zu Rot. Grün ist keine Entwarnung. Jede Stufe nennt passende Anlaufstellen und den Hinweis, dass der Selbstcheck keine fachliche Einschätzung ist.
+- Gewichte, Schwellen, Warnzeichen und Texte gibt der AG fachlich frei (Z-02), vorher kein Livegang.
+- Keine Speicherung: ausgewertet wird nur im Browser. Kein Web Storage, keine Cookies, keine Requests, keine Adressänderung oder Verlaufseinträge je Frage. Beim Zurücknavigieren aus dem Back-Forward-Cache beginnt der Selbstcheck neu.
+- Ohne JavaScript bleibt die Checkbox-Liste in einem `<form>` ohne `action` mit festem Text danach, `autocomplete="off"`.
+- Hinweis „Ihr Selbstcheck wird nicht gespeichert.“ direkt über dem Selbstcheck, nicht erst am Ende.
 
 ### 6.4 Anlaufstelle (Hilfe & Kontaktstellen)
 
@@ -495,5 +491,6 @@ Das Repository `WebsiteWerker-2-0/Am-Anfang-War-Es-Liebe-Main` ist privat und wa
 - [x] Gendersprache: Gendersternchen (Freund*innen), von der Gleichstellungsstelle bestätigt am 13.10.2026. Neutrale Formen bevorzugen; Texte des AG und archivierte Beiträge bleiben im Wortlaut
 - [ ] Veraltete Broschüreninhalte markieren, z. B. „Arbeitslosengeld II“ (seit 2023 Bürgergeld), Öffnungszeiten, Nummern; Korrektur durch AG
 - [ ] Plugin für F-11 (Anmeldeportal mit frei definierbaren Feldern) auswählen und auf Datenflüsse prüfen
+- [ ] Selbstcheck mit Ampel: Gewichte, Schwellen, Warnzeichen und Texte vom AG fachlich freigeben lassen (`selbstcheck.md`)
 - [ ] Leichte Sprache: nicht beauftragt; ggf. als Change Request anbieten
 - [ ] Repo-Struktur, Branch-Modell, Deployment nachtragen (Abschnitt 12)

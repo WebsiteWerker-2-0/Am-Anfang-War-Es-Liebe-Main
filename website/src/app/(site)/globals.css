@@ -21,6 +21,7 @@
   --c-focus: #1a5fb4;
   --c-error: #b00020;
   --c-success: #1b6e3a;
+  --c-warning: #8a5a00; /* Ocker: Gelb der Selbstcheck-Ampel, Funktionsfarbe (Kontrast zu Weiß 5,9:1) */
 
   /* Notausgang: Rot, entschieden am 17.10.2026 (entscheidungen.md). UI-bedingte Abweichung, zulässig laut Entscheidung vom 17.10.2026. */
   --c-exit-bg: #b00020; /* Rot: Funktionsfarbe, bewusst nicht aus der Broschüre (Kontrast zu Weiß 7,3:1) */
@@ -627,6 +628,23 @@ a:hover {
   text-decoration: underline;
 }
 
+.button--secondary {
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+
+/* Knopf, der wie ein Link aussieht: Nebenhandlungen wie „Zurück“ oder „Überspringen“ */
+.link-button {
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 
 .text-link {
   font-weight: 600;
@@ -995,6 +1013,122 @@ a:hover {
   height: 1.5rem;
   margin-block-start: 0.15em;
   accent-color: var(--c-ink);
+}
+
+/* Interaktiver Selbstcheck: eine Frage pro Schritt, Ergebnis als Ampel */
+.self-check-tree {
+  display: grid;
+  gap: var(--space-5);
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--c-ink);
+}
+
+.self-check-tree__step,
+.self-check-tree__area {
+  color: var(--c-ink-muted);
+  font-size: var(--fs-sm);
+}
+
+.self-check-tree__question:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.self-check-tree__legend {
+  display: block;
+  margin-block-end: var(--space-2);
+  font-family: var(--font-text);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  color: var(--c-ink-muted);
+}
+
+.self-check-tree__answers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.self-check-tree__answers .button {
+  min-width: 7rem;
+}
+
+.self-check-tree__choices {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.choice {
+  display: grid;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-4);
+  background: var(--c-paper);
+  color: var(--c-ink);
+  border: 2px solid var(--c-ink);
+  border-radius: var(--radius-control);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.choice:hover {
+  background: var(--c-brand-surface);
+}
+
+.choice__label {
+  font-weight: 600;
+}
+
+.choice__description {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-muted);
+}
+
+.self-check-tree__nav {
+  display: flex;
+  gap: var(--space-5);
+  padding-block-start: var(--space-3);
+  border-block-start: 1px solid var(--c-line);
+}
+
+/* Ampel: Farbe nur als Kante und Etikett, Stufe immer auch als Text und Symbol */
+.self-check-result {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--c-brand-surface);
+  border-inline-start: 0.5rem solid var(--level-color);
+}
+
+.self-check-result--green {
+  --level-color: var(--c-success);
+}
+
+.self-check-result--yellow {
+  --level-color: var(--c-warning);
+}
+
+.self-check-result--red {
+  --level-color: var(--c-exit-bg);
+}
+
+.self-check-result__level {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  padding: var(--space-2) var(--space-3);
+  background: var(--level-color);
+  color: var(--c-paper);
+  font-weight: 600;
+  border-radius: var(--radius-control);
+}
+
+.self-check-result__warnings {
+  list-style: disc;
+  padding-inline-start: var(--space-5);
 }
 
 .notice {

@@ -18,7 +18,7 @@ Bezeichner im Code sind die englischen Entsprechungen aus [`../CONTEXT.md`](../C
 | Pfad | Inhalt |
 |---|---|
 | `src/app/` | Seiten: Start, Hilfe, Selbstcheck, Aktuelles, Kurse, Infos, Arbeitskreis, Kontakt, Internetspuren, Sprachen, Impressum, Datenschutz |
-| `src/components/` | Seitenblöcke (`blocks/`, `CmsPage`), Hilfeleiste und Notausgang (`SiteHeader`, `QuickExit`), Selbstcheck (`SelfCheckForm`), Wanderausstellung (`ExhibitionSlider`), Anlaufstelle (`SupportServiceSection`), Beiträge (`PostList`), Kontaktformular (`ContactForm`) |
+| `src/components/` | Seitenblöcke (`blocks/`, `CmsPage`), Hilfeleiste und Notausgang (`SiteHeader`, `QuickExit`), Selbstcheck (`SelfCheck` mit Baum aus `content/self-check-tree.ts` und `lib/self-check.ts`, ohne JavaScript `SelfCheckForm`), Wanderausstellung (`ExhibitionSlider`), Anlaufstelle (`SupportServiceSection`), Beiträge (`PostList`), Kontaktformular (`ContactForm`) |
 | `src/content/` | Standardinhalt: alle Seiten (`pages/`), Seitenrahmen (`site.ts`), Anlaufstellen (`support-services.ts`), Beiträge der Altseite (`posts.json`). Vorlage für das CMS und Ersatz, wenn es nicht erreichbar ist. |
 | `src/payload.config.ts`, `src/cms/` | Redaktionsbereich (Payload CMS): Konfiguration, Collections, Zugriffsregeln, Import der Altseite |
 | `src/app/(payload)/` | Oberfläche und Schnittstelle des Redaktionsbereichs unter `/backend` (eigenes Root-Layout) |
@@ -75,7 +75,7 @@ Dann `http://localhost:3000/backend` öffnen. Beim ersten Start füllt sich das 
 
 - Keine externen Ressourcen (ADR-0002): Schriften über `next/font` selbst gehostet, keine Embeds, kein Tracking, keine Cookies
 - Notausgang auf jeder Seite (Hilfeleiste, mobil zusätzlich fixiert), zweimal Esc, `Referrer-Policy: no-referrer`, erneutes Verlassen bei Rückkehr aus dem Back-Forward-Cache, Seiten mit `Cache-Control: no-store` (`src/proxy.ts`), Hinweis je Sprachfassung
-- Selbstcheck ohne Speicherung, Zurücksetzen beim Zurücknavigieren (ADR-0003)
+- Selbstcheck als Entscheidungsbaum mit Ampel, nur im Browser ausgewertet, ohne Speicherung, Neubeginn beim Zurücknavigieren (ADR-0003). Tests: `npm test`
 - Anlaufstellen mit fester Datenreihenfolge, weitere Stellen in nativen `<details>`
 - Wanderausstellung als Slider mit `scroll-snap`, ohne Autoplay
 - Sicherheits-Header in `next.config.ts`, CSP vorerst als Report-Only

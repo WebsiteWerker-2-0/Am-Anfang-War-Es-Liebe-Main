@@ -71,9 +71,22 @@ Was ein Besuch im Browser hinterlässt: Verlauf, Cookies, Zwischenspeicher.
 _Englisch_: browsing traces
 
 **Selbstcheck**:
-Eine Liste von Aussagen, mit der eine Besucherin ihre Situation für sich prüft. Nichts wird gespeichert, gesendet oder ausgewertet.
+Ein Entscheidungsbaum aus Fragen und Aussagen, mit dem eine Besucherin ihre Situation für sich prüft. Am Ende zeigt die Ampel, wie deutlich die Anzeichen sind und wer helfen kann. Ausgewertet wird nur im Browser, nichts wird gespeichert oder gesendet.
 _Englisch_: self-check
-_Vermeiden_: Test, Quiz, Fragebogen, Ergebnis
+_Vermeiden_: Test, Quiz, Fragebogen, Diagnose
+
+**Bereich**:
+Eine Form der Gewalt im Selbstcheck mit eigenen Aussagen, etwa „Kontrolle und seelische Gewalt“ oder „Stalking und Gewalt im Internet“.
+_Englisch_: area
+
+**Ampel**:
+Das Ergebnis des Selbstchecks in drei Stufen: Grün (wenige Anzeichen), Gelb (deutliche Anzeichen von Gewalt), Rot (Hinweise auf hohe Gefahr). Keine fachliche Einschätzung und keine Entwarnung.
+_Englisch_: traffic light
+_Vermeiden_: Score, Punktzahl, Risikostufe
+
+**Warnzeichen**:
+Eine Aussage, die auf hohe Gefahr hinweist, etwa Würgen, Todesdrohung oder Waffe. Mit „Ja“ beantwortet, zeigt die Ampel immer Rot.
+_Englisch_: warning sign
 
 **Aussage**:
 Ein Satz im Selbstcheck, der ein gewaltvolles Verhalten beschreibt.

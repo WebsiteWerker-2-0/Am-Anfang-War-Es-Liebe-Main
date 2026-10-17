@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Selbstcheck als Entscheidungsbaum mit Ampel
+- **Entscheidung:** Der Selbstcheck fragt eine Frage nach der anderen und verzweigt: Gefahr jetzt, um wen es geht (mich, eine Frau, die ich kenne, ein Kind), Bereich der Gewalt, dann die Aussagen einzeln (Ja / Nein / Weiß nicht / Überspringen). Am Ende steht eine Ampel Grün / Gelb / Rot aus gewichteten Aussagen. Warnzeichen führen immer zu Rot. Grün ist keine Entwarnung, jede Stufe nennt passende Hilfe und den Hinweis „keine fachliche Einschätzung“. Gelb `--c-warning: #8a5a00` ist neu (5,9:1). Der Baum liegt im Code und ist mit Tests abgesichert, ohne JavaScript bleibt die Checkliste. Auf der Startseite bleibt das Band mit Verweis.
+- **Begründung:** Wunsch nach mehr Interaktivität. Die Ampel ersetzt die Vorgabe „keine Auswertung, keine Ampel“ aus Abschnitt 6.3 bewusst. Einwand von Claude: Eine Ampel kann Frauen in Gefahr falsch beruhigen. Deshalb Warnzeichen, die immer zu Rot führen, keine Entwarnung bei Grün und Freigabe durch die Fachfrauen des AG vor dem Livegang. Die Speicherregeln (ADR-0003) gelten unverändert.
+- **Offen:** Gewichte, Schwellen, Warnzeichen und Texte sind ein Entwurf von Claude. Freigabe durch den AG (Z-02), bis dahin bleibt die Arbeit auf dem Branch `selbstcheck-baum`.
+- **Betrifft:** selbstcheck.md (neu), komponenten.md, farben.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 6.3 und 14, CONTEXT.md (Selbstcheck, Bereich, Ampel, Warnzeichen), `website/src/content/self-check-tree.ts`, `website/src/lib/self-check.ts`, `website/src/components/SelfCheck.tsx`, `website/src/app/(site)/globals.css`
+- **Von:** Enrico (mit Claude)
+
 ## 2026-10-17 – Notausgang: Hinweistext in jeder Sprachfassung
 - **Entscheidung:** Auf `/sprachen` steht unter dem Notausgang jeder Sprachfassung (AR, RU, EN, TR) ein Satz zu Ziel (Wettervorhersage bei Google) und Tastenkürzel (zweimal Esc), Schrift `.small`, mit `lang` und `dir` der Fassung. Die Texte liegen im Code (`QUICK_EXIT_HINTS`), nicht im CMS. Beschriftungen geprüft: „مغادرة الصفحة“, „Покинуть страницу“, „Leave this page“, „Sayfadan çık“; AR mit `dir="rtl"` und gespiegeltem Icon.
 - **Begründung:** Abschnitt 6.2: Das Tastenkürzel muss erklärt werden, bisher nur auf Deutsch (`/internetspuren`). Im Code statt im CMS, weil der Hinweis das Ziel beschreibt und sich mit ihm ändern muss; so gilt er auch sofort auf der laufenden Seite ohne Migration.

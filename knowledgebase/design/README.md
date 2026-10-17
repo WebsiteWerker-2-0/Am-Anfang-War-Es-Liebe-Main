@@ -10,4 +10,5 @@ Verbindliche Design-Festlegungen für die Website.
 | [layout.md](layout.md) | Raster, Abstände, Breakpoints |
 | [komponenten.md](komponenten.md) | Buttons, Navigation, Karten, Formulare … |
 | [bildsprache.md](bildsprache.md) | Fotos, Illustrationen, Icons, Tonalität |
+| [selbstcheck.md](selbstcheck.md) | Selbstcheck als Entscheidungsbaum mit Ampel: Ablauf, Bewertung, Gestaltung, offene Fragen an den AG |
 | [entscheidungen.md](entscheidungen.md) | Chronologisches Log aller Design-Entscheidungen |
