@@ -7,6 +7,7 @@ Gemeinsame Wissensbasis für unsere Website. Alles in Markdown, damit wir beide 
 | Bereich | Inhalt |
 |---|---|
 | [design/](design/README.md) | Festgelegte Design-Entscheidungen: Farben, Typografie, Layout, Komponenten |
+| [lieferungen-ag.md](lieferungen-ag.md) | Was der Arbeitskreis noch liefern oder freigeben muss, als Checkliste |
 
 ## Regeln
 
