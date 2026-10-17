@@ -13,6 +13,8 @@ export const Users: CollectionConfig = {
     // Redakteurinnen sehen die Kontenverwaltung nicht; ihr eigenes Konto erreichen sie über das Symbol oben rechts
     hidden: ({ user }) => user?.role !== "admin",
     defaultColumns: ["name", "email", "role"],
+    description:
+      "Neues Konto: E-Mail-Adresse, Name, Rolle und ein beliebiges Passwort eintragen. Die Person bekommt eine E-Mail mit einem Link, über den sie ihr eigenes Passwort festlegt.",
   },
   auth: {
     tokenExpiration: 60 * 60 * 8,

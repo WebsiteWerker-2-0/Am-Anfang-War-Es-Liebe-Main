@@ -17,7 +17,7 @@ export type MailSettings = {
 };
 
 export async function getMailSettings(payload: Payload): Promise<MailSettings> {
-  const doc = (await payload.findGlobal({ slug: "mail", depth: 0 }).catch(() => ({}))) as Record<string, unknown>;
+  const doc = (await payload.findGlobal({ slug: "mail", depth: 0, context: { mailSecret: true } }).catch(() => ({}))) as Record<string, unknown>;
   const text = (value: unknown) => (typeof value === "string" && value.trim() ? value.trim() : undefined);
   const port = Number(process.env.SMTP_PORT ?? doc.smtpPort ?? 465);
   return {

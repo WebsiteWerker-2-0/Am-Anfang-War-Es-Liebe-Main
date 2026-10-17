@@ -17,6 +17,6 @@ Der Arbeitskreis pflegt Veranstaltungen (Kurse und Termine) selbst im Backend: T
 
 - Anmeldungen enthalten persönliche Daten (Name, E-Mail, Telefon, Nachricht) und gehen per E-Mail an den Arbeitskreis. Das muss in der Datenschutzerklärung und im AVV stehen. **Offen:** Löschfrist (Pflichtenheft § 13). Bis dahin nach dem Kurs von Hand löschen.
 - Die IP-Adresse wird nicht gespeichert, nur flüchtig für die Begrenzung im Arbeitsspeicher gehalten.
-- Das Passwort des Postfachs liegt im Klartext in der Datenbank (nur Admins lesbar). Wer das nicht will, setzt `SMTP_PASSWORD` als Umgebungsvariable.
+- Das Passwort des Postfachs liegt verschlüsselt in der Datenbank (AES-256-GCM, Schlüssel aus `PAYLOAD_SECRET`, `src/lib/secret.ts`) und geht nie an den Browser, auch nicht an Admins (Platzhalter `__gespeichert__`). Ein Hash ist nicht möglich, weil der Versand das Passwort braucht. Ändert sich `PAYLOAD_SECRET`, muss es neu eingetragen werden. Alternativ `SMTP_PASSWORD` als Umgebungsvariable.
 - Kurse und Veranstaltungen (F-06, F-11) sind eine Sammlung. Die frühere, ungenutzte Sammlung `events` ist entfallen.
 - Ohne CMS (Vercel-Vorschau, Fehler) gibt es keine Kurse; die Seite zeigt den Hinweis „Termine folgen“.

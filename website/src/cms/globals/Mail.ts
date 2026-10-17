@@ -1,5 +1,7 @@
 import type { GlobalConfig } from "payload";
 import { isAdmin } from "../access";
+import { decryptSecret, encryptSecret, isEncrypted } from "@/lib/secret";
+import { SECRET_STORED } from "../secret-marker";
 import { getMailSettings, sendMail } from "../../lib/mail";
 
 // Wohin Kursanmeldungen gehen und wie die E-Mail verschickt wird. Nur Admins sehen diesen Bereich,
@@ -62,7 +64,33 @@ export const Mail: GlobalConfig = {
           ],
         },
         { name: "smtpUser", type: "text", label: "Benutzername (meist die E-Mail-Adresse des Postfachs)" },
-        { name: "smtpPassword", type: "text", label: "Passwort des Postfachs", admin: { description: "Nur Admins sehen dieses Feld." } },
+        {
+          name: "smtpPassword",
+          type: "text",
+          label: "Passwort des Postfachs",
+          admin: { components: { Field: "/cms/components/SecretField#SecretField" } },
+          hooks: {
+            // Verschlüsselt speichern; leer oder Platzhalter heißt: gespeichertes Passwort behalten.
+            // Das bisherige kommt direkt aus der Datenbank (ohne afterRead, das es durch den Platzhalter ersetzt).
+            beforeChange: [
+              async ({ value, req }) => {
+                if (typeof value === "string" && value && value !== SECRET_STORED) {
+                  return isEncrypted(value) ? value : encryptSecret(value);
+                }
+                const stored = (await req.payload.db.findGlobal({ slug: "mail", req }).catch(() => null)) as { smtpPassword?: string } | null;
+                const previous = stored?.smtpPassword;
+                return previous ? (isEncrypted(previous) ? previous : encryptSecret(previous)) : null;
+              },
+            ],
+            // Nach außen (Backend, API) nur der Platzhalter. Den echten Wert liest nur lib/mail.ts mit context.mailSecret.
+            afterRead: [
+              ({ value, context }) => {
+                if (!value) return value;
+                return context?.mailSecret ? decryptSecret(value) : SECRET_STORED;
+              },
+            ],
+          },
+        },
         {
           type: "row",
           fields: [

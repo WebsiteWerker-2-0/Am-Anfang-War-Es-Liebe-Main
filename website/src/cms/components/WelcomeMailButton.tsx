@@ -27,7 +27,7 @@ export function WelcomeMailButton() {
       <button type="button" className="btn btn--style-secondary btn--size-medium" onClick={send} disabled={busy}>
         {busy ? "Wird gesendet …" : "Zugangs-E-Mail senden"}
       </button>
-      <p style={{ marginBlockStart: "0.5rem", opacity: 0.7 }}>Link zum Backend an diese Person, ohne Passwort.</p>
+      <p style={{ marginBlockStart: "0.5rem", opacity: 0.7 }}>Schickt der Person einen neuen Link zum Festlegen ihres Passworts. Ein bisheriger Link wird damit ungültig.</p>
     </div>
   );
 }

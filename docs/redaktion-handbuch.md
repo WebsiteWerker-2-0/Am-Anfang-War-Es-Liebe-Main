@@ -74,10 +74,10 @@ Admins sehen im Menü zusätzlich den Bereich **Verwaltung**.
 **E-Mail und Anmeldungen einrichten:**
 
 1. Bei **Anmeldungen gehen an diese E-Mail-Adresse** die Adresse eintragen, die die Anmeldungen bekommen soll.
-2. Unter **Postfach für den Versand** die Angaben eines E-Mail-Postfachs eintragen. Bei Hostinger finden Sie sie in hPanel beim Postfach: Server (meist `smtp.hostinger.com`), Port `465`, „Verschlüsselt“ an, Benutzername und Passwort des Postfachs.
+2. Unter **Postfach für den Versand** die Angaben eines E-Mail-Postfachs eintragen. Das Passwort wird verschlüsselt gespeichert und danach nie wieder angezeigt, auch nicht für andere Admins. Feld leer lassen heißt: Das gespeicherte Passwort bleibt. Bei Hostinger finden Sie sie in hPanel beim Postfach: Server (meist `smtp.hostinger.com`), Port `465`, „Verschlüsselt“ an, Benutzername und Passwort des Postfachs.
 3. **Speichern** und dann **Test-E-Mail senden**. Kommt die E-Mail im Postfach an, ist alles richtig. Sonst zeigt die Meldung den Grund.
 
-**Konten:** Unter **Redakteur:innen** legen Sie Konten an. Die neue Person bekommt automatisch eine E-Mail mit dem Link zum Backend (ohne Passwort, das geben Sie ihr selbst). Mit **Zugangs-E-Mail senden** im Konto schicken Sie sie erneut. Die Rolle **Redaktion** darf Aktuelles, Veranstaltungen und Dateien pflegen, **Admin** zusätzlich Konten und E-Mail-Einstellungen verwalten. Ein Konto sperrt sich nach fünf falschen Passwörtern für zehn Minuten. Wer ihr Passwort vergessen hat, bekommt von einer Admin ein neues.
+**Konten:** Unter **Redakteur:innen** legen Sie Konten an. Tragen Sie ein beliebiges Passwort ein. Die neue Person bekommt automatisch eine E-Mail mit einem Link **Passwort festlegen** (7 Tage gültig) und legt ihr eigenes Passwort fest. Mit **Zugangs-E-Mail senden** im Konto schicken Sie einen neuen Link. Die Rolle **Redaktion** darf Aktuelles, Veranstaltungen und Dateien pflegen, **Admin** zusätzlich Konten und E-Mail-Einstellungen verwalten. Ein Konto sperrt sich nach fünf falschen Passwörtern für zehn Minuten. Wer ihr Passwort vergessen hat, bekommt von einer Admin ein neues.
 
 ## Wenn etwas nicht klappt
 
