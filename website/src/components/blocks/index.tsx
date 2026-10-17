@@ -318,7 +318,7 @@ function LanguageVersions({ block }: { block: Block<"languageVersions"> }) {
             </a>
           </p>
           <p>
-            <QuickExitLink label={version.exitLabel} />
+            <QuickExitLink label={version.exitLabel} lang={version.code} />
           </p>
         </section>
       ))}

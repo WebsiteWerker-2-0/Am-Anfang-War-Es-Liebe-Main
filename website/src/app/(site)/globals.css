@@ -197,6 +197,19 @@ a:hover {
   font-size: var(--fs-xs);
 }
 
+/* Desktop: Hilfeleiste (mit Notausgang) bleibt beim Scrollen sichtbar. Mobil übernimmt
+   das der fixierte Knopf unten rechts. Sprungmarken werden nicht verdeckt. */
+@media (min-width: 64em) {
+  html {
+    scroll-padding-block-start: 4.5rem;
+  }
+  .help-bar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 40;
+  }
+}
+
 .help-bar__inner {
   display: grid;
   grid-template-columns: 1fr auto;
