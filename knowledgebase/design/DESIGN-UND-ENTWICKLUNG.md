@@ -489,7 +489,7 @@ Das Repository `WebsiteWerker-2-0/Am-Anfang-War-Es-Liebe-Main` ist privat und wa
 
 - [ ] Farbwerte aus Druckdaten (Z-06) extrahieren, Tabelle 3.3 füllen, Kontraste prüfen, Designfreigabe einholen
 - [ ] Web-Nutzungsrechte an den Broschüren-Illustrationen (fien-design.de) klären
-- [ ] Farbe des Notausgangs festlegen (Broschürenfarbe oder neutral)
+- [x] Farbe des Notausgangs: Rot `#b00020` (Funktionsfarbe), Designfreigabe des AG steht aus
 - [ ] Hilfetelefon-Nummer für alle Sprachfassungen verifizieren (116 016)
 - [x] Gendersprache: Gendersternchen (Freund*innen), von der Gleichstellungsstelle bestätigt am 13.10.2026. Neutrale Formen bevorzugen; Texte des AG und archivierte Beiträge bleiben im Wortlaut
 - [ ] Veraltete Broschüreninhalte markieren, z. B. „Arbeitslosengeld II“ (seit 2023 Bürgergeld), Öffnungszeiten, Nummern; Korrektur durch AG

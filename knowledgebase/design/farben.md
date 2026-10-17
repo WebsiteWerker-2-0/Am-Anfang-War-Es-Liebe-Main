@@ -16,4 +16,4 @@ In der Broschüre steht weiße Schrift auf Cyan. Auf der Website steht auf Cyan 
 ## Offen
 
 - [ ] Farbwerte aus den Druckdaten (Z-06) farbmanagt übernehmen und diese Tabelle ersetzen
-- [ ] Farbe des Notausgangs festlegen (derzeit --c-ink)
+- [x] Farbe des Notausgangs: Rot `#b00020` (Funktionsfarbe, nicht aus der Broschüre), Designfreigabe des AG steht aus

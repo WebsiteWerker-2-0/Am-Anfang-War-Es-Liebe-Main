@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Notausgang in Rot mit Icon
+- **Entscheidung:** Der Notausgang ist rot (`--c-exit-bg: #b00020`, Schrift weiß) und trägt ein Icon (Tür mit Pfeil nach außen, Inline-SVG, in RTL gespiegelt). Der fixierte Mobil-Knopf hat zusätzlich einen weißen 2-px-Ring.
+- **Begründung:** Der Notausgang soll sich auf jeder Seite sofort erkennen lassen. Rot ist sonst nirgends Flächenfarbe, Kontrast zu Weiß 7,3:1, zu Sand 5,6:1.
+- **Abweichung:** Rot stammt nicht aus der Broschüre (harte Regel 2, Abschnitt 3.1 Punkt 5). Es ist eine Funktionsfarbe wie `--c-error`; die Designfreigabe des AG steht aus.
+- **Betrifft:** komponenten.md, farben.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 14, `website/src/app/(site)/globals.css` (`--c-exit-bg`, `.quick-exit__icon`), `website/src/components/QuickExit.tsx`
+- **Von:** Enrico (mit Claude)
+
 ## 2026-10-17 – Notausgang: Desktop-Leiste fixiert, Esc-Wiederholung ignoriert
 - **Entscheidung:** Ab 64em bleibt die Hilfeleiste (mit Notausgang) beim Scrollen oben stehen (`position: sticky`), `scroll-padding-block-start` verhindert verdeckte Sprungmarken. Mobil bleibt der fixierte Knopf unten rechts. Das Tastenkürzel (zweimal Esc in 1 s) ignoriert Auto-Repeat (`e.repeat`), gehaltenes Esc löst nichts aus. Der Notausgang in den Sprachfassungen auf `/sprachen` trägt das `lang` der jeweiligen Sprache.
 - **Begründung:** Grundsatz 1 (Abschnitt 2.1): Notausgang ohne Scrollen erreichbar. Auf Desktop war er nach dem Scrollen nicht mehr sichtbar. Gehaltenes Esc (z. B. beim Schließen eines Dialogs) hätte den Notausgang versehentlich ausgelöst.
