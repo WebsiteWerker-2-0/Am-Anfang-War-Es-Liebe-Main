@@ -6,10 +6,10 @@ import { revalidateSite } from "../revalidate";
 // Mediathek (F-07): Bilder, Dokumente und Videos für Beiträge und Veranstaltungen.
 export const Media: CollectionConfig = {
   slug: "media",
-  labels: { singular: "Datei", plural: "Dateien" },
+  labels: { singular: "Datei oder Bild", plural: "Dateien und Bilder" },
   admin: {
     useAsTitle: "title",
-    group: "Inhalte",
+    group: "Dateien",
     defaultColumns: ["title", "filename", "mimeType", "isPublic", "updatedAt"],
     description: "Bilder, PDFs und Videos. Dateien, die nicht mehr öffentlich sein sollen, auf „nicht öffentlich“ stellen.",
   },

@@ -6,6 +6,7 @@ import posts from "@/content/posts.json";
 import { mainServices, quickAccess, serviceGroups } from "@/content/support-services";
 import { getCms } from "./cms-client";
 import { groupServices, normalizePage, normalizePost, normalizeSite } from "./cms-content";
+import { listPublicCourses, type PublicCourse } from "./courses";
 
 // Inhalte der Website. Quelle ist das CMS; fehlt es oder sind seine Tabellen noch leer,
 // gilt der Standardinhalt aus `content/`. Die Website funktioniert damit auch ohne CMS.
@@ -91,3 +92,15 @@ export async function getPost(slug: string) {
 /** Seiten und Beiträge, die schon beim Bauen entstehen */
 export const defaultPostSlugs = defaultPosts.map((post) => post.slug);
 export const defaultPageSlugs = defaultPages.map((page) => page.slug);
+
+/** Veröffentlichte Kurse mit freien Plätzen; ohne CMS gibt es keine */
+export const getPublicCourses = cache(async (): Promise<PublicCourse[]> => {
+  const cms = await getCms();
+  if (!cms) return [];
+  try {
+    return await listPublicCourses(cms);
+  } catch (error) {
+    console.error("Kurse aus dem CMS nicht lesbar.", error);
+    return [];
+  }
+});

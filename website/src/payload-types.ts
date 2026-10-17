@@ -67,12 +67,14 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    pages: Page;
     posts: Post;
-    events: Event;
+    courses: Course;
+    registrations: Registration;
+    pages: Page;
     services: Service;
     media: Media;
     users: User;
+    events: Event;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,12 +82,14 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
-    events: EventsSelect<false> | EventsSelect<true>;
+    courses: CoursesSelect<false> | CoursesSelect<true>;
+    registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -97,9 +101,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     site: Site;
+    mail: Mail;
   };
   globalsSelect: {
     site: SiteSelect<false> | SiteSelect<true>;
+    mail: MailSelect<false> | MailSelect<true>;
   };
   locale: null;
   widgets: {
@@ -130,6 +136,166 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Meldungen für den Bereich Aktuelles auf der Website. Mit „Entwurf“ speichern Sie, ohne zu veröffentlichen. Die Reihenfolge ändern Sie in der Liste per Ziehen.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  _order?: string | null;
+  title: string;
+  date: string;
+  /**
+   * Erscheint in der Liste unter dem Titel.
+   */
+  excerpt?: string | null;
+  image?: (number | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  gallery?: (number | Media)[] | null;
+  /**
+   * PDFs, Flyer, Plakate oder Videos, die unter dem Text verlinkt werden.
+   */
+  documents?:
+    | {
+        label: string;
+        file: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Vollständiger Originaltext aus der alten Website. Tabellen und Videos sind im Textfeld oben nicht übernommen, hier ist alles erhalten.
+   */
+  legacyHtml?: string | null;
+  /**
+   * Teil der Internetadresse. Wird beim Speichern aus dem Titel erzeugt, wenn das Feld leer ist.
+   */
+  slug: string;
+  status: 'draft' | 'published' | 'archived';
+  archivedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Bilder, PDFs und Videos. Dateien, die nicht mehr öffentlich sein sollen, auf „nicht öffentlich“ stellen.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  title: string;
+  /**
+   * Für Bilder: kurze Beschreibung für Screenreader und wenn das Bild nicht lädt.
+   */
+  alt?: string | null;
+  description?: string | null;
+  isPublic?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * Hier legen Sie Kurse an. Sobald ein Kurs „Veröffentlicht“ ist, erscheint er mit freien Plätzen und Anmeldeformular auf der Seite „Kurse“.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses".
+ */
+export interface Course {
+  id: number;
+  title: string;
+  startsAt: string;
+  /**
+   * Optional, zum Beispiel bei Kursen über mehrere Tage.
+   */
+  endsAt?: string | null;
+  location?: string | null;
+  audience?: string | null;
+  price?: string | null;
+  instructor?: string | null;
+  /**
+   * Kurzer Text für die Website. Eine Leerzeile beginnt einen neuen Absatz.
+   */
+  description?: string | null;
+  capacity: number;
+  /**
+   * Wird aus den Kursanmeldungen berechnet.
+   */
+  booked?: number | null;
+  registrationOpen?: boolean | null;
+  waitlist?: boolean | null;
+  /**
+   * Leer lassen: Es gilt die Adresse unter „E-Mail und Anmeldungen“.
+   */
+  notifyEmail?: string | null;
+  /**
+   * Teil der Internetadresse. Wird beim Speichern aus dem Titel erzeugt, wenn das Feld leer ist.
+   */
+  slug: string;
+  status: 'draft' | 'published' | 'archived';
+  archivedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Anmeldungen über die Website. Sie enthalten persönliche Daten: bitte nur für den Kurs verwenden und nach dem Kurs löschen.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registrations".
+ */
+export interface Registration {
+  id: number;
+  course: number | Course;
+  name: string;
+  email: string;
+  phone?: string | null;
+  message?: string | null;
+  /**
+   * Bei „Storniert“ wird der Platz sofort wieder auf der Website frei.
+   */
+  status: 'confirmed' | 'waitlist' | 'cancelled';
+  consent?: boolean | null;
+  /**
+   * Bei „Nicht gesendet“ bitte „E-Mail und Anmeldungen“ prüfen.
+   */
+  mailStatus?: ('sent' | 'failed' | 'skipped') | null;
+  mailError?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Alle Seiten der Website, so aufgebaut wie auf der Website. Zum Ändern eine Seite öffnen.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -147,19 +313,6 @@ export interface Page {
     | (
         | {
             heading?: string | null;
-            /**
-             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
-             */
-            anchor?: string | null;
-            variant: 'stack' | 'service' | 'plain';
-            /**
-             * Nur für Sprungziele auf den ganzen Abschnitt, selten nötig.
-             */
-            sectionId?: string | null;
-            /**
-             * Nur, wenn der Abschnitt keine Zwischenüberschrift hat.
-             */
-            ariaLabel?: string | null;
             items?:
               | (
                   | {
@@ -276,6 +429,19 @@ export interface Page {
                     }
                 )[]
               | null;
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            variant: 'stack' | 'service' | 'plain';
+            /**
+             * Nur für Sprungziele auf den ganzen Abschnitt, selten nötig.
+             */
+            sectionId?: string | null;
+            /**
+             * Nur, wenn der Abschnitt keine Zwischenüberschrift hat.
+             */
+            ariaLabel?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'section';
@@ -511,6 +677,34 @@ export interface Page {
             blockType: 'exhibition';
           }
         | {
+            heading: string;
+            /**
+             * Die Kurse selbst legen Sie unter „Kurse“ an. Sie erscheinen hier automatisch.
+             */
+            emptyNotice: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            /**
+             * Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.
+             */
+            anchor?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'courseList';
+          }
+        | {
             variant: 'page' | 'teaser';
             heading?: string | null;
             /**
@@ -592,151 +786,6 @@ export interface Page {
    * Bestimmt Breite und Abstände. Nur im Notfall ändern.
    */
   layout: 'home' | 'stack-lg' | 'measure-stack' | 'wide';
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Bilder, PDFs und Videos. Dateien, die nicht mehr öffentlich sein sollen, auf „nicht öffentlich“ stellen.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  title: string;
-  /**
-   * Für Bilder: kurze Beschreibung für Screenreader und wenn das Bild nicht lädt.
-   */
-  alt?: string | null;
-  description?: string | null;
-  isPublic?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * Meldungen für den Bereich Aktuelles. Die Reihenfolge lässt sich in der Liste per Ziehen ändern.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: number;
-  _order?: string | null;
-  title: string;
-  date: string;
-  /**
-   * Erscheint in der Liste unter dem Titel.
-   */
-  excerpt?: string | null;
-  image?: (number | null) | Media;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  gallery?: (number | Media)[] | null;
-  /**
-   * PDFs, Flyer, Plakate oder Videos, die unter dem Text verlinkt werden.
-   */
-  documents?:
-    | {
-        label: string;
-        file: number | Media;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Vollständiger Originaltext aus der alten Website. Tabellen und Videos sind im Textfeld oben nicht übernommen, hier ist alles erhalten.
-   */
-  legacyHtml?: string | null;
-  /**
-   * Teil der Internetadresse. Wird beim Speichern aus dem Titel erzeugt, wenn das Feld leer ist.
-   */
-  slug: string;
-  status: 'draft' | 'published' | 'archived';
-  archivedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Termine und Kurse. Vergangene Termine bleiben erhalten und lassen sich archivieren.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  _order?: string | null;
-  title: string;
-  startsAt: string;
-  endsAt?: string | null;
-  location?: string | null;
-  image?: (number | null) | Media;
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * Leer lassen für unbegrenzt.
-   */
-  capacity?: number | null;
-  registrationOpen?: boolean | null;
-  /**
-   * PDFs, Flyer, Plakate oder Videos, die unter dem Text verlinkt werden.
-   */
-  documents?:
-    | {
-        label: string;
-        file: number | Media;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Teil der Internetadresse. Wird beim Speichern aus dem Titel erzeugt, wenn das Feld leer ist.
-   */
-  slug: string;
-  status: 'draft' | 'published' | 'archived';
-  archivedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -834,6 +883,59 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Termine und Kurse. Vergangene Termine bleiben erhalten und lassen sich archivieren.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  _order?: string | null;
+  title: string;
+  startsAt: string;
+  endsAt?: string | null;
+  location?: string | null;
+  image?: (number | null) | Media;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Leer lassen für unbegrenzt.
+   */
+  capacity?: number | null;
+  registrationOpen?: boolean | null;
+  /**
+   * PDFs, Flyer, Plakate oder Videos, die unter dem Text verlinkt werden.
+   */
+  documents?:
+    | {
+        label: string;
+        file: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Teil der Internetadresse. Wird beim Speichern aus dem Titel erzeugt, wenn das Feld leer ist.
+   */
+  slug: string;
+  status: 'draft' | 'published' | 'archived';
+  archivedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -858,16 +960,20 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'pages';
-        value: number | Page;
-      } | null)
-    | ({
         relationTo: 'posts';
         value: number | Post;
       } | null)
     | ({
-        relationTo: 'events';
-        value: number | Event;
+        relationTo: 'courses';
+        value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'registrations';
+        value: number | Registration;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'services';
@@ -880,6 +986,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -925,6 +1035,73 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  date?: T;
+  excerpt?: T;
+  image?: T;
+  content?: T;
+  gallery?: T;
+  documents?:
+    | T
+    | {
+        label?: T;
+        file?: T;
+        id?: T;
+      };
+  legacyHtml?: T;
+  slug?: T;
+  status?: T;
+  archivedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses_select".
+ */
+export interface CoursesSelect<T extends boolean = true> {
+  title?: T;
+  startsAt?: T;
+  endsAt?: T;
+  location?: T;
+  audience?: T;
+  price?: T;
+  instructor?: T;
+  description?: T;
+  capacity?: T;
+  booked?: T;
+  registrationOpen?: T;
+  waitlist?: T;
+  notifyEmail?: T;
+  slug?: T;
+  status?: T;
+  archivedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registrations_select".
+ */
+export interface RegistrationsSelect<T extends boolean = true> {
+  course?: T;
+  name?: T;
+  email?: T;
+  phone?: T;
+  message?: T;
+  status?: T;
+  consent?: T;
+  mailStatus?: T;
+  mailError?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
@@ -938,10 +1115,6 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
-              anchor?: T;
-              variant?: T;
-              sectionId?: T;
-              ariaLabel?: T;
               items?:
                 | T
                 | {
@@ -1015,6 +1188,10 @@ export interface PagesSelect<T extends boolean = true> {
                           blockName?: T;
                         };
                   };
+              anchor?: T;
+              variant?: T;
+              sectionId?: T;
+              ariaLabel?: T;
               id?: T;
               blockName?: T;
             };
@@ -1187,6 +1364,15 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        courseList?:
+          | T
+          | {
+              heading?: T;
+              emptyNotice?: T;
+              anchor?: T;
+              id?: T;
+              blockName?: T;
+            };
         newsList?:
           | T
           | {
@@ -1255,59 +1441,6 @@ export interface PagesSelect<T extends boolean = true> {
   description?: T;
   slug?: T;
   layout?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts_select".
- */
-export interface PostsSelect<T extends boolean = true> {
-  _order?: T;
-  title?: T;
-  date?: T;
-  excerpt?: T;
-  image?: T;
-  content?: T;
-  gallery?: T;
-  documents?:
-    | T
-    | {
-        label?: T;
-        file?: T;
-        id?: T;
-      };
-  legacyHtml?: T;
-  slug?: T;
-  status?: T;
-  archivedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events_select".
- */
-export interface EventsSelect<T extends boolean = true> {
-  _order?: T;
-  title?: T;
-  startsAt?: T;
-  endsAt?: T;
-  location?: T;
-  image?: T;
-  description?: T;
-  capacity?: T;
-  registrationOpen?: T;
-  documents?:
-    | T
-    | {
-        label?: T;
-        file?: T;
-        id?: T;
-      };
-  slug?: T;
-  status?: T;
-  archivedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1421,6 +1554,33 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  startsAt?: T;
+  endsAt?: T;
+  location?: T;
+  image?: T;
+  description?: T;
+  capacity?: T;
+  registrationOpen?: T;
+  documents?:
+    | T
+    | {
+        label?: T;
+        file?: T;
+        id?: T;
+      };
+  slug?: T;
+  status?: T;
+  archivedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1566,6 +1726,37 @@ export interface Site {
   createdAt?: string | null;
 }
 /**
+ * Hier legen Sie fest, an welche Adresse Kursanmeldungen geschickt werden, und mit welchem Postfach die E-Mail verschickt wird.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mail".
+ */
+export interface Mail {
+  id: number;
+  /**
+   * Zu jeder Anmeldung erhält diese Adresse eine E-Mail mit Name, Kontakt und Kurs.
+   */
+  courseRecipient?: string | null;
+  /**
+   * Bei Hostinger zum Beispiel smtp.hostinger.com. Die Angaben stehen beim E-Mail-Postfach in hPanel.
+   */
+  smtpHost?: string | null;
+  smtpPort?: number | null;
+  smtpSecure?: boolean | null;
+  smtpUser?: string | null;
+  /**
+   * Nur Admins sehen dieses Feld.
+   */
+  smtpPassword?: string | null;
+  /**
+   * Leer: Benutzername.
+   */
+  fromAddress?: string | null;
+  fromName?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site_select".
  */
@@ -1632,6 +1823,23 @@ export interface SiteSelect<T extends boolean = true> {
         fundingAlt?: T;
         draftNote?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mail_select".
+ */
+export interface MailSelect<T extends boolean = true> {
+  courseRecipient?: T;
+  smtpHost?: T;
+  smtpPort?: T;
+  smtpSecure?: T;
+  smtpUser?: T;
+  smtpPassword?: T;
+  fromAddress?: T;
+  fromName?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

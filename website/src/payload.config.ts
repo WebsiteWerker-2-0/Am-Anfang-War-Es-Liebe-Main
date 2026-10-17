@@ -5,11 +5,14 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { de } from "@payloadcms/translations/languages/de";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+import { Courses } from "./cms/collections/Courses";
 import { Events } from "./cms/collections/Events";
 import { Media } from "./cms/collections/Media";
 import { Pages } from "./cms/collections/Pages";
 import { Posts } from "./cms/collections/Posts";
+import { Registrations } from "./cms/collections/Registrations";
 import { Services } from "./cms/collections/Services";
+import { Mail } from "./cms/globals/Mail";
 import { Site } from "./cms/globals/Site";
 import { Users } from "./cms/collections/Users";
 import { databaseUrl } from "./cms/env";
@@ -29,18 +32,25 @@ export default buildConfig({
     user: Users.slug,
     dateFormat: "dd.MM.yyyy",
     meta: { titleSuffix: " – Redaktion Am Anfang war es Liebe" },
-    components: { graphics: { Logo: "/cms/components/Logo#Logo", Icon: "/cms/components/Logo#Icon" } },
+    components: {
+      beforeDashboard: ["/cms/components/Dashboard#Dashboard"],
+      graphics: { Logo: "/cms/components/Logo#Logo", Icon: "/cms/components/Logo#Icon" },
+    },
     importMap: {
       baseDir: dirname,
       importMapFile: path.resolve(dirname, "app/(payload)/backend/importMap.js"),
     },
   },
-  collections: [Pages, Posts, Events, Services, Media, Users],
-  globals: [Site],
+  // Die Reihenfolge ist die Reihenfolge im Menü des Backends
+  collections: [Posts, Courses, Registrations, Pages, Services, Media, Users, Events],
+  globals: [Site, Mail],
   editor: lexicalEditor(),
   i18n: { supportedLanguages: { de }, fallbackLanguage: "de" },
   // Nur gesetzt, wenn die Seite unter mehreren Adressen erreichbar ist und strenger geprüft werden soll
-  csrf: process.env.CMS_CSRF_ORIGINS?.split(",").map((origin) => origin.trim()).filter(Boolean) ?? [],
+  csrf:
+    process.env.CMS_CSRF_ORIGINS?.split(",")
+      .map((origin) => origin.trim())
+      .filter(Boolean) ?? [],
   db: sqliteAdapter({
     client: { url: databaseUrl, authToken: process.env.DATABASE_AUTH_TOKEN },
     // Auf dem Server laufen die Migrationen beim Start, es gibt keinen Dev-Push

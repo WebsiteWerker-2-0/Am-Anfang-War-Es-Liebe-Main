@@ -14,7 +14,9 @@ export const Events: CollectionConfig = {
   orderable: true,
   admin: {
     useAsTitle: "title",
-    group: "Inhalte",
+    group: "Verwaltung",
+    // Noch nicht auf der Website angebunden, deshalb im Menü ausgeblendet
+    hidden: true,
     defaultColumns: ["title", "startsAt", "location", "status"],
     description: "Termine und Kurse. Vergangene Termine bleiben erhalten und lassen sich archivieren.",
   },

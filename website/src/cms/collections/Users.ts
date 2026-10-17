@@ -9,6 +9,8 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: "email",
     group: "Verwaltung",
+    // Redakteurinnen sehen die Kontenverwaltung nicht; ihr eigenes Konto erreichen sie über das Symbol oben rechts
+    hidden: ({ user }) => user?.role !== "admin",
     defaultColumns: ["name", "email", "role"],
   },
   auth: {

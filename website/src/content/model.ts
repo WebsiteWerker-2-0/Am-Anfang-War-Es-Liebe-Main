@@ -122,6 +122,7 @@ export type PageBlock =
       intro?: string;
       panels: { image: ImageValue; title: string }[];
     }
+  | { blockType: "courseList"; anchor?: string; heading: string; emptyNotice: Rich }
   | { blockType: "newsList"; variant: "page" | "teaser"; anchor?: string; heading?: string; linkLabel?: string; count?: number }
   // Startseite
   | {

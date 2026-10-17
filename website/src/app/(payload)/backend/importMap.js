@@ -10,9 +10,12 @@ import { OrderedListFeatureClient as OrderedListFeatureClient_e70f5e05f09f93e00b
 import { UnorderedListFeatureClient as UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { HeadingFeatureClient as HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ParagraphFeatureClient as ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { ViewOnSite as ViewOnSite_fe182377efab4b5d3a6e1fe4f34cdaa1 } from '../../../cms/components/ViewOnSite'
 import { BlockLabel as BlockLabel_c932a90cc9198b64323d4e73d851c70d } from '../../../cms/components/BlockLabel'
+import { TestMailButton as TestMailButton_71d5ee62b03448617d241db79fc4ec01 } from '../../../cms/components/TestMailButton'
 import { Icon as Icon_eff45f4666ccfb98ed72245053f5e77e } from '../../../cms/components/Logo'
 import { Logo as Logo_eff45f4666ccfb98ed72245053f5e77e } from '../../../cms/components/Logo'
+import { Dashboard as Dashboard_758cc56c4b18c5339e55ed707c830b18 } from '../../../cms/components/Dashboard'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -29,8 +32,11 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnorderedListFeatureClient": UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ParagraphFeatureClient": ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "/cms/components/ViewOnSite#ViewOnSite": ViewOnSite_fe182377efab4b5d3a6e1fe4f34cdaa1,
   "/cms/components/BlockLabel#BlockLabel": BlockLabel_c932a90cc9198b64323d4e73d851c70d,
+  "/cms/components/TestMailButton#TestMailButton": TestMailButton_71d5ee62b03448617d241db79fc4ec01,
   "/cms/components/Logo#Icon": Icon_eff45f4666ccfb98ed72245053f5e77e,
   "/cms/components/Logo#Logo": Logo_eff45f4666ccfb98ed72245053f5e77e,
+  "/cms/components/Dashboard#Dashboard": Dashboard_758cc56c4b18c5339e55ed707c830b18,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

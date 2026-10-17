@@ -5,12 +5,21 @@ import { calloutBlock, sectionItems, withLabel } from "./items";
 // Blöcke einer Seite (siehe `PageBlock` in content/model.ts). Sie entsprechen den
 // Bausteinen des Frontends: jeder Block erscheint genau so auf der Website.
 
+// Seltene Einstellungen stehen eingeklappt unter „Erweitert“, damit die Redaktion nur sieht, was sie braucht
+const advanced = (fields: Field[]): Field => ({
+  type: "collapsible",
+  label: "Erweitert (nur bei Bedarf)",
+  admin: { initCollapsed: true },
+  fields,
+});
+
 const anchorField: Field = {
   name: "anchor",
   type: "text",
   label: "Sprungmarke",
   admin: {
-    description: "Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.",
+    description:
+      "Teil der Adresse nach dem #, zum Beispiel stalking für /hilfe#stalking. Bestehende Links nicht ändern.",
   },
 };
 
@@ -25,32 +34,34 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Textabschnitt", plural: "Textabschnitte" },
     fields: [
       { name: "heading", type: "text", label: "Zwischenüberschrift" },
-      anchorField,
-      {
-        name: "variant",
-        type: "select",
-        label: "Darstellung",
-        required: true,
-        defaultValue: "stack",
-        options: [
-          { label: "Standard", value: "stack" },
-          { label: "Mit Trennlinie oben", value: "service" },
-          { label: "Ohne Rahmen (nur Überschrift und Text)", value: "plain" },
-        ],
-      },
-      {
-        name: "sectionId",
-        type: "text",
-        label: "Kennung des Abschnitts",
-        admin: { description: "Nur für Sprungziele auf den ganzen Abschnitt, selten nötig." },
-      },
-      {
-        name: "ariaLabel",
-        type: "text",
-        label: "Beschreibung für Screenreader",
-        admin: { description: "Nur, wenn der Abschnitt keine Zwischenüberschrift hat." },
-      },
       { name: "items", type: "blocks", label: "Inhalt des Abschnitts", blocks: sectionItems },
+      advanced([
+        anchorField,
+        {
+          name: "variant",
+          type: "select",
+          label: "Darstellung",
+          required: true,
+          defaultValue: "stack",
+          options: [
+            { label: "Standard", value: "stack" },
+            { label: "Mit Trennlinie oben", value: "service" },
+            { label: "Ohne Rahmen (nur Überschrift und Text)", value: "plain" },
+          ],
+        },
+        {
+          name: "sectionId",
+          type: "text",
+          label: "Kennung des Abschnitts",
+          admin: { description: "Nur für Sprungziele auf den ganzen Abschnitt, selten nötig." },
+        },
+        {
+          name: "ariaLabel",
+          type: "text",
+          label: "Beschreibung für Screenreader",
+          admin: { description: "Nur, wenn der Abschnitt keine Zwischenüberschrift hat." },
+        },
+      ]),
     ],
   },
   calloutBlock,
@@ -65,7 +76,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Weitere Anlaufstellen (aufklappbar)", plural: "Weitere Anlaufstellen" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       { name: "note", type: "textarea", label: "Hinweis unter der Liste" },
     ],
   },
@@ -74,7 +85,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Dokumente zum Herunterladen", plural: "Dokumentenlisten" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       {
         name: "items",
         type: "array",
@@ -83,7 +94,12 @@ export const pageBlocks: Block[] = withLabel([
         fields: [
           { name: "title", type: "text", label: "Titel", required: true },
           { name: "file", type: "upload", relationTo: "media", label: "Datei", required: true },
-          { name: "meta", type: "text", label: "Angaben unter dem Titel", admin: { description: "Zum Beispiel PDF, 2,1 MB · Deutsch · Stand: 2016" } },
+          {
+            name: "meta",
+            type: "text",
+            label: "Angaben unter dem Titel",
+            admin: { description: "Zum Beispiel PDF, 2,1 MB · Deutsch · Stand: 2016" },
+          },
         ],
       },
       { name: "note", type: "richText", label: "Hinweis unter der Liste", editor: inlineEditor },
@@ -94,7 +110,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Weiterführende Links", plural: "Linklisten" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       {
         name: "topics",
         type: "array",
@@ -121,7 +137,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Personenliste", plural: "Personenlisten" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       {
         name: "people",
         type: "array",
@@ -139,7 +155,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Kampagne mit Plakat", plural: "Kampagnen" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       { name: "lead", type: "text", label: "Hervorgehobener Satz" },
       { name: "body", type: "richText", label: "Text", editor: bodyEditor },
       {
@@ -149,7 +165,12 @@ export const pageBlocks: Block[] = withLabel([
         fields: [
           { name: "label", type: "text", label: "Linktext" },
           { name: "file", type: "upload", relationTo: "media", label: "Datei" },
-          { name: "meta", type: "text", label: "Angabe dahinter", admin: { description: "Zum Beispiel (PDF, 2,7 MB)" } },
+          {
+            name: "meta",
+            type: "text",
+            label: "Angabe dahinter",
+            admin: { description: "Zum Beispiel (PDF, 2,7 MB)" },
+          },
         ],
       },
       { name: "poster", type: "upload", relationTo: "media", label: "Plakat" },
@@ -184,7 +205,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Kontaktformular", plural: "Kontaktformular" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       {
         name: "concerns",
         type: "array",
@@ -207,7 +228,13 @@ export const pageBlocks: Block[] = withLabel([
         label: "Sprachen",
         labels: { singular: "Sprache", plural: "Sprachen" },
         fields: [
-          { name: "code", type: "text", label: "Sprachkürzel", required: true, admin: { description: "ar, ru, en, tr" } },
+          {
+            name: "code",
+            type: "text",
+            label: "Sprachkürzel",
+            required: true,
+            admin: { description: "ar, ru, en, tr" },
+          },
           {
             name: "direction",
             type: "select",
@@ -233,7 +260,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Wanderausstellung (Bildergalerie)", plural: "Wanderausstellung" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       { name: "intro", type: "textarea", label: "Einleitung" },
       {
         name: "panels",
@@ -245,6 +272,22 @@ export const pageBlocks: Block[] = withLabel([
           { name: "title", type: "text", label: "Titel der Tafel", required: true },
         ],
       },
+    ],
+  },
+  {
+    slug: "courseList",
+    labels: { singular: "Kurse mit Anmeldung", plural: "Kurse mit Anmeldung" },
+    fields: [
+      { name: "heading", type: "text", label: "Überschrift", required: true, defaultValue: "Termine und Anmeldung" },
+      {
+        name: "emptyNotice",
+        type: "richText",
+        label: "Hinweis, solange es keinen veröffentlichten Kurs gibt",
+        editor: inlineEditor,
+        required: true,
+        admin: { description: "Die Kurse selbst legen Sie unter „Kurse“ an. Sie erscheinen hier automatisch." },
+      },
+      advanced([anchorField]),
     ],
   },
   {
@@ -263,7 +306,7 @@ export const pageBlocks: Block[] = withLabel([
         ],
       },
       { name: "heading", type: "text", label: "Überschrift (Teaser)" },
-      anchorField,
+      advanced([anchorField]),
       { name: "linkLabel", type: "text", label: "Linktext „Alle Beiträge“ (Teaser)" },
       { name: "count", type: "number", label: "Anzahl (Teaser)", min: 1, max: 12, defaultValue: 3 },
     ],
@@ -308,7 +351,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Schnellzugriff Anlaufstellen", plural: "Schnellzugriff" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       { name: "linkLabel", type: "text", label: "Linktext", required: true },
       { name: "linkUrl", type: "text", label: "Link", required: true },
     ],
@@ -318,7 +361,7 @@ export const pageBlocks: Block[] = withLabel([
     labels: { singular: "Hervorgehobenes Band mit Bild", plural: "Hervorgehobene Bänder" },
     fields: [
       { name: "heading", type: "text", label: "Überschrift", required: true },
-      anchorField,
+      advanced([anchorField]),
       { name: "lead", type: "textarea", label: "Text", required: true },
       { name: "privacyNote", type: "text", label: "Hinweis mit Schloss-Symbol" },
       { name: "buttonLabel", type: "text", label: "Beschriftung der Schaltfläche", required: true },

@@ -14,10 +14,22 @@ Die eigentliche Website (Next.js) liegt in `website/` — das ist auch das bei V
 
 ## Hosting & Deployment
 
-- **Zielhosting (produktiv):** Hostinger.
-- **Aktuell / Preview:** Vercel (Root Directory `website`, Branch `main`). Jeder Push nach `main` löst automatisch ein Vercel-Deployment aus — dient aktuell der Vorschau, nicht dem finalen Hosting.
-- Nach Code-Änderungen an der Website immer committen und pushen, damit das Ergebnis auf Vercel sichtbar wird — nicht nur lokal lassen.
-- Vor dem Umzug auf Hostinger prüfen: Hostinger-Plan mit Node.js/Next.js-Unterstützung nötig (reines PHP-Hosting reicht nicht).
+- **Hostinger** (Node.js-Web-App) baut `main` bei **jedem Push** automatisch (Node 22, `npm run build`, etwa 2 Minuten) und startet neu. Ein Push nach `main` ist also eine Veröffentlichung: vorher `npm run lint`, `npx tsc --noEmit` und `npm run build`. Auf einem Branch arbeiten, wenn etwas größer ist, und erst nach Prüfung nach `main` bringen.
+- **Vercel** (Root Directory `website`) baut ebenfalls jede Änderung. Dort zeigt die Website den Standardinhalt, das Backend ist nur eine Demo mit flüchtigen Daten.
+- Der Build nutzt **Webpack** (`next build --webpack`). Turbopack bricht auf Hostinger ab.
+- Zugangsdaten (SSH, hPanel, Passwörter, Secrets) stehen nie im Repository. Das Repository ist öffentlich.
+
+## Backend und Redaktionsbereich (Stand 17.10.2026)
+
+Vor Arbeiten am Backend, an Seiteninhalten oder an Kursen lesen: `docs/uebergabe-backend.md` (Architektur, Betrieb, Fallstricke), `docs/redaktion-handbuch.md` (wie die Redaktion arbeitet), `docs/adr/0004-…` und `0005-…`.
+
+- **Seiteninhalte** stehen im Standardinhalt `website/src/content/pages/*.ts` (Vorlage und Ersatz) **und** im CMS (laufende Seite). Eine Textänderung für neue Installationen gehört in den Standardinhalt, für die laufende Seite ins Backend. Neue Blocktypen brauchen Typ, Payload-Block, Renderer und Seeding.
+- **Datenbank-Migrationen nie löschen oder neu erzeugen**, wenn sie schon irgendwo angewendet wurden (Hostinger tut das). Änderungen an Feldern: `npm run cms:types`, `npm run cms:importmap`, `npm run cms:migrate:create -- <name>`, alles committen.
+- **CMS-Skripte** (`cms:seed`, `cms:create-admin`, `cms:migrate`) laufen im Produktionsmodus, sonst hängt der nächste Serverstart an einer Rückfrage.
+- **Kurse und Anmeldung:** Kurse legt die Redaktion im Backend an, die Seite „Kurse“ zeigt freie Plätze live und ein Formular. Anmeldungen werden gespeichert und per E-Mail an eine im Backend hinterlegte Adresse geschickt (`docs/adr/0005-…`). Kontaktanfragen dürfen weiterhin **nie** gespeichert werden (ADR-0003).
+- **`/backend` nie verlinken.** Der Notausgang ist nicht im Backend änderbar und muss auf jeder Seite erscheinen, auch in der 404-Seite.
+- **Prüfen:** Nach Umbauten am Frontend `scripts/compare-html.py` gegen `main` laufen lassen (Kopf des Skripts erklärt es). Kursablauf einmal komplett testen (anlegen, anmelden, Warteliste, Storno, E-Mail).
+- Offene Punkte stehen am Ende von `docs/uebergabe-backend.md` (Löschfrist für Anmeldungen, Vertrag WordPress/Hetzner gegen Next.js/Hostinger, Veranstaltungen, Mehrsprachigkeit).
 
 ## Agent skills
 

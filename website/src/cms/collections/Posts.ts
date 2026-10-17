@@ -9,14 +9,17 @@ import { revalidateSite } from "../revalidate";
 // Aktuelles (F-05): Beiträge des Arbeitskreises.
 export const Posts: CollectionConfig = {
   slug: "posts",
-  labels: { singular: "Beitrag (Aktuelles)", plural: "Beiträge (Aktuelles)" },
+  labels: { singular: "Beitrag", plural: "Aktuelles" },
+  versions: { maxPerDoc: 20 },
   // Reihenfolge per Ziehen in der Liste (Position)
   orderable: true,
   admin: {
     useAsTitle: "title",
-    group: "Inhalte",
+    group: "Aktuelles und Kurse",
     defaultColumns: ["title", "date", "status"],
-    description: "Meldungen für den Bereich Aktuelles. Die Reihenfolge lässt sich in der Liste per Ziehen ändern.",
+    description:
+      "Meldungen für den Bereich Aktuelles auf der Website. Mit „Entwurf“ speichern Sie, ohne zu veröffentlichen. Die Reihenfolge ändern Sie in der Liste per Ziehen.",
+    listSearchableFields: ["title"],
   },
   access: {
     read: publishedOrLoggedIn,
@@ -61,6 +64,7 @@ export const Posts: CollectionConfig = {
           "Vollständiger Originaltext aus der alten Website. Tabellen und Videos sind im Textfeld oben nicht übernommen, hier ist alles erhalten.",
       },
     },
+    { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },
     slugField,
     ...publicationFields,
   ],

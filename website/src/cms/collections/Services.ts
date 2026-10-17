@@ -10,7 +10,7 @@ export const Services: CollectionConfig = {
   orderable: true,
   admin: {
     useAsTitle: "name",
-    group: "Website",
+    group: "Seiten der Website",
     defaultColumns: ["name", "placement", "groupTitle"],
     description:
       "Beratungsstellen, Schutzhaus, Polizei und weitere Hilfen. Die Reihenfolge lässt sich in der Liste per Ziehen ändern.",

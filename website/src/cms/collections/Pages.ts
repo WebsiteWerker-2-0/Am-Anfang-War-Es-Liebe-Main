@@ -10,10 +10,11 @@ import { revalidateSite } from "../revalidate";
 export const Pages: CollectionConfig = {
   slug: "pages",
   labels: { singular: "Seite", plural: "Seiten" },
+  versions: { maxPerDoc: 20 },
   defaultSort: "slug",
   admin: {
     useAsTitle: "title",
-    group: "Website",
+    group: "Seiten der Website",
     defaultColumns: ["title", "slug", "updatedAt"],
     description: "Alle Seiten der Website, so aufgebaut wie auf der Website. Zum Ändern eine Seite öffnen.",
   },
@@ -53,6 +54,7 @@ export const Pages: CollectionConfig = {
         { name: "description", type: "textarea", label: "Kurzbeschreibung für Suchmaschinen" },
       ],
     },
+    { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },
     {
       name: "slug",
       type: "text",

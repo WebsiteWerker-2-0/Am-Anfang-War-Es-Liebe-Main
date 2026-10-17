@@ -3,9 +3,10 @@ import Link from "next/link";
 import { Fragment } from "react";
 import type { CalloutBlock, PageBlock, SectionItem } from "@/content/model";
 import { toImg } from "@/lib/images";
-import { getPosts, getServices, getSite } from "@/lib/content";
+import { getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
 import { Rich, RichInline } from "@/lib/rich";
 import { ContactForm } from "../ContactForm";
+import { CourseList } from "../CourseList";
 import { ExhibitionSlider } from "../ExhibitionSlider";
 import { PhoneLink } from "../PhoneLink";
 import { PostList } from "../PostList";
@@ -346,6 +347,13 @@ function Exhibition({ block }: { block: Block<"exhibition"> }) {
   );
 }
 
+async function CourseListBlock({ block }: { block: Block<"courseList"> }) {
+  const courses = await getPublicCourses();
+  // Ohne veröffentlichte Kurse steht der Hinweis, wie früher. Die Liste lädt neue Kurse selbst nach.
+  const empty = <Callout block={{ blockType: "callout", kind: "notice", measure: true, content: block.emptyNotice }} />;
+  return <CourseList initial={courses} heading={block.heading} anchor={block.anchor} empty={empty} />;
+}
+
 async function NewsList({ block }: { block: Block<"newsList"> }) {
   const posts = await getPosts();
   if (block.variant === "page") {
@@ -503,6 +511,8 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
             return <LanguageVersions key={index} block={block} />;
           case "exhibition":
             return <Exhibition key={index} block={block} />;
+          case "courseList":
+            return <CourseListBlock key={index} block={block} />;
           case "newsList":
             return <NewsList key={index} block={block} />;
           case "entry":

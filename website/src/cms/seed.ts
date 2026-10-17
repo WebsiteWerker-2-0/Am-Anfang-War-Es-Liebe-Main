@@ -170,6 +170,8 @@ export async function seedExistingContent(payload: Payload) {
         return { ...block, items: await Promise.all(block.items.map(convertItem)) };
       case "callout":
         return { ...block, content: lexical(block.content) };
+      case "courseList":
+        return { ...block, emptyNotice: lexical(block.emptyNotice) };
       case "documentList": {
         const items = [];
         for (const item of block.items) {
@@ -233,6 +235,30 @@ export async function seedExistingContent(payload: Payload) {
       await attempt(`Seite ${page.slug}`, () => createPage(page));
     }
     if (known.size === 0) payload.logger.info(`${defaultPages.length} Seiten eingespielt.`);
+  });
+
+  // Bestehende Datenbanken: die Kursliste mit Anmeldung in die Seite „Kurse“ einsetzen, falls sie fehlt
+  await attempt("Kursliste", async () => {
+    const page = (await payload.find({ collection: "pages", where: { slug: { equals: "kurse" } }, limit: 1, depth: 0 }))
+      .docs[0];
+    if (!page) return;
+    const blocks = (page.blocks ?? []) as { blockType: string }[];
+    if (blocks.some((block) => block.blockType === "courseList")) return;
+    const list = defaultPages
+      .find((entry) => entry.slug === "kurse")
+      ?.blocks.find((block) => block.blockType === "courseList");
+    if (!list) return;
+    // Der frühere Hinweis „Termine folgen“ steht jetzt in der Kursliste und entfällt als eigener Block
+    const rest = blocks.filter(
+      (block, index) =>
+        !(block.blockType === "callout" && index === blocks.findIndex((b) => b.blockType === "callout")),
+    );
+    await payload.update({
+      collection: "pages",
+      id: page.id,
+      data: { blocks: [(await convertBlock(list)) as never, ...(rest as never[])] },
+    });
+    payload.logger.info("Kursliste in die Seite „Kurse“ eingesetzt.");
   });
 
   // ---- Beiträge der Altseite -----------------------------------------------

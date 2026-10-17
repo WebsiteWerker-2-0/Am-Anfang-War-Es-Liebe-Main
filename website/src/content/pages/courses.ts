@@ -10,10 +10,10 @@ export const courses: PageData = {
   layout: "stack-lg",
   blocks: [
     {
-      blockType: "callout",
-      kind: "notice",
-      measure: true,
-      content: `<p><strong>Termine 2026:</strong> folgen. Die Anmeldung ist künftig direkt hier auf der Website möglich.</p>`,
+      blockType: "courseList",
+      anchor: "termine",
+      heading: "Termine und Anmeldung",
+      emptyNotice: `<p><strong>Termine 2026:</strong> folgen. Die Anmeldung ist künftig direkt hier auf der Website möglich.</p>`,
     },
     {
       blockType: "section",

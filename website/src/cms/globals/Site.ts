@@ -9,7 +9,7 @@ import { revalidateSite } from "../revalidate";
 export const Site: GlobalConfig = {
   slug: "site",
   label: "Kopf und Fuß der Seite",
-  admin: { group: "Website", description: "Erscheint auf jeder Seite: Menü, Sprachwahl, Hilfetelefon und Fußbereich." },
+  admin: { group: "Seiten der Website", description: "Erscheint auf jeder Seite: Menü, Sprachwahl, Hilfetelefon und Fußbereich." },
   access: { read: () => true, update: isLoggedIn },
   hooks: { afterChange: [() => revalidateSite()] },
   fields: [

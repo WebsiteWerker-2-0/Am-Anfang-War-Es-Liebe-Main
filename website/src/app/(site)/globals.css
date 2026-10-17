@@ -1378,3 +1378,87 @@ a:hover {
     align-items: start;
   }
 }
+
+/* ------------------------------------------------------------------
+   Kurse mit Anmeldung
+   ------------------------------------------------------------------ */
+.courses {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.course {
+  border-block-start: 1px solid var(--c-ink);
+  padding-block: var(--space-5);
+}
+
+.course h3 {
+  margin-block-end: var(--space-2);
+}
+
+.course__meta {
+  display: grid;
+  gap: var(--space-1);
+  margin-block-end: var(--space-3);
+}
+
+.places {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-control);
+  background: var(--c-brand-surface);
+}
+
+.places--waitlist,
+.places--full,
+.places--closed {
+  color: var(--c-ink-muted);
+}
+
+.places__bar {
+  display: inline-block;
+  inline-size: 5rem;
+  block-size: 0.5rem;
+  border-radius: 999px;
+  background: var(--c-line);
+  overflow: hidden;
+}
+
+.places__bar > span {
+  display: block;
+  block-size: 100%;
+  background: var(--c-ink);
+}
+
+.course__form {
+  margin-block-start: var(--space-4);
+}
+
+.course__form summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.course__meta dd {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.course p + p {
+  margin-block-start: var(--space-3);
+}
+
+.course .places {
+  margin-block-start: var(--space-4);
+}
