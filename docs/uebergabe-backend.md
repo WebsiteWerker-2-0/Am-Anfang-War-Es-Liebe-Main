@@ -59,7 +59,8 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 7. Mit Webpack bekommt der Seitentitel der 404-Seite sonst den Titel-Zusatz doppelt (`notFoundMetadata` in `src/lib/site-metadata.ts`).
 8. Formular zurücksetzen nach `await`: `event.currentTarget` ist dann leer, Element vorher merken.
 9. React-Lint verbietet `Date.now()` im Rendern und direktes `setState` im Effekt.
-10. Die Paketversionen von Payload müssen alle gleich sein (aktuell 3.90.2, exakt angepinnt). Next muss zur Peer-Angabe passen (`>=16.3.3 <17`).
+10. Die Paketversionen von Payload müssen alle gleich sein (aktuell 3.91.0, exakt angepinnt). Next muss zur Peer-Angabe passen (`>=16.3.3 <17`). **Payload aktualisieren:** alle `payload`- und `@payloadcms/*`-Versionen in `package.json` gleichzeitig ändern, im `package-lock.json` die Einträge von `payload` und `@payloadcms/*` entfernen, dann `npm install` (sonst `ERESOLVE`, weil npm gegen die alte Version prüft). Danach `cms:migrate:create` gegen eine Datenbank im Serverzustand: „No schema changes detected“ heißt, keine Migration nötig.
+12. `overrides` in `package.json` heben drei Pakete über die von Payload bzw. Monaco gepinnten Versionen, damit `npm audit --omit=dev` (was Hostinger prüft) sauber ist: `dompurify`, `sass` unter `@payloadcms/next` (zieht sonst `chokidar` 3 und `braces` mit), `esbuild` unter `@esbuild-kit/core-utils` (nur für `cms:migrate:create`). Nach jedem Payload-Update prüfen, ob sie noch nötig sind, und überflüssige entfernen. Die verbleibenden Meldungen zu `braces` betreffen nur ESLint (Entwicklung) und haben upstream keinen Fix.
 11. Die Oberfläche von Payload rechnet in rem mit 13 px Basisschrift: Eigene Größen in px angeben.
 
 ## Befehle
@@ -105,3 +106,4 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 - Veranstaltungen lassen sich mit Anmeldungen löschen, die Anmeldungen gehen mit (Hook `beforeDelete` in `Courses.ts`).
 - Zugangs-E-Mail enthält einen Link „Passwort festlegen“ (`payload.forgotPassword` mit `disableEmail`, 7 Tage, Seite `/backend/reset/<token>`), nie ein Passwort. Payloads eigenes „Passwort vergessen“ auf der Anmeldeseite verschickt keine E-Mail (kein E-Mail-Adapter); dafür eine Admin bitten, „Zugangs-E-Mail senden“ zu klicken.
 - Postfach-Passwort verschlüsselt (siehe ADR-0005). Ein noch im Klartext gespeichertes Passwort wird beim nächsten Speichern der Seite „E-Mail und Anmeldungen“ verschlüsselt; angezeigt wird es schon vorher nicht mehr.
+- Sicherheitsupdate: Payload 3.90.2 → 3.91.0 (behebt u. a. `undici`), `npm audit fix` und drei `overrides` (Fallstrick 12). `npm audit --omit=dev`: 0 Schwachstellen. Keine Schemaänderung; geprüft an einer Datenbank im Serverstand (alter Stand mit Beiträgen, Veranstaltung und Anmeldung erzeugt, neuer Stand darauf gestartet, Anmeldung, Platzzählung und Backend im Browser getestet).
