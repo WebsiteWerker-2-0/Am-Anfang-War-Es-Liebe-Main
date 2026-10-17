@@ -2,6 +2,12 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Selbstcheck als Entscheidungsbaum mit Ampel
+- **Entscheidung:** Der Selbstcheck fragt eine Frage nach der anderen und verzweigt: Gefahr jetzt, um wen es geht (mich, eine Frau, die ich kenne, ein Kind), Bereich der Gewalt, dann die Aussagen einzeln (Ja / Nein / Weiß nicht / Überspringen). Am Ende steht eine Ampel Grün / Gelb / Rot aus gewichteten Aussagen. Warnzeichen führen immer zu Rot. Grün ist keine Entwarnung, jede Stufe nennt passende Hilfe und den Hinweis „keine fachliche Einschätzung“. Gelb `--c-warning: #8a5a00` ist neu (5,9:1). Der Baum liegt im Code und ist mit Tests abgesichert, ohne JavaScript bleibt die Checkliste. Auf der Startseite bleibt das Band mit Verweis.
+- **Begründung:** Wunsch nach mehr Interaktivität. Die Ampel ersetzt die Vorgabe „keine Auswertung, keine Ampel“ aus Abschnitt 6.3 bewusst. Einwand von Claude: Eine Ampel kann Frauen in Gefahr falsch beruhigen. Deshalb Warnzeichen, die immer zu Rot führen, keine Entwarnung bei Grün und Freigabe durch die Fachfrauen des AG vor dem Livegang. Die Speicherregeln (ADR-0003) gelten unverändert.
+- **Offen:** Gewichte, Schwellen, Warnzeichen und Texte sind ein Entwurf von Claude. Auf Enricos Entscheidung am 17.10.2026 ohne Freigabe durch den AG live geschaltet. Die fachliche Freigabe (Z-02) ist nachzuholen.
+- **Betrifft:** selbstcheck.md (neu), komponenten.md, farben.md, DESIGN-UND-ENTWICKLUNG.md Abschnitt 6.3 und 14, CONTEXT.md (Selbstcheck, Bereich, Ampel, Warnzeichen), `website/src/content/self-check-tree.ts`, `website/src/lib/self-check.ts`, `website/src/components/SelfCheck.tsx`, `website/src/app/(site)/globals.css`
+- **Von:** Enrico (mit Claude)
 ## 2026-10-17 – Redaktionsbereich: schlank, groß, Liquid Glass
 - **Entscheidung:** Das Backend zeigt der Redaktion nur Aktuelles, Veranstaltungen und das Dateiarchiv, Admins zusätzlich Verwaltung. Seiten, Anlaufstellen, Menü und Fuß sind nicht im Backend änderbar. Gestaltung des Backends als Liquid Glass (durchscheinende Flächen, warme Verläufe in Orange und Magenta), Menüpunkte 19 px und 56 px hoch, helle und dunkle Ansicht, Startseite mit großen Schaltflächen.
 - **Begründung:** Die Redaktion bedient das Backend ohne Vorkenntnisse und soll nur das Nötigste ändern können. Die Gestaltung der Website selbst bleibt unberührt.

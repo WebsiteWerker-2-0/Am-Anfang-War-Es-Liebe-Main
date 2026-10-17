@@ -16,6 +16,11 @@
 - Sprachfassungen auf `/sprachen`: unter dem Notausgang ein Satz zu Ziel und Tastenkürzel in der jeweiligen Sprache (`QUICK_EXIT_HINTS`, im Code wie das Ziel). Deutscher Hinweis auf `/internetspuren`.
 - [ ] Hinweistexte AR, RU, EN, TR vom AG freigeben lassen
 
+## Selbstcheck
+
+- Entscheidungsbaum mit Ampel, eine Frage pro Schritt. Festlegungen in `selbstcheck.md`.
+- Neue Knopfstile dafür: `.button--secondary` (weiß mit dunklem Rand), `.link-button` (Knopf im Aussehen eines Links), `.choice` (Auswahl über volle Breite mit Beschreibung).
+
 ## Seitenkopf mit Broschüren-Band
 
 - Desktop (ab 64em): Titel und Einleitung links auf Weiß, Farbfläche rechts (52vw) mit gewellter Kante, Illustration unten rechts, max. 19rem hoch.

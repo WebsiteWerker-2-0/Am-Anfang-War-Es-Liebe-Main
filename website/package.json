@@ -13,7 +13,8 @@
     "cms:migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "cms:migrate": "cross-env NODE_ENV=production NODE_OPTIONS=--no-deprecation payload migrate",
     "cms:seed": "cross-env NODE_ENV=production NODE_OPTIONS=--no-deprecation payload run scripts/cms-seed.ts",
-    "cms:create-admin": "cross-env NODE_ENV=production NODE_OPTIONS=--no-deprecation payload run scripts/cms-create-admin.ts"
+    "cms:create-admin": "cross-env NODE_ENV=production NODE_OPTIONS=--no-deprecation payload run scripts/cms-create-admin.ts",
+    "test": "node --import tsx --test \"src/**/*.test.ts\""
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "3.90.2",

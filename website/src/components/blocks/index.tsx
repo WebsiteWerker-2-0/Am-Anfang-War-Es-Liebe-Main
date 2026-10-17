@@ -12,7 +12,7 @@ import { ExhibitionSlider } from "../ExhibitionSlider";
 import { PhoneLink } from "../PhoneLink";
 import { PostList } from "../PostList";
 import { QuickExitLink } from "../QuickExit";
-import { SelfCheckForm } from "../SelfCheckForm";
+import { SelfCheck } from "../SelfCheck";
 import { SupportServiceSection } from "../SupportService";
 
 // Darstellung der Seitenblöcke (content/model.ts). Das Markup entspricht den früheren
@@ -499,7 +499,7 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
           case "selfCheck":
             return (
               <div key={index} className="measure">
-                <SelfCheckForm legend={block.legend} statements={block.statements.map((statement) => statement.text)} />
+                <SelfCheck legend={block.legend} statements={block.statements.map((statement) => statement.text)} />
               </div>
             );
           case "contactForm":

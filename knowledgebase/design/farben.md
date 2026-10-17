@@ -15,7 +15,7 @@ In der Broschüre steht weiße Schrift auf Cyan. Auf der Website steht auf Cyan 
 
 ## Funktionsfarben
 
-Für die Benutzeroberfläche erforderliche Abweichungen von der Broschürenpalette sind zulässig (Entscheidung vom 17.10.2026): Notausgang-Rot `#b00020`, Fehler, Erfolg, Fokus. Sie bleiben auf Funktionen beschränkt, Flächen und Marke folgen der Broschüre.
+Für die Benutzeroberfläche erforderliche Abweichungen von der Broschürenpalette sind zulässig (Entscheidung vom 17.10.2026): Notausgang-Rot `#b00020`, Fehler, Erfolg, Fokus, Gelb der Selbstcheck-Ampel `--c-warning: #8a5a00` (5,9:1 zu Weiß, siehe `selbstcheck.md`). Sie bleiben auf Funktionen beschränkt, Flächen und Marke folgen der Broschüre.
 
 ## Offen
 
