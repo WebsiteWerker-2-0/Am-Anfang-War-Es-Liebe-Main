@@ -12,7 +12,7 @@ import { Posts } from "./cms/collections/Posts";
 import { Services } from "./cms/collections/Services";
 import { Site } from "./cms/globals/Site";
 import { Users } from "./cms/collections/Users";
-import { cmsSecret, databaseUrl } from "./cms/env";
+import { databaseUrl } from "./cms/env";
 import { migrations } from "./migrations";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -21,8 +21,8 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 // und für Suchmaschinen gesperrt (siehe next.config.ts). Konten gibt es nur nach
 // Anlage durch eine Admin (docs/adr/0004-payload-cms-unter-backend.md).
 export default buildConfig({
-  // Umgebungsvariable PAYLOAD_SECRET oder ein beim ersten Start erzeugtes Geheimnis (src/cms/env.ts)
-  secret: cmsSecret(),
+  // Ohne PAYLOAD_SECRET startet das Backend nicht, die öffentliche Website ist davon unabhängig.
+  secret: process.env.PAYLOAD_SECRET || "",
   routes: { admin: "/backend", api: "/backend/api" },
   graphQL: { disable: true },
   admin: {

@@ -1,6 +1,5 @@
 import type { CollectionConfig } from "payload";
 import { isAdmin, isAdminField } from "../access";
-import { consumeFirstUserFlag } from "../env";
 
 // Redakteurinnen (F-05). Es gibt keine Registrierung: Konten legt eine Admin an,
 // das allererste Konto wird über `npm run cms:create-admin` erzeugt.
@@ -35,12 +34,6 @@ export const Users: CollectionConfig = {
     },
   },
   hooks: {
-    afterChange: [
-      ({ doc, operation }) => {
-        if (operation === "create") consumeFirstUserFlag();
-        return doc;
-      },
-    ],
     beforeChange: [
       // Das erste Konto ist immer Admin, sonst könnte niemand weitere Konten anlegen.
       async ({ data, operation, req }) => {
