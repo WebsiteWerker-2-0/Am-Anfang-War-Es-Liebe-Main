@@ -10,6 +10,11 @@
 - Mobil fixierter Knopf zusätzlich mit weißem 2-px-Ring, damit er auf jedem Hintergrund sichtbar bleibt.
 - Ab 64em sticky am oberen Rand, damit der Notausgang auf Desktop beim Scrollen erreichbar bleibt. Mobil übernimmt der fixierte Knopf unten rechts.
 - Tastenkürzel zweimal Esc in 1 s; gehaltene Taste (`e.repeat`) zählt nicht.
+- Ziel: Google-Suche `q=wetter` (`QUICK_EXIT_URL` in `content/navigation.ts`), bestätigt am 17.10.2026.
+- Back-Forward-Cache: Holt der Browser eine Seite zurück, die den Notausgang schon ausgelöst hatte (`pageshow` mit `event.persisted`), verlässt sie sich sofort wieder. Der Merker liegt nur im Arbeitsspeicher. Normales Zurück innerhalb der Website bleibt möglich.
+- Alle Seiten der Website senden `Cache-Control: no-store` (`src/proxy.ts`), damit der Browser sie weder im Back-Forward-Cache noch im Zwischenspeicher ablegt. Statische Dateien (`/_next/`, Adressen mit Dateiendung) bleiben cachebar.
+- Sprachfassungen auf `/sprachen`: unter dem Notausgang ein Satz zu Ziel und Tastenkürzel in der jeweiligen Sprache (`QUICK_EXIT_HINTS`, im Code wie das Ziel). Deutscher Hinweis auf `/internetspuren`.
+- [ ] Hinweistexte AR, RU, EN, TR vom AG freigeben lassen
 
 ## Seitenkopf mit Broschüren-Band
 

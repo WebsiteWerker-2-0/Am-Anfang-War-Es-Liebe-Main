@@ -244,6 +244,7 @@ Desktop: Kopfzeile zweizeilig (oben Hilfeleiste mit Sprachwahl, Hilfetelefon, No
 - Desktop: in der Hilfeleiste; Mobil: zusätzlich fixiert unten inline-end, Mindestgröße 48 × 48 px, nicht vom Cookie- oder sonstigem UI verdeckbar (es gibt keines).
 - Tastenkürzel: zweimal `Esc` innerhalb von 1 s. Im Hinweistext auf der Seite F-09 erklären.
 - `Referrer-Policy: no-referrer` serverseitig setzen, damit die Zielseite keine Herkunft sieht.
+- `Cache-Control: no-store` für alle Seiten, damit sie nicht im Back-Forward-Cache oder Zwischenspeicher landen. Kehrt eine Seite trotzdem nach dem Notausgang aus dem Back-Forward-Cache zurück (`pageshow` mit `event.persisted`), wird sie sofort erneut verlassen (Entscheidung vom 17.10.2026).
 
 ```js
 // assets/js/exit.js (ohne Abhängigkeiten, defer)
