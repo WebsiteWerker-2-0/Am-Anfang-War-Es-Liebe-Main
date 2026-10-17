@@ -1,59 +1,66 @@
-# Übergabe: Backend, Kurse und Betrieb
+# Übergabe: Backend, Veranstaltungen und Betrieb
 
-Stand 17.10.2026. Dieses Dokument bringt eine neue Sitzung (oder Person) auf den Stand des Redaktionsbereichs. Lesereihenfolge: `CLAUDE.md`, dieses Dokument, dann die ADRs 0004 und 0005 in `docs/adr/`. Für Redakteurinnen gibt es ein eigenes Handbuch: `docs/redaktion-handbuch.md`. Zugangsdaten stehen nirgends im Repository (das Repo ist öffentlich).
+Stand 17.10.2026. Dieses Dokument bringt eine neue Sitzung (oder Person) auf den Stand des Redaktionsbereichs. Lesereihenfolge: `CLAUDE.md`, dieses Dokument, dann die ADRs 0004 bis 0006 in `docs/adr/`. Für Redakteurinnen gibt es ein eigenes Handbuch: `docs/redaktion-handbuch.md`. Zugangsdaten stehen nirgends im Repository (das Repo ist öffentlich).
 
 ## Was es gibt
 
-- Website: Next.js 16 (App Router) in `website/`, ISR (60 s), keine externen Ressourcen.
-- Redaktionsbereich unter `/backend`: Payload CMS 3.90 im selben Projekt (SQLite, Konten nur durch Admins), Oberfläche auf Deutsch.
-- Das Backend ist wie die Website aufgebaut: jede der 12 Seiten ist ein Eintrag mit denselben Blöcken in derselben Reihenfolge. Dazu Aktuelles, Kurse mit Anmeldung, Anlaufstellen, Dateien, Kopf und Fuß, E-Mail-Einstellungen.
-- Läuft produktiv-ähnlich auf **Hostinger** (Node.js-Web-App, baut `main` bei jedem Push) und als Vorschau auf **Vercel** (dort zeigt die Website den Standardinhalt, das Backend ist nur eine Demo mit flüchtigen Daten).
+- Website: Next.js 16 (App Router) in `website/`, ISR (60 s), keine externen Ressourcen, Notausgang auf jeder Seite.
+- Redaktionsbereich unter `/backend`: Payload CMS 3.90 im selben Projekt (SQLite, Konten nur durch Admins), auf Deutsch.
+- **Die Redaktion sieht nur drei Bereiche: Aktuelles, Veranstaltungen, Dateiarchiv.** Admins zusätzlich Verwaltung (Redakteur:innen, E-Mail und Anmeldungen). **Seiten, Anlaufstellen, Menü, Sprachwahl und Fuß sind bewusst nicht im Backend**, sie stehen im Code (ADR-0006).
+- Läuft auf **Hostinger** (Node.js-Web-App, baut `main` bei jedem Push) und als Vorschau auf **Vercel** (dort zeigt die Website nur den Altbestand, das Backend ist eine Demo mit flüchtigen Daten).
 
-## Wie Inhalte laufen
+## Wo welcher Inhalt liegt
 
-```
-Standardinhalt (website/src/content/)  ──seed──►  CMS-Datenbank  ──lesen──►  Website
-        ▲ Vorlage und Ersatz                          ▲ Redaktion ändert hier
-```
+| Inhalt | Ort | Änderbar durch |
+|---|---|---|
+| Seiten (12), Texte, Blöcke | `website/src/content/pages/*.ts`, Datenmodell `content/model.ts` | Entwicklung (Pull Request) |
+| Anlaufstellen | `content/support-services.ts` | Entwicklung |
+| Menü, Sprachwahl, Hilfetelefon, Fuß, Postfächer der Kontaktseite | `content/site.ts` | Entwicklung |
+| Aktuelles | CMS, Sammlung `posts` (Altbestand: `content/posts.json` als Vorlage) | Redaktion |
+| Veranstaltungen und Anmeldungen | CMS, Sammlungen `courses`, `registrations` | Redaktion |
+| Dateien | CMS, Sammlung `media`, öffentlich unter `/dateien/<Name>` | Redaktion |
+| Empfänger und Postfach für Anmeldungen | CMS, Global `mail` | Admins |
 
-- `src/content/pages/*.ts`: Standardinhalt jeder Seite im Datenmodell `src/content/model.ts` (Blöcke, Text als HTML-Zeichenkette, Bilder als Schlüssel). Reine Daten ohne Bildimporte, damit auch Skripte sie laden können. `src/content/site.ts` (Menü, Fuß), `support-services.ts` (Anlaufstellen), `posts.json` (Beiträge der Altseite).
-- `src/lib/content.ts` liest zuerst das CMS und fällt auf den Standardinhalt zurück (`cmsEnabled()` in `src/lib/cms-client.ts`: aus beim Bauen, ohne `PAYLOAD_SECRET`, auf Vercel). **Die Website ist nie vom CMS abhängig.**
-- Seeding (`src/cms/seed.ts`) läuft bei jedem Start über `onInit` und füllt fehlende Teile (je Seite, Anlaufstelle, Beitrag einzeln, Fehler einzelner Teile legen das Backend nicht lahm). `CMS_SEED=false` schaltet es ab.
-- Änderungen im Backend lösen `revalidateSite()` aus (`src/cms/revalidate.ts`), die Seiten sind nach Sekunden aktuell.
-- Darstellung der Blöcke: `src/components/blocks/index.tsx`, Seitenrahmen `CmsPage.tsx`, Text `src/lib/rich.tsx` (CMS-Text und HTML-Standardinhalt mit denselben Klassen), `src/lib/html-to-jsx.tsx`.
-- Neuer Blocktyp = Typ in `model.ts`, Payload-Block in `src/cms/blocks/page-blocks.ts`, Renderer, Umwandlung in `seed.ts` (`convertBlock`), Standardinhalt.
+`src/lib/content.ts` liefert Seiten, Site und Anlaufstellen aus dem Code und Beiträge/Veranstaltungen aus dem CMS (`cmsEnabled()` in `src/lib/cms-client.ts`: aus beim Bauen, ohne Geheimnis, auf Vercel). **Die Website ist nie vom CMS abhängig**: ohne CMS erscheinen der Altbestand der Beiträge und keine Veranstaltungen. Änderungen im Backend lösen `revalidateSite()` aus, die Seiten sind nach Sekunden aktuell. Das Einspielen (`src/cms/seed.ts`, über `onInit`) füllt nur die Beiträge der Altseite, `CMS_SEED=false` schaltet es ab.
 
-## Kurse und Anmeldung (ADR-0005)
+Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenrahmen), `src/lib/rich.tsx` und `src/lib/html-to-jsx.tsx` (Text aus HTML-Standardinhalt und aus dem CMS mit denselben Klassen). Neuer Blocktyp = Typ in `model.ts`, Renderer, Standardinhalt in `content/pages/`. Das CMS kennt Blöcke nicht mehr.
 
-- Sammlungen `courses` und `registrations`, Global `mail` (nur Admins). Logik in `src/lib/courses.ts`, `registration.ts`, `mail.ts`.
-- Öffentliche Schnittstellen: `GET /api/kurse` (Stand, ohne Cache), `POST /api/kurse/anmeldung`. Die Kursliste `src/components/CourseList.tsx` ist eine Client-Komponente, fragt alle 30 s nach und lädt auch nach, wenn die Seite ohne Kurse erzeugt wurde.
-- Block `courseList` auf der Seite „Kurse“. Ohne veröffentlichte Kurse erscheint der Hinweis „Termine folgen“ wie früher.
-- E-Mail über nodemailer. Test: Knopf „Test-E-Mail senden“ im Backend. Lokal lässt sich ein SMTP-Server wie `smtp-server` (npm) auf Port 2525 zum Auffangen der Mails nutzen.
+## Veranstaltungen und Anmeldung (ADR-0005)
+
+- Sammlung `courses` (im Backend „Veranstaltungen“, der Name bleibt intern), `registrations` (nicht im Menü, `group: false`; in der Veranstaltung als Join-Liste, dazu Startseite des Backends), Global `mail`. Logik in `src/lib/courses.ts`, `registration.ts`, `mail.ts`.
+- Öffentliche Schnittstellen: `GET /api/kurse` (Stand, ohne Cache), `POST /api/kurse/anmeldung` (Herkunft, verstecktes Feld, Begrenzung 10 je Adresse und Stunde über `CMS_REGISTRATION_LIMIT`, Plätze werden nacheinander vergeben, Doppelanmeldungen werden abgelehnt).
+- Die Kursliste `src/components/CourseList.tsx` (Client) fragt alle 30 s nach und lädt auch nach, wenn die Seite ohne Veranstaltungen erzeugt wurde. Block `courseList` im Standardinhalt der Seite „Kurse“. Ohne Veranstaltung erscheint der Hinweis „Termine folgen“.
+- E-Mail über nodemailer. Test: Knopf „Test-E-Mail senden“ im Backend (Admin). Lokal fängt ein SMTP-Server wie `smtp-server` (npm) auf Port 2525 die Mails auf. Scheitert der Versand, bleibt die Anmeldung gespeichert und zeigt „Nicht gesendet“.
 
 ## Redaktions-Oberfläche
 
-Menügruppen und Reihenfolge ergeben sich aus `collections`/`globals` in `src/payload.config.ts` und `admin.group` der Sammlungen. Startseite: `src/cms/components/Dashboard.tsx`. Rollen: `admin` und `editor` (`src/cms/access.ts`). Redakteurinnen sehen weder Konten noch E-Mail-Einstellungen. Versionsverlauf (`versions`) für Seiten, Aktuelles, Kurse. Seltene Felder sind unter „Erweitert“ eingeklappt. Events (Veranstaltungen) sind ausgeblendet, bis die Seite gebaut ist.
+- Menügruppen kommen aus `admin.group` der Sammlungen: je Bereich eine eigene Gruppe (Aktuelles, Veranstaltungen, Dateiarchiv), die Überschrift blendet `custom.css` aus, damit das Menü flach wirkt. „Verwaltung“ ist nach Rolle ausgeblendet (`admin.hidden`). Startseite: `src/cms/components/Dashboard.tsx` (Schaltflächen), die Standard-Karten von Payload sind ausgeblendet.
+- Gestaltung: `src/app/(payload)/custom.css` (Liquid Glass, Orange und Magenta der Broschüre, hell und dunkel). Größen in px, Payload setzt die Basisschrift auf 13 px. Betrifft nur das Backend. Die Klassen (`.nav`, `.nav-group`, `.nav__link`, `#nav-group-<Name>`) gehören Payload: nach einem Update das Backend ansehen.
+- Einfach halten: Slug von Beiträgen und Veranstaltungen ist unsichtbar und bleibt beim Umbenennen gleich, Spezialfelder sind eingeklappt, Versionsverlauf für Aktuelles und Veranstaltungen, Link „Auf der Website ansehen“, deutsche Beschriftungen, die Redaktion legt Dateien direkt im Beitrag oder in der Veranstaltung ab.
+- Rollen: `admin` und `editor` (`src/cms/access.ts`). Nur Admins verwalten Konten und E-Mail-Einstellungen.
 
 ## Betrieb auf Hostinger
 
 - Hostinger klont `main`, findet `website/` selbst und führt `npm install` und `npm run build` aus, danach Neustart. Build und Deployment dauern etwa 2 Minuten und starten bei **jedem** Push nach `main`.
-- Node 22. Build mit **Webpack** (`next build --webpack`): Turbopack bricht dort bei der CSS-Verarbeitung ab (eigener PostCSS-Prozess endet sofort, „TurbopackInternalError … globals.css“).
-- Umgebungsvariablen setzt man in hPanel (Websites → Node.js web app). Namen genau schreiben. Nötig: `PAYLOAD_SECRET` (langer Zufallswert), `CMS_DATA_DIR` (absoluter Pfad außerhalb des App-Ordners, z. B. im Home-Verzeichnis, damit Deployments Datenbank und Uploads nicht überschreiben). Zum Anlegen des ersten Kontos vorübergehend `CMS_ALLOW_FIRST_USER=true`, Konto im Browser anlegen, Variable wieder entfernen. Fremde Einträge in der Liste nicht löschen.
+- Node 22. Build mit **Webpack** (`next build --webpack`): Turbopack bricht dort bei der CSS-Verarbeitung ab (eigener PostCSS-Prozess endet sofort).
+- Umgebungsvariablen setzt man in hPanel (Websites → Node.js web app), Namen genau schreiben. Nötig: `PAYLOAD_SECRET` (langer Zufallswert), `CMS_DATA_DIR` (absoluter Pfad außerhalb des App-Ordners, damit Deployments Datenbank und Uploads nicht überschreiben). Zum Anlegen des ersten Kontos vorübergehend `CMS_ALLOW_FIRST_USER=true`, Konto im Browser anlegen, Variable wieder entfernen. Einträge, die nicht aus diesem Projekt stammen, nicht löschen.
 - Logs: Build-Protokolle unter `hbuilds/logs/<id>/…deploy.log` im Konto-Ordner der Website. Die laufende App schreibt `console.log` und `stderr.log` in ihr Arbeitsverzeichnis (`hbuilds/versions/<id>/nodejs`, zu finden über den Prozess `next-server`). Dort stehen Fehler des Backends.
-- Nach dem Deployment liegen nur Dateien im Standalone-Ordner (`.next/standalone`). Was zur Laufzeit gelesen wird (`src/assets`, `public/…`), muss über `outputFileTracingIncludes` in `next.config.ts` hineinkommen.
+- Im Standalone-Ordner liegt nur, was nachverfolgt wird. Zur Laufzeit gelesene Dateien (heute nur `public/…` für das Einspielen der Beiträge) gehören in `outputFileTracingIncludes` in `next.config.ts`.
 - Noch zu prüfen: Behält der Tarif Dateien in `CMS_DATA_DIR` zwischen Deployments? Sind Backups täglich mit 14 Tagen Aufbewahrung (Pflichtenheft 3.1)? Serverstandort Deutschland?
 
 ## Fallstricke (alle schon einmal aufgetreten)
 
-1. **Migrationen nie löschen oder neu erzeugen**, sobald eine Datenbank sie angewendet hat. Neue Änderungen: `npm run cms:types`, `npm run cms:importmap`, dann `npm run cms:migrate:create -- <name>` und die Dateien committen. Fragt der Befehl „blank migration?“, gibt es keine Schemaänderung: mit `n` antworten.
-2. **CMS-Skripte laufen im Produktionsmodus** (`NODE_ENV=production` in den npm-Skripten). Im Entwicklungsmodus schiebt Payload das Schema direkt in die Datenbank, und der nächste Serverstart wartet auf eine Rückfrage („dev mode … data loss“). Auf dem Server bedeutet das: hängender Start.
-3. `outputFileTracingIncludes`: Die Schlüssel sind Muster (picomatch), eckige Klammern der Routen wirken als Zeichenklasse. `"/backend/**"` statt `"/backend/[[...segments]]"`.
-4. `notFound()` bei zur Laufzeit erzeugten Seiten liefert nur eine leere Hülle. Deshalb leitet die Beitragsseite unbekannte Adressen auf `/aktuelles` um. Unbekannte Adressen der Website zeigt `src/app/global-not-found.tsx` (experimentell, `experimental.globalNotFound`), weil Website und Backend je ein Root-Layout haben. Der Notausgang muss auch dort erscheinen (`SiteDocument`).
-5. Zwei Server mit demselben `.next`-Ordner überschreiben sich den ISR-Zwischenspeicher: Vergleichstests getrennt fahren.
-6. Mit Webpack bekommt der Seitentitel der 404-Seite sonst den Titel-Zusatz doppelt (`notFoundMetadata` in `src/lib/site-metadata.ts`).
-7. Formular zurücksetzen nach `await`: `event.currentTarget` ist dann leer, Element vorher merken.
-8. React-Lint verbietet `Date.now()` im Rendern und direktes `setState` im Effekt.
-9. Die Paketversionen von Payload müssen alle gleich sein (aktuell 3.90.2, exakt angepinnt). Next muss zur Payload-Peer-Angabe passen (`>=16.3.3 <17`).
+1. **Migrationen nie löschen oder neu erzeugen**, sobald eine Datenbank sie angewendet hat. Neue Änderungen: `npm run cms:types`, `npm run cms:importmap`, dann `npm run cms:migrate:create -- <name>` (Eingabe von `/dev/null` lesen lassen, sonst fragt der Befehl bei „keine Änderung“ nach) und die Dateien committen.
+2. **SQLite-Migrationen sind nicht atomar.** Ein Fehler lässt einen halb migrierten Stand zurück. Darum jede Migration vor dem Veröffentlichen an einer Datenbank im Zustand des Servers prüfen: Stand von `main` bauen, mit Daten füllen, Verzeichnis `CMS_DATA_DIR` sichern, dann den neuen Stand darauf starten (beim Wiederholen die Sicherung zurückkopieren). Erzeugte Migrationen, die Tabellen löschen, prüfen: `DROP TABLE` scheitert an Fremdschlüsseln, wenn Verweistabellen später neu gebaut werden (so geschehen in `…_cms_verschlanken`, dort von Hand umgestellt).
+3. **CMS-Skripte laufen im Produktionsmodus** (`NODE_ENV=production` in den npm-Skripten). Im Entwicklungsmodus schiebt Payload das Schema direkt in die Datenbank, und der nächste Serverstart wartet auf eine Rückfrage („dev mode … data loss“). Auf dem Server bedeutet das einen hängenden Start.
+4. `outputFileTracingIncludes`: Die Schlüssel sind Muster (picomatch), eckige Klammern der Routen wirken als Zeichenklasse. `"/backend/**"` statt `"/backend/[[...segments]]"`.
+5. `notFound()` bei zur Laufzeit erzeugten Seiten liefert nur eine leere Hülle. Deshalb leitet die Beitragsseite unbekannte Adressen auf `/aktuelles` um. Unbekannte Adressen der Website zeigt `src/app/global-not-found.tsx` (experimentell, `experimental.globalNotFound`), weil Website und Backend je ein Root-Layout haben. Der Notausgang muss auch dort erscheinen (`SiteDocument`).
+6. Zwei Server mit demselben `.next`-Ordner überschreiben sich den ISR-Zwischenspeicher: Vergleichstests getrennt fahren.
+7. Mit Webpack bekommt der Seitentitel der 404-Seite sonst den Titel-Zusatz doppelt (`notFoundMetadata` in `src/lib/site-metadata.ts`).
+8. Formular zurücksetzen nach `await`: `event.currentTarget` ist dann leer, Element vorher merken.
+9. React-Lint verbietet `Date.now()` im Rendern und direktes `setState` im Effekt.
+10. Die Paketversionen von Payload müssen alle gleich sein (aktuell 3.90.2, exakt angepinnt). Next muss zur Peer-Angabe passen (`>=16.3.3 <17`).
+11. Die Oberfläche von Payload rechnet in rem mit 13 px Basisschrift: Eigene Größen in px angeben.
 
 ## Befehle
 
@@ -62,18 +69,19 @@ Menügruppen und Reihenfolge ergeben sich aus `collections`/`globals` in `src/pa
 | `npm run dev` | Entwicklung, Daten in `./data` |
 | `npm run build` / `npm run start` | Produktionsbau (Webpack) und Start |
 | `npm run cms:types`, `cms:importmap`, `cms:migrate:create -- <name>` | nach Änderungen an Feldern, Dateien committen |
-| `npm run cms:seed` | Standardinhalt einspielen (läuft sonst bei jedem Start) |
+| `npm run cms:seed` | Beiträge der Altseite einspielen (läuft sonst bei jedem Start) |
 | `ADMIN_EMAIL=… ADMIN_PASSWORD=… npm run cms:create-admin` | erstes Konto, Passwort mind. 12 Zeichen |
 | `python3 scripts/compare-html.py <Referenz> <Prüfling> website/src/content/posts.json` | HTML zweier Server Seite für Seite vergleichen (siehe Kopf des Skripts) |
 
-## Prüfen vor dem Push
+## Prüfen vor dem Push nach `main`
 
-`npm run lint`, `npx tsc --noEmit` (die Meldungen zu `PageProps`/`LayoutProps` verschwinden nach einem Build), `npm run build`. Bei Umbauten an Seiten oder Blöcken `scripts/compare-html.py` gegen `main`. Bei Änderungen an Kursen und Anmeldung den Ablauf einmal komplett durchspielen (Kurs anlegen, anmelden, Warteliste, Storno, E-Mail).
+`npm run lint`, `npx tsc --noEmit` (die Meldungen zu `PageProps`/`LayoutProps` verschwinden nach einem Build), `npm run build`. Bei Umbauten an Seiten oder Blöcken `scripts/compare-html.py` gegen `main`. Bei Änderungen an Veranstaltungen und Anmeldung den Ablauf einmal komplett durchspielen (anlegen, anmelden, Warteliste, Storno, E-Mail). Bei Änderungen am Datenbankschema die Migration an einer Datenbank im Serverzustand prüfen (Fallstrick 2).
 
 ## Offene Punkte
 
-- Löschfrist für Kursanmeldungen mit dem Arbeitskreis festlegen (Pflichtenheft § 13), Datenschutzerklärung und AVV um Anmeldungen und E-Mail-Versand ergänzen.
+- Löschfrist für Anmeldungen mit dem Arbeitskreis festlegen (Pflichtenheft § 13), Datenschutzerklärung und AVV um Anmeldungen und E-Mail-Versand ergänzen.
 - Vertrag: Das Pflichtenheft nennt WordPress auf Hetzner. Next.js und Hostinger brauchen die schriftliche Abstimmung mit dem Kunden und die AVV-Information (Frist 4 Wochen, § 5 Abs. 2).
-- Veranstaltungen (F-06) und Seiteninhalte in fünf Sprachen (F-03) sind nicht gebaut. Kontaktformular (F-04) hat noch keinen Versand.
+- Seiteninhalte in fünf Sprachen (F-03) sind nicht gebaut. Das Kontaktformular (F-04) hat noch keinen Versand.
 - Passwort-zurücksetzen-E-Mails des CMS gehen mangels Mailadapter in die Konsole. Admins setzen Passwörter von Hand zurück.
 - Farben warten auf die Druckdaten (Z-06), Texte und Daten auf die Freigaben des Kunden (siehe `// OFFEN:` im Code).
+- Das Liquid-Glass-Design ist nach eigenem Ermessen gebaut: Soll es einer Vorlage („Portfolio Dashboard“) näherkommen, Screenshot dazulegen und `custom.css` anpassen.

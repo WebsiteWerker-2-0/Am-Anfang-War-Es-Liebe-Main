@@ -1,23 +1,25 @@
 import { APIError, type CollectionConfig } from "payload";
 import { isLoggedIn, publishedOrLoggedIn } from "../access";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
-import { slugField } from "../fields/slug";
+import { hiddenSlugField } from "../fields/slug";
 import { revalidateSite } from "../revalidate";
 
-// Kurse mit Plätzen und Anmeldung (F-11). Die Website zeigt veröffentlichte Kurse auf der Seite „Kurse“
-// mit der Zahl der freien Plätze und einem Anmeldeformular, siehe components/blocks/CourseList.tsx.
+// Veranstaltungen (Kurse und Termine) mit Plätzen und Anmeldung (F-06, F-11). Die Website zeigt
+// veröffentlichte Veranstaltungen auf der Seite „Kurse“ mit freien Plätzen und einem Anmeldeformular,
+// siehe components/CourseList.tsx. Der Name der Sammlung bleibt „courses“ (Datenbank, Adressen),
+// im Backend heißt sie „Veranstaltungen“.
 export const Courses: CollectionConfig = {
   slug: "courses",
-  labels: { singular: "Kurs", plural: "Kurse" },
+  labels: { singular: "Veranstaltung", plural: "Veranstaltungen" },
   versions: { maxPerDoc: 20 },
   defaultSort: "startsAt",
   admin: {
     useAsTitle: "title",
-    group: "Aktuelles und Kurse",
+    group: "Veranstaltungen",
     defaultColumns: ["title", "startsAt", "booked", "capacity", "status"],
     listSearchableFields: ["title", "location"],
     description:
-      "Hier legen Sie Kurse an. Sobald ein Kurs „Veröffentlicht“ ist, erscheint er mit freien Plätzen und Anmeldeformular auf der Seite „Kurse“.",
+      "Kurse und Termine mit Anmeldung. Sobald eine Veranstaltung „Veröffentlicht“ ist, erscheint sie mit freien Plätzen und Anmeldeformular auf der Website.",
   },
   access: {
     read: publishedOrLoggedIn,
@@ -30,12 +32,12 @@ export const Courses: CollectionConfig = {
     afterChange: [() => revalidateSite()],
     afterDelete: [() => revalidateSite()],
     beforeDelete: [
-      // Anmeldungen enthalten persönliche Daten und gehören zu genau einem Kurs
+      // Anmeldungen enthalten persönliche Daten und gehören zu genau einer Veranstaltung
       async ({ id, req }) => {
         const { totalDocs } = await req.payload.count({ collection: "registrations", where: { course: { equals: id } }, req });
         if (totalDocs > 0) {
           throw new APIError(
-            `Dieser Kurs hat ${totalDocs} Anmeldung(en) und kann nicht gelöscht werden. Stellen Sie ihn stattdessen auf „Archiviert“.`,
+            `Diese Veranstaltung hat ${totalDocs} Anmeldung(en) und kann nicht gelöscht werden. Stellen Sie sie stattdessen auf „Archiviert“.`,
             400,
             undefined,
             true,
@@ -45,42 +47,25 @@ export const Courses: CollectionConfig = {
     ],
   },
   fields: [
-    { name: "title", type: "text", label: "Name des Kurses", required: true, admin: { placeholder: "Zum Beispiel: WenDo für Frauen und Mädchen" } },
     {
-      type: "row",
-      fields: [
-        {
-          name: "startsAt",
-          type: "date",
-          label: "Beginn",
-          required: true,
-          admin: { date: { pickerAppearance: "dayAndTime", displayFormat: "dd.MM.yyyy HH:mm" }, width: "50%" },
-        },
-        {
-          name: "endsAt",
-          type: "date",
-          label: "Ende",
-          admin: {
-            date: { pickerAppearance: "dayAndTime", displayFormat: "dd.MM.yyyy HH:mm" },
-            width: "50%",
-            description: "Optional, zum Beispiel bei Kursen über mehrere Tage.",
-          },
-        },
-      ],
+      name: "title",
+      type: "text",
+      label: "Name der Veranstaltung",
+      required: true,
+      admin: { placeholder: "Zum Beispiel: WenDo für Frauen und Mädchen" },
     },
-    { name: "location", type: "text", label: "Ort", admin: { placeholder: "Zum Beispiel: Kreishaus Höxter, Raum 12" } },
     {
-      type: "row",
-      fields: [
-        { name: "audience", type: "text", label: "Für wen", admin: { placeholder: "Frauen und Mädchen ab 15 Jahren", width: "50%" } },
-        { name: "price", type: "text", label: "Kosten", admin: { placeholder: "kostenlos", width: "50%" } },
-      ],
+      name: "startsAt",
+      type: "date",
+      label: "Wann beginnt es?",
+      required: true,
+      admin: { date: { pickerAppearance: "dayAndTime", displayFormat: "dd.MM.yyyy HH:mm" } },
     },
-    { name: "instructor", type: "text", label: "Kursleitung" },
+    { name: "location", type: "text", label: "Wo findet es statt?", admin: { placeholder: "Zum Beispiel: Kreishaus Höxter, Raum 12" } },
     {
       name: "description",
       type: "textarea",
-      label: "Beschreibung",
+      label: "Worum geht es?",
       admin: { description: "Kurzer Text für die Website. Eine Leerzeile beginnt einen neuen Absatz." },
     },
     {
@@ -89,7 +74,7 @@ export const Courses: CollectionConfig = {
         {
           name: "capacity",
           type: "number",
-          label: "Plätze insgesamt",
+          label: "Wie viele Plätze gibt es?",
           required: true,
           min: 1,
           defaultValue: 12,
@@ -98,9 +83,9 @@ export const Courses: CollectionConfig = {
         {
           name: "booked",
           type: "number",
-          label: "Angemeldet",
+          label: "Schon angemeldet",
           virtual: true,
-          admin: { readOnly: true, width: "50%", description: "Wird aus den Kursanmeldungen berechnet." },
+          admin: { readOnly: true, width: "50%", description: "Zählt das System selbst, aus den Anmeldungen unten." },
           hooks: {
             afterRead: [
               async ({ data, req }) => {
@@ -137,14 +122,51 @@ export const Courses: CollectionConfig = {
       ],
     },
     {
-      name: "notifyEmail",
-      type: "email",
-      label: "Anmeldungen für diesen Kurs gehen an",
-      access: { read: ({ req }) => Boolean(req.user) },
-      admin: { description: "Leer lassen: Es gilt die Adresse unter „E-Mail und Anmeldungen“." },
+      name: "registrationList",
+      type: "join",
+      collection: "registrations",
+      on: "course",
+      label: "Anmeldungen",
+      admin: {
+        defaultColumns: ["name", "email", "status", "createdAt"],
+        allowCreate: false,
+        description:
+          "Wer sich angemeldet hat. Zum Stornieren (Platz wird frei) oder zum Nachrücken von der Warteliste eine Zeile öffnen und den Status ändern. Nach der Veranstaltung bitte löschen: Die Angaben sind persönliche Daten.",
+      },
+    },
+    {
+      type: "collapsible",
+      label: "Weitere Angaben (freiwillig)",
+      admin: { initCollapsed: true },
+      fields: [
+        {
+          name: "endsAt",
+          type: "date",
+          label: "Wann endet es?",
+          admin: {
+            date: { pickerAppearance: "dayAndTime", displayFormat: "dd.MM.yyyy HH:mm" },
+            description: "Zum Beispiel bei Veranstaltungen über mehrere Tage.",
+          },
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "audience", type: "text", label: "Für wen", admin: { placeholder: "Frauen und Mädchen ab 15 Jahren", width: "50%" } },
+            { name: "price", type: "text", label: "Kosten", admin: { placeholder: "kostenlos", width: "50%" } },
+          ],
+        },
+        { name: "instructor", type: "text", label: "Leitung" },
+        {
+          name: "notifyEmail",
+          type: "email",
+          label: "Anmeldungen für diese Veranstaltung gehen an",
+          access: { read: ({ req }) => Boolean(req.user) },
+          admin: { description: "Leer lassen: Es gilt die Adresse, die ein Admin unter „E-Mail und Anmeldungen“ eingetragen hat." },
+        },
+      ],
     },
     { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },
-    slugField,
+    hiddenSlugField,
     ...publicationFields,
   ],
 };

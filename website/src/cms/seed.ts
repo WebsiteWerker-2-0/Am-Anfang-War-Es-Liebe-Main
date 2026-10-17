@@ -3,20 +3,15 @@ import path from "node:path";
 import { convertHTMLToLexical, editorConfigFactory } from "@payloadcms/richtext-lexical";
 import { JSDOM } from "jsdom";
 import type { Payload } from "payload";
-import type { ImageValue, PageBlock, PageData, Rich, SectionItem, SiteData } from "@/content/model";
-import { defaultPages } from "@/content/pages";
 import posts from "@/content/posts.json";
-import { defaultSite } from "@/content/site";
-import { mainServices, quickAccess, serviceGroups, type SupportService } from "@/content/support-services";
 
-// Spielt den Inhalt der bisherigen Website ins CMS ein: Seiten, Anlaufstellen, Seitenrahmen,
-// Beiträge der Altseite samt Bildern und Dokumenten. Jeder Teil läuft nur, solange seine
-// Sammlung leer ist, und kann gefahrlos wiederholt werden.
+// Spielt die Beiträge der Altseite (src/content/posts.json) mit Bildern und Dokumenten (public/medien)
+// ins CMS ein, solange es noch keine Beiträge gibt. Kann gefahrlos wiederholt werden.
+// Seiten, Anlaufstellen, Menü und Fuß gehören nicht ins CMS (sie stehen in src/content/).
 
 type LegacyPost = (typeof posts)[number];
 
 const PUBLIC_DIR = path.resolve(process.cwd(), "public");
-const ASSETS_DIR = path.resolve(process.cwd(), "src/assets");
 const DOCUMENT_EXTENSION = /\.(pdf|docx?|mp4)$/i;
 
 async function exists(file: string) {
@@ -34,35 +29,16 @@ function resolvePublicFile(webPath: string) {
   return file.startsWith(PUBLIC_DIR + path.sep) ? file : null;
 }
 
-/** Bilder der Website: Schlüssel wie "illustrations/band-p07" zeigt auf src/assets/<Schlüssel>.<Endung> */
-async function resolveAsset(key: string) {
-  for (const extension of ["jpg", "png", "webp"]) {
-    const file = path.resolve(ASSETS_DIR, `${key}.${extension}`);
-    if (file.startsWith(ASSETS_DIR + path.sep) && (await exists(file))) return file;
-  }
-  return null;
-}
-
 export async function seedExistingContent(payload: Payload) {
-  // Jeder Teil läuft für sich: scheitert einer (zum Beispiel wegen einer fehlenden Datei), startet das
-  // Backend trotzdem, und der nächste Start versucht den fehlenden Teil erneut.
-  const attempt = async (name: string, step: () => Promise<void>) => {
-    try {
-      await step();
-    } catch (error) {
-      payload.logger.error({
-        err: error,
-        msg: `Einspielen von „${name}“ fehlgeschlagen, wird beim nächsten Start erneut versucht.`,
-      });
-    }
-  };
+  if ((await payload.count({ collection: "posts" })).totalDocs > 0) return;
 
   const editorConfig = await editorConfigFactory.default({ config: payload.config });
   const mediaByFile = new Map<string, number>();
 
-  async function importFile(file: string | null, label: string, title: string, alt?: string) {
+  async function importPublic(webPath: string, title: string, alt?: string) {
+    const file = resolvePublicFile(webPath);
     if (!file || !(await exists(file))) {
-      payload.logger.warn(`Datei nicht gefunden, übersprungen: ${label}`);
+      payload.logger.warn(`Datei nicht gefunden, übersprungen: ${webPath}`);
       return null;
     }
     const known = mediaByFile.get(file);
@@ -82,190 +58,12 @@ export async function seedExistingContent(payload: Payload) {
     return created.id;
   }
 
-  const importPublic = (webPath: string, title: string, alt?: string) =>
-    importFile(resolvePublicFile(webPath), webPath, title, alt);
-
-  async function importAsset(value: ImageValue, alt?: string) {
-    if (!value || !("asset" in value)) return null;
-    return importFile(await resolveAsset(value.asset), value.asset, path.basename(value.asset), alt);
-  }
-
-  // Zwischenüberschriften und Zeilenumbrüche im Quelltext sind Formatierung, kein Text
-  const lexical = (html: Rich) => {
-    if (typeof html !== "string") return html;
-    return convertHTMLToLexical({ editorConfig, html: html.replace(/>\s*\n\s*</g, "><"), JSDOM });
-  };
-
-  // ---- Anlaufstellen -------------------------------------------------------
-  await attempt("Anlaufstellen", async () => {
-    const known = new Set(
-      (await payload.find({ collection: "services", limit: 500, pagination: false, depth: 0 })).docs.map(
-        (doc) => doc.serviceId,
-      ),
-    );
-    const create = async (service: SupportService, placement: "main" | "group", groupTitle?: string) => {
-      if (known.has(service.id)) return;
-      const quickIndex = quickAccess.findIndex((entry) => entry.id === service.id);
-      await payload.create({
-        collection: "services",
-        data: {
-          serviceId: service.id,
-          name: service.name,
-          placement,
-          groupTitle,
-          question: service.question,
-          provider: service.provider,
-          phones: service.phones,
-          availability: service.availability,
-          addresses: service.addresses?.map((address) => ({ address })),
-          email: service.email,
-          website: service.website,
-          description: service.description,
-          offers: service.offers?.map((text) => ({ text })),
-          quick: service.quick ? { ...service.quick, order: quickIndex } : undefined,
-        },
-      });
-    };
-    for (const service of mainServices) await create(service, "main");
-    for (const group of serviceGroups)
-      for (const service of group.services) await create(service, "group", group.title);
-    if (known.size === 0) payload.logger.info("Anlaufstellen eingespielt.");
-  });
-
-  // ---- Seitenrahmen --------------------------------------------------------
-  await attempt("Kopf und Fuß", async () => {
-    const site = await payload.findGlobal({ slug: "site" });
-    if (!site.navigation?.length) {
-      const footer: SiteData["footer"] = defaultSite.footer;
-      await payload.updateGlobal({
-        slug: "site",
-        data: {
-          navigation: defaultSite.navigation,
-          languages: defaultSite.languages,
-          helpline: defaultSite.helpline,
-          mailboxes: defaultSite.mailboxes,
-          footer: {
-            ...footer,
-            address: lexical(footer.address) as never,
-            emergency: lexical(footer.emergency) as never,
-            fundingLogo: (await importAsset(footer.fundingLogo, footer.fundingAlt)) ?? undefined,
-          },
-        },
-      });
-      payload.logger.info("Kopf und Fuß eingespielt.");
-    }
-  });
-
-  // ---- Seiten --------------------------------------------------------------
-  async function convertItem(item: SectionItem): Promise<unknown> {
-    if (item.blockType === "rich" || item.blockType === "note" || item.blockType === "callout") {
-      return { ...item, content: lexical(item.content) };
-    }
-    return item;
-  }
-
-  async function convertBlock(block: PageBlock): Promise<unknown | null> {
-    switch (block.blockType) {
-      case "section":
-        return { ...block, items: await Promise.all(block.items.map(convertItem)) };
-      case "callout":
-        return { ...block, content: lexical(block.content) };
-      case "courseList":
-        return { ...block, emptyNotice: lexical(block.emptyNotice) };
-      case "documentList": {
-        const items = [];
-        for (const item of block.items) {
-          items.push({ ...item, file: await importPublic(item.file, item.title) });
-        }
-        return { ...block, items, note: block.note ? lexical(block.note) : undefined };
-      }
-      case "campaign":
-        return {
-          ...block,
-          body: lexical(block.body),
-          download: block.download
-            ? { ...block.download, file: await importPublic(block.download.file, block.download.label) }
-            : undefined,
-          poster: await importAsset(block.poster, block.posterAlt),
-        };
-      case "photo": {
-        const image = await importAsset(block.image, block.alt);
-        return image ? { ...block, image } : null;
-      }
-      case "exhibition": {
-        const panels = [];
-        for (const panel of block.panels) {
-          const image = await importAsset(panel.image, `Tafel der Wanderausstellung: ${panel.title}`);
-          if (image) panels.push({ title: panel.title, image });
-        }
-        return { ...block, panels };
-      }
-      case "entry":
-      case "teaserBand":
-        return { ...block, image: await importAsset(block.image) };
-      default:
-        return block;
-    }
-  }
-
-  async function createPage(page: PageData) {
-    await payload.create({
-      collection: "pages",
-      data: {
-        slug: page.slug,
-        title: page.title,
-        metaTitle: page.metaTitle,
-        description: page.description,
-        intro: page.intro,
-        layout: page.layout,
-        band: page.band ?? undefined,
-        blocks: (await Promise.all(page.blocks.map(convertBlock))).filter(Boolean) as never,
-      },
-    });
-  }
-
-  await attempt("Seiten", async () => {
-    const known = new Set(
-      (await payload.find({ collection: "pages", limit: 100, pagination: false, depth: 0 })).docs.map(
-        (doc) => doc.slug,
-      ),
-    );
-    for (const page of defaultPages) {
-      if (known.has(page.slug)) continue;
-      await attempt(`Seite ${page.slug}`, () => createPage(page));
-    }
-    if (known.size === 0) payload.logger.info(`${defaultPages.length} Seiten eingespielt.`);
-  });
-
-  // Bestehende Datenbanken: die Kursliste mit Anmeldung in die Seite „Kurse“ einsetzen, falls sie fehlt
-  await attempt("Kursliste", async () => {
-    const page = (await payload.find({ collection: "pages", where: { slug: { equals: "kurse" } }, limit: 1, depth: 0 }))
-      .docs[0];
-    if (!page) return;
-    const blocks = (page.blocks ?? []) as { blockType: string }[];
-    if (blocks.some((block) => block.blockType === "courseList")) return;
-    const list = defaultPages
-      .find((entry) => entry.slug === "kurse")
-      ?.blocks.find((block) => block.blockType === "courseList");
-    if (!list) return;
-    // Der frühere Hinweis „Termine folgen“ steht jetzt in der Kursliste und entfällt als eigener Block
-    const rest = blocks.filter(
-      (block, index) =>
-        !(block.blockType === "callout" && index === blocks.findIndex((b) => b.blockType === "callout")),
-    );
-    await payload.update({
-      collection: "pages",
-      id: page.id,
-      data: { blocks: [(await convertBlock(list)) as never, ...(rest as never[])] },
-    });
-    payload.logger.info("Kursliste in die Seite „Kurse“ eingesetzt.");
-  });
-
-  // ---- Beiträge der Altseite -----------------------------------------------
-  if ((await payload.count({ collection: "posts" })).totalDocs > 0) return;
+  const lexical = (html: string) =>
+    convertHTMLToLexical({ editorConfig, html: html.replace(/>\s*\n\s*</g, "><"), JSDOM });
 
   for (const post of posts as LegacyPost[]) {
-    await attempt(`Beitrag ${post.slug}`, async () => {
+    // Ein Beitrag, der scheitert, legt das Backend nicht lahm; der nächste Start versucht es erneut
+    try {
       const doc = new JSDOM(`<body>${post.html}</body>`).window.document;
 
       // Bilder: das erste ist das Titelbild, weitere kommen in „Weitere Bilder“
@@ -288,8 +86,7 @@ export async function seedExistingContent(payload: Payload) {
       }
       for (const video of [...doc.querySelectorAll("video[src]")]) {
         const src = video.getAttribute("src") ?? "";
-        if (src.startsWith("/") && !documents.some((entry) => entry.path === src))
-          documents.push({ label: "Video", path: src });
+        if (src.startsWith("/") && !documents.some((entry) => entry.path === src)) documents.push({ label: "Video", path: src });
       }
 
       // Bildunterschriften werden zu Absätzen, Bilder und Videos stehen als eigene Felder
@@ -300,9 +97,7 @@ export async function seedExistingContent(payload: Payload) {
       }
       doc.querySelectorAll("img, video, figure:empty").forEach((el) => el.remove());
 
-      const image = post.image
-        ? await importPublic(post.image, post.title, imageAlt.get(post.image) || post.title)
-        : null;
+      const image = post.image ? await importPublic(post.image, post.title, imageAlt.get(post.image) || post.title) : null;
       const gallery: number[] = [];
       for (const src of imageSources) {
         const id = await importPublic(src, post.title, imageAlt.get(src) || post.title);
@@ -329,7 +124,9 @@ export async function seedExistingContent(payload: Payload) {
           status: "published",
         },
       });
-    });
+    } catch (error) {
+      payload.logger.error({ err: error, msg: `Einspielen des Beitrags ${post.slug} fehlgeschlagen.` });
+    }
   }
   payload.logger.info(`${posts.length} Beiträge der Altseite eingespielt.`);
 }

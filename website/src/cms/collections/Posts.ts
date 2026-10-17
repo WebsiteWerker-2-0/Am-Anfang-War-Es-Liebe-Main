@@ -2,7 +2,7 @@ import type { CollectionConfig } from "payload";
 import { isLoggedIn, publishedOrLoggedIn } from "../access";
 import { documentsField } from "../fields/documents";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
-import { slugField } from "../fields/slug";
+import { hiddenSlugField } from "../fields/slug";
 import { bodyEditor } from "../editors";
 import { revalidateSite } from "../revalidate";
 
@@ -15,7 +15,7 @@ export const Posts: CollectionConfig = {
   orderable: true,
   admin: {
     useAsTitle: "title",
-    group: "Aktuelles und Kurse",
+    group: "Aktuelles",
     defaultColumns: ["title", "date", "status"],
     description:
       "Meldungen für den Bereich Aktuelles auf der Website. Mit „Entwurf“ speichern Sie, ohne zu veröffentlichen. Die Reihenfolge ändern Sie in der Liste per Ziehen.",
@@ -65,7 +65,7 @@ export const Posts: CollectionConfig = {
       },
     },
     { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },
-    slugField,
+    hiddenSlugField,
     ...publicationFields,
   ],
 };

@@ -16,21 +16,20 @@ export function slugify(input: string) {
 }
 
 // Leere Adresse wird aus dem Titel erzeugt; eine eingegebene Adresse wird bereinigt.
-const slugFromTitle: FieldHook = ({ value, data }) => {
+const slugFromTitle: FieldHook = ({ value, data, previousValue }) => {
+  // Eine einmal vergebene Adresse ändert sich nicht, wenn der Titel geändert wird (Links bleiben gültig)
+  if (!value && previousValue) return previousValue;
   const source = typeof value === "string" && value.trim() ? value : data?.title;
   return typeof source === "string" ? slugify(source) : value;
 };
 
-export const slugField: Field = {
+/** Adresse, die die Redaktion nie sieht: sie entsteht aus dem Titel */
+export const hiddenSlugField: Field = {
   name: "slug",
   type: "text",
-  label: "Adresse (URL)",
   required: true,
   unique: true,
   index: true,
-  admin: {
-    position: "sidebar",
-    description: "Teil der Internetadresse. Wird beim Speichern aus dem Titel erzeugt, wenn das Feld leer ist.",
-  },
+  admin: { hidden: true },
   hooks: { beforeValidate: [slugFromTitle] },
 };

@@ -11,7 +11,7 @@ export const Mail: GlobalConfig = {
     group: "Verwaltung",
     hidden: ({ user }) => user?.role !== "admin",
     description:
-      "Hier legen Sie fest, an welche Adresse Kursanmeldungen geschickt werden, und mit welchem Postfach die E-Mail verschickt wird.",
+      "Hier legen Sie fest, an welche Adresse Anmeldungen geschickt werden, und mit welchem Postfach die E-Mail verschickt wird.",
   },
   access: { read: isAdmin, update: isAdmin },
   endpoints: [
@@ -23,12 +23,12 @@ export const Mail: GlobalConfig = {
         if (req.user?.role !== "admin") return Response.json({ message: "Nur Admins dürfen das." }, { status: 403 });
         const settings = await getMailSettings(req.payload);
         if (!settings.courseRecipient) {
-          return Response.json({ message: "Bitte tragen Sie zuerst die Adresse für Kursanmeldungen ein und speichern Sie." }, { status: 400 });
+          return Response.json({ message: "Bitte tragen Sie zuerst die Adresse für Anmeldungen ein und speichern Sie." }, { status: 400 });
         }
         const result = await sendMail(settings, {
           to: settings.courseRecipient,
           subject: "Test: E-Mail der Website Am Anfang war es Liebe",
-          text: "Das ist eine Test-E-Mail. Wenn Sie sie lesen, werden Kursanmeldungen an diese Adresse zugestellt.",
+          text: "Das ist eine Test-E-Mail. Wenn Sie sie lesen, werden Anmeldungen an diese Adresse zugestellt.",
         });
         return result.ok
           ? Response.json({ message: `Test-E-Mail an ${settings.courseRecipient} gesendet. Bitte prüfen Sie das Postfach.` })
@@ -40,7 +40,7 @@ export const Mail: GlobalConfig = {
     {
       name: "courseRecipient",
       type: "email",
-      label: "Kursanmeldungen gehen an diese E-Mail-Adresse",
+      label: "Anmeldungen gehen an diese E-Mail-Adresse",
       admin: { description: "Zu jeder Anmeldung erhält diese Adresse eine E-Mail mit Name, Kontakt und Kurs." },
     },
     {

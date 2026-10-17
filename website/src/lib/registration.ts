@@ -43,7 +43,7 @@ export function register(payload: Payload, input: RegistrationInput, origin: str
   return serialized(async () => {
     const course = await payload.findByID({ collection: "courses", id: input.courseId, depth: 0 }).catch(() => null);
     if (!course || course.status !== "published") {
-      return { ok: false, code: "invalid", message: "Diesen Kurs gibt es nicht mehr." };
+      return { ok: false, code: "invalid", message: "Diese Veranstaltung gibt es nicht mehr." };
     }
 
     const email = input.email.trim().toLowerCase();
@@ -52,14 +52,14 @@ export function register(payload: Payload, input: RegistrationInput, origin: str
       where: { and: [{ course: { equals: course.id } }, { email: { equals: email } }, { status: { not_equals: "cancelled" } }] },
     });
     if (existing.totalDocs > 0) {
-      return { ok: false, code: "duplicate", message: "Mit dieser E-Mail-Adresse sind Sie für diesen Kurs schon angemeldet." };
+      return { ok: false, code: "duplicate", message: "Mit dieser E-Mail-Adresse sind Sie schon angemeldet." };
     }
 
     const taken = (await takenSeats(payload, [course.id])).get(course.id) ?? 0;
     const free = Math.max(course.capacity - taken, 0);
     const state = courseState(course, free);
-    if (state === "closed") return { ok: false, code: "closed", message: "Für diesen Kurs ist die Anmeldung nicht möglich." };
-    if (state === "full") return { ok: false, code: "full", message: "Dieser Kurs ist leider ausgebucht." };
+    if (state === "closed") return { ok: false, code: "closed", message: "Für diese Veranstaltung ist die Anmeldung nicht möglich." };
+    if (state === "full") return { ok: false, code: "full", message: "Diese Veranstaltung ist leider ausgebucht." };
 
     const status = state === "open" ? "confirmed" : "waitlist";
     const registration = await payload.create({
@@ -86,14 +86,14 @@ export function register(payload: Payload, input: RegistrationInput, origin: str
       const result = await sendMail(settings, {
         to: recipient,
         replyTo: email,
-        subject: `${status === "waitlist" ? "Warteliste" : "Kursanmeldung"}: ${course.title} – ${input.name.trim()}`,
+        subject: `${status === "waitlist" ? "Warteliste" : "Anmeldung"}: ${course.title} – ${input.name.trim()}`,
         text: [
-          status === "waitlist" ? "Neue Anmeldung auf der WARTELISTE" : "Neue Kursanmeldung",
+          status === "waitlist" ? "Neue Anmeldung auf der WARTELISTE" : "Neue Anmeldung",
           "",
-          `Kurs: ${course.title}`,
+          `Veranstaltung: ${course.title}`,
           `Termin: ${dateFormat.format(new Date(course.startsAt))}`,
           course.location ? `Ort: ${course.location}` : "",
-          `Plätze: ${Math.min(taken + (status === "confirmed" ? 1 : 0), course.capacity)} von ${course.capacity} belegt${left === 0 && status === "confirmed" ? " (Kurs jetzt voll)" : ""}`,
+          `Plätze: ${Math.min(taken + (status === "confirmed" ? 1 : 0), course.capacity)} von ${course.capacity} belegt${left === 0 && status === "confirmed" ? " (jetzt voll)" : ""}`,
           "",
           `Name: ${input.name.trim()}`,
           `E-Mail: ${email}`,

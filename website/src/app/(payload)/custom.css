@@ -1,0 +1,344 @@
+/* ------------------------------------------------------------------
+   Gestaltung des Redaktionsbereichs: Liquid Glass in den Farben der Broschüre.
+   Wird in (payload)/layout.tsx nach dem Standard-CSS von Payload geladen.
+   Grundsätze: große Ziele, ruhige Flächen, wenig Text auf einmal. Nichts davon betrifft die Website.
+   Größen stehen in px, weil Payload die Basisschrift (html) auf 13 px setzt und rem hier zu klein wäre.
+   Payload-Klassen (.nav, .nav-group, .app-header …) können sich mit neuen Payload-Versionen ändern:
+   nach einem Update das Backend einmal ansehen.
+   ------------------------------------------------------------------ */
+
+:root {
+  --aal-orange: #d9480f; /* Broschüren-Orange, abgedunkelt für weißen Text (Kontrast >= 4,5:1) */
+  --aal-magenta: #c2185b;
+  --aal-radius: 22px;
+  --aal-radius-small: 14px;
+  --aal-blur: blur(26px) saturate(165%);
+}
+
+html[data-theme="light"] {
+  --aal-glass: rgba(255, 255, 255, 0.58);
+  --aal-glass-strong: rgba(255, 255, 255, 0.78);
+  --aal-glass-edge: rgba(255, 255, 255, 0.85);
+  --aal-glass-line: rgba(80, 40, 30, 0.14);
+  --aal-shadow: 0 12px 40px rgba(150, 70, 30, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --aal-field: rgba(255, 255, 255, 0.7);
+  --aal-ink: #26232b;
+  --aal-backdrop:
+    radial-gradient(900px 620px at 6% -4%, rgba(255, 127, 0, 0.34), transparent 62%),
+    radial-gradient(820px 620px at 104% 8%, rgba(255, 3, 138, 0.22), transparent 62%),
+    radial-gradient(1000px 760px at 62% 108%, rgba(245, 221, 185, 0.95), transparent 62%),
+    linear-gradient(135deg, #fff8ee, #ffeef5);
+  --theme-bg: transparent;
+  --theme-input-bg: var(--aal-field);
+}
+
+html[data-theme="dark"] {
+  --aal-glass: rgba(40, 34, 56, 0.5);
+  --aal-glass-strong: rgba(52, 44, 72, 0.7);
+  --aal-glass-edge: rgba(255, 255, 255, 0.16);
+  --aal-glass-line: rgba(255, 255, 255, 0.12);
+  --aal-shadow: 0 14px 44px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --aal-field: rgba(255, 255, 255, 0.07);
+  --aal-ink: #ffffff;
+  --aal-backdrop:
+    radial-gradient(900px 620px at 6% -4%, rgba(255, 127, 0, 0.3), transparent 62%),
+    radial-gradient(820px 620px at 104% 8%, rgba(255, 3, 138, 0.26), transparent 62%),
+    radial-gradient(1000px 760px at 62% 108%, rgba(96, 70, 210, 0.34), transparent 62%),
+    linear-gradient(135deg, #15111f, #1d1428);
+  --theme-bg: transparent;
+  --theme-input-bg: var(--aal-field);
+}
+
+html {
+  background: var(--aal-backdrop);
+  background-attachment: fixed;
+}
+
+body,
+.template-default {
+  background: transparent;
+}
+
+/* ---- Seitenleiste: große, klare Menüpunkte ---- */
+.nav {
+  background: var(--aal-glass);
+  -webkit-backdrop-filter: var(--aal-blur);
+  backdrop-filter: var(--aal-blur);
+  border-inline-end: 1px solid var(--aal-glass-edge);
+  box-shadow: var(--aal-shadow);
+  border-start-end-radius: var(--aal-radius);
+  border-end-end-radius: var(--aal-radius);
+}
+
+.nav__link,
+.nav-group__toggle {
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.nav {
+  padding-block-start: 18px;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  min-block-size: 56px;
+  margin-block: 6px;
+  padding: 12px 18px;
+  border-radius: var(--aal-radius-small);
+  border: 1px solid transparent;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.nav__link:hover {
+  background: var(--aal-glass-strong);
+  border-color: var(--aal-glass-edge);
+  transform: translateX(2px);
+}
+
+.nav__link.active,
+.nav__link[aria-current="page"],
+.nav__link--active {
+  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(194, 24, 91, 0.35);
+}
+
+.nav__link.active *,
+.nav__link--active * {
+  color: #fff;
+}
+
+/* Gruppen mit nur einem Eintrag zeigen ihn ohne Überschrift, damit das Menü flach wirkt */
+#nav-group-Aktuelles .nav-group__toggle,
+#nav-group-Veranstaltungen .nav-group__toggle,
+#nav-group-Dateiarchiv .nav-group__toggle {
+  display: none;
+}
+
+#nav-group-Aktuelles .nav-group__content,
+#nav-group-Veranstaltungen .nav-group__content,
+#nav-group-Dateiarchiv .nav-group__content {
+  display: flex !important;
+  flex-direction: column;
+  block-size: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Verwaltung (nur Admins): ruhiger, klar abgesetzt */
+#nav-group-Verwaltung {
+  margin-block-start: 1.25rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--aal-glass-line);
+}
+
+#nav-group-Verwaltung .nav-group__toggle {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+#nav-group-Verwaltung .nav__link {
+  font-size: 16px;
+  min-block-size: 46px;
+}
+
+/* ---- Kopfleiste ---- */
+.app-header {
+  background: var(--aal-glass);
+  -webkit-backdrop-filter: var(--aal-blur);
+  backdrop-filter: var(--aal-blur);
+  border-block-end: 1px solid var(--aal-glass-edge);
+  box-shadow: var(--aal-shadow);
+}
+
+/* ---- Startseite des Backends ---- */
+/* Die Standard-Karten von Payload (Liste aller Bereiche) entfallen, die Schaltflächen unten reichen */
+.dashboard > :not(.aal-dashboard),
+.dashboard__group,
+.dashboard__card-list,
+.modular-dashboard {
+  display: none;
+}
+
+.aal-dashboard {
+  padding-block: 28px 32px;
+}
+
+.aal-dashboard__title {
+  font-size: clamp(30px, 2vw + 20px, 42px);
+  margin-block-end: 6px;
+}
+
+.aal-dashboard__lead {
+  font-size: 18px;
+  margin-block-end: 28px;
+  opacity: 0.8;
+}
+
+.aal-tiles {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.aal-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-block-size: 132px;
+  padding: 24px 26px;
+  border-radius: var(--aal-radius);
+  background: var(--aal-glass);
+  -webkit-backdrop-filter: var(--aal-blur);
+  backdrop-filter: var(--aal-blur);
+  border: 1px solid var(--aal-glass-edge);
+  box-shadow: var(--aal-shadow);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.aal-tile::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 20px;
+  inset-inline-end: 20px;
+  inline-size: 12px;
+  block-size: 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
+  opacity: 0.85;
+}
+
+.aal-tile:hover,
+.aal-tile:focus-visible {
+  transform: translateY(-4px);
+  background: var(--aal-glass-strong);
+  box-shadow: 0 18px 50px rgba(194, 24, 91, 0.22), inset 0 1px 0 var(--aal-glass-edge);
+}
+
+.aal-tile__title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  padding-inline-end: 24px;
+}
+
+.aal-tile__text {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0.78;
+}
+
+/* ---- Listen und Formulare ---- */
+.collection-list .table,
+.list-controls,
+.collection-edit__form,
+.doc-controls,
+.document-fields__main,
+.document-fields__sidebar-wrap,
+.collapsible,
+.render-fields .field-type.join,
+.join-field {
+  border-radius: var(--aal-radius-small);
+}
+
+.table-wrap,
+.list-controls,
+.collapsible,
+.document-fields__sidebar-wrap {
+  background: var(--aal-glass);
+  -webkit-backdrop-filter: var(--aal-blur);
+  backdrop-filter: var(--aal-blur);
+  border: 1px solid var(--aal-glass-edge);
+  box-shadow: var(--aal-shadow);
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+.rs__control {
+  border-radius: 12px;
+  border: 1px solid var(--aal-glass-line);
+  background: var(--aal-field);
+  min-block-size: 46px;
+  font-size: 16px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.rs__control--is-focused {
+  outline: 3px solid color-mix(in srgb, var(--aal-orange) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.field-label {
+  font-weight: 650;
+  font-size: 15px;
+}
+
+/* ---- Schaltflächen ---- */
+.btn {
+  border-radius: 999px;
+  font-size: 15px;
+}
+
+.btn--style-primary {
+  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
+  color: #fff;
+  border: 0;
+  box-shadow: 0 8px 22px rgba(194, 24, 91, 0.3);
+}
+
+.btn--style-primary:hover {
+  filter: brightness(1.07);
+}
+
+.btn--style-primary * {
+  color: #fff;
+}
+
+/* Die wichtigste Aktion jeder Liste („Neu erstellen“) groß und farbig */
+.list-create-new-doc__create-new-button {
+  min-block-size: 44px;
+  padding-inline: 22px;
+  font-size: 16px;
+  font-weight: 650;
+  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
+  color: #fff;
+  border: 0;
+  box-shadow: 0 8px 22px rgba(194, 24, 91, 0.3);
+}
+
+.list-create-new-doc__create-new-button * {
+  color: #fff;
+}
+
+/* ---- Anmeldeseite ---- */
+.login__wrap {
+  padding: 36px;
+  border-radius: var(--aal-radius);
+  background: var(--aal-glass);
+  -webkit-backdrop-filter: var(--aal-blur);
+  backdrop-filter: var(--aal-blur);
+  border: 1px solid var(--aal-glass-edge);
+  box-shadow: var(--aal-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__link,
+  .aal-tile {
+    transition: none;
+  }
+  .aal-tile:hover,
+  .nav__link:hover {
+    transform: none;
+  }
+}

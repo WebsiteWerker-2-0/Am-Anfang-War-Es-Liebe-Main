@@ -244,7 +244,7 @@ export function CourseList({
             {(course.state === "open" || course.state === "waitlist") && (
               <details className="course__form">
                 <summary>
-                  {course.state === "waitlist" ? "Auf die Warteliste setzen" : "Zu diesem Kurs anmelden"}
+                  {course.state === "waitlist" ? "Auf die Warteliste setzen" : "Hier anmelden"}
                 </summary>
                 <RegistrationForm course={course} onDone={refresh} />
               </details>

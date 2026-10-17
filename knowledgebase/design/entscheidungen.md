@@ -2,6 +2,12 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 2026-10-17 – Redaktionsbereich: schlank, groß, Liquid Glass
+- **Entscheidung:** Das Backend zeigt der Redaktion nur Aktuelles, Veranstaltungen und das Dateiarchiv, Admins zusätzlich Verwaltung. Seiten, Anlaufstellen, Menü und Fuß sind nicht im Backend änderbar. Gestaltung des Backends als Liquid Glass (durchscheinende Flächen, warme Verläufe in Orange und Magenta), Menüpunkte 19 px und 56 px hoch, helle und dunkle Ansicht, Startseite mit großen Schaltflächen.
+- **Begründung:** Die Redaktion bedient das Backend ohne Vorkenntnisse und soll nur das Nötigste ändern können. Die Gestaltung der Website selbst bleibt unberührt.
+- **Betrifft:** `website/src/app/(payload)/custom.css`, `docs/adr/0006-schlanke-redaktion.md`. Die dunkleren Orange- und Magentatöne (`#d9480f`, `#c2185b`) sind Funktionsfarben der Oberfläche für Kontrast zu weißer Schrift, keine Markenfarben (siehe Entscheidung zu UI-bedingten Farbabweichungen).
+- **Von:** Steffen
+
 ## 2026-10-17 – UI-bedingte Farbabweichungen sind zulässig
 - **Entscheidung:** Farbabweichungen von der Broschürenpalette, die für die Benutzeroberfläche erforderlich sind (Funktionsfarben wie Notausgang-Rot, Fehler, Erfolg, Fokus), sind in Ordnung. Markenfarben und Flächen der Gestaltung bleiben an die Broschüre gebunden (harte Regel 2).
 - **Begründung:** Funktionsfarben müssen Kontrast und Erkennbarkeit sichern, was die Broschürenpalette nicht leistet (Magenta und Orange erreichen keinen Textkontrast, Rot fehlt ganz).

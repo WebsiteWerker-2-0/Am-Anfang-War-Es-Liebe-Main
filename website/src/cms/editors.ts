@@ -26,8 +26,3 @@ export const bodyEditor = lexicalEditor({
     InlineToolbarFeature(),
   ],
 });
-
-// Ein einzelner Absatz, etwa in Hinweiskästen
-export const inlineEditor = lexicalEditor({
-  features: [ParagraphFeature(), BoldFeature(), ItalicFeature(), LinkFeature(), InlineToolbarFeature()],
-});
