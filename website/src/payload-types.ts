@@ -132,7 +132,7 @@ export interface UserAuthOperations {
   };
 }
 /**
- * Meldungen für den Bereich Aktuelles auf der Website. Mit „Entwurf“ speichern Sie, ohne zu veröffentlichen. Die Reihenfolge ändern Sie in der Liste per Ziehen.
+ * Meldungen für den Bereich Aktuelles auf der Website. Mit „Speichern“ erscheint der Beitrag sofort. Wollen Sie ihn noch nicht zeigen, wählen Sie rechts den Status „Entwurf“. Mit dem Auge-Symbol oben sehen Sie die Vorschau.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
@@ -147,6 +147,9 @@ export interface Post {
    */
   excerpt?: string | null;
   image?: (number | null) | Media;
+  /**
+   * Datei oder Bild an einer bestimmten Stelle einfügen: Klicken Sie im Text an die gewünschte Stelle, dann in der Leiste ganz links auf das erste Symbol und wählen „Datei oder Bild“.
+   */
   content?: {
     root: {
       type: string;
@@ -221,7 +224,7 @@ export interface Media {
   };
 }
 /**
- * Kurse und Termine mit Anmeldung. Sobald eine Veranstaltung „Veröffentlicht“ ist, erscheint sie mit freien Plätzen und Anmeldeformular auf der Website.
+ * Kurse und Termine mit Anmeldung. Mit „Speichern“ erscheint die Veranstaltung sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses".
@@ -235,6 +238,24 @@ export interface Course {
    * Kurzer Text für die Website. Eine Leerzeile beginnt einen neuen Absatz.
    */
   description?: string | null;
+  /**
+   * Zum Beispiel Ablauf, Mitbringen, Hinweise. Datei oder Bild an einer bestimmten Stelle einfügen: im Text an die Stelle klicken, dann in der Leiste ganz links auf das erste Symbol und „Datei oder Bild“ wählen.
+   */
+  details?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   capacity: number;
   /**
    * Zählt das System selbst, aus den Anmeldungen unten.
@@ -442,6 +463,7 @@ export interface CoursesSelect<T extends boolean = true> {
   startsAt?: T;
   location?: T;
   description?: T;
+  details?: T;
   capacity?: T;
   booked?: T;
   registrationOpen?: T;
@@ -576,7 +598,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Hier legen Sie fest, an welche Adresse Kursanmeldungen geschickt werden, und mit welchem Postfach die E-Mail verschickt wird.
+ * Hier legen Sie fest, an welche Adresse Anmeldungen geschickt werden, und mit welchem Postfach die E-Mail verschickt wird.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "mail".

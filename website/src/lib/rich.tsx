@@ -1,5 +1,7 @@
 import { RichText, type JSXConvertersFunction } from "@payloadcms/richtext-lexical/react";
+import Image from "next/image";
 import type { Rich } from "@/content/model";
+import { mediaToImg, mediaUrl } from "./cms-content";
 import { htmlToInlineJsx, htmlToJsx } from "./html-to-jsx";
 
 // Formatierter Text aus dem Standardinhalt (HTML) oder dem CMS (Lexical), beide mit
@@ -22,6 +24,31 @@ function converters(telClass: boolean, inline: boolean, prose = false): JSXConve
       const children = nodesToJSX({ nodes: node.children });
       const ordered = "tag" in parent && parent.tag === "ol";
       return <li>{ordered && !prose ? <span>{children}</span> : children}</li>;
+    },
+    blocks: {
+      // Datei oder Bild an einer Stelle im Text (Backend: Baustein „Datei oder Bild“)
+      datei: ({ node }: { node: { fields?: Record<string, unknown> } }) => {
+        const fields = (node.fields ?? {}) as { file?: Record<string, unknown> | number; label?: string };
+        const file = fields.file;
+        if (!file || typeof file !== "object") return null;
+        const label = fields.label || String(file.title ?? file.filename);
+        const image = String(file.mimeType).startsWith("image/") ? mediaToImg(file) : null;
+        if (image) {
+          return (
+            <figure>
+              <Image src={image} alt={typeof file.alt === "string" ? file.alt : ""} sizes="(min-width: 64em) 40rem, 100vw" />
+              {fields.label && <figcaption>{fields.label}</figcaption>}
+            </figure>
+          );
+        }
+        return (
+          <p className="file-link">
+            <a href={mediaUrl(file)} download>
+              {label}
+            </a>
+          </p>
+        );
+      },
     },
     link: ({ node, nodesToJSX }) => {
       const href: string = node.fields.url ?? "";

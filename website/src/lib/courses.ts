@@ -1,4 +1,6 @@
 import type { Payload } from "payload";
+import type { Course } from "@/payload-types";
+import { richToHtml } from "./rich-html";
 
 // Kurse für die Website: nur Veröffentlichtes, dessen Termin noch nicht vorbei ist, mit freien Plätzen.
 
@@ -8,6 +10,8 @@ export type PublicCourse = {
   id: number;
   title: string;
   description: string;
+  /** Ausführlicher Text als HTML (aus dem Textfeld des Backends), leer wenn nicht ausgefüllt */
+  detailsHtml: string;
   startsAt: string;
   endsAt: string | null;
   location: string;
@@ -52,28 +56,33 @@ export async function listPublicCourses(payload: Payload): Promise<PublicCourse[
     collection: "courses",
     where: { and: [{ status: { equals: "published" } }, { or: [{ endsAt: { greater_than: since } }, { and: [{ endsAt: { exists: false } }, { startsAt: { greater_than: since } }] }] }] },
     sort: "startsAt",
-    depth: 0,
+    // Tiefe 1: Dateien im Text müssen aufgelöst sein; die Anmeldungen (Join) werden nicht mitgeladen
+    depth: 1,
+    joins: false,
     limit: 100,
     pagination: false,
   });
   const taken = await takenSeats(payload, docs.map((doc) => doc.id));
-  return docs.map((doc) => {
-    const used = taken.get(doc.id) ?? 0;
-    const free = Math.max(doc.capacity - used, 0);
-    return {
-      id: doc.id,
-      title: doc.title,
-      description: doc.description ?? "",
-      startsAt: doc.startsAt,
-      endsAt: doc.endsAt ?? null,
-      location: doc.location ?? "",
-      audience: doc.audience ?? "",
-      price: doc.price ?? "",
-      instructor: doc.instructor ?? "",
-      capacity: doc.capacity,
-      taken: used,
-      free,
-      state: courseState(doc, free),
-    };
-  });
+  return docs.map((doc) => toPublicCourse(doc, taken.get(doc.id) ?? 0));
+}
+
+/** Eine Veranstaltung aus dem CMS in der Form für die Website (auch für die Vorschau im Backend) */
+export function toPublicCourse(doc: Course, used: number): PublicCourse {
+  const free = Math.max(doc.capacity - used, 0);
+  return {
+    id: doc.id,
+    title: doc.title,
+    description: doc.description ?? "",
+    detailsHtml: richToHtml(doc.details),
+    startsAt: doc.startsAt,
+    endsAt: doc.endsAt ?? null,
+    location: doc.location ?? "",
+    audience: doc.audience ?? "",
+    price: doc.price ?? "",
+    instructor: doc.instructor ?? "",
+    capacity: doc.capacity,
+    taken: used,
+    free,
+    state: courseState(doc, free),
+  };
 }

@@ -1,5 +1,6 @@
 /* ------------------------------------------------------------------
-   Gestaltung des Redaktionsbereichs: Liquid Glass in den Farben der Broschüre.
+   Gestaltung des Redaktionsbereichs: Liquid Glass, bewusst farblos (Grautöne). Die wichtigste Aktion
+   einer Seite (Speichern, Neu erstellen, Anmelden) ist die einzige kräftige, dunkle Fläche und fällt dadurch auf.
    Wird in (payload)/layout.tsx nach dem Standard-CSS von Payload geladen.
    Grundsätze: große Ziele, ruhige Flächen, wenig Text auf einmal. Nichts davon betrifft die Website.
    Größen stehen in px, weil Payload die Basisschrift (html) auf 13 px setzt und rem hier zu klein wäre.
@@ -8,43 +9,47 @@
    ------------------------------------------------------------------ */
 
 :root {
-  --aal-orange: #d9480f; /* Broschüren-Orange, abgedunkelt für weißen Text (Kontrast >= 4,5:1) */
-  --aal-magenta: #c2185b;
   --aal-radius: 22px;
   --aal-radius-small: 14px;
   --aal-blur: blur(26px) saturate(165%);
 }
 
 html[data-theme="light"] {
+  --aal-primary: #1d1d1f; /* wichtigste Aktion: Kontrast zu weißer Schrift > 15:1 */
+  --aal-primary-text: #ffffff;
+  --aal-primary-glow: rgba(0, 0, 0, 0.28);
   --aal-glass: rgba(255, 255, 255, 0.58);
   --aal-glass-strong: rgba(255, 255, 255, 0.78);
   --aal-glass-edge: rgba(255, 255, 255, 0.85);
   --aal-glass-line: rgba(80, 40, 30, 0.14);
-  --aal-shadow: 0 12px 40px rgba(150, 70, 30, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --aal-shadow: 0 12px 40px rgba(30, 32, 40, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   --aal-field: rgba(255, 255, 255, 0.7);
   --aal-ink: #26232b;
   --aal-backdrop:
-    radial-gradient(900px 620px at 6% -4%, rgba(255, 127, 0, 0.34), transparent 62%),
-    radial-gradient(820px 620px at 104% 8%, rgba(255, 3, 138, 0.22), transparent 62%),
-    radial-gradient(1000px 760px at 62% 108%, rgba(245, 221, 185, 0.95), transparent 62%),
-    linear-gradient(135deg, #fff8ee, #ffeef5);
+    radial-gradient(900px 620px at 6% -4%, rgba(255, 255, 255, 0.95), transparent 62%),
+    radial-gradient(820px 620px at 104% 8%, rgba(200, 206, 218, 0.7), transparent 62%),
+    radial-gradient(1000px 760px at 62% 108%, rgba(214, 218, 226, 0.9), transparent 62%),
+    linear-gradient(135deg, #eef0f4, #dfe2e9);
   --theme-bg: transparent;
   --theme-input-bg: var(--aal-field);
 }
 
 html[data-theme="dark"] {
-  --aal-glass: rgba(40, 34, 56, 0.5);
-  --aal-glass-strong: rgba(52, 44, 72, 0.7);
+  --aal-primary: #f5f5f7;
+  --aal-primary-text: #111114;
+  --aal-primary-glow: rgba(255, 255, 255, 0.2);
+  --aal-glass: rgba(44, 46, 54, 0.5);
+  --aal-glass-strong: rgba(60, 63, 74, 0.7);
   --aal-glass-edge: rgba(255, 255, 255, 0.16);
   --aal-glass-line: rgba(255, 255, 255, 0.12);
   --aal-shadow: 0 14px 44px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.14);
   --aal-field: rgba(255, 255, 255, 0.07);
   --aal-ink: #ffffff;
   --aal-backdrop:
-    radial-gradient(900px 620px at 6% -4%, rgba(255, 127, 0, 0.3), transparent 62%),
-    radial-gradient(820px 620px at 104% 8%, rgba(255, 3, 138, 0.26), transparent 62%),
-    radial-gradient(1000px 760px at 62% 108%, rgba(96, 70, 210, 0.34), transparent 62%),
-    linear-gradient(135deg, #15111f, #1d1428);
+    radial-gradient(900px 620px at 6% -4%, rgba(120, 126, 142, 0.38), transparent 62%),
+    radial-gradient(820px 620px at 104% 8%, rgba(90, 96, 112, 0.3), transparent 62%),
+    radial-gradient(1000px 760px at 62% 108%, rgba(70, 74, 88, 0.4), transparent 62%),
+    linear-gradient(135deg, #16171b, #1d1f25);
   --theme-bg: transparent;
   --theme-input-bg: var(--aal-field);
 }
@@ -101,14 +106,14 @@ body,
 .nav__link.active,
 .nav__link[aria-current="page"],
 .nav__link--active {
-  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
-  color: #fff;
-  box-shadow: 0 8px 22px rgba(194, 24, 91, 0.35);
+  background: var(--aal-primary);
+  color: var(--aal-primary-text);
+  box-shadow: 0 8px 22px var(--aal-primary-glow);
 }
 
 .nav__link.active *,
 .nav__link--active * {
-  color: #fff;
+  color: var(--aal-primary-text);
 }
 
 /* Gruppen mit nur einem Eintrag zeigen ihn ohne Überschrift, damit das Menü flach wirkt */
@@ -212,15 +217,15 @@ body,
   inline-size: 12px;
   block-size: 12px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
-  opacity: 0.85;
+  background: var(--aal-primary);
+  opacity: 0.8;
 }
 
 .aal-tile:hover,
 .aal-tile:focus-visible {
   transform: translateY(-4px);
   background: var(--aal-glass-strong);
-  box-shadow: 0 18px 50px rgba(194, 24, 91, 0.22), inset 0 1px 0 var(--aal-glass-edge);
+  box-shadow: 0 18px 50px var(--aal-primary-glow), inset 0 1px 0 var(--aal-glass-edge);
 }
 
 .aal-tile__title {
@@ -275,7 +280,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 .rs__control--is-focused {
-  outline: 3px solid color-mix(in srgb, var(--aal-orange) 55%, transparent);
+  outline: 3px solid color-mix(in srgb, var(--aal-ink) 60%, transparent);
   outline-offset: 1px;
 }
 
@@ -284,41 +289,82 @@ select:focus-visible,
   font-size: 15px;
 }
 
-/* ---- Schaltflächen ---- */
+/* ---- Schaltflächen ----
+   Die wichtigste Aktion (primär: Speichern, Neu erstellen, Anmelden) ist groß, dunkel und mit Schatten.
+   Alles andere ist zurückhaltend (Glas, dünner Rand), damit der nächste Schritt sofort zu finden ist. */
 .btn {
   border-radius: 999px;
   font-size: 15px;
 }
 
-.btn--style-primary {
-  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
-  color: #fff;
-  border: 0;
-  box-shadow: 0 8px 22px rgba(194, 24, 91, 0.3);
+.btn--style-secondary,
+.btn--style-tertiary {
+  background: var(--aal-glass);
+  border: 1px solid var(--aal-glass-line);
 }
 
-.btn--style-primary:hover {
-  filter: brightness(1.07);
-}
-
-.btn--style-primary * {
-  color: #fff;
-}
-
-/* Die wichtigste Aktion jeder Liste („Neu erstellen“) groß und farbig */
+.btn--style-primary,
 .list-create-new-doc__create-new-button {
-  min-block-size: 44px;
-  padding-inline: 22px;
-  font-size: 16px;
+  min-block-size: 46px;
+  padding-inline: 26px;
+  font-size: 17px;
   font-weight: 650;
-  background: linear-gradient(135deg, var(--aal-orange), var(--aal-magenta));
-  color: #fff;
+  background: var(--aal-primary);
+  color: var(--aal-primary-text);
   border: 0;
-  box-shadow: 0 8px 22px rgba(194, 24, 91, 0.3);
+  box-shadow: 0 8px 24px var(--aal-primary-glow);
 }
 
+.btn--style-primary:hover,
+.list-create-new-doc__create-new-button:hover {
+  filter: brightness(1.15);
+}
+
+.btn--style-primary *,
 .list-create-new-doc__create-new-button * {
-  color: #fff;
+  color: var(--aal-primary-text);
+}
+
+/* Speichern: beim Bearbeiten immer sichtbar, auch wenn man weit unten im Formular ist */
+.doc-controls {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 5;
+  padding-block: 10px;
+  background: var(--aal-glass-strong);
+  -webkit-backdrop-filter: var(--aal-blur);
+  backdrop-filter: var(--aal-blur);
+  border-radius: var(--aal-radius-small);
+}
+
+#action-save {
+  min-inline-size: 150px;
+}
+
+/* Kopfzeile der Listen: Überschrift und „Neu erstellen“ auf einer Linie, mit Abstand zur Kopfleiste */
+.collection-list > .list-header,
+.list-header {
+  padding-block-start: 28px;
+}
+
+.list-header__title-and-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.list-header__title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  min-block-size: 46px;
+  line-height: 1;
+}
+
+.list-header__title-actions {
+  display: flex;
+  align-items: center;
 }
 
 /* ---- Anmeldeseite ---- */
@@ -341,4 +387,22 @@ select:focus-visible,
   .nav__link:hover {
     transform: none;
   }
+}
+
+/* ---- Textfeld: größere Symbole in der Leiste ---- */
+.fixed-toolbar {
+  padding-block: 6px;
+}
+
+.fixed-toolbar .toolbar-popup__button,
+.fixed-toolbar .toolbar-popup__dropdown-item,
+.fixed-toolbar .toolbar-popup__dropdown .toolbar-popup__dropdown-item {
+  min-inline-size: 40px;
+  min-block-size: 40px;
+  font-size: 15px;
+}
+
+.fixed-toolbar svg {
+  inline-size: 20px;
+  block-size: 20px;
 }

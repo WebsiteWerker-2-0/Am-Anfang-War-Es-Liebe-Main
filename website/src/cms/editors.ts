@@ -1,4 +1,5 @@
 import {
+  BlocksFeature,
   BoldFeature,
   FixedToolbarFeature,
   HeadingFeature,
@@ -7,12 +8,15 @@ import {
   LinkFeature,
   OrderedListFeature,
   ParagraphFeature,
+  UnderlineFeature,
   UnorderedListFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
+import { FileBlock } from "./blocks/datei";
 
 // Nur die Formate, die das Design der Website kennt: Absatz, Zwischenüberschrift,
-// Liste, Nummerierung, fett, kursiv, Link. Alles andere würde auf der Seite nicht gestaltet.
+// Liste, Nummerierung, fett, kursiv, unterstrichen, Link und Datei/Bild an einer Stelle im Text.
+// Schriftart, -größe und Farbe lassen sich bewusst nicht ändern: Die Website gestaltet den Text einheitlich.
 export const bodyEditor = lexicalEditor({
   features: [
     ParagraphFeature(),
@@ -21,7 +25,9 @@ export const bodyEditor = lexicalEditor({
     OrderedListFeature(),
     BoldFeature(),
     ItalicFeature(),
+    UnderlineFeature(),
     LinkFeature(),
+    BlocksFeature({ blocks: [FileBlock] }),
     FixedToolbarFeature(),
     InlineToolbarFeature(),
   ],

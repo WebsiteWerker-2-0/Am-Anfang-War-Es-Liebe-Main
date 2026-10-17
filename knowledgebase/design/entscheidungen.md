@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 17.10.2026 – Redaktionsbereich farblos, nächster Schritt hervorgehoben
+
+- **Entscheidung:** Das Backend bleibt Liquid Glass, aber ohne Farben (Grautöne). Die wichtigste Aktion jeder Seite ist die einzige dunkle, kräftige Fläche; „Speichern“ bleibt beim Scrollen sichtbar.
+- **Begründung:** Wunsch des Auftraggebers nach schlichterer Oberfläche; Laien finden den nächsten Schritt sofort.
+- **Datei:** `website/src/app/(payload)/custom.css`
+- **Von:** Steffen (mit Claude)
+
 ## 2026-10-17 – Redaktionsbereich: schlank, groß, Liquid Glass
 - **Entscheidung:** Das Backend zeigt der Redaktion nur Aktuelles, Veranstaltungen und das Dateiarchiv, Admins zusätzlich Verwaltung. Seiten, Anlaufstellen, Menü und Fuß sind nicht im Backend änderbar. Gestaltung des Backends als Liquid Glass (durchscheinende Flächen, warme Verläufe in Orange und Magenta), Menüpunkte 19 px und 56 px hoch, helle und dunkle Ansicht, Startseite mit großen Schaltflächen.
 - **Begründung:** Die Redaktion bedient das Backend ohne Vorkenntnisse und soll nur das Nötigste ändern können. Die Gestaltung der Website selbst bleibt unberührt.

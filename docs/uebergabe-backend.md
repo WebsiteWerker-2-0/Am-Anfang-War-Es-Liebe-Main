@@ -85,3 +85,13 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 - Passwort-zurücksetzen-E-Mails des CMS gehen mangels Mailadapter in die Konsole. Admins setzen Passwörter von Hand zurück.
 - Farben warten auf die Druckdaten (Z-06), Texte und Daten auf die Freigaben des Kunden (siehe `// OFFEN:` im Code).
 - Das Liquid-Glass-Design ist nach eigenem Ermessen gebaut: Soll es einer Vorlage („Portfolio Dashboard“) näherkommen, Screenshot dazulegen und `custom.css` anpassen.
+
+## Nachtrag 17.10.2026 (nachmittags)
+
+- Backend farblos (Liquid Glass in Grautönen), primäre Aktion dunkel hervorgehoben, „Speichern“-Leiste klebt oben. Datei: `website/src/app/(payload)/custom.css`.
+- Standardstatus „Veröffentlicht“, neue Beiträge oben. Ursache der Meldung „gespeichert, aber nicht da“: Entwurf als Standard plus Einsortierung am Ende.
+- Textfeld: Unterstreichen, Baustein „Datei oder Bild“ (Darstellung `src/lib/rich.tsx` für Beiträge, `src/lib/rich-html.ts` für die Veranstaltungsliste im Browser). Veranstaltungen: Feld `details`.
+- Vorschau: `src/app/(site)/vorschau/…`, `src/lib/preview.ts`. CSP `frame-ancestors 'self'` nur dort (`next.config.ts`).
+- Migration `20261017_142156_veranstaltung_text` **von Hand gekürzt** auf zwei `ALTER TABLE … ADD`: Payload wollte wegen des geänderten Standardwerts `posts` und `courses` per `DROP TABLE` neu bauen (Gefahr von Datenverlust, siehe Fallstrick 2). Der Standardwert gilt nur in der Anwendung. Geprüft an einer Datenbank im Serverstand.
+- `push: false` im SQLite-Adapter: Auch lokal ändert sich das Schema nur über Migrationen. Nach einer neuen Migration lokal einmal im Produktionsmodus starten (z. B. `npm run cms:seed`), dann läuft sie.
+- `npx payload migrate` meldet nichts und wendet nichts an; die Migrationen laufen beim Start (`prodMigrations`).

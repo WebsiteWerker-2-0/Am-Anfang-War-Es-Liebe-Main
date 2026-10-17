@@ -51,6 +51,8 @@ export default buildConfig({
     client: { url: databaseUrl, authToken: process.env.DATABASE_AUTH_TOKEN },
     // Auf dem Server laufen die Migrationen beim Start, es gibt keinen Dev-Push
     prodMigrations: migrations,
+    // Das Datenmodell ändert sich nur über Migrationen (npm run cms:migrate:create), nie per Dev-Push
+    push: false,
   }),
   sharp,
   upload: { limits: { fileSize: 30_000_000 } },

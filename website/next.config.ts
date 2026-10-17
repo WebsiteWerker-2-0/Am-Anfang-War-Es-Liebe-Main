@@ -50,8 +50,17 @@ const nextConfig: NextConfig = {
   async headers() {
     const withoutCsp = securityHeaders.filter((header) => header.key !== "Content-Security-Policy-Report-Only");
     return [
-      // Website: alle Adressen außer /backend
-      { source: "/((?!backend(?:/|$)).*)", headers: securityHeaders },
+      // Website: alle Adressen außer /backend und der Vorschau
+      { source: "/((?!backend(?:/|$)|vorschau(?:/|$)).*)", headers: securityHeaders },
+      // Vorschau im Backend: erscheint dort in einem Rahmen derselben Adresse
+      {
+        source: "/vorschau/:path*",
+        headers: securityHeaders.map((header) =>
+          header.key === "Content-Security-Policy-Report-Only"
+            ? { ...header, value: header.value.replace("frame-ancestors 'none'", "frame-ancestors 'self'") }
+            : header,
+        ),
+      },
       { source: "/backend/:path*", headers: [...withoutCsp, ...backendHeaders] },
     ];
   },

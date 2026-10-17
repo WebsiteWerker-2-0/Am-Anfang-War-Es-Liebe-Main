@@ -8,7 +8,7 @@ export const publicationFields: Field[] = [
     type: "select",
     label: "Status",
     required: true,
-    defaultValue: "draft",
+    defaultValue: "published",
     index: true,
     options: [
       { label: "Entwurf (nicht öffentlich)", value: "draft" },

@@ -162,12 +162,15 @@ export function CourseList({
   heading,
   anchor,
   empty,
+  preview = false,
 }: {
   initial: PublicCourse[];
   heading: string;
   anchor?: string;
   /** Hinweis, solange es keinen veröffentlichten Kurs gibt (wird auf dem Server erzeugt) */
   empty: ReactNode;
+  /** Vorschau im Backend: keine Abfrage beim Server, keine Anmeldung */
+  preview?: boolean;
 }) {
   const [courses, setCourses] = useState(initial);
 
@@ -182,6 +185,7 @@ export function CourseList({
 
   useEffect(() => {
     // Gleich nach dem Laden und danach alle 30 Sekunden, solange die Seite sichtbar ist
+    if (preview) return;
     const first = setTimeout(refresh, 0);
     const timer = setInterval(() => {
       if (document.visibilityState === "visible") refresh();
@@ -190,7 +194,7 @@ export function CourseList({
       clearTimeout(first);
       clearInterval(timer);
     };
-  }, [refresh]);
+  }, [refresh, preview]);
 
   // Die Seite ist zwischengespeichert: auch wenn sie ohne Kurse erzeugt wurde, erscheinen neue Kurse nach dem Laden
   if (courses.length === 0) return <>{empty}</>;
@@ -240,8 +244,10 @@ export function CourseList({
                   {paragraph}
                 </p>
               ))}
+            {course.detailsHtml && <div className="prose" dangerouslySetInnerHTML={{ __html: course.detailsHtml }} />}
             <Places course={course} />
-            {(course.state === "open" || course.state === "waitlist") && (
+            {preview && <p className="small muted">Vorschau: Hier erscheint das Anmeldeformular.</p>}
+            {!preview && (course.state === "open" || course.state === "waitlist") && (
               <details className="course__form">
                 <summary>
                   {course.state === "waitlist" ? "Auf die Warteliste setzen" : "Hier anmelden"}

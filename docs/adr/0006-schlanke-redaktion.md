@@ -11,7 +11,11 @@ Die Redaktion des Arbeitskreises soll im Backend nur das Nötigste ändern könn
 - **Menü:** Pro Bereich eine Gruppe aus einem Eintrag, deren Überschrift per CSS verschwindet, damit das Menü flach und groß wirkt (`app/(payload)/custom.css`). Die Gruppe „Verwaltung“ ist für Redakteurinnen ausgeblendet (`admin.hidden` nach Rolle). Die Sammlung `registrations` hat `group: false`: nicht im Menü, aber erreichbar, und zwar als Liste in der jeweiligen Veranstaltung (Join-Feld) und über die Startseite des Backends.
 - **Dateien:** Hochgeladen wird direkt im Beitrag oder in der Veranstaltung. Das Dateiarchiv ist nur die Übersicht.
 - **Einfach halten:** Die Adresse (Slug) von Beiträgen und Veranstaltungen ist für die Redaktion unsichtbar und bleibt beim Umbenennen stabil. Seltene Angaben stehen eingeklappt („Weitere Angaben“). Startseite des Backends mit großen Schaltflächen (`src/cms/components/Dashboard.tsx`), die Standard-Karten von Payload sind ausgeblendet.
-- **Gestaltung:** Liquid Glass (durchscheinende Flächen mit Weichzeichner, warme Verläufe in Orange und Magenta der Broschüre), helle und dunkle Ansicht, Menüpunkte 19 px und 56 px hoch. Größen in px, weil Payload die Basisschrift auf 13 px setzt. Nur der Redaktionsbereich ist betroffen, nicht die Website.
+- **Gestaltung:** Liquid Glass (durchscheinende Flächen mit Weichzeichner), seit 17.10.2026 farblos in Grautönen. Die wichtigste Aktion (Speichern, Neu erstellen, Anmelden) ist die einzige dunkle, kräftige Fläche; die Leiste mit „Speichern“ bleibt beim Scrollen sichtbar. Helle und dunkle Ansicht, Menüpunkte 19 px und 56 px hoch. Größen in px, weil Payload die Basisschrift auf 13 px setzt. Nur der Redaktionsbereich ist betroffen, nicht die Website.
+
+- **Speichern heißt veröffentlichen:** Neue Beiträge und Veranstaltungen starten mit Status „Veröffentlicht“, neue Beiträge kommen an die erste Stelle (Hook `newPostsFirst` in `Posts.ts`). Vorher waren neue Beiträge Entwurf und standen am Ende; die Redaktion hielt sie für verloren.
+- **Text:** fett, kursiv, unterstrichen, Zwischenüberschrift, Listen, Links und der Baustein „Datei oder Bild“ (`src/cms/blocks/datei.ts`) an beliebiger Stelle. Keine Schriftarten, Größen oder Farben. Veranstaltungen haben dafür das Feld „Ausführlicher Text“ (`details`).
+- **Vorschau:** Live-Vorschau von Payload (Auge-Symbol) zeigt `/vorschau/aktuelles/<id>` bzw. `/vorschau/veranstaltungen/<id>`, nur für Angemeldete, lädt nach dem Speichern neu (`@payloadcms/live-preview-react`).
 
 ## Folgen
 

@@ -20,8 +20,13 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 2. **Titel** und **Datum** eintragen, bei **Kurzfassung** zwei Sätze für die Liste.
 3. Ein **Titelbild** wählen oder hochladen. Geben Sie die Bildbeschreibung an, sie hilft Screenreadern.
 4. Den **Text** schreiben. Mit den Knöpfen oben im Textfeld gibt es Zwischenüberschriften, Listen, fett und Links.
-5. Rechts bei **Status** wählen: **Entwurf** (nur Sie sehen es), **Veröffentlicht** (alle sehen es) oder **Archiviert** (bleibt erhalten, ist aber nicht mehr zu sehen).
-6. **Speichern**. Mit **Auf der Website ansehen** rechts prüfen Sie das Ergebnis.
+5. Rechts steht der **Status** schon auf **Veröffentlicht**. Soll der Beitrag noch nicht erscheinen, wählen Sie **Entwurf** (nur Sie sehen es). **Archiviert** heißt: bleibt erhalten, ist aber nicht mehr zu sehen.
+6. **Speichern** (der dunkle Knopf oben rechts, er bleibt beim Scrollen sichtbar). Der Beitrag steht danach **ganz oben** in Aktuelles.
+7. **Vorschau:** Das **Auge-Symbol** neben „Speichern“ zeigt rechts, wie der Beitrag auf der Website aussieht, auch bei Entwürfen. Nach jedem Speichern aktualisiert sie sich.
+
+**Datei oder Bild mitten im Text:** Im Text an die gewünschte Stelle klicken, in der Leiste über dem Text ganz links auf das erste Symbol klicken und **Datei oder Bild** wählen. Dann eine Datei aus dem Archiv wählen oder neu hochladen, optional eine Beschriftung eintragen. Bilder erscheinen als Bild, PDFs und andere Dateien als Download-Link genau an dieser Stelle.
+
+**Text gestalten:** fett, kursiv, unterstrichen, Zwischenüberschrift, Listen, Links. Schriftart, Größe und Farbe legt die Website fest, damit alles einheitlich aussieht.
 
 **Reihenfolge ändern:** In der Liste „Aktuelles“ die Zeilen am Griff links ziehen. **Dokument anhängen:** im Beitrag unter „Dokumente zum Download“ eine Datei wählen oder hochladen.
 
@@ -31,7 +36,8 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 2. **Name**, **Wann beginnt es?** und **Wo findet es statt?** eintragen, bei **Worum geht es?** einen kurzen Text.
 3. Bei **Wie viele Plätze gibt es?** die Teilnehmerzahl eintragen. **Schon angemeldet** zählt das System selbst.
 4. **Warteliste anbieten** schalten Sie ein, wenn sich auch bei vollen Plätzen Interessentinnen eintragen dürfen.
-5. Rechts den Status auf **Veröffentlicht** stellen und speichern. Die Veranstaltung erscheint auf der Seite „Kurse“ mit den freien Plätzen und einem Anmeldeformular. Die Anzeige aktualisiert sich von selbst, wenn sich jemand anmeldet.
+5. Bei **Ausführlicher Text** (freiwillig) Ablauf oder Hinweise schreiben, auch mit Datei oder Bild an einer Stelle im Text (wie bei Aktuelles).
+6. **Speichern**. Der Status steht schon auf **Veröffentlicht**. Die Veranstaltung erscheint auf der Seite „Kurse“ mit den freien Plätzen und einem Anmeldeformular. Die Anzeige aktualisiert sich von selbst, wenn sich jemand anmeldet.
 
 Unter **Weitere Angaben (freiwillig)** stehen Ende, Zielgruppe, Kosten, Leitung und eine abweichende E-Mail-Adresse für die Anmeldungen.
 

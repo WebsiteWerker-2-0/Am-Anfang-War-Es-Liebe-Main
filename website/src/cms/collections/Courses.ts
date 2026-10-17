@@ -1,5 +1,6 @@
 import { APIError, type CollectionConfig } from "payload";
 import { isLoggedIn, publishedOrLoggedIn } from "../access";
+import { bodyEditor } from "../editors";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
 import { hiddenSlugField } from "../fields/slug";
 import { revalidateSite } from "../revalidate";
@@ -18,8 +19,10 @@ export const Courses: CollectionConfig = {
     group: "Veranstaltungen",
     defaultColumns: ["title", "startsAt", "booked", "capacity", "status"],
     listSearchableFields: ["title", "location"],
+    // Auge-Symbol: Vorschau der Veranstaltung, wie sie auf der Website erscheint
+    livePreview: { url: ({ data }) => `/vorschau/veranstaltungen/${data.id}` },
     description:
-      "Kurse und Termine mit Anmeldung. Sobald eine Veranstaltung „Veröffentlicht“ ist, erscheint sie mit freien Plätzen und Anmeldeformular auf der Website.",
+      "Kurse und Termine mit Anmeldung. Mit „Speichern“ erscheint die Veranstaltung sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.",
   },
   access: {
     read: publishedOrLoggedIn,
@@ -67,6 +70,16 @@ export const Courses: CollectionConfig = {
       type: "textarea",
       label: "Worum geht es?",
       admin: { description: "Kurzer Text für die Website. Eine Leerzeile beginnt einen neuen Absatz." },
+    },
+    {
+      name: "details",
+      type: "richText",
+      label: "Ausführlicher Text (freiwillig)",
+      editor: bodyEditor,
+      admin: {
+        description:
+          "Zum Beispiel Ablauf, Mitbringen, Hinweise. Datei oder Bild an einer bestimmten Stelle einfügen: im Text an die Stelle klicken, dann in der Leiste ganz links auf das erste Symbol und „Datei oder Bild“ wählen.",
+      },
     },
     {
       type: "row",
