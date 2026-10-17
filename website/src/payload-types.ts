@@ -143,6 +143,10 @@ export interface Post {
   title: string;
   date: string;
   /**
+   * Erscheint auf der Website neben dem Datum.
+   */
+  author: string;
+  /**
    * Erscheint in der Liste unter dem Titel.
    */
   excerpt?: string | null;
@@ -243,6 +247,9 @@ export interface Media {
 export interface Course {
   id: number;
   title: string;
+  /**
+   * Vergangene Termine erscheinen nicht auf der Website (ab dem Tag nach Beginn bzw. Ende).
+   */
   startsAt: string;
   location?: string | null;
   /**
@@ -300,7 +307,7 @@ export interface Course {
   createdAt: string;
 }
 /**
- * Anmeldungen über die Website. Sie enthalten persönliche Daten: bitte nur für die Veranstaltung verwenden und danach löschen.
+ * Anmeldungen über die Website. Bei Absagen den Status auf „Storniert“ stellen (der Platz wird frei) oder die Anmeldung löschen. Name und Kontakt lassen sich ändern. Persönliche Daten: nach der Veranstaltung bitte löschen.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "registrations".
@@ -447,6 +454,7 @@ export interface PostsSelect<T extends boolean = true> {
   _order?: T;
   title?: T;
   date?: T;
+  author?: T;
   excerpt?: T;
   image?: T;
   content?: T;

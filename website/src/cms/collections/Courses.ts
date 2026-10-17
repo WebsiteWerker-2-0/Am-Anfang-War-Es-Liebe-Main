@@ -1,4 +1,4 @@
-import { APIError, type CollectionConfig } from "payload";
+import type { CollectionConfig } from "payload";
 import { isLoggedIn, publishedOrLoggedIn } from "../access";
 import { bodyEditor } from "../editors";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
@@ -35,17 +35,10 @@ export const Courses: CollectionConfig = {
     afterChange: [() => revalidateSite()],
     afterDelete: [() => revalidateSite()],
     beforeDelete: [
-      // Anmeldungen enthalten persönliche Daten und gehören zu genau einer Veranstaltung
+      // Löschen ist immer möglich (Payload fragt vorher „Sind Sie sicher?“). Die Anmeldungen der
+      // Veranstaltung werden mitgelöscht, sie enthalten persönliche Daten und gehören nur zu ihr.
       async ({ id, req }) => {
-        const { totalDocs } = await req.payload.count({ collection: "registrations", where: { course: { equals: id } }, req });
-        if (totalDocs > 0) {
-          throw new APIError(
-            `Diese Veranstaltung hat ${totalDocs} Anmeldung(en) und kann nicht gelöscht werden. Stellen Sie sie stattdessen auf „Archiviert“.`,
-            400,
-            undefined,
-            true,
-          );
-        }
+        await req.payload.delete({ collection: "registrations", where: { course: { equals: id } }, req });
       },
     ],
   },
@@ -77,7 +70,7 @@ export const Courses: CollectionConfig = {
     {
       name: "details",
       type: "richText",
-      label: "Ausführlicher Text (freiwillig)",
+      label: "Ausführlicher Text (optional)",
       editor: bodyEditor,
       admin: {
         description:
@@ -152,7 +145,7 @@ export const Courses: CollectionConfig = {
     },
     {
       type: "collapsible",
-      label: "Weitere Angaben (freiwillig)",
+      label: "Weitere Angaben (optional)",
       admin: { initCollapsed: true },
       fields: [
         {

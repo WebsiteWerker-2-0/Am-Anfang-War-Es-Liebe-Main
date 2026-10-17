@@ -170,6 +170,8 @@ export type PostData = {
   /** JJJJ-MM-TT */
   date: string;
   excerpt: string;
+  /** „Verfasst von“ (Pflichtfeld im Backend, fehlt beim Altbestand ohne CMS) */
+  author?: string;
   image: Img | null;
   imageAlt?: string;
   /** Text: HTML (Altbestand ohne CMS) oder Lexical */

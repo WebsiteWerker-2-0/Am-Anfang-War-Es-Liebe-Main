@@ -58,12 +58,26 @@ export const Posts: CollectionConfig = {
   fields: [
     { name: "title", type: "text", label: "Titel", required: true },
     {
-      name: "date",
-      type: "date",
-      label: "Datum",
-      required: true,
-      defaultValue: () => new Date().toISOString(),
-      admin: { date: { pickerAppearance: "dayOnly", displayFormat: "dd.MM.yyyy" } },
+      type: "row",
+      fields: [
+        {
+          name: "date",
+          type: "date",
+          label: "Datum",
+          required: true,
+          defaultValue: () => new Date().toISOString(),
+          admin: { width: "50%", date: { pickerAppearance: "dayOnly", displayFormat: "dd.MM.yyyy" } },
+        },
+        {
+          name: "author",
+          type: "text",
+          label: "Verfasst von",
+          required: true,
+          // Vorbelegt mit dem Namen des eigenen Kontos, sonst der E-Mail-Adresse
+          defaultValue: ({ user }: { user?: { name?: string | null; email?: string } | null }) => user?.name || user?.email || undefined,
+          admin: { width: "50%", description: "Erscheint auf der Website neben dem Datum." },
+        },
+      ],
     },
     { name: "excerpt", type: "textarea", label: "Kurzfassung", admin: { description: "Erscheint in der Liste unter dem Titel." } },
     { name: "image", type: "upload", relationTo: "media", label: "Titelbild" },
@@ -104,6 +118,6 @@ export const Posts: CollectionConfig = {
     },
     { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },
     hiddenSlugField,
-    ...publicationFields("Archiviert (eingeklappt im Archiv unten auf Aktuelles)"),
+    ...publicationFields("Archiv"),
   ],
 };

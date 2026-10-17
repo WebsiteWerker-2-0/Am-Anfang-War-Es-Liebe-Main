@@ -38,7 +38,7 @@ export const FileBlock: Block = {
     {
       name: "label",
       type: "text",
-      label: "Beschriftung (freiwillig)",
+      label: "Beschriftung (optional)",
       admin: {
         description:
           "Bei Dateien der Linktext, bei Bildern die Bildunterschrift. Leer: Titel der Datei.",

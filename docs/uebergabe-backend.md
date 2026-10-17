@@ -100,3 +100,6 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 - Zweiter Faktor per E-Mail-Code, siehe ADR-0007. Getestet: Signatur, Sitzungsbindung, Ablauf, Fehlversuche (Kernfunktionen mit esbuild und Node). Den ganzen Ablauf im Browser hat Steffen nach dem Deployment getestet.
 - Veranstaltungen: Vergangene Termine (Beginn bzw. Ende vor gestern) erscheinen nicht auf der Website; Hinweis am Feld „Wann beginnt es?“. Menüpunkt der Website heißt „Veranstaltungen“ (Adresse bleibt `/kurse`).
 - Kalender und Auswahllisten im Backend undurchsichtig: Payload-Variablen in den Menüs auf `--aal-solid` gesetzt (`custom.css`).
+- Aktuelles: Pflichtfeld „Verfasst von“ (`author`), auf der Website neben dem Datum. Migration `…_verfasst_von` von Hand mit Standardwert (NOT NULL an gefüllter Tabelle), Altbestand = „Arbeitskreis gegen Gewalt an Frauen und Kindern“.
+- Neue Konten bekommen eine Zugangs-E-Mail (`src/cms/welcome-mail.ts`, Hook in `Users.ts`), erneut über den Knopf „Zugangs-E-Mail senden“ (Endpunkt `POST /backend/api/users/:id/zugang`, nur Admins). Adresse aus `SITE_URL` oder der Anfrage. Kein Passwort in der E-Mail.
+- Veranstaltungen lassen sich mit Anmeldungen löschen, die Anmeldungen gehen mit (Hook `beforeDelete` in `Courses.ts`).

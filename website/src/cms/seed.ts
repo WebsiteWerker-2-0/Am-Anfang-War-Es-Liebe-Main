@@ -119,6 +119,8 @@ export async function seedExistingContent(payload: Payload) {
           image: image ?? undefined,
           gallery,
           documents: attachments,
+          showDownloads: attachments.length > 0,
+          author: "Arbeitskreis gegen Gewalt an Frauen und Kindern",
           content: lexical(doc.body.innerHTML) as never,
           legacyHtml: post.html,
           status: "published",

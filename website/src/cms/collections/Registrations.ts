@@ -15,7 +15,7 @@ export const Registrations: CollectionConfig = {
     defaultColumns: ["name", "course", "status", "createdAt"],
     listSearchableFields: ["name", "email"],
     description:
-      "Anmeldungen über die Website. Sie enthalten persönliche Daten: bitte nur für die Veranstaltung verwenden und danach löschen.",
+      "Anmeldungen über die Website. Bei Absagen den Status auf „Storniert“ stellen (der Platz wird frei) oder die Anmeldung löschen. Name und Kontakt lassen sich ändern. Persönliche Daten: nach der Veranstaltung bitte löschen.",
   },
   access: {
     read: isLoggedIn,

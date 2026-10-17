@@ -27,6 +27,7 @@ export function normalizePost(doc: Doc): PostData {
     title: String(post.title),
     date: String(post.date).slice(0, 10),
     excerpt: typeof post.excerpt === "string" ? post.excerpt : "",
+    author: typeof post.author === "string" && post.author.trim() ? post.author.trim() : undefined,
     image,
     imageAlt: media && typeof media.alt === "string" ? media.alt : undefined,
     content: isLexical(post.content) ? (post.content as PostData["content"]) : String(post.legacyHtml ?? ""),

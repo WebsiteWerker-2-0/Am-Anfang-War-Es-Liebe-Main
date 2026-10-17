@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { isAdmin, isAdminField } from "../access";
+import { sendWelcomeMail } from "../welcome-mail";
 
 // Redakteurinnen (F-05). Es gibt keine Registrierung: Konten legt eine Admin an,
 // das allererste Konto wird über `npm run cms:create-admin` erzeugt.
@@ -35,7 +36,32 @@ export const Users: CollectionConfig = {
       return req.user ? { id: { equals: req.user.id } } : false;
     },
   },
+  endpoints: [
+    {
+      // Knopf „Zugangs-E-Mail senden“ (components/WelcomeMailButton.tsx)
+      path: "/:id/zugang",
+      method: "post",
+      handler: async (req) => {
+        if (req.user?.role !== "admin") return Response.json({ message: "Nur Admins dürfen das." }, { status: 403 });
+        const user = await req.payload.findByID({ collection: "users", id: String(req.routeParams?.id), depth: 0, req }).catch(() => null);
+        if (!user) return Response.json({ message: "Konto nicht gefunden." }, { status: 404 });
+        const result = await sendWelcomeMail(req.payload, user, req);
+        return result.ok
+          ? Response.json({ message: `Zugangs-E-Mail an ${user.email} gesendet.` })
+          : Response.json({ message: `Das Senden hat nicht geklappt: ${result.message}` }, { status: 502 });
+      },
+    },
+  ],
   hooks: {
+    afterChange: [
+      // Neues Konto: Zugangs-E-Mail mit Link zum Backend. Scheitert der Versand, bleibt das Konto bestehen.
+      async ({ doc, operation, req }) => {
+        if (operation !== "create") return doc;
+        const result = await sendWelcomeMail(req.payload, doc, req);
+        if (!result.ok) req.payload.logger.warn(`Zugangs-E-Mail an ${doc.email} nicht gesendet: ${result.message}`);
+        return doc;
+      },
+    ],
     beforeChange: [
       // Das erste Konto ist immer Admin, sonst könnte niemand weitere Konten anlegen.
       async ({ data, operation, req }) => {
@@ -60,6 +86,15 @@ export const Users: CollectionConfig = {
         { label: "Admin (zusätzlich Konten verwalten)", value: "admin" },
       ],
       access: { create: isAdminField, update: isAdminField },
+    },
+    {
+      name: "welcomeMail",
+      type: "ui",
+      admin: {
+        position: "sidebar",
+        condition: (_data, _siblingData, { user }) => user?.role === "admin",
+        components: { Field: "/cms/components/WelcomeMailButton#WelcomeMailButton" },
+      },
     },
   ],
 };

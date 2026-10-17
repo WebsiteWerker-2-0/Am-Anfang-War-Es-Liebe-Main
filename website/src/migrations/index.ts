@@ -3,6 +3,7 @@ import * as migration_20261017_115003_kurse_und_anmeldungen from './20261017_115
 import * as migration_20261017_121359_cms_verschlanken from './20261017_121359_cms_verschlanken';
 import * as migration_20261017_142156_veranstaltung_text from './20261017_142156_veranstaltung_text';
 import * as migration_20261017_151620_downloads_bildposition from './20261017_151620_downloads_bildposition';
+import * as migration_20261017_153858_verfasst_von from './20261017_153858_verfasst_von';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20261017_151620_downloads_bildposition.up,
     down: migration_20261017_151620_downloads_bildposition.down,
-    name: '20261017_151620_downloads_bildposition'
+    name: '20261017_151620_downloads_bildposition',
+  },
+  {
+    up: migration_20261017_153858_verfasst_von.up,
+    down: migration_20261017_153858_verfasst_von.down,
+    name: '20261017_153858_verfasst_von'
   },
 ];

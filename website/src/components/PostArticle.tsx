@@ -18,6 +18,7 @@ export function PostArticle({ post }: { post: PostData }) {
         <h1>{post.title}</h1>
         <p className="muted" style={{ marginBlockStart: "var(--space-3)" }}>
           <time dateTime={post.date}>{formatDate(post.date)}</time>
+          {post.author && <> · Verfasst von {post.author}</>}
         </p>
       </header>
       {typeof post.content === "string" ? (

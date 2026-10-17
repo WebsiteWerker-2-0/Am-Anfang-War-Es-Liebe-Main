@@ -19,7 +19,7 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 ## Eine Meldung schreiben (Aktuelles)
 
 1. Auf der Startseite **Neuen Beitrag schreiben** wählen.
-2. **Titel** und **Datum** eintragen, bei **Kurzfassung** zwei Sätze für die Liste.
+2. **Titel**, **Datum** und **Verfasst von** eintragen (vorbelegt mit Ihrem Namen, erscheint auf der Website neben dem Datum), bei **Kurzfassung** zwei Sätze für die Liste.
 3. Ein **Titelbild** wählen oder hochladen. Geben Sie die Bildbeschreibung an, sie hilft Screenreadern.
 4. Den **Text** schreiben. Mit den Knöpfen oben im Textfeld gibt es Zwischenüberschriften, Listen, fett und Links.
 5. Rechts steht der **Status** schon auf **Veröffentlicht**. Soll der Beitrag noch nicht erscheinen, wählen Sie **Entwurf** (nur Sie sehen es). **Archiviert** heißt: bleibt erhalten, ist aber nicht mehr zu sehen.
@@ -34,7 +34,7 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 
 **Downloads unter dem Beitrag:** Haken bei **Download-Bereich mit Dokumenten anzeigen** setzen. Dann je Dokument einen Namen und eine **PDF-Datei** wählen, auf Wunsch ein kleines Vorschaubild (sonst erscheint ein PDF-Symbol). Auf der Website steht unten eine Liste „Downloads“ mit Knopf zum Herunterladen. Andere Dateitypen als PDF sind hier nicht möglich.
 
-**Archiv:** Steht ein Beitrag auf **Archiviert**, verschwindet er aus der Liste und steht eingeklappt im **Archiv** ganz unten auf der Seite Aktuelles. Er bleibt aufrufbar.
+**Archiv:** Steht ein Beitrag auf **Archiv**, verschwindet er aus der Liste und steht eingeklappt im **Archiv** ganz unten auf der Seite Aktuelles. Er bleibt aufrufbar.
 
 ## Eine Veranstaltung anlegen
 
@@ -42,17 +42,18 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 2. **Name**, **Wann beginnt es?** und **Wo findet es statt?** eintragen, bei **Worum geht es?** einen kurzen Text.
 3. Bei **Wie viele Plätze gibt es?** die Teilnehmerzahl eintragen. **Schon angemeldet** zählt das System selbst.
 4. **Warteliste anbieten** schalten Sie ein, wenn sich auch bei vollen Plätzen Interessentinnen eintragen dürfen.
-5. Bei **Ausführlicher Text** (freiwillig) Ablauf oder Hinweise schreiben, auch mit Datei oder Bild an einer Stelle im Text (wie bei Aktuelles).
+5. Bei **Ausführlicher Text** (optional) Ablauf oder Hinweise schreiben, auch mit Datei oder Bild an einer Stelle im Text (wie bei Aktuelles).
 6. **Speichern**. Der Status steht schon auf **Veröffentlicht**. Die Veranstaltung erscheint auf der Seite „Kurse“ mit den freien Plätzen und einem Anmeldeformular. Die Anzeige aktualisiert sich von selbst, wenn sich jemand anmeldet.
 
-Unter **Weitere Angaben (freiwillig)** stehen Ende, Zielgruppe, Kosten, Leitung und eine abweichende E-Mail-Adresse für die Anmeldungen.
+Unter **Weitere Angaben (optional)** stehen Ende, Zielgruppe, Kosten, Leitung und eine abweichende E-Mail-Adresse für die Anmeldungen.
 
-**Absagen oder beenden:** Status auf **Archiviert** stellen. Eine Veranstaltung mit Anmeldungen lässt sich nicht löschen, damit keine Anmeldedaten verloren gehen.
+**Absagen oder beenden:** Status auf **Archiviert** stellen oder die Veranstaltung **löschen**. Beim Löschen fragt das Backend „Sind Sie sicher?“; die Anmeldungen der Veranstaltung werden mitgelöscht.
 
 ## Anmeldungen ansehen und verwalten
 
 Jede Anmeldung kommt als E-Mail an die eingestellte Adresse **und** steht unten in der Veranstaltung unter **Anmeldungen** (Name, E-Mail, Status). Alle neuen Anmeldungen sehen Sie auch über die Startseite.
 
+- **Absage:** die Anmeldung öffnen und den Status auf **Storniert** stellen oder die Anmeldung löschen. Name, E-Mail und Telefon lassen sich dort auch korrigieren.
 - **Platz wieder freigeben:** die Anmeldung öffnen und den Status auf **Storniert** stellen. Der Platz ist sofort wieder frei.
 - **Warteliste:** Wird ein Platz frei, öffnen Sie die Anmeldung der Wartenden, stellen sie auf **Angemeldet** und schreiben der Person.
 - **Mit einer Teilnehmerin schreiben:** Antworten Sie einfach auf die E-Mail der Anmeldung.
@@ -76,7 +77,7 @@ Admins sehen im Menü zusätzlich den Bereich **Verwaltung**.
 2. Unter **Postfach für den Versand** die Angaben eines E-Mail-Postfachs eintragen. Bei Hostinger finden Sie sie in hPanel beim Postfach: Server (meist `smtp.hostinger.com`), Port `465`, „Verschlüsselt“ an, Benutzername und Passwort des Postfachs.
 3. **Speichern** und dann **Test-E-Mail senden**. Kommt die E-Mail im Postfach an, ist alles richtig. Sonst zeigt die Meldung den Grund.
 
-**Konten:** Unter **Redakteur:innen** legen Sie Konten an. Die Rolle **Redaktion** darf Aktuelles, Veranstaltungen und Dateien pflegen, **Admin** zusätzlich Konten und E-Mail-Einstellungen verwalten. Ein Konto sperrt sich nach fünf falschen Passwörtern für zehn Minuten. Wer ihr Passwort vergessen hat, bekommt von einer Admin ein neues.
+**Konten:** Unter **Redakteur:innen** legen Sie Konten an. Die neue Person bekommt automatisch eine E-Mail mit dem Link zum Backend (ohne Passwort, das geben Sie ihr selbst). Mit **Zugangs-E-Mail senden** im Konto schicken Sie sie erneut. Die Rolle **Redaktion** darf Aktuelles, Veranstaltungen und Dateien pflegen, **Admin** zusätzlich Konten und E-Mail-Einstellungen verwalten. Ein Konto sperrt sich nach fünf falschen Passwörtern für zehn Minuten. Wer ihr Passwort vergessen hat, bekommt von einer Admin ein neues.
 
 ## Wenn etwas nicht klappt
 

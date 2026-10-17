@@ -40,7 +40,7 @@ export const documentsFields: Field[] = [
         name: "preview",
         type: "upload",
         relationTo: "media",
-        label: "Vorschaubild (freiwillig)",
+        label: "Vorschaubild (optional)",
         filterOptions: { mimeType: { contains: "image/" } },
         admin: { description: "Zum Beispiel ein Bild der Titelseite. Ohne Bild erscheint ein PDF-Symbol." },
       },

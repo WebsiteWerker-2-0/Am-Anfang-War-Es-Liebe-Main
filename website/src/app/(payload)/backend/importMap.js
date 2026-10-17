@@ -13,6 +13,7 @@ import { UnorderedListFeatureClient as UnorderedListFeatureClient_e70f5e05f09f93
 import { HeadingFeatureClient as HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ParagraphFeatureClient as ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ViewOnSite as ViewOnSite_fe182377efab4b5d3a6e1fe4f34cdaa1 } from '../../../cms/components/ViewOnSite'
+import { WelcomeMailButton as WelcomeMailButton_a84487f9726f35958d302cfbdd5be944 } from '../../../cms/components/WelcomeMailButton'
 import { TestMailButton as TestMailButton_71d5ee62b03448617d241db79fc4ec01 } from '../../../cms/components/TestMailButton'
 import { Icon as Icon_eff45f4666ccfb98ed72245053f5e77e } from '../../../cms/components/Logo'
 import { Logo as Logo_eff45f4666ccfb98ed72245053f5e77e } from '../../../cms/components/Logo'
@@ -36,6 +37,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ParagraphFeatureClient": ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/cms/components/ViewOnSite#ViewOnSite": ViewOnSite_fe182377efab4b5d3a6e1fe4f34cdaa1,
+  "/cms/components/WelcomeMailButton#WelcomeMailButton": WelcomeMailButton_a84487f9726f35958d302cfbdd5be944,
   "/cms/components/TestMailButton#TestMailButton": TestMailButton_71d5ee62b03448617d241db79fc4ec01,
   "/cms/components/Logo#Icon": Icon_eff45f4666ccfb98ed72245053f5e77e,
   "/cms/components/Logo#Logo": Logo_eff45f4666ccfb98ed72245053f5e77e,
