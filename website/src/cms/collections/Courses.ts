@@ -2,6 +2,7 @@ import type { CollectionConfig, PayloadRequest } from "payload";
 import { isLoggedIn, publishedOrLoggedIn } from "../access";
 import { bodyEditor } from "../editors";
 import { publicationFields, syncArchivedAt } from "../fields/publication";
+import { emailListField } from "../fields/email-list";
 import { hiddenSlugField } from "../fields/slug";
 import { revalidateSite } from "../revalidate";
 
@@ -185,13 +186,12 @@ export const Courses: CollectionConfig = {
           ],
         },
         { name: "instructor", type: "text", label: "Leitung" },
-        {
+        emailListField({
           name: "notifyEmail",
-          type: "email",
           label: "Anmeldungen für diese Veranstaltung gehen an",
           access: { read: ({ req }) => Boolean(req.user) },
-          admin: { description: "Leer lassen: Es gilt die Adresse, die ein Admin unter „E-Mail und Anmeldungen“ eingetragen hat." },
-        },
+          description: "Leer lassen: Es gilt die Adresse, die ein Admin unter „E-Mail und Anmeldungen“ eingetragen hat.",
+        }),
       ],
     },
     { name: "viewOnSite", type: "ui", admin: { position: "sidebar", components: { Field: "/cms/components/ViewOnSite#ViewOnSite" } } },

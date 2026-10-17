@@ -1,5 +1,6 @@
 import type { GlobalConfig } from "payload";
 import { isAdmin } from "../access";
+import { emailListField } from "../fields/email-list";
 import { decryptSecret, encryptSecret, isEncrypted } from "@/lib/secret";
 import { SECRET_STORED } from "../secret-marker";
 import { getMailSettings, sendMail } from "../../lib/mail";
@@ -39,12 +40,11 @@ export const Mail: GlobalConfig = {
     },
   ],
   fields: [
-    {
+    emailListField({
       name: "courseRecipient",
-      type: "email",
-      label: "Anmeldungen gehen an diese E-Mail-Adresse",
-      admin: { description: "Zu jeder Anmeldung erhält diese Adresse eine E-Mail mit Name, Kontakt und Kurs." },
-    },
+      label: "Anmeldungen gehen an diese E-Mail-Adresse(n)",
+      description: "Zu jeder Anmeldung erhalten diese Adressen eine E-Mail mit Name, Kontakt und Kurs.",
+    }),
     {
       type: "collapsible",
       label: "Postfach für den Versand (Zugangsdaten)",

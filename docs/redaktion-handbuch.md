@@ -45,7 +45,7 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 5. Bei **Ausführlicher Text** (optional) Ablauf oder Hinweise schreiben, auch mit Datei oder Bild an einer Stelle im Text (wie bei Aktuelles).
 6. **Speichern**. Der Status steht schon auf **Veröffentlicht**. Die Veranstaltung erscheint auf der Seite „Kurse“ mit den freien Plätzen und einem Anmeldeformular. Die Anzeige aktualisiert sich von selbst, wenn sich jemand anmeldet.
 
-Unter **Weitere Angaben (optional)** stehen Ende, Zielgruppe, Kosten, Leitung und eine abweichende E-Mail-Adresse für die Anmeldungen.
+Unter **Weitere Angaben (optional)** stehen Ende, Zielgruppe, Kosten, Leitung und abweichende E-Mail-Adressen für die Anmeldungen. Mehrere Adressen trennen Sie mit Komma, zum Beispiel `kurse@beispiel.de, leitung@beispiel.de`.
 
 **Absagen oder beenden:** Status auf **Archiviert** stellen oder die Veranstaltung **löschen**. Beim Löschen fragt das Backend „Sind Sie sicher?“; die Anmeldungen der Veranstaltung werden mitgelöscht.
 
