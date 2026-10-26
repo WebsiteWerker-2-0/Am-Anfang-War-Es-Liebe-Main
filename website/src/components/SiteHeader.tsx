@@ -70,7 +70,10 @@ export function SiteHeader({ site }: { site: Pick<SiteData, "navigation" | "lang
           <p className="help-bar__phone">
             Hilfetelefon{" "}
             <a href={`tel:${site.helpline.number.replace(/[^\d+]/g, "")}`}>{site.helpline.number.replace(/ /g, "\u202f")}</a>
-            {site.helpline.suffix && <span className="wide-only">{site.helpline.suffix}</span>}
+            {/* Teal heißt im Theme „erreichbar“: der Hinweis steht als Marke neben der Nummer */}
+            {site.helpline.suffix && (
+              <span className="tag tag--in wide-only">{site.helpline.suffix.replace(/^,\s*/, "")}</span>
+            )}
           </p>
         </div>
       </div>

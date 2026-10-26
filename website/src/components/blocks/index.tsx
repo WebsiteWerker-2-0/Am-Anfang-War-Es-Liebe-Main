@@ -434,23 +434,28 @@ function Promises({ block }: { block: Block<"promises"> }) {
 
 async function QuickAccess({ block }: { block: Block<"quickAccess"> }) {
   const { quick } = await getServices();
+  // Überschrift und Verweis links, die Nummern als Zahlenreihe rechts
   return (
-    <section className="section wide" aria-labelledby={block.anchor}>
-      <div className="section__header">
-        <h2 id={block.anchor}>{block.heading}</h2>
-        <Link href={block.linkUrl} className="text-link">
-          {block.linkLabel}
-        </Link>
+    <section className="quick-help" aria-labelledby={block.anchor}>
+      <div className="quick-help__inner wide">
+        <div className="quick-help__head">
+          <h2 id={block.anchor}>{block.heading}</h2>
+          <p>
+            <Link href={block.linkUrl} className="text-link">
+              {block.linkLabel}
+            </Link>
+          </p>
+        </div>
+        <ul className="service-list">
+          {quick.map((service) => (
+            <li key={service.id}>
+              <span className="service-list__name">{service.quick?.label ?? service.name}</span>
+              {service.quick && <span className="muted">{service.quick.note}</span>}
+              <PhoneLink number={service.phones[0].number} className="service-list__number" />
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="service-list">
-        {quick.map((service) => (
-          <li key={service.id}>
-            <span className="service-list__name">{service.quick?.label ?? service.name}</span>
-            {service.quick && <span className="muted">{service.quick.note}</span>}
-            <PhoneLink number={service.phones[0].number} className="service-list__number" />
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

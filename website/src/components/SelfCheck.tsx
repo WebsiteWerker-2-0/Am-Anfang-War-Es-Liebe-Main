@@ -299,12 +299,12 @@ function Choices({ options }: { options: { label: string; description?: string; 
 function TrafficLight({ level }: { level: Level }) {
   const lights: Level[] = ["red", "yellow", "green"];
   return (
-    <svg className="traffic-light" viewBox="0 0 44 112" aria-hidden="true" focusable="false">
-      <rect className="traffic-light__housing" x="1.5" y="1.5" width="41" height="109" rx="14" />
+    <svg className="signal-light" viewBox="0 0 44 112" aria-hidden="true" focusable="false">
+      <rect className="signal-light__housing" x="1.5" y="1.5" width="41" height="109" rx="14" />
       {lights.map((light, index) => (
         <circle
           key={light}
-          className={`traffic-light__lamp traffic-light__lamp--${light}`}
+          className={`signal-light__lamp signal-light__lamp--${light}`}
           data-on={light === level ? "" : undefined}
           cx="22"
           cy={22 + index * 34}
