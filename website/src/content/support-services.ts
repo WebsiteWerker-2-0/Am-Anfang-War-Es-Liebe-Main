@@ -148,7 +148,7 @@ const police: SupportService = {
   emailNote: "Opferschutz",
   website: { url: "https://hoexter.polizei.nrw", label: "hoexter.polizei.nrw" },
   description:
-    "Wenn Sie oder Ihre Kinder bedroht werden, können Sie sich jederzeit an die Polizei wenden. Die Polizei kann die gewalttätige Person für zehn Tage aus der Wohnung verweisen und ein Rückkehrverbot aussprechen, auch wenn die Wohnung ihr gehört. Der polizeiliche Opferschutz informiert Sie über den Ablauf eines Strafverfahrens, Ihre Rechte als Opfer sowie Antrags- und Entschädigungsmöglichkeiten. Sie erfahren, welche Hilfseinrichtungen es gibt, und werden bei Bedarf zeitnah an professionelle Hilfe vermittelt.",
+    "Wenn Sie oder Ihre Kinder bedroht werden, können Sie sich jederzeit an die Polizei wenden. Die Polizei kann die gewalttätige Person für 14 Tage aus der Wohnung verweisen und ein Rückkehrverbot aussprechen, auch wenn die Wohnung ihr gehört. Der polizeiliche Opferschutz informiert Sie über den Ablauf eines Strafverfahrens, Ihre Rechte als Opfer sowie Antrags- und Entschädigungsmöglichkeiten. Sie erfahren, welche Hilfseinrichtungen es gibt, und werden bei Bedarf zeitnah an professionelle Hilfe vermittelt.",
   quick: {
     label: "Polizei im Notfall",
     note: "Wenn Sie oder Ihre Kinder in Gefahr sind",
