@@ -9,6 +9,13 @@ Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzli
 - **Datei:** `website/src/components/blocks/index.tsx`, `components/CourseOfferArticle.tsx`, `app/(site)/kurse/[slug]/page.tsx`, `cms/collections/CourseOffers.ts`, `migrations/20261031_200000_kurse_kurzfassung.ts`, `app/(site)/globals.css` (`.post-list--plain`)
 - **Von:** Steffen (mit Claude)
 
+## 31.10.2026 – Hilfe: Farbe nur aus den Abschnittsüberschriften, Kontaktdaten als Tabelle, alles eingeklappt
+
+- **Entscheidung:** Die vier Abschnittsüberschriften sind farbige Bänder aus der vorhandenen Palette: Teal, Orange `#f17e01`, Magenta `#ec008c`, Cyan `#00a3d3`. Innerhalb eines Abschnitts erscheint nur dessen Farbe, als feine Linie an Wegweiser, Anlaufstellen und aufklappbaren Einträgen, keine getönten Flächen. Keine eigenen Farben je Institution. Kontaktdaten stehen in einer schlichten Tabelle, Beschreibung und Angebote hinter „Mehr dazu“. Auch die Spurensicherung ist zugeklappt; das ersetzt die frühere Festlegung, sie offen zu lassen.
+- **Begründung:** Wunsch von Enrico: erst zu schwarz-weiß und textlastig, ein erster Entwurf mit Flächen je Institution war zu viel.
+- **Datei:** `website/src/app/(site)/globals.css`, `components/SupportService.tsx`, `content/pages/help.ts`
+- **Von:** Enrico (mit Claude)
+
 ## 31.10.2026 – Backend: Haus statt „A“, Auswahl „Übersicht/Layout“ entfernt
 
 - **Entscheidung:** Links oben im Backend steht ein Haus-Symbol statt des Buchstabens „A“. Die Auswahl „Übersicht/Layout“ auf der Startseite ist ausgeblendet.

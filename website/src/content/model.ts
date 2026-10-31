@@ -61,6 +61,9 @@ export type FactEntry = {
 
 // ---- Blöcke einer Seite -----------------------------------------------------
 
+// Farbe eines Abschnitts (globals.css, .tone-…), der Wegweiser nimmt dieselbe Farbe auf
+export type Tone = "teal" | "orange" | "magenta" | "cyan";
+
 export type PageBlock =
   | {
       blockType: "section";
@@ -80,7 +83,7 @@ export type PageBlock =
   | { blockType: "supportServices" }
   | { blockType: "serviceGroups"; anchor?: string; heading?: string; note?: string }
   // Großer Abschnitt einer langen Seite
-  | { blockType: "chapter"; anchor: string; heading: string; blocks: PageBlock[] }
+  | { blockType: "chapter"; anchor: string; heading: string; tone: Tone; blocks: PageBlock[] }
   | {
       blockType: "documentList";
       anchor?: string;
@@ -133,7 +136,7 @@ export type PageBlock =
     }
   | { blockType: "courseList"; anchor?: string; heading: string; emptyNotice: Rich }
   /** Wegweiser zu Bereichen dieser oder anderer Seiten (Optik wie „Sie sind hier, weil …“) */
-  | { blockType: "linkHub"; ariaLabel: string; items: { label: string; note?: string; href: string }[] }
+  | { blockType: "linkHub"; ariaLabel: string; items: { label: string; note?: string; href: string; tone?: Tone }[] }
   /** Grafiken zum Ansehen und Herunterladen, z. B. Rad der Gewalt */
   | {
       blockType: "graphics";
@@ -225,7 +228,7 @@ export type SiteData = {
     fundingLabel: string;
     fundingLogo: ImageValue;
     fundingAlt: string;
-    draftNote: string;
+    draftNote?: string;
   };
 };
 

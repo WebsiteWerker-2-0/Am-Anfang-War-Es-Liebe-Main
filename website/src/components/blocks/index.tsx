@@ -161,7 +161,7 @@ async function SupportServices() {
   return (
     <div>
       {main.map((service) => (
-        <SupportServiceSection key={service.id} service={service} level={3} collapseOffers />
+        <SupportServiceSection key={service.id} service={service} level={3} collapseDetails />
       ))}
     </div>
   );
@@ -396,7 +396,7 @@ function LinkHub({ block }: { block: Block<"linkHub"> }) {
     <nav aria-label={block.ariaLabel} className="measure">
       <ul className="paths">
         {block.items.map((item) => (
-          <li key={item.href}>
+          <li key={item.href} className={item.tone ? `tone-${item.tone}` : undefined}>
             <Link href={item.href}>
               <span className="paths__reason">{item.label}</span>
               {item.note && <span className="paths__target">{item.note}</span>}
@@ -676,7 +676,7 @@ function TeaserBand({ block }: { block: Block<"teaserBand"> }) {
 
 function Chapter({ block }: { block: Block<"chapter"> }) {
   return (
-    <section className="chapter" aria-labelledby={block.anchor}>
+    <section className={`chapter tone-${block.tone}`} aria-labelledby={block.anchor}>
       <h2 className="chapter__title" id={block.anchor}>
         {block.heading}
       </h2>
