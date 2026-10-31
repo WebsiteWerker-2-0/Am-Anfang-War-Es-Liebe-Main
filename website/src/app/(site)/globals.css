@@ -657,6 +657,18 @@ a:hover {
 }
 
 /* Anlaufstellen als Liste mit Linien */
+/* Sprungmarken oben auf einer Seite (z. B. Kurse: Krav Maga, WenDo, Termine) */
+.jump-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  font-weight: 600;
+}
+
+.service[id] {
+  scroll-margin-block-start: var(--space-6);
+}
+
 .service-list {
   border-block-start: 1px solid var(--c-ink);
 }

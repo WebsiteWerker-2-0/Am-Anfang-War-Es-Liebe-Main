@@ -1,8 +1,8 @@
 import type { Block } from "payload";
 
-// Datei oder Bild an einer bestimmten Stelle im Text (Aktuelles und Veranstaltungen).
+// Datei oder Bild an einer bestimmten Stelle im Text (Aktuelles, Termine und Kurse).
 // Bilder erscheinen als Bild, alle anderen Dateien (PDF, Word, Video) als Download-Link.
-// Dargestellt wird der Baustein in lib/rich.tsx (Beiträge) und lib/rich-html.ts (Veranstaltungen).
+// Dargestellt wird der Baustein in lib/rich.tsx (Beiträge) und lib/rich-html.ts (Termine).
 export const FileBlock: Block = {
   slug: "datei",
   admin: { disableBlockName: true },

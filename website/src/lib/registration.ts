@@ -43,7 +43,7 @@ export function register(payload: Payload, input: RegistrationInput, origin: str
   return serialized(async () => {
     const course = await payload.findByID({ collection: "courses", id: input.courseId, depth: 0 }).catch(() => null);
     if (!course || course.status !== "published") {
-      return { ok: false, code: "invalid", message: "Diese Veranstaltung gibt es nicht mehr." };
+      return { ok: false, code: "invalid", message: "Diesen Termin gibt es nicht mehr." };
     }
 
     const email = input.email.trim().toLowerCase();
@@ -58,8 +58,8 @@ export function register(payload: Payload, input: RegistrationInput, origin: str
     const taken = (await takenSeats(payload, [course.id])).get(course.id) ?? 0;
     const free = Math.max(course.capacity - taken, 0);
     const state = courseState(course, free);
-    if (state === "closed") return { ok: false, code: "closed", message: "Für diese Veranstaltung ist die Anmeldung nicht möglich." };
-    if (state === "full") return { ok: false, code: "full", message: "Diese Veranstaltung ist leider ausgebucht." };
+    if (state === "closed") return { ok: false, code: "closed", message: "Für diesen Termin ist die Anmeldung nicht möglich." };
+    if (state === "full") return { ok: false, code: "full", message: "Dieser Termin ist leider ausgebucht." };
 
     const status = state === "open" ? "confirmed" : "waitlist";
     const registration = await payload.create({
@@ -90,7 +90,7 @@ export function register(payload: Payload, input: RegistrationInput, origin: str
         text: [
           status === "waitlist" ? "Neue Anmeldung auf der WARTELISTE" : "Neue Anmeldung",
           "",
-          `Veranstaltung: ${course.title}`,
+          `Termin: ${course.title}`,
           `Termin: ${dateFormat.format(new Date(course.startsAt))}`,
           course.location ? `Ort: ${course.location}` : "",
           `Plätze: ${Math.min(taken + (status === "confirmed" ? 1 : 0), course.capacity)} von ${course.capacity} belegt${left === 0 && status === "confirmed" ? " (jetzt voll)" : ""}`,

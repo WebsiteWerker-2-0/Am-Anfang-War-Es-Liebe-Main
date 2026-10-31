@@ -5,7 +5,7 @@ import type { CalloutBlock, PageBlock, SectionItem } from "@/content/model";
 import { QUICK_EXIT_HINTS } from "@/content/navigation";
 import { TEXTS } from "@/content/self-check-tree";
 import { toImg } from "@/lib/images";
-import { getArchivedPosts, getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
+import { getArchivedPosts, getCourseOffers, getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
 import { Rich, RichInline } from "@/lib/rich";
 import { ContactForm } from "../ContactForm";
 import { CourseList } from "../CourseList";
@@ -357,6 +357,40 @@ async function CourseListBlock({ block }: { block: Block<"courseList"> }) {
   return <CourseList initial={courses} heading={block.heading} anchor={block.anchor} empty={empty} />;
 }
 
+// Kurse aus dem Backend: Sprungmarken zu jedem Kurs, dann je Kurs ein Abschnitt (Gestaltung wie Anlaufstellen)
+async function CourseOffersBlock({ block }: { block: Block<"courseOffers"> }) {
+  const offers = await getCourseOffers();
+  return (
+    <>
+      {(offers.length > 1 || block.datesLink) && (
+        <nav aria-label="Kurse auf dieser Seite" className="measure">
+          <ul className="jump-links">
+            {offers.length > 1 &&
+              offers.map((offer) => (
+                <li key={offer.slug}>
+                  <a href={`#${offer.slug}`}>{offer.title}</a>
+                </li>
+              ))}
+            {block.datesLink && (
+              <li>
+                <Link href={block.datesLink.href}>{block.datesLink.label}</Link>
+              </li>
+            )}
+          </ul>
+        </nav>
+      )}
+      {offers.map((offer) => (
+        <section key={offer.slug} className="service" id={offer.slug} aria-labelledby={`${offer.slug}-titel`}>
+          <h2 id={`${offer.slug}-titel`}>{offer.title}</h2>
+          <div className="measure stack">
+            <Rich value={offer.content ?? offer.html ?? null} />
+          </div>
+        </section>
+      ))}
+    </>
+  );
+}
+
 async function NewsList({ block }: { block: Block<"newsList"> }) {
   const posts = await getPosts();
   if (block.variant === "page") {
@@ -556,6 +590,8 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
             return <Exhibition key={index} block={block} />;
           case "courseList":
             return <CourseListBlock key={index} block={block} />;
+          case "courseOffers":
+            return <CourseOffersBlock key={index} block={block} />;
           case "newsList":
             return <NewsList key={index} block={block} />;
           case "entry":

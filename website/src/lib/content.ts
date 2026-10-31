@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { defaultPageBySlug, defaultPages } from "@/content/pages";
-import type { PageData, PostData, SiteData } from "@/content/model";
+import { defaultCourseOffers } from "@/content/course-offers";
+import type { CourseOfferData, PageData, PostData, SiteData } from "@/content/model";
 import { defaultSite } from "@/content/site";
 import posts from "@/content/posts.json";
 import { mainServices, quickAccess, serviceGroups } from "@/content/support-services";
@@ -11,7 +12,8 @@ import { listPublicCourses, type PublicCourse } from "./courses";
 // Inhalte der Website.
 //  - Seiten, Anlaufstellen, Menü und Fuß stehen im Code (`src/content/`) und sind bewusst nicht im Backend
 //    änderbar (Entscheidung vom 17.10.2026, docs/adr/0005-…).
-//  - Aktuelles und Veranstaltungen kommen aus dem CMS. Fehlt es, zeigt die Website den Altbestand und keine Termine.
+//  - Aktuelles, Termine und Kurse kommen aus dem CMS. Fehlt es, zeigt die Website den Altbestand, keine Termine
+//    und die Kurse aus content/course-offers.ts.
 
 export const getPage = cache(async (slug: string): Promise<PageData | null> => defaultPageBySlug.get(slug) ?? null);
 
@@ -66,15 +68,36 @@ export async function getPost(slug: string) {
   return (await getAllPosts()).find((post) => post.slug === slug) ?? null;
 }
 
-/** Veröffentlichte Veranstaltungen mit freien Plätzen; ohne CMS gibt es keine */
+/** Veröffentlichte Termine mit freien Plätzen; ohne CMS gibt es keine */
 export const getPublicCourses = cache(async (): Promise<PublicCourse[]> => {
   const cms = await getCms();
   if (!cms) return [];
   try {
     return await listPublicCourses(cms);
   } catch (error) {
-    console.error("Veranstaltungen aus dem CMS nicht lesbar.", error);
+    console.error("Termine aus dem CMS nicht lesbar.", error);
     return [];
+  }
+});
+
+/** Veröffentlichte Kurse in der Reihenfolge aus dem Backend; ohne CMS (oder leeres CMS) die Standardfassung */
+export const getCourseOffers = cache(async (): Promise<CourseOfferData[]> => {
+  const cms = await getCms();
+  if (!cms) return defaultCourseOffers;
+  try {
+    const { docs } = await cms.find({
+      collection: "course-offers",
+      where: { status: { equals: "published" } },
+      depth: 1,
+      limit: 50,
+      pagination: false,
+      sort: "_order",
+    });
+    if (!docs.length && (await cms.count({ collection: "course-offers" })).totalDocs === 0) return defaultCourseOffers;
+    return docs.map((doc) => ({ slug: doc.slug, title: doc.title, content: (doc.content ?? null) as CourseOfferData["content"] }));
+  } catch (error) {
+    console.error("Kurse aus dem CMS nicht lesbar.", error);
+    return defaultCourseOffers;
   }
 });
 

@@ -5,6 +5,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { de } from "@payloadcms/translations/languages/de";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+import { CourseOffers } from "./cms/collections/CourseOffers";
 import { Courses } from "./cms/collections/Courses";
 import { Media } from "./cms/collections/Media";
 import { Posts } from "./cms/collections/Posts";
@@ -38,7 +39,7 @@ export default buildConfig({
     },
   },
   // Die Reihenfolge ist die Reihenfolge im Menü des Backends
-  collections: [Posts, Courses, Registrations, Media, Users],
+  collections: [Posts, Courses, CourseOffers, Registrations, Media, Users],
   globals: [Mail],
   editor: lexicalEditor(),
   i18n: { supportedLanguages: { de }, fallbackLanguage: "de" },

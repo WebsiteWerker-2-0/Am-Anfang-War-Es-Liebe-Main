@@ -123,6 +123,8 @@ export type PageBlock =
       panels: { image: ImageValue; title: string }[];
     }
   | { blockType: "courseList"; anchor?: string; heading: string; emptyNotice: Rich }
+  /** Kurse (Krav Maga, WenDo …) aus dem Backend, Sprungmarken oben und je Kurs ein Abschnitt */
+  | { blockType: "courseOffers"; datesLink?: { label: string; href: string } }
   | { blockType: "newsList"; variant: "page" | "teaser"; anchor?: string; heading?: string; linkLabel?: string; count?: number }
   // Startseite
   | {
@@ -207,4 +209,13 @@ export type SiteData = {
     fundingAlt: string;
     draftNote: string;
   };
+};
+
+/** Kurs (Krav Maga, WenDo …): Beschreibung ohne Termin; die Termine mit Anmeldung stehen unter „Termine“ */
+export type CourseOfferData = {
+  slug: string;
+  title: string;
+  /** HTML (Standardinhalt) oder Lexical (Backend) */
+  html?: string;
+  content?: Rich;
 };

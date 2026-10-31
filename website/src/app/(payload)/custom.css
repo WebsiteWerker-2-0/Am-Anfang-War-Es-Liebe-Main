@@ -120,13 +120,15 @@ body,
 
 /* Gruppen mit nur einem Eintrag zeigen ihn ohne Überschrift, damit das Menü flach wirkt */
 #nav-group-Aktuelles .nav-group__toggle,
-#nav-group-Veranstaltungen .nav-group__toggle,
+#nav-group-Termine .nav-group__toggle,
+#nav-group-Kurse .nav-group__toggle,
 #nav-group-Dateiarchiv .nav-group__toggle {
   display: none;
 }
 
 #nav-group-Aktuelles .nav-group__content,
-#nav-group-Veranstaltungen .nav-group__content,
+#nav-group-Termine .nav-group__content,
+#nav-group-Kurse .nav-group__content,
 #nav-group-Dateiarchiv .nav-group__content {
   display: flex !important;
   flex-direction: column;

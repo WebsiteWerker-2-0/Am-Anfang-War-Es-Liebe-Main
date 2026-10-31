@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     posts: Post;
     courses: Course;
+    'course-offers': CourseOffer;
     registrations: Registration;
     media: Media;
     users: User;
@@ -85,6 +86,7 @@ export interface Config {
   collectionsSelect: {
     posts: PostsSelect<false> | PostsSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
+    'course-offers': CourseOffersSelect<false> | CourseOffersSelect<true>;
     registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -202,7 +204,7 @@ export interface Post {
   createdAt: string;
 }
 /**
- * Das Archiv aller hochgeladenen Bilder, PDFs und Videos. Hochladen Sie neue Dateien am besten direkt im Beitrag oder in der Veranstaltung.
+ * Das Archiv aller hochgeladenen Bilder, PDFs und Videos. Hochladen Sie neue Dateien am besten direkt im Beitrag, im Termin oder im Kurs.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -239,7 +241,7 @@ export interface Media {
   };
 }
 /**
- * Kurse und Termine mit Anmeldung. Mit „Speichern“ erscheint die Veranstaltung sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.
+ * Termine mit Anmeldung, zum Beispiel Kurstermine oder Aktionen. Mit „Speichern“ erscheint der Termin sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses".
@@ -283,7 +285,7 @@ export interface Course {
   registrationOpen?: boolean | null;
   waitlist?: boolean | null;
   /**
-   * Wer sich angemeldet hat. Zum Stornieren (Platz wird frei) oder zum Nachrücken von der Warteliste eine Zeile öffnen und den Status ändern. Nach der Veranstaltung bitte löschen: Die Angaben sind persönliche Daten.
+   * Wer sich angemeldet hat. Zum Stornieren (Platz wird frei) oder zum Nachrücken von der Warteliste eine Zeile öffnen und den Status ändern. Nach dem Termin bitte löschen: Die Angaben sind persönliche Daten.
    */
   registrationList?: {
     docs?: (number | Registration)[];
@@ -291,14 +293,14 @@ export interface Course {
     totalDocs?: number;
   };
   /**
-   * Zum Beispiel bei Veranstaltungen über mehrere Tage.
+   * Zum Beispiel bei Terminen über mehrere Tage.
    */
   endsAt?: string | null;
   audience?: string | null;
   price?: string | null;
   instructor?: string | null;
   /**
-   * Leer lassen: Es gilt die Adresse, die ein Admin unter „E-Mail und Anmeldungen“ eingetragen hat.
+   * Leer lassen: Es gilt die Adresse, die ein Admin unter „E-Mail und Anmeldungen“ eingetragen hat. Mehrere Adressen mit Komma trennen.
    */
   notifyEmail?: string | null;
   slug: string;
@@ -308,7 +310,7 @@ export interface Course {
   createdAt: string;
 }
 /**
- * Anmeldungen über die Website. Bei Absagen den Status auf „Storniert“ stellen (der Platz wird frei) oder die Anmeldung löschen. Name und Kontakt lassen sich ändern. Persönliche Daten: nach der Veranstaltung bitte löschen.
+ * Anmeldungen über die Website. Bei Absagen den Status auf „Storniert“ stellen (der Platz wird frei) oder die Anmeldung löschen. Name und Kontakt lassen sich ändern. Persönliche Daten: nach dem Termin bitte löschen.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "registrations".
@@ -330,6 +332,40 @@ export interface Registration {
    */
   mailStatus?: ('sent' | 'failed' | 'skipped') | null;
   mailError?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und WenDo. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-offers".
+ */
+export interface CourseOffer {
+  id: number;
+  _order?: string | null;
+  title: string;
+  /**
+   * Datei oder Bild an einer bestimmten Stelle einfügen: im Text an die Stelle klicken, dann in der Leiste ganz links auf das erste Symbol und „Datei oder Bild“ wählen.
+   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  slug: string;
+  status: 'draft' | 'published' | 'archived';
+  archivedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -394,6 +430,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'courses';
         value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'course-offers';
+        value: number | CourseOffer;
       } | null)
     | ({
         relationTo: 'registrations';
@@ -499,6 +539,20 @@ export interface CoursesSelect<T extends boolean = true> {
   price?: T;
   instructor?: T;
   notifyEmail?: T;
+  slug?: T;
+  status?: T;
+  archivedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-offers_select".
+ */
+export interface CourseOffersSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  content?: T;
   slug?: T;
   status?: T;
   archivedAt?: T;
@@ -631,7 +685,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Mail {
   id: number;
   /**
-   * Zu jeder Anmeldung erhält diese Adresse eine E-Mail mit Name, Kontakt und Kurs.
+   * Zu jeder Anmeldung erhalten diese Adressen eine E-Mail mit Name, Kontakt und Termin. Mehrere Adressen mit Komma trennen.
    */
   courseRecipient?: string | null;
   /**

@@ -2,6 +2,7 @@ import type { PageData } from "../model";
 import { browsingTraces } from "./browsing-traces";
 import { contact } from "./contact";
 import { courses } from "./courses";
+import { dates } from "./dates";
 import { help } from "./help";
 import { home } from "./home";
 import { info } from "./info";
@@ -19,6 +20,7 @@ export const defaultPages: PageData[] = [
   help,
   selfCheck,
   news,
+  dates,
   courses,
   info,
   workingGroup,

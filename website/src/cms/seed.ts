@@ -3,6 +3,7 @@ import path from "node:path";
 import { convertHTMLToLexical, editorConfigFactory } from "@payloadcms/richtext-lexical";
 import { JSDOM } from "jsdom";
 import type { Payload } from "payload";
+import { defaultCourseOffers } from "@/content/course-offers";
 import posts from "@/content/posts.json";
 
 // Spielt die Beiträge der Altseite (src/content/posts.json) mit Bildern und Dokumenten (public/medien)
@@ -30,6 +31,7 @@ function resolvePublicFile(webPath: string) {
 }
 
 export async function seedExistingContent(payload: Payload) {
+  await seedCourseOffers(payload);
   if ((await payload.count({ collection: "posts" })).totalDocs > 0) return;
 
   const editorConfig = await editorConfigFactory.default({ config: payload.config });
@@ -131,4 +133,27 @@ export async function seedExistingContent(payload: Payload) {
     }
   }
   payload.logger.info(`${posts.length} Beiträge der Altseite eingespielt.`);
+}
+
+// Kurse (Krav Maga, WenDo) aus dem offiziellen Dokument des AG, nur solange es noch keinen Kurs gibt.
+// Gibt es gar keinen Kurs mehr (alle gelöscht), kommen sie beim nächsten Start zurück; ausblenden also mit „Archiviert“.
+async function seedCourseOffers(payload: Payload) {
+  if ((await payload.count({ collection: "course-offers" })).totalDocs > 0) return;
+  const editorConfig = await editorConfigFactory.default({ config: payload.config });
+  for (const offer of defaultCourseOffers) {
+    try {
+      await payload.create({
+        collection: "course-offers",
+        data: {
+          title: offer.title,
+          slug: offer.slug,
+          content: convertHTMLToLexical({ editorConfig, html: offer.html ?? "", JSDOM }) as never,
+          status: "published",
+        },
+      });
+    } catch (error) {
+      payload.logger.error({ err: error, msg: `Einspielen des Kurses ${offer.slug} fehlgeschlagen.` });
+    }
+  }
+  payload.logger.info(`${defaultCourseOffers.length} Kurse eingespielt.`);
 }

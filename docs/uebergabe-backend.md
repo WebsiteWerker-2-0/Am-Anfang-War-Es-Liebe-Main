@@ -107,3 +107,9 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 - Zugangs-E-Mail enthält einen Link „Passwort festlegen“ (`payload.forgotPassword` mit `disableEmail`, 7 Tage, Seite `/backend/reset/<token>`), nie ein Passwort. Payloads eigenes „Passwort vergessen“ auf der Anmeldeseite verschickt keine E-Mail (kein E-Mail-Adapter); dafür eine Admin bitten, „Zugangs-E-Mail senden“ zu klicken.
 - Postfach-Passwort verschlüsselt (siehe ADR-0005). Ein noch im Klartext gespeichertes Passwort wird beim nächsten Speichern der Seite „E-Mail und Anmeldungen“ verschlüsselt; angezeigt wird es schon vorher nicht mehr.
 - Sicherheitsupdate: Payload 3.90.2 → 3.91.0 (behebt u. a. `undici`), `npm audit fix` und drei `overrides` (Fallstrick 12). `npm audit --omit=dev`: 0 Schwachstellen. Keine Schemaänderung; geprüft an einer Datenbank im Serverstand (alter Stand mit Beiträgen, Veranstaltung und Anmeldung erzeugt, neuer Stand darauf gestartet, Anmeldung, Platzzählung und Backend im Browser getestet).
+
+## Nachtrag 31.10.2026: Termine und Kurse
+
+- „Veranstaltungen“ heißen „Termine“ (Website `/termine`, Backend „Termine“, Sammlung weiter `courses`). Neu „Kurse“ (`/kurse`, Sammlung `course-offers`), Wortlaut aus dem Dokument des AG in `src/content/course-offers.ts`, eingespielt von `seed.ts`. Siehe ADR-0008.
+- Migration `…_kurse`: nur neue Tabellen und eine Spalte in `payload_locked_documents_rels` (von Payload so erzeugt, unverändert übernommen). An Daten im Serverstand geprüft.
+- Vorschau: `/vorschau/termine/<id>` (vorher `/vorschau/veranstaltungen`), `/vorschau/kurse/<id>`.

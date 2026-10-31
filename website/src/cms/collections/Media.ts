@@ -3,7 +3,7 @@ import { isLoggedIn } from "../access";
 import { uploadDir } from "../env";
 import { revalidateSite } from "../revalidate";
 
-// Mediathek (F-07): Bilder, Dokumente und Videos für Beiträge und Veranstaltungen.
+// Mediathek (F-07): Bilder, Dokumente und Videos für Beiträge, Termine und Kurse.
 export const Media: CollectionConfig = {
   slug: "media",
   labels: { singular: "Datei", plural: "Dateiarchiv" },
@@ -12,7 +12,7 @@ export const Media: CollectionConfig = {
     group: "Dateiarchiv",
     defaultColumns: ["title", "filename", "mimeType", "isPublic", "updatedAt"],
     description:
-      "Das Archiv aller hochgeladenen Bilder, PDFs und Videos. Hochladen Sie neue Dateien am besten direkt im Beitrag oder in der Veranstaltung.",
+      "Das Archiv aller hochgeladenen Bilder, PDFs und Videos. Hochladen Sie neue Dateien am besten direkt im Beitrag, im Termin oder im Kurs.",
   },
   access: {
     // Öffentlich abrufbar ist nur, was als öffentlich markiert ist

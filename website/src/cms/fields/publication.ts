@@ -1,7 +1,7 @@
 import type { CollectionBeforeChangeHook, Field } from "payload";
 
-// Status und Archiv, gemeinsam für Beiträge, Veranstaltungen und Seitentexte.
-// Archiviert heißt bei Veranstaltungen: bleibt erhalten, ist öffentlich nicht mehr sichtbar.
+// Status und Archiv, gemeinsam für Beiträge, Termine und Kurse.
+// Archiviert heißt bei Terminen und Kursen: bleibt erhalten, ist öffentlich nicht mehr sichtbar.
 // Bei Beiträgen steht Archiviertes eingeklappt im Archiv unten auf „Aktuelles“.
 export const publicationFields = (archivedLabel = "Archiviert (nicht mehr öffentlich)"): Field[] => [
   {

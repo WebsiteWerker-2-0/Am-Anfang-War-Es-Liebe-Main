@@ -17,24 +17,24 @@ async function onlineSeats(courseId: unknown, req: PayloadRequest) {
   return totalDocs;
 }
 
-// Veranstaltungen (Kurse und Termine) mit Plätzen und Anmeldung (F-06, F-11). Die Website zeigt
-// veröffentlichte Veranstaltungen auf der Seite „Kurse“ mit freien Plätzen und einem Anmeldeformular,
+// Termine mit Plätzen und Anmeldung (F-06, F-11). Die Website zeigt veröffentlichte Termine
+// auf der Seite „Termine“ (/termine) mit freien Plätzen und einem Anmeldeformular,
 // siehe components/CourseList.tsx. Der Name der Sammlung bleibt „courses“ (Datenbank, Adressen),
-// im Backend heißt sie „Veranstaltungen“.
+// im Backend heißt sie „Termine“. Die Kursbeschreibungen (Krav Maga, WenDo) sind die Sammlung „course-offers“.
 export const Courses: CollectionConfig = {
   slug: "courses",
-  labels: { singular: "Veranstaltung", plural: "Veranstaltungen" },
+  labels: { singular: "Termin", plural: "Termine" },
   versions: { maxPerDoc: 20 },
   defaultSort: "startsAt",
   admin: {
     useAsTitle: "title",
-    group: "Veranstaltungen",
+    group: "Termine",
     defaultColumns: ["title", "startsAt", "booked", "capacity", "status"],
     listSearchableFields: ["title", "location"],
-    // Auge-Symbol: Vorschau der Veranstaltung, wie sie auf der Website erscheint
-    livePreview: { url: ({ data }) => `/vorschau/veranstaltungen/${data.id}` },
+    // Auge-Symbol: Vorschau des Termins, wie er auf der Website erscheint
+    livePreview: { url: ({ data }) => `/vorschau/termine/${data.id}` },
     description:
-      "Kurse und Termine mit Anmeldung. Mit „Speichern“ erscheint die Veranstaltung sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.",
+      "Termine mit Anmeldung, zum Beispiel Kurstermine oder Aktionen. Mit „Speichern“ erscheint der Termin sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.",
   },
   access: {
     read: publishedOrLoggedIn,
@@ -58,7 +58,7 @@ export const Courses: CollectionConfig = {
     afterDelete: [() => revalidateSite()],
     beforeDelete: [
       // Löschen ist immer möglich (Payload fragt vorher „Sind Sie sicher?“). Die Anmeldungen der
-      // Veranstaltung werden mitgelöscht, sie enthalten persönliche Daten und gehören nur zu ihr.
+      // Termins werden mitgelöscht, sie enthalten persönliche Daten und gehören nur zu ihr.
       async ({ id, req }) => {
         await req.payload.delete({ collection: "registrations", where: { course: { equals: id } }, req });
       },
@@ -68,7 +68,7 @@ export const Courses: CollectionConfig = {
     {
       name: "title",
       type: "text",
-      label: "Name der Veranstaltung",
+      label: "Name des Termins",
       required: true,
       admin: { placeholder: "Zum Beispiel: WenDo für Frauen und Mädchen" },
     },
@@ -161,7 +161,7 @@ export const Courses: CollectionConfig = {
         defaultColumns: ["name", "email", "status", "createdAt"],
         allowCreate: false,
         description:
-          "Wer sich angemeldet hat. Zum Stornieren (Platz wird frei) oder zum Nachrücken von der Warteliste eine Zeile öffnen und den Status ändern. Nach der Veranstaltung bitte löschen: Die Angaben sind persönliche Daten.",
+          "Wer sich angemeldet hat. Zum Stornieren (Platz wird frei) oder zum Nachrücken von der Warteliste eine Zeile öffnen und den Status ändern. Nach dem Termin bitte löschen: Die Angaben sind persönliche Daten.",
       },
     },
     {
@@ -175,7 +175,7 @@ export const Courses: CollectionConfig = {
           label: "Wann endet es?",
           admin: {
             date: { pickerAppearance: "dayAndTime", displayFormat: "dd.MM.yyyy HH:mm" },
-            description: "Zum Beispiel bei Veranstaltungen über mehrere Tage.",
+            description: "Zum Beispiel bei Terminen über mehrere Tage.",
           },
         },
         {
@@ -188,7 +188,7 @@ export const Courses: CollectionConfig = {
         { name: "instructor", type: "text", label: "Leitung" },
         emailListField({
           name: "notifyEmail",
-          label: "Anmeldungen für diese Veranstaltung gehen an",
+          label: "Anmeldungen für diesen Termin gehen an",
           access: { read: ({ req }) => Boolean(req.user) },
           description: "Leer lassen: Es gilt die Adresse, die ein Admin unter „E-Mail und Anmeldungen“ eingetragen hat.",
         }),

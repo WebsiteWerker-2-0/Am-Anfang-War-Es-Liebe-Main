@@ -5,6 +5,7 @@ import * as migration_20261017_142156_veranstaltung_text from './20261017_142156
 import * as migration_20261017_151620_downloads_bildposition from './20261017_151620_downloads_bildposition';
 import * as migration_20261017_153858_verfasst_von from './20261017_153858_verfasst_von';
 import * as migration_20261017_155447_plaetze_von_hand from './20261017_155447_plaetze_von_hand';
+import * as migration_20261031_121905_kurse from './20261031_121905_kurse';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261017_155447_plaetze_von_hand.up,
     down: migration_20261017_155447_plaetze_von_hand.down,
-    name: '20261017_155447_plaetze_von_hand'
+    name: '20261017_155447_plaetze_von_hand',
+  },
+  {
+    up: migration_20261031_121905_kurse.up,
+    down: migration_20261031_121905_kurse.down,
+    name: '20261031_121905_kurse'
   },
 ];

@@ -10,12 +10,12 @@ export const Registrations: CollectionConfig = {
   defaultSort: "-createdAt",
   admin: {
     useAsTitle: "name",
-    // Nicht im Menü: die Redaktion sieht die Anmeldungen in der jeweiligen Veranstaltung
+    // Nicht im Menü: die Redaktion sieht die Anmeldungen im jeweiligen Termin
     group: false,
     defaultColumns: ["name", "course", "status", "createdAt"],
     listSearchableFields: ["name", "email"],
     description:
-      "Anmeldungen über die Website. Bei Absagen den Status auf „Storniert“ stellen (der Platz wird frei) oder die Anmeldung löschen. Name und Kontakt lassen sich ändern. Persönliche Daten: nach der Veranstaltung bitte löschen.",
+      "Anmeldungen über die Website. Bei Absagen den Status auf „Storniert“ stellen (der Platz wird frei) oder die Anmeldung löschen. Name und Kontakt lassen sich ändern. Persönliche Daten: nach dem Termin bitte löschen.",
   },
   access: {
     read: isLoggedIn,
@@ -24,7 +24,7 @@ export const Registrations: CollectionConfig = {
     delete: isLoggedIn,
   },
   fields: [
-    { name: "course", type: "relationship", relationTo: "courses", label: "Veranstaltung", required: true, admin: { readOnly: true } },
+    { name: "course", type: "relationship", relationTo: "courses", label: "Termin", required: true, admin: { readOnly: true } },
     { name: "name", type: "text", label: "Name", required: true },
     { name: "email", type: "email", label: "E-Mail", required: true },
     { name: "phone", type: "text", label: "Telefon" },

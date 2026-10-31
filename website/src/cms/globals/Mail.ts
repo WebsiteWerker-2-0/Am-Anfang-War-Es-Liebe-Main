@@ -43,7 +43,7 @@ export const Mail: GlobalConfig = {
     emailListField({
       name: "courseRecipient",
       label: "Anmeldungen gehen an diese E-Mail-Adresse(n)",
-      description: "Zu jeder Anmeldung erhalten diese Adressen eine E-Mail mit Name, Kontakt und Kurs.",
+      description: "Zu jeder Anmeldung erhalten diese Adressen eine E-Mail mit Name, Kontakt und Termin.",
     }),
     {
       type: "collapsible",

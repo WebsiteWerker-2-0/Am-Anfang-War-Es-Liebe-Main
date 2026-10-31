@@ -233,8 +233,8 @@ export function CourseList({
               )}
               {course.instructor && (
                 <div>
-                  <dt className="visually-hidden">Kursleitung</dt>
-                  <dd>Kursleitung: {course.instructor}</dd>
+                  <dt className="visually-hidden">Leitung</dt>
+                  <dd>Leitung: {course.instructor}</dd>
                 </div>
               )}
             </dl>

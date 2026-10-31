@@ -33,9 +33,10 @@ export async function Dashboard({ payload, user }: Props) {
         <Tile href="/backend/collections/posts/create" title="Neuen Beitrag schreiben" text="Eine Meldung für den Bereich Aktuelles" />
         <Tile
           href="/backend/collections/courses/create"
-          title="Neue Veranstaltung anlegen"
-          text={`Kurs oder Termin mit Anmeldung · ${events} veröffentlicht`}
+          title="Neuen Termin anlegen"
+          text={`Termin mit Anmeldung · ${events} veröffentlicht`}
         />
+        <Tile href="/backend/collections/course-offers" title="Kurse bearbeiten" text="Krav Maga, WenDo und weitere Kurse" />
         <Tile
           href="/backend/collections/registrations"
           title="Anmeldungen ansehen"

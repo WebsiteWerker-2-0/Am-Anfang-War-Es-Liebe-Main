@@ -137,18 +137,18 @@ Eine datierte Meldung in Aktuelles, etwa zu einer Aktion oder Ausstellung.
 _Englisch_: post
 _Vermeiden_: Artikel, Blogpost, News
 
-**Veranstaltung**:
-Ein Termin mit Datum, Uhrzeit und Ort, etwa eine Aktion oder ein Kurstermin.
-_Englisch_: event
-_Vermeiden_: Event, Termin (nur im Satz)
+**Termin**:
+Ein Angebot mit Datum, Uhrzeit und Ort, auf Wunsch mit Plätzen und Anmeldung, etwa ein Kurstermin oder eine Aktion. Seite „Termine“ (`/termine`), im Backend „Termine“.
+_Englisch_: event (im Code historisch die Sammlung `courses`, Typ `PublicCourse`)
+_Vermeiden_: Veranstaltung (seit 31.10.2026), Event
 
 **Kurs**:
-Ein Selbstverteidigungs- oder Selbstbehauptungskurs, den der Arbeitskreis anbietet.
-_Englisch_: course
+Ein Selbstverteidigungs- oder Selbstbehauptungskurs, den der Arbeitskreis anbietet (Krav Maga, WenDo), als Beschreibung ohne Datum. Seite „Kurse“ (`/kurse`), im Backend „Kurse“.
+_Englisch_: course offer (Sammlung `course-offers`, weil `courses` schon die Termine sind)
 _Vermeiden_: Seminar, Training (außer als Teil des Kursnamens)
 
 **Anmeldung**:
-Die Anmeldung einer Person zu einem Kurs. Anders als Kontaktanfragen darf sie gespeichert werden.
+Die Anmeldung einer Person zu einem Termin. Anders als Kontaktanfragen darf sie gespeichert werden.
 _Englisch_: registration
 
 **Kontaktanfrage**:

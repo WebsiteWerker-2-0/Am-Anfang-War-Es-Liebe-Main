@@ -5,7 +5,7 @@ import { PreviewRefresh } from "@/components/PreviewRefresh";
 import { takenSeats, toPublicCourse } from "@/lib/courses";
 import { requirePreviewCms } from "@/lib/preview";
 
-// Vorschau einer Veranstaltung im Backend, nur für angemeldete Redakteurinnen
+// Vorschau eines Termins im Backend, nur für angemeldete Redakteurinnen
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Vorschau",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function CoursePreview({
   params,
-}: PageProps<"/vorschau/veranstaltungen/[id]">) {
+}: PageProps<"/vorschau/termine/[id]">) {
   const { id } = await params;
   const cms = await requirePreviewCms();
   const doc = await cms
@@ -28,7 +28,7 @@ export default async function CoursePreview({
       <CourseList
         preview
         initial={[toPublicCourse(doc, taken.get(doc.id) ?? 0)]}
-        heading="Veranstaltung"
+        heading="Termin"
         empty={null}
       />
     </div>

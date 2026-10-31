@@ -6,7 +6,7 @@ import { mediaUrl } from "./cms-content";
 import { figureClass } from "./figure";
 
 // Formatierter Text aus dem CMS als HTML-Text, für Teile der Website, die im Browser erzeugt werden
-// (Veranstaltungsliste). Dieselben Bausteine wie in rich.tsx, die Klassen kommen aus .prose.
+// (Terminliste). Dieselben Bausteine wie in rich.tsx, die Klassen kommen aus .prose.
 
 const escape = (value: string) =>
   value

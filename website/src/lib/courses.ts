@@ -78,7 +78,7 @@ export async function listPublicCourses(payload: Payload): Promise<PublicCourse[
   return docs.map((doc) => toPublicCourse(doc, taken.get(doc.id) ?? 0));
 }
 
-/** Eine Veranstaltung aus dem CMS in der Form für die Website (auch für die Vorschau im Backend) */
+/** Ein Termin aus dem CMS in der Form für die Website (auch für die Vorschau im Backend) */
 export function toPublicCourse(doc: Course, used: number): PublicCourse {
   const free = Math.max(doc.capacity - used, 0);
   return {

@@ -26,7 +26,7 @@ export function TestMailButton() {
         {busy ? "Wird gesendet …" : "Test-E-Mail senden"}
       </button>
       <p style={{ marginBlockStart: "0.5rem", opacity: 0.7 }}>
-        Speichern Sie zuerst Ihre Angaben. Die Test-E-Mail geht an die Adresse für Kursanmeldungen.
+        Speichern Sie zuerst Ihre Angaben. Die Test-E-Mail geht an die Adresse für Anmeldungen.
       </p>
     </div>
   );
