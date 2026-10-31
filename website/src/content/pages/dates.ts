@@ -13,7 +13,7 @@ export const dates: PageData = {
       blockType: "courseList",
       anchor: "termine",
       heading: "Termine und Anmeldung",
-      emptyNotice: `<p><strong>Termine 2026:</strong> folgen. Die Anmeldung ist künftig direkt hier auf der Website möglich.</p>`,
+      emptyNotice: `<p><strong>Termine:</strong> folgen. Die Anmeldung ist künftig direkt hier auf der Website möglich.</p>`,
     },
   ],
 };
