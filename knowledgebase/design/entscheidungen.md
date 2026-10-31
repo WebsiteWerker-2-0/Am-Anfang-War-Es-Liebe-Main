@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Auch andere Farben als die der Broschüre erlaubt
+
+- **Entscheidung:** Die Broschüre bleibt die Grundlage der Farbwelt, weitere Farben sind aber auch außerhalb der Funktionsfarben erlaubt. Sie werden als Token angelegt und in `farben.md` eingetragen, die Kontrastregeln gelten weiter. Erweitert die Entscheidung „UI-bedingte Farbabweichungen sind zulässig“ vom 17.10.2026.
+- **Begründung:** Wunsch von Enrico.
+- **Datei:** `knowledgebase/design/DESIGN-UND-ENTWICKLUNG.md` (Regel 2, Abschnitte 2.1, 2.3, 3.1, 3.4), `knowledgebase/design/farben.md`, `CLAUDE.md`
+- **Von:** Enrico (mit Claude)
+
 ## 31.10.2026 – Hilfe in vier farbige Abschnitte gegliedert
 
 - **Entscheidung:** Die Hilfe-Seite beginnt nach dem Notruf mit einem Wegweiser und gliedert sich in vier Abschnitte mit Sandfläche und Farbkante: „Hier bekommen Sie Hilfe“ (Cyan), „Was Sie jetzt tun können“ (Orange), „Wenn Sie helfen möchten“ (Magenta), „Weitere Anlaufstellen“ (Grau). Die Fragen der Broschüre bleiben als Unterüberschriften. Spurensicherung bleibt offen, „Für sich selbst tun“ und Stalking sind zugeklappt, die langen Angebotslisten liegen hinter „Mehr zu den Angeboten“. Kontaktdaten bleiben immer sichtbar.
