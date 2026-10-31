@@ -10,7 +10,16 @@ export const defaultSite: SiteData = {
     { href: "/aktuelles", label: "Aktuelles" },
     { href: "/termine", label: "Termine" },
     { href: "/kurse", label: "Kurse" },
-    { href: "/infos", label: "Infos" },
+    {
+      href: "/infos",
+      label: "Infos",
+      children: [
+        { href: "/infos#spurensicherung", label: "Vertrauliche Spurensicherung" },
+        { href: "/infos#downloads", label: "Broschüren und Flyer" },
+        { href: "/infos#links", label: "Weiterführende Informationen" },
+        { href: "/infos#wanderausstellung", label: "Unsere Wanderausstellung" },
+      ],
+    },
     { href: "/arbeitskreis", label: "Arbeitskreis" },
     { href: "/kontakt", label: "Kontakt" },
   ],

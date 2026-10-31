@@ -1,5 +1,5 @@
 import type { PageData } from "../model";
-import { tel } from "./helpers";
+import { exhibitionBooking, exhibitionPanels, tel } from "./helpers";
 
 export const info: PageData = {
   slug: "infos",
@@ -17,7 +17,7 @@ export const info: PageData = {
         { label: "Vertrauliche Spurensicherung im Kreis Höxter", note: "Nach sexueller Gewalt Spuren sichern lassen, auch ohne Anzeige", href: "#spurensicherung" },
         { label: "Broschüren und Flyer zum Download", note: "Broschüre des Arbeitskreises, Flyer, Rad der Gewalt und Gewaltspirale", href: "#downloads" },
         { label: "Weiterführende Informationen", note: "Für Erwachsene, für Kinder und Jugendliche, zu digitaler Gewalt", href: "#links" },
-        { label: "Unsere Wanderausstellung", note: "Alle zwölf Tafeln ansehen und die Ausstellung buchen", href: "/#ausstellung-titel" },
+        { label: "Unsere Wanderausstellung", note: "Alle zwölf Tafeln ansehen und die Ausstellung buchen", href: "#wanderausstellung" },
       ],
     },
     // Kampagne Anonyme Spurensicherung (F-08), Inhalt nach Flyer und Plakat 2017 vom AG.
@@ -62,6 +62,16 @@ export const info: PageData = {
           meta: "PDF, 1,2 MB · Deutsch · Stand: 2026",
         },
         {
+          title: "Flyer des Frauen- und Kinderschutzhauses im Kreis Höxter",
+          file: "/downloads/flyer-frauenhaus.pdf",
+          meta: "PDF, 0,8 MB · Deutsch · Stand: ohne Datum",
+        },
+        {
+          title: "Flyer „Sicher feiern“: Tipps für dich und deine Freund*innen",
+          file: "/downloads/flyer-sicher-feiern.pdf",
+          meta: "PDF, 1,3 MB · Deutsch · Stand: 2026",
+        },
+        {
           title: "Flyer des Weissen Rings zu K.-o.-Tropfen",
           file: "/downloads/flyer-ko-tropfen-weisser-ring.pdf",
           meta: "PDF, 0,3 MB · Deutsch · Stand: ohne Datum",
@@ -82,16 +92,16 @@ export const info: PageData = {
         {
           image: { asset: "infos/rad-der-gewalt" },
           alt: "Rad der Gewalt: In der Mitte „Macht und Kontrolle“, darum die Formen von Gewalt mit Beispielen: körperliche, psychische, sexualisierte, digitale, soziale und finanzielle Gewalt, Instrumentalisierung der Kinder und Abschieben der Verantwortung.",
-          title: "Rad der Gewalt",
-          file: "/downloads/rad-der-gewalt.png",
-          meta: "PNG, 3,0 MB",
+          title: "Das Rad der Gewalt: Gewalt ist keine Privatsache",
+          file: "/downloads/rad-der-gewalt.pdf",
+          meta: "PDF, 0,5 MB · Stand: 2026",
         },
         {
           image: { asset: "infos/gewaltspirale" },
           alt: "Gewaltspirale bei häuslicher Gewalt: fünf Phasen, die sich wiederholen: Spannungsaufbau, akute Gewalt, Reue und Entschuldigung, Versöhnung, Entspannungsphase.",
-          title: "Gewaltspirale",
-          file: "/downloads/gewaltspirale.png",
-          meta: "PNG, 2,9 MB",
+          title: "Die Gewaltspirale bei häuslicher Gewalt",
+          file: "/downloads/gewaltspirale.pdf",
+          meta: "PDF, 0,5 MB · Stand: 2026",
         },
       ],
     },
@@ -126,6 +136,15 @@ export const info: PageData = {
           ],
         },
       ],
+    },
+    {
+      blockType: "exhibition",
+      anchor: "wanderausstellung",
+      heading: "Unsere Wanderausstellung",
+      intro:
+        "„Am Anfang war es Liebe … Wege aus der körperlichen und seelischen Gewalt“ ist seit 2022 im ganzen Kreis Höxter unterwegs, in Rathäusern, Banken und Gesundheitszentren.",
+      panels: exhibitionPanels,
+      booking: exhibitionBooking,
     },
   ],
 };

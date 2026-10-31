@@ -4,10 +4,16 @@ Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzli
 
 ## 31.10.2026 – Infos als Navigationsseite
 
-- **Entscheidung:** Infos bekommt keine Unterseiten. Oben stehen Wegweiser in der Optik von „Sie sind hier, weil …“ zu Spurensicherung, Broschüren und Flyer, weiterführenden Informationen und der Wanderausstellung (Startseite). Rad der Gewalt und Gewaltspirale als Vorschau mit Download.
+- **Entscheidung:** Infos bekommt keine Unterseiten. Oben stehen Wegweiser in der Optik von „Sie sind hier, weil …“ zu Spurensicherung, Broschüren und Flyer, weiterführenden Informationen und Wanderausstellung, alle auf derselben Seite; dazu die Unterpunkte im Menü (Enrico). Rad der Gewalt und Gewaltspirale als Vorschau, Download als PDF.
 - **Begründung:** Wunsch der Frauenberatungsstelle nach Unterpunkten, Entscheidung Steffen: eine Seite, die zu den Bereichen führt.
 - **Datei:** `website/src/content/pages/info.ts`, Blöcke `linkHub` und `graphics`
 - **Von:** Steffen (mit Claude)
+## 31.10.2026 – Unterpunkte im Menü, Mitgliederliste ohne Namen
+
+- **Entscheidung:** „Infos“ hat Unterpunkte: am Desktop beim Zeigen oder per Tastaturfokus, mobil immer sichtbar und eingerückt. Die Mitgliederliste nennt nur Einrichtungen, keine Namen.
+- **Begründung:** Wünsche der Frauenberatungsstelle (21.10.2026) und des AG (28.10.2026).
+- **Dateien:** `website/src/content/site.ts`, `website/src/components/SiteHeader.tsx`, `website/src/content/pages/working-group.ts`
+- **Von:** Auftraggeber, umgesetzt mit Claude
 
 ## 31.10.2026 – Seitenköpfe Hilfe und Infos getauscht
 

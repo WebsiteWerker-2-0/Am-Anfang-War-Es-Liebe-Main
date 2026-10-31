@@ -8,7 +8,7 @@ Eine Frage pro Schritt, keine eigene Adresse und kein Verlaufseintrag je Frage.
 
 1. „Sind Sie oder ist jemand anderes gerade in Gefahr?“ Ja / Nein / Weiß nicht. Bei Ja kommt zuerst ein Hilfeschritt mit 110 und Hilfetelefon, danach geht es auf Wunsch weiter.
 2. „Um wen geht es?“ Mich selbst / eine Frau, die ich kenne / ein Kind oder eine*n Jugendliche*n.
-3. Bereich wählen (nicht bei Kindern): Kontrolle und seelische Gewalt, Körperliche Gewalt und Drohungen, Sexuelle Gewalt, Geld und Arbeit, Stalking und Gewalt im Internet. Oder „Alle Bereiche nacheinander“.
+3. Bereich wählen (nicht bei Kindern): Kontrolle und seelische Gewalt, Körperliche Gewalt und Drohungen, Sexuelle Gewalt, Geld und Arbeit, Stalking und digitale Gewalt, Druck über die Kinder. Oder „Alle Bereiche nacheinander“.
 4. Die Aussagen des Bereichs einzeln: Ja / Nein / Weiß nicht, dazu „Überspringen“. Nach einem Bereich: weitere Bereiche oder „Zum Ergebnis“.
 5. Ergebnis als Ampel mit Hilfe passend zu den Bereichen, in denen etwas zutraf.
 
@@ -57,5 +57,5 @@ Immer da: „Zurück“ und „Neu beginnen“. Über jeder Aussage stehen der B
 - [ ] Neue Aussagen (im Code mit `added: true`): Handy kontrollieren, Würgen, Waffe, Zunahme der Gewalt, Schwangerschaft, Druck zu sexuellen Handlungen und Nacktbildern, Schulden auf den eigenen Namen, Auflauern nach der Trennung, sowie alle sechs Aussagen zu Kindern.
 - [ ] Ast „Kind oder Jugendliche*r“: Gehört er in den Selbstcheck, oder reicht ein Verweis auf Jugendamt und Nummer gegen Kummer? Wer im Arbeitskreis kann die Aussagen fachlich prüfen?
 - [ ] Hilfe je Bereich: Passt die Zuordnung der Anlaufstellen?
-- [ ] Ergänzung „Digitale Gewalt“ und „Instrumentalisierung der Kinder“ (Wunsch Frauenberatungsstelle 21.10.2026): Entscheidungsvorlage `docs/vorlagen/Selbstcheck-Ergaenzung-Vorlage-2026-10.docx` (11 Aussagen, Gewichte, Warnzeichen K4/K5) liegt beim AG. Nach Rücklauf in `self-check-tree.ts` umsetzen, `npm test`.
+- [ ] Ergänzung „Digitale Gewalt“ und „Instrumentalisierung der Kinder“ (Wunsch Frauenberatungsstelle 21.10.2026): Entscheidungsvorlage `docs/vorlagen/Selbstcheck-Ergaenzung-Vorlage-2026-10.docx` (Teil A: 4 vorläufig online gestellte Aussagen bestätigen, Teil B: 8 weitere Vorschläge) liegt beim AG. Nach Rücklauf in `self-check-tree.ts` umsetzen, `npm test`.
 - [ ] Übersetzungen für AR, RU, EN, TR, sobald die Sprachfassungen kommen.
