@@ -338,7 +338,7 @@ export interface Registration {
   createdAt: string;
 }
 /**
- * Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und WenDo. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.
+ * Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und Wendo. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "course-offers".

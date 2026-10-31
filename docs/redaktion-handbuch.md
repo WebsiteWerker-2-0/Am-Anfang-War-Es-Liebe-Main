@@ -12,7 +12,7 @@ Danach sehen Sie die **Startseite** mit großen Schaltflächen für die häufigs
 |---|---|
 | **Aktuelles** | Meldungen für die Website schreiben |
 | **Termine** | Termine mit Anmeldung anlegen, Anmeldungen ansehen |
-| **Kurse** | Beschreibungen der Kurse (Krav Maga, WenDo) bearbeiten |
+| **Kurse** | Beschreibungen der Kurse (Krav Maga, Wendo) bearbeiten |
 | **Mitglieder** | Liste „Wer im Arbeitskreis mitarbeitet“ auf der Seite Arbeitskreis |
 | **Dateiarchiv** | Übersicht aller hochgeladenen Bilder und Dokumente |
 
@@ -53,7 +53,7 @@ Unter **Weitere Angaben (optional)** stehen Ende, Zielgruppe, Kosten, Leitung un
 
 ## Kurse bearbeiten
 
-Unter **Kurse** stehen die Beschreibungen von Krav Maga / Kids Krav Maga und Wen Do für die Seite „Kurse“. Den Text ändern Sie wie bei einem Beitrag, die Reihenfolge per Ziehen in der Liste. Termine mit Datum und Anmeldung zu einem Kurs legen Sie unter **Termine** an. Einen Kurs nicht mehr zeigen: Status **Archiviert** (nicht löschen).
+Unter **Kurse** stehen die Beschreibungen von Krav Maga und Kids Krav Maga sowie Wendo für die Seite „Kurse“. Den Text ändern Sie wie bei einem Beitrag, die Reihenfolge per Ziehen in der Liste. Termine mit Datum und Anmeldung zu einem Kurs legen Sie unter **Termine** an. Einen Kurs nicht mehr zeigen: Status **Archiviert** (nicht löschen).
 
 ## Mitglieder bearbeiten
 

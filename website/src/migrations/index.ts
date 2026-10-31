@@ -7,6 +7,7 @@ import * as migration_20261017_153858_verfasst_von from './20261017_153858_verfa
 import * as migration_20261017_155447_plaetze_von_hand from './20261017_155447_plaetze_von_hand';
 import * as migration_20261031_121905_kurse from './20261031_121905_kurse';
 import * as migration_20261031_180000_mitglieder from './20261031_180000_mitglieder';
+import * as migration_20261031_190000_kurse_sprache from './20261031_190000_kurse_sprache';
 import * as migration_20261031_160000_kurs_alter from './20261031_160000_kurs_alter';
 import * as migration_20261031_170000_kurse_quellen from './20261031_170000_kurse_quellen';
 
@@ -65,5 +66,10 @@ export const migrations = [
     up: migration_20261031_180000_mitglieder.up,
     down: migration_20261031_180000_mitglieder.down,
     name: '20261031_180000_mitglieder',
+  },
+  {
+    up: migration_20261031_190000_kurse_sprache.up,
+    down: migration_20261031_190000_kurse_sprache.down,
+    name: '20261031_190000_kurse_sprache',
   },
 ];

@@ -137,7 +137,7 @@ export async function seedExistingContent(payload: Payload) {
   payload.logger.info(`${posts.length} Beiträge der Altseite eingespielt.`);
 }
 
-// Kurse (Krav Maga, WenDo) aus dem offiziellen Dokument des AG, nur solange es noch keinen Kurs gibt.
+// Kurse (Krav Maga, Wendo) aus dem offiziellen Dokument des AG, nur solange es noch keinen Kurs gibt.
 // Gibt es gar keinen Kurs mehr (alle gelöscht), kommen sie beim nächsten Start zurück; ausblenden also mit „Archiviert“.
 async function seedCourseOffers(payload: Payload) {
   if ((await payload.count({ collection: "course-offers" })).totalDocs > 0) return;

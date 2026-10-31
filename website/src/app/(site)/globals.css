@@ -709,7 +709,7 @@ a:hover {
 }
 
 /* Anlaufstellen als Liste mit Linien */
-/* Sprungmarken oben auf einer Seite (z. B. Kurse: Krav Maga, WenDo, Termine) */
+/* Sprungmarken oben auf einer Seite (z. B. Kurse: Krav Maga, Wendo, Termine) */
 .jump-links {
   display: flex;
   flex-wrap: wrap;

@@ -141,7 +141,7 @@ export type PageBlock =
       heading: string;
       items: { image: ImageValue; alt: string; title: string; file: FileValue; meta?: string }[];
     }
-  /** Kurse (Krav Maga, WenDo …) aus dem Backend, Sprungmarken oben und je Kurs ein Abschnitt */
+  /** Kurse (Krav Maga, Wendo …) aus dem Backend, Sprungmarken oben und je Kurs ein Abschnitt */
   | { blockType: "courseOffers"; datesLink?: { label: string; href: string } }
   | { blockType: "newsList"; variant: "page" | "teaser"; anchor?: string; heading?: string; linkLabel?: string; count?: number }
   // Startseite
@@ -229,7 +229,7 @@ export type SiteData = {
   };
 };
 
-/** Kurs (Krav Maga, WenDo …): Beschreibung ohne Termin; die Termine mit Anmeldung stehen unter „Termine“ */
+/** Kurs (Krav Maga, Wendo …): Beschreibung ohne Termin; die Termine mit Anmeldung stehen unter „Termine“ */
 export type CourseOfferData = {
   slug: string;
   title: string;

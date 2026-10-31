@@ -50,9 +50,9 @@ Klären:
 - [ ] Erlaubnis von SAMI-X / KMC Höxter für die Übernahme ihres Website-Textes (Quelle ist jetzt angegeben)
 - [ ] Wen-Do-Text aus Wikipedia: Quelle, Lizenz und Autor*innen-Hinweis sind jetzt angegeben (CC BY-SA 4.0). Klären, ob der Text gegenüber Wikipedia verändert wurde (dann „verändert“ ergänzen) und ob die Weitergabe unter derselben Lizenz für den AG in Ordnung ist; sonst eigener Text
 - [ ] Wer bietet Wen Do an (Trainerin, Ort, Kontakt)? Bei Krav Maga steht der Anbieter, bei Wen Do nicht
-- [ ] Einheitliche Schreibweisen: Wen Do / Wendo / WenDo; SAMI-X Krav Maga -TC Höxter / SAMI-X-Krav Maga- TC Höxter / KMC-Höxter / KMC Höxter
-- [ ] „Seminare“ und „Kurse“ werden gemischt
-- [ ] Sprachliche Fehler korrigieren lassen (Liste im Chat vom 31.10.)
+- [x] Einheitliche Schreibweisen (31.10.2026, Entscheidung Steffen): „Wendo“ wie im Wikipedia-Artikel, Anbieter beim ersten Mal „SAMI-X Krav Maga TC Höxter (KMC Höxter)“, danach „KMC Höxter“ (Migration `20261031_190000_kurse_sprache`)
+- [x] Einheitlich „Kurse“ statt „Seminare“ (31.10.2026)
+- [x] Sprachliche Fehler korrigiert (31.10.2026, Entscheidung Steffen): u. a. „heißt“, „auf Hebräisch“, deutsche Anführungszeichen, „zu Hilfe eilen“, „jede und jeder“ statt „ein Jeder“, die zwei unvollständigen Sätze, „Know-how“, „d. h.“. Wikipedia-Quelle jetzt „Sprachlich bearbeiteter Text nach dem Artikel …“ (Hinweis auf Änderung laut CC BY-SA). Der AG kann die Fassung im Backend prüfen
 
 ## Nicht in der Nachricht, aber offen beim AG
 

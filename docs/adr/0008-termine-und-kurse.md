@@ -1,6 +1,6 @@
 # Termine und Kurse getrennt, Kurse im Backend
 
-Auf Wunsch des Auftraggebers (31.10.2026) heißt der Bereich „Veranstaltungen“ jetzt **Termine**, daneben gibt es **Kurse**. Termine sind datierte Angebote mit Plätzen und Anmeldung (ADR-0005). Kurse sind die Beschreibungen von Krav Maga / Kids Krav Maga und Wen Do, bisher fest im Code, jetzt als bearbeitbare Einträge im Backend.
+Auf Wunsch des Auftraggebers (31.10.2026) heißt der Bereich „Veranstaltungen“ jetzt **Termine**, daneben gibt es **Kurse**. Termine sind datierte Angebote mit Plätzen und Anmeldung (ADR-0005). Kurse sind die Beschreibungen von Krav Maga und Kids Krav Maga sowie Wendo, bisher fest im Code, jetzt als bearbeitbare Einträge im Backend.
 
 **Status:** angenommen, 31.10.2026. Ergänzt ADR-0005 und ADR-0006.
 

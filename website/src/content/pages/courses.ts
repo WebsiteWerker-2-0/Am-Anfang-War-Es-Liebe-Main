@@ -9,7 +9,7 @@ export const courses: PageData = {
   // die Überschrift aus dem Dokument des AG steht darunter als Einleitung
   title: "Unsere Kurse",
   intro: `${courseOffersHeading} für Frauen, Mädchen und Kinder im Kreis Höxter.`,
-  description: "Krav Maga und WenDo: Kurse für Frauen, Mädchen und Kinder im Kreis Höxter.",
+  description: "Krav Maga und Wendo: Kurse für Frauen, Mädchen und Kinder im Kreis Höxter.",
   band: "courses",
   layout: "stack-lg",
   blocks: [{ blockType: "courseOffers", datesLink: { label: "Termine und Anmeldung", href: "/termine" } }],

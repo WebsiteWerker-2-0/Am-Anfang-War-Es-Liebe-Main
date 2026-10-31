@@ -20,7 +20,7 @@ async function onlineSeats(courseId: unknown, req: PayloadRequest) {
 // Termine mit Plätzen und Anmeldung (F-06, F-11). Die Website zeigt veröffentlichte Termine
 // auf der Seite „Termine“ (/termine) mit freien Plätzen und einem Anmeldeformular,
 // siehe components/CourseList.tsx. Der Name der Sammlung bleibt „courses“ (Datenbank, Adressen),
-// im Backend heißt sie „Termine“. Die Kursbeschreibungen (Krav Maga, WenDo) sind die Sammlung „course-offers“.
+// im Backend heißt sie „Termine“. Die Kursbeschreibungen (Krav Maga, Wendo) sind die Sammlung „course-offers“.
 export const Courses: CollectionConfig = {
   slug: "courses",
   labels: { singular: "Termin", plural: "Termine" },
@@ -70,7 +70,7 @@ export const Courses: CollectionConfig = {
       type: "text",
       label: "Name des Termins",
       required: true,
-      admin: { placeholder: "Zum Beispiel: WenDo für Frauen und Mädchen" },
+      admin: { placeholder: "Zum Beispiel: Wendo für Frauen und Mädchen" },
     },
     {
       name: "startsAt",

@@ -5,7 +5,7 @@ import { publicationFields, syncArchivedAt } from "../fields/publication";
 import { hiddenSlugField } from "../fields/slug";
 import { revalidateSite } from "../revalidate";
 
-// Kurse (Krav Maga, WenDo …): Beschreibung je Kurs für die Seite „Kurse“ (/kurse). Ohne Termin und Anmeldung;
+// Kurse (Krav Maga, Wendo …): Beschreibung je Kurs für die Seite „Kurse“ (/kurse). Ohne Termin und Anmeldung;
 // die datierten Angebote mit Anmeldung sind die „Termine“ (Sammlung courses, historischer Name).
 // Erste Fassung aus dem offiziellen Dokument des AG (content/course-offers.ts, eingespielt von cms/seed.ts).
 export const CourseOffers: CollectionConfig = {
@@ -19,7 +19,7 @@ export const CourseOffers: CollectionConfig = {
     group: "Kurse",
     defaultColumns: ["title", "status", "updatedAt"],
     description:
-      "Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und WenDo. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.",
+      "Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und Wendo. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.",
     livePreview: { url: ({ data }) => `/vorschau/kurse/${data.id}` },
   },
   access: {
