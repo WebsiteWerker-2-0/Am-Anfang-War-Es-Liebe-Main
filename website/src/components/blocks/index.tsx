@@ -440,33 +440,28 @@ function Graphics({ block }: { block: Block<"graphics"> }) {
 // Kurse aus dem Backend: Sprungmarken zu jedem Kurs, dann je Kurs ein Abschnitt (Gestaltung wie Anlaufstellen)
 async function CourseOffersBlock({ block }: { block: Block<"courseOffers"> }) {
   const offers = await getCourseOffers();
+  // Übersicht wie Aktuelles: Name und Kurzfassung, der ganze Text steht auf der Seite des Kurses
   return (
     <>
-      {(offers.length > 1 || block.datesLink) && (
-        <nav aria-label="Kurse auf dieser Seite" className="measure">
-          <ul className="jump-links">
-            {offers.length > 1 &&
-              offers.map((offer) => (
-                <li key={offer.slug}>
-                  <a href={`#${offer.slug}`}>{offer.title}</a>
-                </li>
-              ))}
-            {block.datesLink && (
-              <li>
-                <Link href={block.datesLink.href}>{block.datesLink.label}</Link>
-              </li>
-            )}
-          </ul>
-        </nav>
+      <ul className="post-list post-list--plain">
+        {offers.map((offer) => (
+          <li key={offer.slug}>
+            <div>
+              <h2>
+                <Link href={`/kurse/${offer.slug}`}>{offer.title}</Link>
+              </h2>
+              {offer.excerpt && <p className="muted measure">{offer.excerpt}</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+      {block.datesLink && (
+        <p>
+          <Link className="button" href={block.datesLink.href}>
+            {block.datesLink.label}
+          </Link>
+        </p>
       )}
-      {offers.map((offer) => (
-        <section key={offer.slug} className="service" id={offer.slug} aria-labelledby={`${offer.slug}-titel`}>
-          <h2 id={`${offer.slug}-titel`}>{offer.title}</h2>
-          <div className="measure stack">
-            <Rich value={offer.content ?? offer.html ?? null} />
-          </div>
-        </section>
-      ))}
     </>
   );
 }

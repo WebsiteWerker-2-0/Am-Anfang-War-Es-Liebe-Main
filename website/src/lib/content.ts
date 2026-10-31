@@ -7,7 +7,7 @@ import { defaultSite } from "@/content/site";
 import posts from "@/content/posts.json";
 import { mainServices, quickAccess, serviceGroups } from "@/content/support-services";
 import { getCms } from "./cms-client";
-import { normalizePost } from "./cms-content";
+import { normalizeCourseOffer, normalizePost } from "./cms-content";
 import { listPublicCourses, type PublicCourse } from "./courses";
 
 // Inhalte der Website.
@@ -95,12 +95,20 @@ export const getCourseOffers = cache(async (): Promise<CourseOfferData[]> => {
       sort: "_order",
     });
     if (!docs.length && (await cms.count({ collection: "course-offers" })).totalDocs === 0) return defaultCourseOffers;
-    return docs.map((doc) => ({ slug: doc.slug, title: doc.title, content: (doc.content ?? null) as CourseOfferData["content"] }));
+    return docs.map((doc) => normalizeCourseOffer(doc as never));
   } catch (error) {
     console.error("Kurse aus dem CMS nicht lesbar.", error);
     return defaultCourseOffers;
   }
 });
+
+/** Ein veröffentlichter Kurs für seine eigene Seite unter /kurse/… */
+export async function getCourseOffer(slug: string) {
+  return (await getCourseOffers()).find((offer) => offer.slug === slug) ?? null;
+}
+
+/** Kurse, deren Seiten schon beim Bauen entstehen */
+export const defaultCourseOfferSlugs = defaultCourseOffers.map((offer) => offer.slug);
 
 /** Mitglieder des Arbeitskreises in der Reihenfolge aus dem Backend; ohne CMS (oder leeres CMS) die Standardliste */
 export const getMembers = cache(async (): Promise<MemberData[]> => {

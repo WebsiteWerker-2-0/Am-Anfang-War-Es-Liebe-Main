@@ -149,6 +149,7 @@ async function seedCourseOffers(payload: Payload) {
         data: {
           title: offer.title,
           slug: offer.slug,
+          excerpt: offer.excerpt,
           content: convertHTMLToLexical({ editorConfig, html: offer.html ?? "", JSDOM }) as never,
           status: "published",
         },

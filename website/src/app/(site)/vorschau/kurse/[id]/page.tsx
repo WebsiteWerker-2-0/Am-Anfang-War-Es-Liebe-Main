@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { CourseOfferArticle } from "@/components/CourseOfferArticle";
 import { PreviewRefresh } from "@/components/PreviewRefresh";
-import { Rich } from "@/lib/rich";
+import { normalizeCourseOffer } from "@/lib/cms-content";
 import { requirePreviewCms } from "@/lib/preview";
 
 // Vorschau eines Kurses im Backend (Auge-Symbol), nur für angemeldete Redakteurinnen
@@ -14,14 +15,9 @@ export default async function CourseOfferPreview({ params }: PageProps<"/vorscha
   const doc = await cms.findByID({ collection: "course-offers", id, depth: 1 }).catch(() => null);
   if (!doc) notFound();
   return (
-    <div className="wide" style={{ paddingBlock: "var(--space-6)" }}>
+    <>
       <PreviewRefresh />
-      <section className="service">
-        <h2>{doc.title}</h2>
-        <div className="measure stack">
-          <Rich value={(doc.content ?? null) as never} />
-        </div>
-      </section>
-    </div>
+      <CourseOfferArticle offer={normalizeCourseOffer(doc as never)} />
+    </>
   );
 }

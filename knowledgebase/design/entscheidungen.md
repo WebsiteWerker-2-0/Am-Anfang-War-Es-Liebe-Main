@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Kurse aufgebaut wie Aktuelles
+
+- **Entscheidung:** Die Seite „Kurse“ zeigt eine Übersicht wie Aktuelles (Liste mit Linien, Name als Link, Kurzfassung darunter, ohne Datumsspalte). Jeder Kurs hat eine eigene Seite unter `/kurse/<kurs>` im Aufbau eines Beitrags (Rücklink „Kurse“, Überschrift, Titelbild, Text), darunter der Knopf „Termine und Anmeldung“. Im Backend haben Kurse wie Beiträge die Felder „Kurzfassung“ und „Titelbild“. Die Sprungmarken oben auf der Seite entfallen.
+- **Begründung:** Wunsch von Steffen: einheitliche Logik und Gestaltung für Redaktion und Besucher*innen.
+- **Datei:** `website/src/components/blocks/index.tsx`, `components/CourseOfferArticle.tsx`, `app/(site)/kurse/[slug]/page.tsx`, `cms/collections/CourseOffers.ts`, `migrations/20261031_200000_kurse_kurzfassung.ts`, `app/(site)/globals.css` (`.post-list--plain`)
+- **Von:** Steffen (mit Claude)
+
 ## 31.10.2026 – Backend: Haus statt „A“, Auswahl „Übersicht/Layout“ entfernt
 
 - **Entscheidung:** Links oben im Backend steht ein Haus-Symbol statt des Buchstabens „A“. Die Auswahl „Übersicht/Layout“ auf der Startseite ist ausgeblendet.

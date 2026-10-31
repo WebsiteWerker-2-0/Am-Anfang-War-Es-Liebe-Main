@@ -18,7 +18,7 @@ export function ViewOnSite() {
   if (!slug) return null;
 
   const href =
-    collectionSlug === "posts" ? `/aktuelles/${slug}` : collectionSlug === "course-offers" ? `/kurse#${slug}` : "/termine";
+    collectionSlug === "posts" ? `/aktuelles/${slug}` : collectionSlug === "course-offers" ? `/kurse/${slug}` : "/termine";
 
   return (
     <p style={{ marginBlock: "1rem" }}>

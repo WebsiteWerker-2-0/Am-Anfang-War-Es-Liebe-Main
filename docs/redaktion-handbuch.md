@@ -53,7 +53,7 @@ Unter **Weitere Angaben (optional)** stehen Ende, Zielgruppe, Kosten, Leitung un
 
 ## Kurse bearbeiten
 
-Unter **Kurse** stehen die Beschreibungen von Krav Maga und Kids Krav Maga sowie Wendo für die Seite „Kurse“. Den Text ändern Sie wie bei einem Beitrag, die Reihenfolge per Ziehen in der Liste. Termine mit Datum und Anmeldung zu einem Kurs legen Sie unter **Termine** an. Einen Kurs nicht mehr zeigen: Status **Archiviert** (nicht löschen).
+Unter **Kurse** stehen die Beschreibungen von Krav Maga und Kids Krav Maga sowie Wendo für die Seite „Kurse“. Ein Kurs funktioniert wie ein Beitrag in Aktuelles: Die **Kurzfassung** erscheint in der Übersicht auf „Kurse“, der **Text** auf der eigenen Seite des Kurses, das **Titelbild** (freiwillig) über dem Text. Die Reihenfolge ändern Sie per Ziehen in der Liste. Termine mit Datum und Anmeldung zu einem Kurs legen Sie unter **Termine** an. Einen Kurs nicht mehr zeigen: Status **Archiviert** (nicht löschen).
 
 ## Mitglieder bearbeiten
 

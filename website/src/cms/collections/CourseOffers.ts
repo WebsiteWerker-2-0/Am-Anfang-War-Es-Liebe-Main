@@ -19,7 +19,7 @@ export const CourseOffers: CollectionConfig = {
     group: "Kurse",
     defaultColumns: ["title", "status", "updatedAt"],
     description:
-      "Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und Wendo. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.",
+      "Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und Wendo. Die Übersicht zeigt Name und Kurzfassung, jeder Kurs hat seine eigene Seite mit dem ganzen Text. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.",
     livePreview: { url: ({ data }) => `/vorschau/kurse/${data.id}` },
   },
   access: {
@@ -35,6 +35,9 @@ export const CourseOffers: CollectionConfig = {
   },
   fields: [
     { name: "title", type: "text", label: "Name des Kurses", required: true },
+    // Wie bei Aktuelles: Kurzfassung in der Übersicht, der ganze Text auf der eigenen Seite des Kurses
+    { name: "excerpt", type: "textarea", label: "Kurzfassung", admin: { description: "Erscheint in der Übersicht unter dem Namen des Kurses." } },
+    { name: "image", type: "upload", relationTo: "media", label: "Titelbild" },
     {
       name: "content",
       type: "richText",

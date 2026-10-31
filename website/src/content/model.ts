@@ -233,6 +233,10 @@ export type SiteData = {
 export type CourseOfferData = {
   slug: string;
   title: string;
+  /** Kurzfassung in der Übersicht auf „Kurse“ */
+  excerpt?: string;
+  image?: Img | null;
+  imageAlt?: string;
   /** HTML (Standardinhalt) oder Lexical (Backend) */
   html?: string;
   content?: Rich;

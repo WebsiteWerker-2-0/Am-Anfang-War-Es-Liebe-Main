@@ -338,7 +338,7 @@ export interface Registration {
   createdAt: string;
 }
 /**
- * Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und Wendo. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.
+ * Die Kurse auf der Seite „Kurse“, zum Beispiel Krav Maga und Wendo. Die Übersicht zeigt Name und Kurzfassung, jeder Kurs hat seine eigene Seite mit dem ganzen Text. Termine mit Anmeldung legen Sie unter „Termine“ an. Das Auge-Symbol zeigt die Vorschau.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "course-offers".
@@ -347,6 +347,11 @@ export interface CourseOffer {
   id: number;
   _order?: string | null;
   title: string;
+  /**
+   * Erscheint in der Übersicht unter dem Namen des Kurses.
+   */
+  excerpt?: string | null;
+  image?: (number | null) | Media;
   /**
    * Datei oder Bild an einer bestimmten Stelle einfügen: im Text an die Stelle klicken, dann in der Leiste ganz links auf das erste Symbol und „Datei oder Bild“ wählen.
    */
@@ -576,6 +581,8 @@ export interface CoursesSelect<T extends boolean = true> {
 export interface CourseOffersSelect<T extends boolean = true> {
   _order?: T;
   title?: T;
+  excerpt?: T;
+  image?: T;
   content?: T;
   slug?: T;
   status?: T;

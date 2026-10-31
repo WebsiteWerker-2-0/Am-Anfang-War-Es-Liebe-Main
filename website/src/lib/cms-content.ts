@@ -1,6 +1,6 @@
-import type { Img, PostData, PostDocument } from "@/content/model";
+import type { CourseOfferData, Img, PostData, PostDocument } from "@/content/model";
 
-// Wandelt Beiträge aus dem CMS in das Modell der Website um (content/model.ts).
+// Wandelt Beiträge und Kurse aus dem CMS in das Modell der Website um (content/model.ts).
 
 type Doc = Record<string, unknown>;
 
@@ -37,6 +37,18 @@ export function normalizePost(doc: Doc): PostData {
     }),
     documents: post.showDownloads ? ((post.documents ?? []) as Doc[]).flatMap(normalizeDocument) : [],
     archived: post.status === "archived",
+  };
+}
+
+export function normalizeCourseOffer(doc: Doc): CourseOfferData {
+  const media = isMedia(doc.image) ? doc.image : null;
+  return {
+    slug: String(doc.slug),
+    title: String(doc.title),
+    excerpt: typeof doc.excerpt === "string" && doc.excerpt.trim() ? doc.excerpt.trim() : undefined,
+    image: mediaToImg(doc.image),
+    imageAlt: media && typeof media.alt === "string" ? media.alt : undefined,
+    content: isLexical(doc.content) ? (doc.content as CourseOfferData["content"]) : undefined,
   };
 }
 

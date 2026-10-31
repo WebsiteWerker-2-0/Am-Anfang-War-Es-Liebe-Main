@@ -34,6 +34,12 @@
 - MKJFGFI-Logo (offizielle Datei, unverändert) auf weißer Fläche, weil die Schrift schwarz auf transparentem Grund ist.
 - Polsterung oben 1rem, unten 0.75rem (optischer Ausgleich, Text steht im Logo oben bündig am Wappen), seitlich 1.5rem.
 
+## Listen mit Kurzfassung (Aktuelles, Kurse)
+
+- Liste mit Linie oben (Textfarbe) und hellen Trennlinien, Titel als Link (Literata, `--fs-md`), Kurzfassung gedämpft darunter (`.post-list`).
+- Aktuelles mit Datumsspalte links, Kurse ohne (`.post-list--plain`).
+- Die Einzelseite hat immer denselben Aufbau: kleiner Rücklink zur Übersicht, Überschrift, Titelbild, Text. Beim Kurs folgt der Knopf „Termine und Anmeldung“ (Entscheidung vom 31.10.2026).
+
 ## Offen
 
 - [ ] Button-Stile festlegen
