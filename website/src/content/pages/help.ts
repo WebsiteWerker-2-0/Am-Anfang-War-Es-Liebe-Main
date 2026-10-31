@@ -141,10 +141,7 @@ export const help: PageData = {
       heading: "Weitere Anlaufstellen",
       tone: "cyan",
       blocks: [
-        {
-          blockType: "serviceGroups",
-          note: "Stand der Angaben: Übernahme von der bisherigen Website. Alle Nummern und Zeiten werden vor der Veröffentlichung geprüft.",
-        },
+        { blockType: "serviceGroups" },
       ],
     },
   ],

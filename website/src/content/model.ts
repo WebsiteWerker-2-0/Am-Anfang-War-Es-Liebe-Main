@@ -228,7 +228,7 @@ export type SiteData = {
     fundingLabel: string;
     fundingLogo: ImageValue;
     fundingAlt: string;
-    draftNote: string;
+    draftNote?: string;
   };
 };
 

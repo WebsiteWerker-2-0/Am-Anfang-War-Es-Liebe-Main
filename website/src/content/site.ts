@@ -47,7 +47,5 @@ export const defaultSite: SiteData = {
     fundingLogo: { asset: "logos/mkjfgfi-nrw" },
     fundingAlt:
       "Ministerium für Kinder, Jugend, Familie, Gleichstellung, Flucht und Integration des Landes Nordrhein-Westfalen",
-    draftNote:
-      "Illustrationen: fien-design, Höxter.",
   },
 };
