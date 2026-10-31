@@ -57,13 +57,14 @@ const pattern = (from: string) => new RegExp(from.split(' ').map(escape).join('[
 function replaceText(node: Node): boolean {
   let changed = false
   if (typeof node.text === 'string') {
+    let text = node.text
     for (const [from, to] of REPLACEMENTS) {
-      if (to.includes(from) && node.text.includes(to)) continue
-      const next = node.text.replace(pattern(from), to)
-      if (next !== node.text) {
-        node.text = next
-        changed = true
-      }
+      if (to.includes(from) && text.includes(to)) continue
+      text = text.replace(pattern(from), to)
+    }
+    if (text !== node.text) {
+      node.text = text
+      changed = true
     }
   }
   for (const child of node.children ?? []) changed = replaceText(child) || changed
