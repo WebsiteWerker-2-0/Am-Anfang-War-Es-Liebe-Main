@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { CourseOffers } from "./cms/collections/CourseOffers";
 import { Courses } from "./cms/collections/Courses";
 import { Media } from "./cms/collections/Media";
+import { Members } from "./cms/collections/Members";
 import { Posts } from "./cms/collections/Posts";
 import { Registrations } from "./cms/collections/Registrations";
 import { Mail } from "./cms/globals/Mail";
@@ -39,7 +40,7 @@ export default buildConfig({
     },
   },
   // Die Reihenfolge ist die Reihenfolge im Menü des Backends
-  collections: [Posts, Courses, CourseOffers, Registrations, Media, Users],
+  collections: [Posts, Courses, CourseOffers, Members, Registrations, Media, Users],
   globals: [Mail],
   editor: lexicalEditor(),
   i18n: { supportedLanguages: { de }, fallbackLanguage: "de" },

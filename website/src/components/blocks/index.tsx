@@ -5,7 +5,7 @@ import type { CalloutBlock, PageBlock, SectionItem } from "@/content/model";
 import { QUICK_EXIT_HINTS } from "@/content/navigation";
 import { TEXTS } from "@/content/self-check-tree";
 import { toImg } from "@/lib/images";
-import { getArchivedPosts, getCourseOffers, getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
+import { getArchivedPosts, getCourseOffers, getMembers, getPosts, getPublicCourses, getServices, getSite } from "@/lib/content";
 import { Rich, RichInline } from "@/lib/rich";
 import { ContactForm } from "../ContactForm";
 import { CourseList } from "../CourseList";
@@ -244,6 +244,11 @@ function TopicLinks({ block }: { block: Block<"topicLinks"> }) {
       </ul>
     </section>
   );
+}
+
+async function MemberListBlock({ block }: { block: Block<"memberList"> }) {
+  const people = await getMembers();
+  return <PeopleList block={{ blockType: "peopleList", anchor: block.anchor, heading: block.heading, people }} />;
 }
 
 function PeopleList({ block }: { block: Block<"peopleList"> }) {
@@ -687,6 +692,8 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
             return <CourseListBlock key={index} block={block} />;
           case "courseOffers":
             return <CourseOffersBlock key={index} block={block} />;
+          case "memberList":
+            return <MemberListBlock key={index} block={block} />;
           case "linkHub":
             return <LinkHub key={index} block={block} />;
           case "graphics":

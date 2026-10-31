@@ -13,6 +13,9 @@ Auf Wunsch des Auftraggebers (31.10.2026) heißt der Bereich „Veranstaltungen�
 
 - **Änderungen am Wortlaut (31.10.2026, Entscheidung Steffen, der AG kontrolliert):** Alter einheitlich „ab 15 Jahren“, Sätze aus Sicht des Anbieters in dritter Person, Quellenangaben für KMC Höxter und Wikipedia (CC BY-SA 4.0). Im Backend per Datenmigration (`…_kurs_alter`, `…_kurse_quellen`), die nur diese Stellen ersetzt; Liste der Stellen in `knowledgebase/lieferungen-ag.md`.
 
+- **Mitglieder (31.10.2026):** Die Liste „Wer im Arbeitskreis mitarbeitet“ ist die Sammlung `members` (Einrichtung, Bereich/Funktion, Internetseite, Reihenfolge per Ziehen), Bereich „Mitglieder“ im Backend. Standardliste `src/content/members.ts`, eingespielt von `seed.ts`. Ausnahme zu ADR-0006 (Seiten nur im Code) auf Wunsch des AG.
+- **Kopfbild Termine:** eigenes Band `band-p08` (Broschüre S. 14, zwei Frauen am Tisch), damit Termine und Kurse sich unterscheiden.
+
 ## Folgen
 
 - Werden alle Kurse gelöscht, kommen beim nächsten Start die Kurse aus dem Dokument zurück, und die Website zeigt sie auch ohne Neustart. Einen Kurs nicht mehr zeigen: Status „Archiviert“.

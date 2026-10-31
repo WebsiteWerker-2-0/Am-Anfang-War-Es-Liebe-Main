@@ -70,6 +70,7 @@ export interface Config {
     posts: Post;
     courses: Course;
     'course-offers': CourseOffer;
+    members: Member;
     registrations: Registration;
     media: Media;
     users: User;
@@ -87,6 +88,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     'course-offers': CourseOffersSelect<false> | CourseOffersSelect<true>;
+    members: MembersSelect<false> | MembersSelect<true>;
     registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -370,6 +372,24 @@ export interface CourseOffer {
   createdAt: string;
 }
 /**
+ * Die Liste „Wer im Arbeitskreis mitarbeitet“ auf der Seite Arbeitskreis. Reihenfolge per Ziehen ändern. Namen von Personen bitte nur mit deren Einverständnis.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "members".
+ */
+export interface Member {
+  id: number;
+  _order?: string | null;
+  name: string;
+  role?: string | null;
+  /**
+   * Vollständige Adresse mit https://. Der Name wird dann verlinkt.
+   */
+  url?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Neues Konto: E-Mail-Adresse, Name, Rolle und ein beliebiges Passwort eintragen. Die Person bekommt eine E-Mail mit einem Link, über den sie ihr eigenes Passwort festlegt.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -434,6 +454,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'course-offers';
         value: number | CourseOffer;
+      } | null)
+    | ({
+        relationTo: 'members';
+        value: number | Member;
       } | null)
     | ({
         relationTo: 'registrations';
@@ -556,6 +580,18 @@ export interface CourseOffersSelect<T extends boolean = true> {
   slug?: T;
   status?: T;
   archivedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "members_select".
+ */
+export interface MembersSelect<T extends boolean = true> {
+  _order?: T;
+  name?: T;
+  role?: T;
+  url?: T;
   updatedAt?: T;
   createdAt?: T;
 }

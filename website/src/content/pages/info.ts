@@ -108,7 +108,7 @@ export const brochures: PageData = {
         {
           title: "Flyer des Frauen- und Kinderschutzhauses im Kreis Höxter",
           file: "/downloads/flyer-frauenhaus.pdf",
-          meta: "PDF, 0,8 MB · Deutsch · Stand: ohne Datum",
+          meta: "PDF, 0,8 MB · Deutsch · Stand: 2026",
         },
         {
           title: "Flyer „Sicher feiern“: Tipps für dich und deine Freund*innen",
@@ -118,7 +118,7 @@ export const brochures: PageData = {
         {
           title: "Flyer des Weissen Rings zu K.-o.-Tropfen",
           file: "/downloads/flyer-ko-tropfen-weisser-ring.pdf",
-          meta: "PDF, 0,3 MB · Deutsch · Stand: ohne Datum",
+          meta: "PDF, 0,3 MB · Deutsch · Stand: 2017",
         },
         {
           title: "Plakat zur Wanderausstellung „Am Anfang war es Liebe …“",

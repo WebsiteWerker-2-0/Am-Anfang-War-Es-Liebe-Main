@@ -61,3 +61,11 @@ Klären:
 - [ ] Löschfrist für Kursanmeldungen (Pflichtenheft § 13)
 - [ ] Nutzungsrechte der Broschüren-Illustrationen (fien-design) für das Web
 - [ ] Schriftliche Zustimmung zu Next.js bei Hostinger statt WordPress bei Hetzner, dazu AVV-Information mit vier Wochen Widerspruchsfrist
+
+## Erledigt am 31.10.2026 (Steffen)
+
+- E-Mail der Frauenberatungsstelle überall `fbs@awo-hoexter.de` (vorher noch `frauenberatungsstelle@awo-hoexter.de` als Postfach des Kontaktformulars).
+- Stand der Flyer: Frauen- und Kinderschutzhaus 2026, Weisser Ring (K.-o.-Tropfen) 2017.
+- Impressum: Hinweis „Entwurf: Das vollständige Impressum wird vor der Veröffentlichung … abgestimmt“ entfernt.
+- Mitgliederliste im Backend bearbeitbar (Bereich „Mitglieder“).
+- Kontaktformular geprüft: Zuordnung siehe Chat vom 31.10.; der Versand ist noch nicht angebunden (offen).

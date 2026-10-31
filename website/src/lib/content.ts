@@ -1,7 +1,8 @@
 import { cache } from "react";
 import { defaultPageBySlug, defaultPages } from "@/content/pages";
 import { defaultCourseOffers } from "@/content/course-offers";
-import type { CourseOfferData, PageData, PostData, SiteData } from "@/content/model";
+import { defaultMembers } from "@/content/members";
+import type { CourseOfferData, MemberData, PageData, PostData, SiteData } from "@/content/model";
 import { defaultSite } from "@/content/site";
 import posts from "@/content/posts.json";
 import { mainServices, quickAccess, serviceGroups } from "@/content/support-services";
@@ -98,6 +99,20 @@ export const getCourseOffers = cache(async (): Promise<CourseOfferData[]> => {
   } catch (error) {
     console.error("Kurse aus dem CMS nicht lesbar.", error);
     return defaultCourseOffers;
+  }
+});
+
+/** Mitglieder des Arbeitskreises in der Reihenfolge aus dem Backend; ohne CMS (oder leeres CMS) die Standardliste */
+export const getMembers = cache(async (): Promise<MemberData[]> => {
+  const cms = await getCms();
+  if (!cms) return defaultMembers;
+  try {
+    const { docs } = await cms.find({ collection: "members", depth: 0, limit: 200, pagination: false, sort: "_order" });
+    if (!docs.length) return defaultMembers;
+    return docs.map((doc) => ({ name: doc.name, role: doc.role ?? undefined, url: doc.url ?? undefined }));
+  } catch (error) {
+    console.error("Mitglieder aus dem CMS nicht lesbar.", error);
+    return defaultMembers;
   }
 });
 

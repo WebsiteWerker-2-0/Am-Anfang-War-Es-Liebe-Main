@@ -6,13 +6,14 @@ So pflegen Sie Aktuelles, Termine und Kurse selbst. Sie brauchen dafür nur eine
 
 Nach dem Passwort schickt die Website einen **sechsstelligen Code an Ihre E-Mail-Adresse**. Geben Sie ihn ein und klicken Sie **Bestätigen**. Der Code gilt 10 Minuten. Keine E-Mail? Im Spam-Ordner nachsehen oder **Neuen Code senden**.
 
-Danach sehen Sie die **Startseite** mit großen Schaltflächen für die häufigsten Aufgaben. Das Menü öffnen Sie über das Symbol oben links. Es hat nur vier Punkte:
+Danach sehen Sie die **Startseite** mit großen Schaltflächen für die häufigsten Aufgaben. Das Menü öffnen Sie über das Symbol oben links. Es hat nur fünf Punkte:
 
 | Menüpunkt | Wofür |
 |---|---|
 | **Aktuelles** | Meldungen für die Website schreiben |
 | **Termine** | Termine mit Anmeldung anlegen, Anmeldungen ansehen |
 | **Kurse** | Beschreibungen der Kurse (Krav Maga, WenDo) bearbeiten |
+| **Mitglieder** | Liste „Wer im Arbeitskreis mitarbeitet“ auf der Seite Arbeitskreis |
 | **Dateiarchiv** | Übersicht aller hochgeladenen Bilder und Dokumente |
 
 Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü und Fußbereich lassen sich hier bewusst **nicht** ändern. Dafür wenden Sie sich an Website Werker.
@@ -53,6 +54,10 @@ Unter **Weitere Angaben (optional)** stehen Ende, Zielgruppe, Kosten, Leitung un
 ## Kurse bearbeiten
 
 Unter **Kurse** stehen die Beschreibungen von Krav Maga / Kids Krav Maga und Wen Do für die Seite „Kurse“. Den Text ändern Sie wie bei einem Beitrag, die Reihenfolge per Ziehen in der Liste. Termine mit Datum und Anmeldung zu einem Kurs legen Sie unter **Termine** an. Einen Kurs nicht mehr zeigen: Status **Archiviert** (nicht löschen).
+
+## Mitglieder bearbeiten
+
+Unter **Mitglieder** steht die Liste „Wer im Arbeitskreis mitarbeitet“. Je Eintrag: **Einrichtung**, optional **Bereich oder Funktion** und **Internetseite** (mit https://, dann ist der Name auf der Website verlinkt). Neue Einträge mit **Neu erstellen**, Reihenfolge per Ziehen in der Liste, nicht mehr dabei: Eintrag löschen. Namen von Personen nur mit deren Einverständnis.
 
 ## Anmeldungen ansehen und verwalten
 

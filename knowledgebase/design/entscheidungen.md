@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Eigenes Kopfbild für Termine
+
+- **Entscheidung:** Termine zeigt ein eigenes Band: zwei Frauen am Tisch aus der Broschüre (S. 14), Grund Magenta `#c62f7c` wie in der Broschüre an dieser Stelle. Kurse behält das sandfarbene Band.
+- **Begründung:** Termine und Kurse hatten dasselbe Bild (Wunsch Steffen).
+- **Datei:** `website/src/assets/illustrations/band-p08.jpg`, `website/src/content/page-bands.ts`
+- **Von:** Steffen (mit Claude)
+
 ## 31.10.2026 – Farben nach Hallmark-Theme „Ink“
 
 - **Entscheidung:** Die Website übernimmt die Farben des Hallmark-Themes Ink (github.com/nutlope/hallmark): weißes Papier, Schwarz ohne Farbton, Teal als einzige Akzentfarbe. Nur Farben, Schriften und Aufbau bleiben. Die Abschnitte der Hilfe stehen als Bänder in Tinte statt mit farbiger Kante. Illustrationen und Bänder im Seitenkopf behalten ihre Farben, der Notausgang bleibt rot, die Ampel bleibt.

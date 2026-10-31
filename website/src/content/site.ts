@@ -26,7 +26,7 @@ export const defaultSite: SiteData = {
   helpline: { number: "116 016", suffix: ", rund um die Uhr" },
   // Postfächer und Anliegen der Kontaktanfrage (F-04), Angaben vom AG am 11.10.2026 (Z-09, teilweise).
   mailboxes: {
-    help: { label: "Sie suchen Hilfe", email: "frauenberatungsstelle@awo-hoexter.de" },
+    help: { label: "Sie suchen Hilfe", email: "fbs@awo-hoexter.de" },
     information: { label: "Sie möchten sich informieren", email: "gleichstellung@kreis-hoexter.de" },
   },
   footer: {
