@@ -29,28 +29,35 @@ export async function Dashboard({ payload, user }: Props) {
     <div className="aal-dashboard">
       <h2 className="aal-dashboard__title">Willkommen{user?.name ? `, ${user.name}` : ""}!</h2>
       <p className="aal-dashboard__lead">Was möchten Sie tun? Änderungen erscheinen sofort auf der Website.</p>
-      <div className="aal-tiles">
-        <Tile href="/backend/collections/posts/create" title="Neuen Beitrag schreiben" text="Eine Meldung für den Bereich Aktuelles" />
-        <Tile
-          href="/backend/collections/courses/create"
-          title="Neuen Termin anlegen"
-          text={`Termin mit Anmeldung · ${events} veröffentlicht`}
-        />
-        <Tile href="/backend/collections/course-offers" title="Kurse bearbeiten" text="Krav Maga, WenDo und weitere Kurse" />
-        <Tile
-          href="/backend/collections/registrations"
-          title="Anmeldungen ansehen"
-          text={recent ? `${recent} neue in den letzten 7 Tagen` : "Keine neuen Anmeldungen in den letzten 7 Tagen"}
-        />
-        <Tile href="/backend/collections/media" title="Dateiarchiv" text="Alle hochgeladenen Bilder und Dokumente" />
-        <Tile href="/" target="_blank" title="Website ansehen" text="So sehen Besucherinnen die Website" />
-        {isAdmin && (
-          <>
-            <Tile href="/backend/globals/mail" title="E-Mail und Anmeldungen" text="Nur für Admins: Empfänger und Postfach" />
-            <Tile href="/backend/collections/users" title="Konten" text="Nur für Admins: Redakteur:innen verwalten" />
-          </>
-        )}
-      </div>
+      <section aria-labelledby="aal-tools-editorial">
+        <h3 id="aal-tools-editorial" className="aal-dashboard__heading">Redaktion</h3>
+        <div className="aal-tiles">
+          <Tile href="/backend/collections/posts/create" title="Neuen Beitrag schreiben" text="Eine Meldung für den Bereich Aktuelles" />
+          <Tile
+            href="/backend/collections/courses/create"
+            title="Neuen Termin anlegen"
+            text={`Termin mit Anmeldung · ${events} veröffentlicht`}
+          />
+          <Tile href="/backend/collections/course-offers" title="Kurse bearbeiten" text="Krav Maga, WenDo und weitere Kurse" />
+          <Tile
+            href="/backend/collections/registrations"
+            title="Anmeldungen ansehen"
+            text={recent ? `${recent} neue in den letzten 7 Tagen` : "Keine neuen Anmeldungen in den letzten 7 Tagen"}
+          />
+          <Tile href="/backend/collections/media" title="Dateiarchiv" text="Alle hochgeladenen Bilder und Dokumente" />
+          <Tile href="/" target="_blank" title="Website ansehen" text="So sehen Besucherinnen die Website" />
+        </div>
+      </section>
+      {isAdmin && (
+        <section className="aal-dashboard__admin" aria-labelledby="aal-tools-admin">
+          <h3 id="aal-tools-admin" className="aal-dashboard__heading">Verwaltung</h3>
+          <p className="aal-dashboard__note">Nur für Admins sichtbar.</p>
+          <div className="aal-tiles">
+            <Tile href="/backend/globals/mail" title="E-Mail und Anmeldungen" text="Empfänger und Postfach" />
+            <Tile href="/backend/collections/users" title="Konten" text="Redakteur:innen verwalten" />
+          </div>
+        </section>
+      )}
     </div>
   );
 }

@@ -189,6 +189,39 @@ body,
   opacity: 0.8;
 }
 
+.aal-dashboard__heading {
+  font-size: 22px;
+  margin-block-end: 14px;
+}
+
+/* Verwaltung (nur Admins): klar von den Redaktionswerkzeugen abgesetzt, wie im Menü */
+.aal-dashboard__admin {
+  margin-block-start: 40px;
+  padding-block-start: 28px;
+  border-block-start: 1px solid var(--aal-glass-line);
+}
+
+.aal-dashboard__admin .aal-dashboard__heading {
+  margin-block-end: 2px;
+}
+
+.aal-dashboard__note {
+  font-size: 16px;
+  margin-block-end: 14px;
+  opacity: 0.8;
+}
+
+.aal-dashboard__admin .aal-tile {
+  min-block-size: 104px;
+  padding-block: 18px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.aal-dashboard__admin .aal-tile::before {
+  display: none;
+}
+
 .aal-tiles {
   display: grid;
   gap: 18px;
