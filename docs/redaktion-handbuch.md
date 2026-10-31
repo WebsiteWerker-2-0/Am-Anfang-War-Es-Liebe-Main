@@ -74,7 +74,7 @@ Oben in jedem Beitrag, Termin und Kurs gibt es den Reiter **Versionen**. Dort w�
 
 ## Nur f체r Admins: Verwaltung
 
-Admins sehen im Men체 zus채tzlich den Bereich **Verwaltung**.
+Admins sehen im Men체 und auf der Startseite unter den Schaltfl채chen der Redaktion zus채tzlich den Bereich **Verwaltung**.
 
 **E-Mail und Anmeldungen einrichten:**
 

@@ -8,6 +8,12 @@ Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzli
 - **Begründung:** Entscheidung Steffen: kein One-Pager.
 - **Datei:** `website/src/content/pages/info.ts`, `website/src/content/site.ts`
 - **Von:** Steffen (mit Claude)
+## 31.10.2026 – Backend-Startseite: Verwaltung getrennt von der Redaktion
+
+- **Entscheidung:** Die Startseite des Backends zeigt zwei Abschnitte: „Redaktion“ mit den Werkzeugen für alle und darunter, durch eine Linie abgesetzt und ruhiger gestaltet, „Verwaltung“ mit „E-Mail und Anmeldungen“ und „Konten“, nur für Admins sichtbar.
+- **Begründung:** Wunsch von Enrico; die Einstellungen sollen nicht zwischen den täglichen Aufgaben stehen. Das Menü trennte beides schon, keine neuen Menüpunkte.
+- **Datei:** `website/src/cms/components/Dashboard.tsx`, `website/src/app/(payload)/custom.css`
+- **Von:** Enrico (mit Claude)
 
 ## 31.10.2026 – Infos als Navigationsseite
 
