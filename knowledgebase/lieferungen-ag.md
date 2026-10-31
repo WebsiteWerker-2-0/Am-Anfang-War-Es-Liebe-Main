@@ -32,6 +32,18 @@ Zuletzt geliefert am 21. und 28.10.2026: Anmerkungen der Frauenberatungsstelle, 
 - [ ] 16. Links geprüft: alle aktuell, veraltete gemeldet
 - [ ] 17. Bespricht der Arbeitskreis. Veraltete Broschüren-Angaben korrigiert, z. B. „Arbeitslosengeld II“ statt Bürgergeld
 
+## Rückfragen zum Kurstext Krav Maga / Wen Do (Dokument vom 21.10.2026)
+
+Text wortgleich übernommen (`website/src/content/course-offers.ts`, im Backend unter „Kurse“). Einzige Änderung: Alter für Frauen und Mädchen einheitlich „ab 15 Jahren“ (Entscheidung Steffen 31.10., vorher oben „ab 14“, unten „ab 15“). Klären:
+
+- [ ] Alter „ab 15 Jahren“ bestätigen
+- [ ] Erlaubnis von SAMI-X / KMC Höxter für die Übernahme ihres Website-Textes; Ich-Form des Anbieters („bitten wir … bei uns“, „in unserem Trainingscenter“) liest sich auf der AK-Seite, als spräche der Arbeitskreis
+- [ ] Wen-Do-Text aus Wikipedia: Lizenz CC BY-SA verlangt Quelle mit Link, Autor*innen-Hinweis und Lizenzangabe; „(Info Wikipedia)“ reicht nicht. Alternativ eigener Text
+- [ ] Wer bietet Wen Do an (Trainerin, Ort, Kontakt)? Bei Krav Maga steht der Anbieter, bei Wen Do nicht
+- [ ] Einheitliche Schreibweisen: Wen Do / Wendo / WenDo; SAMI-X Krav Maga -TC Höxter / SAMI-X-Krav Maga- TC Höxter / KMC-Höxter / KMC Höxter
+- [ ] „Seminare“ und „Kurse“ werden gemischt
+- [ ] Sprachliche Fehler korrigieren lassen (Liste im Chat vom 31.10.)
+
 ## Nicht in der Nachricht, aber offen beim AG
 
 - [ ] Druckdaten der Broschüre (Z-06) für die genauen Farben

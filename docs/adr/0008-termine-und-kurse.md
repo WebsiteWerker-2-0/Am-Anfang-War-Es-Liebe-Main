@@ -14,4 +14,4 @@ Auf Wunsch des Auftraggebers (31.10.2026) heißt der Bereich „Veranstaltungen�
 ## Folgen
 
 - Werden alle Kurse gelöscht, kommen beim nächsten Start die Kurse aus dem Dokument zurück, und die Website zeigt sie auch ohne Neustart. Einen Kurs nicht mehr zeigen: Status „Archiviert“.
-- Das Dokument nennt für Krav Maga zwei Altersangaben (ab 14 und ab 15 Jahren). Übernommen wie geliefert, Klärung mit dem AG offen.
+- Das Dokument nannte für Krav Maga zwei Altersangaben (ab 14 und ab 15 Jahren). Seit 31.10.2026 einheitlich „ab 15 Jahren“ (Entscheidung Steffen, Datenmigration `…_kurs_alter`); Bestätigung und weitere Rückfragen in `knowledgebase/lieferungen-ag.md`.

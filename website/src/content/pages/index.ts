@@ -5,7 +5,7 @@ import { courses } from "./courses";
 import { dates } from "./dates";
 import { help } from "./help";
 import { home } from "./home";
-import { info } from "./info";
+import { brochures, evidenceCollection, exhibitionPage, furtherInformation, info } from "./info";
 import { languages } from "./languages";
 import { legalNotice } from "./legal-notice";
 import { news } from "./news";
@@ -23,6 +23,10 @@ export const defaultPages: PageData[] = [
   dates,
   courses,
   info,
+  evidenceCollection,
+  brochures,
+  furtherInformation,
+  exhibitionPage,
   workingGroup,
   contact,
   browsingTraces,

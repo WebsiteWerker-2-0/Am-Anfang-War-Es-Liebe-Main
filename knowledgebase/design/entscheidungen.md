@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Infos mit eigenen Seiten je Bereich
+
+- **Entscheidung:** Infos ist eine Navigationsseite mit vier Wegweisern. Jeder Bereich hat eine eigene Seite: `/infos/spurensicherung`, `/infos/broschueren-und-flyer`, `/infos/weiterfuehrende-informationen`, `/infos/wanderausstellung`. Wegweiser und Unterpunkte im Menü kommen aus derselben Liste (`infoSections`). Ersetzt den Eintrag „Infos als Navigationsseite“ vom selben Tag.
+- **Begründung:** Entscheidung Steffen: kein One-Pager.
+- **Datei:** `website/src/content/pages/info.ts`, `website/src/content/site.ts`
+- **Von:** Steffen (mit Claude)
+
 ## 31.10.2026 – Infos als Navigationsseite
 
 - **Entscheidung:** Infos bekommt keine Unterseiten. Oben stehen Wegweiser in der Optik von „Sie sind hier, weil …“ zu Spurensicherung, Broschüren und Flyer, weiterführenden Informationen und Wanderausstellung, alle auf derselben Seite; dazu die Unterpunkte im Menü (Enrico). Rad der Gewalt und Gewaltspirale als Vorschau, Download als PDF.

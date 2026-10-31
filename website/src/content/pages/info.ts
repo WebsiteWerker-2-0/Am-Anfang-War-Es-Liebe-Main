@@ -1,6 +1,37 @@
 import type { PageData } from "../model";
 import { exhibitionBooking, exhibitionPanels, tel } from "./helpers";
 
+// Infos: Navigationsseite mit vier Wegweisern, jeder Bereich hat eine eigene Seite unter /infos/…
+// (Wunsch Frauenberatungsstelle 21.10.2026, Entscheidung Steffen 31.10.2026). Die Unterpunkte im Menü
+// (content/site.ts) und die Wegweiser kommen beide aus `infoSections`.
+
+export const infoSections = [
+  {
+    slug: "infos/spurensicherung",
+    label: "Vertrauliche Spurensicherung im Kreis Höxter",
+    menuLabel: "Vertrauliche Spurensicherung",
+    note: "Nach sexueller Gewalt Spuren sichern lassen, auch ohne Anzeige",
+  },
+  {
+    slug: "infos/broschueren-und-flyer",
+    label: "Broschüren und Flyer zum Download",
+    menuLabel: "Broschüren und Flyer",
+    note: "Broschüre des Arbeitskreises, Flyer, Rad der Gewalt und Gewaltspirale",
+  },
+  {
+    slug: "infos/weiterfuehrende-informationen",
+    label: "Weiterführende Informationen",
+    menuLabel: "Weiterführende Informationen",
+    note: "Für Erwachsene, für Kinder und Jugendliche, zu digitaler Gewalt",
+  },
+  {
+    slug: "infos/wanderausstellung",
+    label: "Unsere Wanderausstellung",
+    menuLabel: "Unsere Wanderausstellung",
+    note: "Alle zwölf Tafeln ansehen und die Ausstellung buchen",
+  },
+] as const;
+
 export const info: PageData = {
   slug: "infos",
   title: "Infos und Broschüren",
@@ -9,17 +40,23 @@ export const info: PageData = {
   band: "info",
   layout: "stack-lg",
   blocks: [
-    // Navigationsseite: Wegweiser zu den Bereichen (Wunsch Frauenberatungsstelle 21.10.2026, keine Unterseiten)
+    // Navigationsseite (Entscheidung Steffen 31.10.2026): jeder Wegweiser führt auf eine eigene Seite unter /infos/…
     {
       blockType: "linkHub",
-      ariaLabel: "Bereiche der Seite Infos",
-      items: [
-        { label: "Vertrauliche Spurensicherung im Kreis Höxter", note: "Nach sexueller Gewalt Spuren sichern lassen, auch ohne Anzeige", href: "#spurensicherung" },
-        { label: "Broschüren und Flyer zum Download", note: "Broschüre des Arbeitskreises, Flyer, Rad der Gewalt und Gewaltspirale", href: "#downloads" },
-        { label: "Weiterführende Informationen", note: "Für Erwachsene, für Kinder und Jugendliche, zu digitaler Gewalt", href: "#links" },
-        { label: "Unsere Wanderausstellung", note: "Alle zwölf Tafeln ansehen und die Ausstellung buchen", href: "#wanderausstellung" },
-      ],
+      ariaLabel: "Bereiche der Infos",
+      items: infoSections.map((section) => ({ label: section.label, note: section.note, href: `/${section.slug}` })),
     },
+  ],
+};
+
+export const evidenceCollection: PageData = {
+  slug: "infos/spurensicherung",
+  title: "Vertrauliche Spurensicherung im Kreis Höxter",
+  description: "Nach sexueller Gewalt Spuren sichern lassen, anonym und kostenlos, im St. Ansgar Krankenhaus Höxter.",
+  intro: "Nach sexueller Gewalt können Sie Spuren sichern lassen, auch ohne Anzeige.",
+  band: "info",
+  layout: "stack-lg",
+  blocks: [
     // Kampagne Anonyme Spurensicherung (F-08), Inhalt nach Flyer und Plakat 2017 vom AG.
     // OFFEN: Flyer und Plakat werden laut AG überarbeitet, dann Bild, Text und Download austauschen
     {
@@ -40,10 +77,21 @@ export const info: PageData = {
       posterAlt:
         "Plakat „Sexuelle Gewalt? Lass Spuren sichern. Jetzt. Tu’s für dich.“: Beine einer Frau, die barfuß nachts über eine Straße geht.",
     },
+  ],
+};
+
+export const brochures: PageData = {
+  slug: "infos/broschueren-und-flyer",
+  title: "Broschüren und Flyer zum Download",
+  description: "Broschüre des Arbeitskreises, Flyer der Beratungsstellen, Rad der Gewalt und Gewaltspirale zum Herunterladen.",
+  intro: "Die Broschüre des Arbeitskreises, Flyer und Grafiken zum Herunterladen.",
+  band: "info",
+  layout: "stack-lg",
+  blocks: [
     {
       blockType: "documentList",
       anchor: "downloads",
-      heading: "Broschüren und Flyer zum Download",
+      heading: "Broschüren und Flyer",
       // Dokumente nach Abschnitt 6.8: Titel, Dateityp, Größe, Sprache, Stand
       items: [
         {
@@ -105,10 +153,21 @@ export const info: PageData = {
         },
       ],
     },
+  ],
+};
+
+export const furtherInformation: PageData = {
+  slug: "infos/weiterfuehrende-informationen",
+  title: "Weiterführende Informationen",
+  description: "Internetseiten zu Gewalt gegen Frauen und Kinder: für Erwachsene, für Kinder und Jugendliche, zu digitaler Gewalt.",
+  intro: "Ausgewählte Internetseiten für Erwachsene, für Kinder und Jugendliche und zu digitaler Gewalt.",
+  band: "info",
+  layout: "stack-lg",
+  blocks: [
     {
       blockType: "topicLinks",
       anchor: "links",
-      heading: "Weiterführende Informationen",
+      heading: "Empfohlene Internetseiten",
       // Links nach Vorschlag der Frauenberatungsstelle (21.10.2026); gewaltschutz.info entfernt (veraltet)
       topics: [
         {
@@ -137,12 +196,23 @@ export const info: PageData = {
         },
       ],
     },
+  ],
+};
+
+export const exhibitionPage: PageData = {
+  slug: "infos/wanderausstellung",
+  title: "Unsere Wanderausstellung",
+  description: "Die Wanderausstellung „Am Anfang war es Liebe …“ des Arbeitskreises: alle zwölf Tafeln und Buchung.",
+  intro: "Die Ausstellung des Arbeitskreises zeigt Wege aus der körperlichen und seelischen Gewalt.",
+  band: "info",
+  layout: "stack-lg",
+  blocks: [
     {
       blockType: "exhibition",
       anchor: "wanderausstellung",
-      heading: "Unsere Wanderausstellung",
+      heading: "Die zwölf Tafeln",
       intro:
-        "„Am Anfang war es Liebe … Wege aus der körperlichen und seelischen Gewalt“ ist seit 2022 im ganzen Kreis Höxter unterwegs, in Rathäusern, Banken und Gesundheitszentren.",
+        "„Am Anfang war es Liebe … Wege aus der körperlichen und seelischen Gewalt“ ist seit 2022 im ganzen Kreis Höxter unterwegs, in Rathäusern, Banken und Gesundheitszentren. Hier sehen Sie alle zwölf Tafeln.",
       panels: exhibitionPanels,
       booking: exhibitionBooking,
     },
