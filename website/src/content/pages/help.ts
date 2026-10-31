@@ -25,12 +25,11 @@ export const help: PageData = {
         { label: "Weitere Anlaufstellen", note: "Familie, Kreis und Städte, junge Frauen, Telefon und online", href: "#weitere" },
       ],
     },
-    { blockType: "chapter", anchor: "anlaufstellen", heading: "Hier bekommen Sie Hilfe", tone: "cyan", blocks: [{ blockType: "supportServices" }] },
+    { blockType: "chapter", anchor: "anlaufstellen", heading: "Hier bekommen Sie Hilfe", blocks: [{ blockType: "supportServices" }] },
     {
       blockType: "chapter",
       anchor: "was-tun",
       heading: "Was Sie jetzt tun können",
-      tone: "orange",
       blocks: [
         {
           blockType: "section",
@@ -92,7 +91,6 @@ export const help: PageData = {
       blockType: "chapter",
       anchor: "helfen",
       heading: "Wenn Sie helfen möchten",
-      tone: "magenta",
       blocks: [
         {
           blockType: "section",
@@ -139,7 +137,6 @@ export const help: PageData = {
       blockType: "chapter",
       anchor: "weitere",
       heading: "Weitere Anlaufstellen",
-      tone: "sand",
       blocks: [
         {
           blockType: "serviceGroups",

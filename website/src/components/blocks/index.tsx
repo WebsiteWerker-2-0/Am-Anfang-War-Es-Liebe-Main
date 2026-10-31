@@ -635,7 +635,7 @@ function TeaserBand({ block }: { block: Block<"teaserBand"> }) {
 
 function Chapter({ block }: { block: Block<"chapter"> }) {
   return (
-    <section className={`chapter chapter--${block.tone}`} aria-labelledby={block.anchor}>
+    <section className="chapter" aria-labelledby={block.anchor}>
       <h2 className="chapter__title" id={block.anchor}>
         {block.heading}
       </h2>

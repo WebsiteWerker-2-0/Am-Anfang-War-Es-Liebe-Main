@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Farben nach Hallmark-Theme „Ink“
+
+- **Entscheidung:** Die Website übernimmt die Farben des Hallmark-Themes Ink (github.com/nutlope/hallmark): weißes Papier, Schwarz ohne Farbton, Teal als einzige Akzentfarbe. Nur Farben, Schriften und Aufbau bleiben. Die Abschnitte der Hilfe stehen als Bänder in Tinte statt mit farbiger Kante. Illustrationen und Bänder im Seitenkopf behalten ihre Farben, der Notausgang bleibt rot, die Ampel bleibt.
+- **Begründung:** Wunsch von Enrico. Hallmark hat fünfzig Themes; Ink war schon für die Testversion `design/hallmark-redesign` gewählt und ist für gemeinnützige, lokale Angebote gedacht. Sein Blass-Teal wirkte als große Fläche zu laut, daher hell und neutral.
+- **Datei:** `website/src/app/(site)/globals.css`, `knowledgebase/design/farben.md`
+- **Von:** Enrico (mit Claude)
+
 ## 31.10.2026 – Auch andere Farben als die der Broschüre erlaubt
 
 - **Entscheidung:** Die Broschüre bleibt die Grundlage der Farbwelt, weitere Farben sind aber auch außerhalb der Funktionsfarben erlaubt. Sie werden als Token angelegt und in `farben.md` eingetragen, die Kontrastregeln gelten weiter. Erweitert die Entscheidung „UI-bedingte Farbabweichungen sind zulässig“ vom 17.10.2026.

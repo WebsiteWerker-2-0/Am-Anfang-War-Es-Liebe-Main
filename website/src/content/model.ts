@@ -79,8 +79,8 @@ export type PageBlock =
   | CalloutBlock
   | { blockType: "supportServices" }
   | { blockType: "serviceGroups"; anchor?: string; heading?: string; note?: string }
-  // Großer Abschnitt einer langen Seite, die Farbe unterscheidet die Abschnitte zusätzlich zur Überschrift
-  | { blockType: "chapter"; anchor: string; heading: string; tone: "cyan" | "orange" | "magenta" | "sand"; blocks: PageBlock[] }
+  // Großer Abschnitt einer langen Seite
+  | { blockType: "chapter"; anchor: string; heading: string; blocks: PageBlock[] }
   | {
       blockType: "documentList";
       anchor?: string;
