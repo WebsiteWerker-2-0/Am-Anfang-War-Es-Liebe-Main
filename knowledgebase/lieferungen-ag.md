@@ -34,11 +34,21 @@ Zuletzt geliefert am 21. und 28.10.2026: Anmerkungen der Frauenberatungsstelle, 
 
 ## Rückfragen zum Kurstext Krav Maga / Wen Do (Dokument vom 21.10.2026)
 
-Text wortgleich übernommen (`website/src/content/course-offers.ts`, im Backend unter „Kurse“). Einzige Änderung: Alter für Frauen und Mädchen einheitlich „ab 15 Jahren“ (Entscheidung Steffen 31.10., vorher oben „ab 14“, unten „ab 15“). Klären:
+Text übernommen (`website/src/content/course-offers.ts`, im Backend unter „Kurse“). Von uns geändert am 31.10.2026 (Entscheidung Steffen), der AG kontrolliert:
+
+1. Krav Maga, Aufzählung oben: „ab 14 Jahren“ → „ab 15 Jahren“ (unten stand schon 15).
+2. Krav Maga, Abschnitt „Was ist „Krav Maga Concept“ (KMC)?“: „…bitten wir freundlichst von einer Anmeldung bei uns abzusehen.“ → „…bittet KMC Höxter freundlichst, von einer Anmeldung abzusehen.“
+3. Krav Maga, gleicher Abschnitt, neu am Ende: „Quelle dieses Abschnitts: Internetseite des SAMI-X Krav Maga TC Höxter (KMC Höxter), www.kravmaga-hoexter.de“ (kursiv, verlinkt).
+4. Krav Maga, Abschnitt „Kids Krav Maga“: „…in laufenden Kursen in unserem Trainingscenter…“ → „…in laufenden Kursen im Trainingscenter von KMC Höxter…“
+5. Krav Maga, Abschnitt „Kids Krav Maga“, neu am Ende: „Angaben zu Kids Krav Maga nach KMC Höxter, www.kravmaga-hoexter.de“ (kursiv, verlinkt).
+6. Wen Do, letzte Zeile: „(Info Wikipedia)“ → „Text nach dem Artikel „Wendo“ der deutschsprachigen Wikipedia, Lizenz CC BY-SA 4.0, Autor*innen siehe Versionsgeschichte.“ (kursiv, alle drei verlinkt).
+
+Klären:
 
 - [ ] Alter „ab 15 Jahren“ bestätigen
-- [ ] Erlaubnis von SAMI-X / KMC Höxter für die Übernahme ihres Website-Textes; Ich-Form des Anbieters („bitten wir … bei uns“, „in unserem Trainingscenter“) liest sich auf der AK-Seite, als spräche der Arbeitskreis
-- [ ] Wen-Do-Text aus Wikipedia: Lizenz CC BY-SA verlangt Quelle mit Link, Autor*innen-Hinweis und Lizenzangabe; „(Info Wikipedia)“ reicht nicht. Alternativ eigener Text
+- [ ] Änderungen 1 bis 6 oben prüfen und bestätigen
+- [ ] Erlaubnis von SAMI-X / KMC Höxter für die Übernahme ihres Website-Textes (Quelle ist jetzt angegeben)
+- [ ] Wen-Do-Text aus Wikipedia: Quelle, Lizenz und Autor*innen-Hinweis sind jetzt angegeben (CC BY-SA 4.0). Klären, ob der Text gegenüber Wikipedia verändert wurde (dann „verändert“ ergänzen) und ob die Weitergabe unter derselben Lizenz für den AG in Ordnung ist; sonst eigener Text
 - [ ] Wer bietet Wen Do an (Trainerin, Ort, Kontakt)? Bei Krav Maga steht der Anbieter, bei Wen Do nicht
 - [ ] Einheitliche Schreibweisen: Wen Do / Wendo / WenDo; SAMI-X Krav Maga -TC Höxter / SAMI-X-Krav Maga- TC Höxter / KMC-Höxter / KMC Höxter
 - [ ] „Seminare“ und „Kurse“ werden gemischt

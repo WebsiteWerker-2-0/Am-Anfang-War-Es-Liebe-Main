@@ -9,7 +9,9 @@ Auf Wunsch des Auftraggebers (31.10.2026) heißt der Bereich „Veranstaltungen�
 - **Website:** Menüpunkte „Termine“ (`/termine`, Terminliste mit Anmeldung) und „Kurse“ (`/kurse`, Überschrift laut Dokument „Selbstverteidigungs- und Selbstbehauptungskurse“, Sprungmarken zu den Kursen und zu „Termine und Anmeldung“). Die Schnittstellen bleiben `/api/kurse` und `/api/kurse/anmeldung`.
 - **Backend:** Menü Aktuelles, Termine, Kurse, Dateiarchiv (Verwaltung für Admins). Gleiche Bauart wie die übrigen Bereiche (Gruppe mit einem Eintrag, Überschrift per CSS ausgeblendet, Vorschau, Status, Reihenfolge per Ziehen).
 - **Sammlungen:** `courses` bleibt der Name der Termine in Datenbank und Code (Umbenennen hieße Tabellen umbauen). Die Kurse sind die neue Sammlung `course-offers` (Name, Text, Status).
-- **Wortlaut:** Die Kurstexte stammen unverändert aus dem offiziellen Dokument „KravMaga_WenDo AK_Internetseite.docx“ (`src/content/course-offers.ts`). Nur Layout ist umgesetzt: Trennlinie entfernt, fette Zwischenzeilen als Zwischenüberschriften, Aufzählungen als Listen, Internetadresse als Link. Beim Start legt `cms/seed.ts` die beiden Kurse an, solange es keinen Kurs gibt. Geprüft: Text im Backend zeichengleich mit dem Dokument.
+- **Wortlaut:** Die Kurstexte stammen aus dem offiziellen Dokument „KravMaga_WenDo AK_Internetseite.docx“ (`src/content/course-offers.ts`). Nur Layout ist umgesetzt: Trennlinie entfernt, fette Zwischenzeilen als Zwischenüberschriften, Aufzählungen als Listen, Internetadresse als Link. Beim Start legt `cms/seed.ts` die beiden Kurse an, solange es keinen Kurs gibt. Geprüft: Text im Backend zeichengleich mit dem Dokument.
+
+- **Änderungen am Wortlaut (31.10.2026, Entscheidung Steffen, der AG kontrolliert):** Alter einheitlich „ab 15 Jahren“, Sätze aus Sicht des Anbieters in dritter Person, Quellenangaben für KMC Höxter und Wikipedia (CC BY-SA 4.0). Im Backend per Datenmigration (`…_kurs_alter`, `…_kurse_quellen`), die nur diese Stellen ersetzt; Liste der Stellen in `knowledgebase/lieferungen-ag.md`.
 
 ## Folgen
 
