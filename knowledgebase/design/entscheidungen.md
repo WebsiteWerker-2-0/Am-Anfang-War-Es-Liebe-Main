@@ -2,6 +2,27 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Farben nach Hallmark-Theme „Ink“
+
+- **Entscheidung:** Die Website übernimmt die Farben des Hallmark-Themes Ink (github.com/nutlope/hallmark): weißes Papier, Schwarz ohne Farbton, Teal als einzige Akzentfarbe. Nur Farben, Schriften und Aufbau bleiben. Die Abschnitte der Hilfe stehen als Bänder in Tinte statt mit farbiger Kante. Illustrationen und Bänder im Seitenkopf behalten ihre Farben, der Notausgang bleibt rot, die Ampel bleibt.
+- **Begründung:** Wunsch von Enrico. Hallmark hat fünfzig Themes; Ink war schon für die Testversion `design/hallmark-redesign` gewählt und ist für gemeinnützige, lokale Angebote gedacht. Sein Blass-Teal wirkte als große Fläche zu laut, daher hell und neutral.
+- **Datei:** `website/src/app/(site)/globals.css`, `knowledgebase/design/farben.md`
+- **Von:** Enrico (mit Claude)
+
+## 31.10.2026 – Auch andere Farben als die der Broschüre erlaubt
+
+- **Entscheidung:** Die Broschüre bleibt die Grundlage der Farbwelt, weitere Farben sind aber auch außerhalb der Funktionsfarben erlaubt. Sie werden als Token angelegt und in `farben.md` eingetragen, die Kontrastregeln gelten weiter. Erweitert die Entscheidung „UI-bedingte Farbabweichungen sind zulässig“ vom 17.10.2026.
+- **Begründung:** Wunsch von Enrico.
+- **Datei:** `knowledgebase/design/DESIGN-UND-ENTWICKLUNG.md` (Regel 2, Abschnitte 2.1, 2.3, 3.1, 3.4), `knowledgebase/design/farben.md`, `CLAUDE.md`
+- **Von:** Enrico (mit Claude)
+
+## 31.10.2026 – Hilfe in vier farbige Abschnitte gegliedert
+
+- **Entscheidung:** Die Hilfe-Seite beginnt nach dem Notruf mit einem Wegweiser und gliedert sich in vier Abschnitte mit Sandfläche und Farbkante: „Hier bekommen Sie Hilfe“ (Cyan), „Was Sie jetzt tun können“ (Orange), „Wenn Sie helfen möchten“ (Magenta), „Weitere Anlaufstellen“ (Grau). Die Fragen der Broschüre bleiben als Unterüberschriften. Spurensicherung bleibt offen, „Für sich selbst tun“ und Stalking sind zugeklappt, die langen Angebotslisten liegen hinter „Mehr zu den Angeboten“. Kontaktdaten bleiben immer sichtbar.
+- **Begründung:** Neun gleich große Überschriften mit gleicher Linie machten die Abschnitte ununterscheidbar (Enrico). Alles bleibt auf einer Seite, damit „Hilfe vor Inhalt“ gilt und die Sprunglinks aus dem Selbstcheck weiter funktionieren; sie klappen ihr Ziel auf. Die Abschnittsüberschriften sind neu und brauchen die Freigabe des AG.
+- **Datei:** `website/src/content/pages/help.ts`, `components/blocks/index.tsx`, `components/SupportService.tsx`, `components/OpenDetailsOnHash.tsx`, `app/(site)/globals.css`
+- **Von:** Enrico (mit Claude)
+
 ## 31.10.2026 – Infos mit eigenen Seiten je Bereich
 
 - **Entscheidung:** Infos ist eine Navigationsseite mit vier Wegweisern. Jeder Bereich hat eine eigene Seite: `/infos/spurensicherung`, `/infos/broschueren-und-flyer`, `/infos/weiterfuehrende-informationen`, `/infos/wanderausstellung`. Wegweiser und Unterpunkte im Menü kommen aus derselben Liste (`infoSections`). Ersetzt den Eintrag „Infos als Navigationsseite“ vom selben Tag.

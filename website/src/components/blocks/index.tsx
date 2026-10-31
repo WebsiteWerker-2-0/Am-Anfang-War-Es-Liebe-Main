@@ -14,6 +14,7 @@ import { PhoneLink } from "../PhoneLink";
 import { PostList } from "../PostList";
 import { QuickExitLink } from "../QuickExit";
 import { SelfCheck } from "../SelfCheck";
+import { OpenDetailsOnHash } from "../OpenDetailsOnHash";
 import { SupportServiceSection } from "../SupportService";
 
 // Darstellung der Seitenblöcke (content/model.ts). Das Markup entspricht den früheren
@@ -112,7 +113,8 @@ type Block<T extends PageBlock["blockType"]> = Extract<PageBlock, { blockType: T
 
 function Section({ block }: { block: Block<"section"> }) {
   const items = block.items.map((item, index) => <SectionItemView key={index} item={item} />);
-  const heading = block.heading ? <h2 id={block.anchor}>{block.heading}</h2> : null;
+  const Heading = block.headingLevel === 3 ? "h3" : "h2";
+  const heading = block.heading ? <Heading id={block.anchor}>{block.heading}</Heading> : null;
 
   if (block.variant === "plain") {
     return (
@@ -120,6 +122,16 @@ function Section({ block }: { block: Block<"section"> }) {
         {heading}
         {items}
       </>
+    );
+  }
+  if (block.variant === "service" && block.collapsible) {
+    return (
+      <details className="group" id={block.sectionId} open={block.collapsible === "open"}>
+        <summary>
+          <h3 id={block.anchor}>{block.heading}</h3>
+        </summary>
+        <div className="group__content measure stack">{items}</div>
+      </details>
     );
   }
   if (block.variant === "service") {
@@ -148,7 +160,7 @@ async function SupportServices() {
   return (
     <div>
       {main.map((service) => (
-        <SupportServiceSection key={service.id} service={service} />
+        <SupportServiceSection key={service.id} service={service} level={3} collapseOffers />
       ))}
     </div>
   );
@@ -157,10 +169,12 @@ async function SupportServices() {
 async function ServiceGroups({ block }: { block: Block<"serviceGroups"> }) {
   const { groups } = await getServices();
   return (
-    <section aria-labelledby={block.anchor}>
-      <h2 id={block.anchor} style={{ marginBlockEnd: "var(--space-4)" }}>
-        {block.heading}
-      </h2>
+    <section aria-labelledby={block.heading ? block.anchor : undefined}>
+      {block.heading && (
+        <h2 id={block.anchor} style={{ marginBlockEnd: "var(--space-4)" }}>
+          {block.heading}
+        </h2>
+      )}
       {groups.map((group) => (
         <details className="group" key={group.title}>
           <summary>{group.title}</summary>
@@ -619,6 +633,18 @@ function TeaserBand({ block }: { block: Block<"teaserBand"> }) {
   );
 }
 
+function Chapter({ block }: { block: Block<"chapter"> }) {
+  return (
+    <section className="chapter" aria-labelledby={block.anchor}>
+      <h2 className="chapter__title" id={block.anchor}>
+        {block.heading}
+      </h2>
+      <PageBlocks blocks={block.blocks} />
+      <OpenDetailsOnHash />
+    </section>
+  );
+}
+
 export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
   return (
     <>
@@ -628,6 +654,8 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
             return <Section key={index} block={block} />;
           case "callout":
             return <Callout key={index} block={block} />;
+          case "chapter":
+            return <Chapter key={index} block={block} />;
           case "supportServices":
             return <SupportServices key={index} />;
           case "serviceGroups":

@@ -4,7 +4,7 @@
 
 ## Hilfeleiste
 
-- Fläche in Sand (`--c-brand-surface`), keine Trennlinie zum Kopf.
+- Helle Fläche (`--c-brand-surface`), keine Trennlinie zum Kopf.
 - Schrift `--fs-xs`; Beschriftungen und nicht aktive Sprachen `--c-ink-muted`, Rufnummer und aktive Sprache `--c-ink` fett.
 - Notausgang (`--fs-sm`, `--c-exit-bg`) in Rot `#b00020` mit weißer Schrift und Icon (Tür mit Pfeil nach außen, Inline-SVG, `aria-hidden`, in RTL gespiegelt). Er ist die einzige rote Fläche der Seite und hebt sich so von Sand und Inhalt ab.
 - Mobil fixierter Knopf zusätzlich mit weißem 2-px-Ring, damit er auf jedem Hintergrund sichtbar bleibt.
@@ -18,7 +18,7 @@
 
 ## Selbstcheck
 
-- Entscheidungsbaum mit Ampel, eine Frage pro Schritt, auf einem Band in Cyan über die volle Breite mit Wellenkanten. Ergebnis als gezeichnete Ampel neben der Stufe. Festlegungen in `selbstcheck.md`.
+- Entscheidungsbaum mit Ampel, eine Frage pro Schritt, auf einem hellen Band über die volle Breite mit Wellenkanten. Ergebnis als gezeichnete Ampel neben der Stufe. Festlegungen in `selbstcheck.md`.
 - Neue Knopfstile dafür: `.button--secondary` (weiß mit dunklem Rand), `.link-button` (Knopf im Aussehen eines Links), `.choice` (Auswahl über volle Breite mit Beschreibung).
 
 ## Seitenkopf mit Broschüren-Band

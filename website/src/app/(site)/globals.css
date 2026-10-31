@@ -6,19 +6,21 @@
 :root {
   color-scheme: light;
 
-  /* Markenrollen: VORLÄUFIG, aus der Web-PDF der Broschüre 2016 und den
-     Illustrationen abgetastet. Nicht freigabefähig bis Druckdaten Z-06. */
-  --c-brand-primary: #00a3d3; /* Cyan: Titel, Flächen. Nur mit --c-ink als Schrift */
-  --c-brand-secondary: #f17e01; /* Orange: Flächen, Illustration */
-  --c-brand-accent: #ec008c; /* Magenta: nur Dekor, erreicht keinen Textkontrast */
-  --c-brand-surface: #f5ddb9; /* Sand: Hintergrund der Illustrationen */
+  /* Farben nach dem Hallmark-Theme „Ink“ (Entscheidung vom 31.10.2026): weißes Papier, Schwarz ohne Farbton,
+     ein Teal als einzige Akzentfarbe. Die Farben der Broschüre stehen nur noch in den Illustrationen. */
+  --c-brand-primary: oklch(94% 0.006 100); /* Helle Fläche für große Bänder, immer mit --c-ink als Schrift */
+  --c-brand-secondary: oklch(50% 0.095 188); /* Teal: Logo-Wort, Unterstreichungen, Balken */
+  --c-brand-accent: oklch(50% 0.095 188);
+  --c-brand-surface: oklch(97% 0.004 100); /* Helle Fläche: Hinweise, Hilfeleiste */
+  --c-illustration-ground: #f5ddb9; /* Gemessener Grund der Illustrationen, sonst entsteht eine Kante am Bild */
 
   /* Funktionsrollen */
-  --c-ink: #26232b;
-  --c-ink-muted: #5b5663;
-  --c-paper: #ffffff;
-  --c-line: #d8d5dd;
-  --c-focus: #1a5fb4;
+  --c-ink: oklch(28% 0 0);
+  --c-ink-strong: oklch(16% 0 0);
+  --c-ink-muted: oklch(44% 0 0);
+  --c-paper: oklch(99.5% 0.003 100);
+  --c-line: oklch(89% 0.004 100);
+  --c-focus: oklch(50% 0.095 188);
   --c-error: #b00020;
   --c-success: #1b6e3a;
   /* Lichter der Selbstcheck-Ampel: echte Ampelfarben, Funktionsfarben nur für die Grafik, nie für Schrift.
@@ -539,7 +541,7 @@ a:hover {
 }
 
 .entry__image {
-  background: var(--c-brand-surface);
+  background: var(--c-illustration-ground);
   align-self: stretch;
   display: flex;
   align-items: flex-end;
@@ -894,6 +896,52 @@ a:hover {
 }
 
 /* ------------------------------------------------------------------
+   Große Abschnitte einer langen Seite (Hilfe): Band in Tinte mit Überschrift.
+   ------------------------------------------------------------------ */
+main :where(h1, h2, h3) {
+  color: var(--c-ink-strong);
+}
+
+.chapter {
+  scroll-margin-block-start: var(--space-7);
+}
+
+.chapter__title {
+  padding: var(--space-4) var(--space-5);
+  margin-block-end: var(--space-4);
+  background: var(--c-ink-strong);
+  color: var(--c-paper);
+}
+
+/* Unter der Farbfläche braucht der erste Eintrag keine eigene Linie, Einträge trennt eine feine Linie */
+.chapter .service {
+  border-block-start-color: var(--c-line);
+  padding-block: var(--space-5);
+}
+
+.chapter__title + div > .service:first-child,
+.chapter__title + .service,
+.chapter__title + .group {
+  border-block-start: 0;
+}
+
+.group summary h3 {
+  margin: 0;
+  font: inherit;
+}
+
+.service__more {
+  margin-block-start: var(--space-4);
+  border-block: 1px solid var(--c-line);
+  padding-block: var(--space-3);
+}
+
+.service__more summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------
    Anlaufstelle im Detail
    ------------------------------------------------------------------ */
 .service {
@@ -1089,7 +1137,7 @@ a:hover {
 }
 
 /* Band des Selbstchecks: volle Breite in Cyan mit gewellten Kanten wie das Band der Startseite.
-   Auf Cyan erreicht nur --c-ink genug Kontrast (5,3:1), deshalb steht hier alles in Tinte. */
+   Hier steht alles in Tinte. */
 .self-check-stage {
   --stage-line: color-mix(in srgb, var(--c-ink) 30%, transparent);
   position: relative;

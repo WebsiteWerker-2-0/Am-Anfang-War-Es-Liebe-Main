@@ -11,7 +11,7 @@ Einbindung in Claude Code: in `CLAUDE.md` die Zeilen `@PROJEKT.md` und `@DESIGN-
 ## 0. Harte Regeln (vor jeder Änderung prüfen)
 
 1. **Keine externen Ressourcen.** Keine Google Fonts, kein CDN, keine YouTube/Vimeo-Embeds, keine Karten, kein Gravatar, keine Tracking- oder Consent-Skripte. Jede Datei wird vom eigenen Server ausgeliefert.
-2. **Farbwelt der Broschüre 1:1.** Markenfarben ausschließlich aus den Druckdaten (Z-06). Keine eigenen Farbtöne erfinden. Ausnahme: für die Benutzeroberfläche erforderliche Funktionsfarben (Notausgang, Fehler, Erfolg, Fokus), Entscheidung vom 17.10.2026. Siehe Abschnitt 3.
+2. **Farbwelt der Broschüre als Grundlage.** Die Markenfarben kommen aus den Druckdaten (Z-06). Weitere Farben sind erlaubt, wenn sie als Token angelegt sind und die Kontrastregeln einhalten (Entscheidung vom 31.10.2026). Siehe Abschnitt 3.
 3. **Kontaktformular speichert nichts.** Keine Einträge in der Datenbank, kein Entry-Logging, keine Kopie in Logs.
 4. **Selbstcheck bleibt im Browser.** Kein Request, kein `localStorage`, kein `sessionStorage`, keine Cookies.
 5. **Notausgang auf jeder Seite**, in jeder Sprache, auch in 404, Suche, Archiven.
@@ -47,7 +47,7 @@ Die Website übersetzt die Broschüre (Stand Juli 2016, Gestaltung und Illustrat
 1. **Hilfe vor Inhalt.** Von jeder Seite aus sind Notausgang, Hilfetelefon und Sprachwahl ohne Scrollen erreichbar.
 2. **Ruhe statt Dringlichkeit.** Keine Autoplays, keine Zähler, keine Countdown- oder Verkaufsrhetorik, keine Pop-ups. Die Zielgruppe ist potenziell in akuter Belastung.
 3. **Die Broschüre spricht.** Überschriften als Fragen in der Sprache der Broschüre („Was kann die Polizei für Sie tun?“), Anrede „Sie“; Kinder und Jugendliche werden, wie in der Broschüre, mit „Ihr/Euch“ angesprochen.
-4. **Farbe aus der Broschüre, Charakter aus Typografie und Illustration.** Die Identität muss auch mit der noch nicht gelieferten Palette tragen. Deshalb liegt das Unterscheidende in Typografie, Satzspiegel und den Broschüren-Illustrationen.
+4. **Farbe vor allem aus der Broschüre, Charakter aus Typografie und Illustration.** Die Identität muss auch mit der noch nicht gelieferten Palette tragen. Deshalb liegt das Unterscheidende in Typografie, Satzspiegel und den Broschüren-Illustrationen.
 5. **Nichts verlässt den Server.** Jede Gestaltungsentscheidung, die eine externe Ressource bräuchte, ist ausgeschlossen.
 
 ### 2.2 Das eine prägende Element
@@ -72,7 +72,6 @@ Die Formulierungen sind ein Vorschlag auf Basis der Broschüre (S. 3) und benöt
 - Fade-in-Animation pro Abschnitt, Hover-Animation auf jeder Karte
 - Nummerierung (01/02/03) für Inhalte ohne Reihenfolge
 - Bildklischees zu Gewalt (Faust, blaues Auge, zusammengekauerte Frau im Dunkeln)
-- Orange als Kampagnenfarbe („Orange the World“) ohne Deckung durch die Broschüre
 
 ---
 
@@ -85,8 +84,8 @@ Die Markenfarben sind **nicht festgelegt, solange die Druckdaten fehlen**. Die W
 1. Farbwerte aus den Druckdaten (PDF/X oder InDesign) auslesen, bevorzugt als Sonderfarben- oder CMYK-Angaben.
 2. CMYK farbmanagt nach sRGB konvertieren (Quellprofil laut Druckdaten, sonst PSO Coated v3 bzw. ISO Coated v2; Rendering Intent relativ farbmetrisch). Keine naive CMYK-Formelumrechnung.
 3. Ergebnis in Tabelle 3.3 dokumentieren (Quelle, CMYK, sRGB-Hex, Kontrastwerte).
-4. Kontraste nach WCAG 2.2 prüfen. Erreicht eine Broschürenfarbe gegen Weiß oder Textfarbe nicht 4,5:1, wird sie **nur für Flächen, Illustrationen und Dekor** verwendet, nie für Fließtext oder Links. So bleibt die Farbwelt 1:1 erhalten, ohne die Lesbarkeit zu opfern.
-5. Aufhellungen oder Abdunklungen (z. B. Hover, Hintergrundtöne) gelten als Abweichung und brauchen die Designfreigabe des AG.
+4. Kontraste nach WCAG 2.2 prüfen. Erreicht eine Broschürenfarbe gegen Weiß oder Textfarbe nicht 4,5:1, wird sie **nur für Flächen, Illustrationen und Dekor** verwendet, nie für Fließtext oder Links. Das gilt ebenso für weitere Farben.
+5. Aufhellungen, Abdunklungen und weitere Farben sind erlaubt. Sie werden als Token angelegt und in `farben.md` mit Einsatz und Kontrast eingetragen.
 
 ### 3.2 Token-Struktur
 
@@ -127,7 +126,7 @@ Rollen statt Farbnamen. Markenrollen werden aus Z-06 befüllt, Funktionsrollen s
 
 ### 3.4 Dark Mode
 
-Nicht vorgesehen. Die Farbwelt ist an die Druckvorlage gebunden; ein Dark Mode wäre eine Abweichung. `color-scheme: light` setzen.
+Nicht vorgesehen. `color-scheme: light` setzen.
 
 ---
 

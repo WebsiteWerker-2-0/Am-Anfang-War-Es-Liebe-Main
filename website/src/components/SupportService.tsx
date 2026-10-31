@@ -3,10 +3,43 @@ import { PhoneLink } from "./PhoneLink";
 
 // Eine Anlaufstelle. Feste Reihenfolge der Daten: Name, Träger, Telefon,
 // Erreichbarkeit, Adresse, E-Mail, Website (Abschnitt 6.4)
-export function SupportServiceSection({ service, level = 2 }: { service: SupportService; level?: 2 | 3 }) {
+export function SupportServiceSection({
+  service,
+  level = 2,
+  collapseOffers = false,
+}: {
+  service: SupportService;
+  level?: 2 | 3;
+  collapseOffers?: boolean;
+}) {
   const emails = [service.email ?? []].flat();
   const Heading = level === 2 ? "h2" : "h3";
   const headingId = `anlaufstelle-${service.id}`;
+
+  const offers = (
+    <>
+      {service.topics && (
+        <div className="measure service__offers">
+          <p>Beratung zu:</p>
+          <ul className="list-bullets">
+            {service.topics.map((topic) => (
+              <li key={topic}>{topic}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {service.offers && (
+        <div className="measure service__offers">
+          <p>{service.offersLabel ?? "Die Beraterinnen bieten:"}</p>
+          <ul className="list-bullets">
+            {service.offers.map((offer) => (
+              <li key={offer}>{offer}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
+  );
 
   return (
     <section className="service" aria-labelledby={headingId} id={service.id}>
@@ -87,25 +120,13 @@ export function SupportServiceSection({ service, level = 2 }: { service: Support
         )}
       </dl>
       {service.description && <p className="measure">{service.description}</p>}
-      {service.topics && (
-        <div className="measure service__offers">
-          <p>Beratung zu:</p>
-          <ul className="list-bullets">
-            {service.topics.map((topic) => (
-              <li key={topic}>{topic}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {service.offers && (
-        <div className="measure service__offers">
-          <p>{service.offersLabel ?? "Die Beraterinnen bieten:"}</p>
-          <ul className="list-bullets">
-            {service.offers.map((offer) => (
-              <li key={offer}>{offer}</li>
-            ))}
-          </ul>
-        </div>
+      {collapseOffers && (service.topics || service.offers) ? (
+        <details className="service__more measure">
+          <summary>Mehr zu den Angeboten</summary>
+          {offers}
+        </details>
+      ) : (
+        offers
       )}
     </section>
   );

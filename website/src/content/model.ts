@@ -71,11 +71,16 @@ export type PageBlock =
       heading?: string;
       ariaLabel?: string;
       variant: "stack" | "service" | "plain";
+      headingLevel?: 3;
+      // Nur bei „service“: als aufklappbarer Eintrag innerhalb eines Abschnitts (h3)
+      collapsible?: "open" | "closed";
       items: SectionItem[];
     }
   | CalloutBlock
   | { blockType: "supportServices" }
-  | { blockType: "serviceGroups"; anchor?: string; heading: string; note?: string }
+  | { blockType: "serviceGroups"; anchor?: string; heading?: string; note?: string }
+  // Großer Abschnitt einer langen Seite
+  | { blockType: "chapter"; anchor: string; heading: string; blocks: PageBlock[] }
   | {
       blockType: "documentList";
       anchor?: string;
