@@ -27,6 +27,7 @@ Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzli
 
 - **Entscheidung:** Die Website übernimmt die Farben des Hallmark-Themes Ink (github.com/nutlope/hallmark): weißes Papier, Schwarz ohne Farbton, Teal als einzige Akzentfarbe. Nur Farben, Schriften und Aufbau bleiben. Die Abschnitte der Hilfe stehen als Bänder in Tinte statt mit farbiger Kante. Illustrationen und Bänder im Seitenkopf behalten ihre Farben, der Notausgang bleibt rot, die Ampel bleibt.
 - **Begründung:** Wunsch von Enrico. Hallmark hat fünfzig Themes; Ink war schon für die Testversion `design/hallmark-redesign` gewählt und ist für gemeinnützige, lokale Angebote gedacht. Sein Blass-Teal wirkte als große Fläche zu laut, daher hell und neutral.
+- **Freigabe:** Der AG hat die Farben telefonisch freigegeben (Enrico, 31.10.2026), schriftliche Bestätigung offen.
 - **Datei:** `website/src/app/(site)/globals.css`, `knowledgebase/design/farben.md`
 - **Von:** Enrico (mit Claude)
 
@@ -40,7 +41,7 @@ Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzli
 ## 31.10.2026 – Hilfe in vier farbige Abschnitte gegliedert
 
 - **Entscheidung:** Die Hilfe-Seite beginnt nach dem Notruf mit einem Wegweiser und gliedert sich in vier Abschnitte mit Sandfläche und Farbkante: „Hier bekommen Sie Hilfe“ (Cyan), „Was Sie jetzt tun können“ (Orange), „Wenn Sie helfen möchten“ (Magenta), „Weitere Anlaufstellen“ (Grau). Die Fragen der Broschüre bleiben als Unterüberschriften. Spurensicherung bleibt offen, „Für sich selbst tun“ und Stalking sind zugeklappt, die langen Angebotslisten liegen hinter „Mehr zu den Angeboten“. Kontaktdaten bleiben immer sichtbar.
-- **Begründung:** Neun gleich große Überschriften mit gleicher Linie machten die Abschnitte ununterscheidbar (Enrico). Alles bleibt auf einer Seite, damit „Hilfe vor Inhalt“ gilt und die Sprunglinks aus dem Selbstcheck weiter funktionieren; sie klappen ihr Ziel auf. Die Abschnittsüberschriften sind neu und brauchen die Freigabe des AG.
+- **Begründung:** Neun gleich große Überschriften mit gleicher Linie machten die Abschnitte ununterscheidbar (Enrico). Alles bleibt auf einer Seite, damit „Hilfe vor Inhalt“ gilt und die Sprunglinks aus dem Selbstcheck weiter funktionieren; sie klappen ihr Ziel auf. Die Abschnittsüberschriften sind neu; der AG hat sie telefonisch freigegeben (Enrico, 31.10.2026), schriftliche Bestätigung offen.
 - **Datei:** `website/src/content/pages/help.ts`, `components/blocks/index.tsx`, `components/SupportService.tsx`, `components/OpenDetailsOnHash.tsx`, `app/(site)/globals.css`
 - **Von:** Enrico (mit Claude)
 
