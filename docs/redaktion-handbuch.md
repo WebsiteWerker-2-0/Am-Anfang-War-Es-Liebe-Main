@@ -21,7 +21,7 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 
 1. Auf der Startseite **Neuen Beitrag schreiben** wählen.
 2. **Titel**, **Datum** und **Verfasst von** eintragen (vorbelegt mit Ihrem Namen, erscheint auf der Website neben dem Datum), bei **Kurzfassung** zwei Sätze für die Liste.
-3. Ein **Titelbild** wählen oder hochladen. Geben Sie die Bildbeschreibung an, sie hilft Screenreadern.
+3. Ein **Titelbild** wählen oder hochladen. Geben Sie die Bildbeschreibung an, sie hilft Screenreadern. Fotos im iPhone-Format HEIC nimmt das Backend nicht an, speichern Sie sie vorher als JPG.
 4. Den **Text** schreiben. Mit den Knöpfen oben im Textfeld gibt es Zwischenüberschriften, Listen, fett und Links.
 5. Rechts steht der **Status** schon auf **Veröffentlicht**. Soll der Beitrag noch nicht erscheinen, wählen Sie **Entwurf** (nur Sie sehen es). **Archiviert** heißt: bleibt erhalten, ist aber nicht mehr zu sehen.
 6. **Speichern** (der dunkle Knopf oben rechts, er bleibt beim Scrollen sichtbar). Der Beitrag steht danach **ganz oben** in Aktuelles.

@@ -1,7 +1,12 @@
-import type { CollectionConfig } from "payload";
+import { APIError, type CollectionConfig } from "payload";
 import { isLoggedIn } from "../access";
 import { uploadDir } from "../env";
 import { revalidateSite } from "../revalidate";
+
+// HEIC (Fotos vom iPhone) zeigen die meisten Browser nicht an: lieber beim Hochladen ablehnen und sagen, was zu tun ist.
+const HEIC = /\.(heic|heif)$|^image\/(heic|heif)/i;
+const HEIC_MESSAGE =
+  "Dieses Foto hat das iPhone-Format HEIC und lässt sich auf der Website nicht anzeigen. Bitte speichern Sie es als JPG und laden Sie es erneut hoch.";
 
 // Mediathek (F-07): Bilder, Dokumente und Videos für Beiträge, Termine und Kurse.
 export const Media: CollectionConfig = {
@@ -24,7 +29,13 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: uploadDir,
     mimeTypes: [
-      "image/*",
+      // Bewusst aufgezählt statt image/*: nur Formate, die alle Browser anzeigen (kein HEIC)
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+      "image/avif",
+      "image/svg+xml",
       "application/pdf",
       "video/mp4",
       "application/msword",
@@ -34,6 +45,13 @@ export const Media: CollectionConfig = {
     adminThumbnail: "thumbnail",
   },
   hooks: {
+    // Läuft vor der Typprüfung von Payload, deren Meldung für die Redaktion nicht verständlich wäre
+    beforeOperation: [
+      ({ req }) => {
+        const file = req.file;
+        if (file && (HEIC.test(file.name) || HEIC.test(file.mimetype))) throw new APIError(HEIC_MESSAGE, 400, undefined, true);
+      },
+    ],
     afterChange: [() => revalidateSite()],
     beforeValidate: [
       ({ data, req }) => {
