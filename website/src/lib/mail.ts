@@ -39,7 +39,7 @@ export type SendResult = { ok: true } | { ok: false; reason: "not-configured" | 
 
 export async function sendMail(
   settings: MailSettings,
-  mail: { to: string; subject: string; text: string; replyTo?: string },
+  mail: { to: string; subject: string; text: string; replyTo?: string; bcc?: string },
 ): Promise<SendResult> {
   if (!settings.host || !settings.fromAddress) {
     return { ok: false, reason: "not-configured", message: "Der E-Mail-Versand ist noch nicht eingerichtet (Server und Absender fehlen)." };
@@ -57,6 +57,7 @@ export async function sendMail(
     await transport.sendMail({
       from: settings.fromName ? { name: settings.fromName, address: settings.fromAddress } : settings.fromAddress,
       to: mail.to,
+      bcc: mail.bcc,
       subject: mail.subject,
       text: mail.text,
       replyTo: mail.replyTo,

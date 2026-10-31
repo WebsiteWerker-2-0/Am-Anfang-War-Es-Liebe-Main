@@ -7,6 +7,8 @@ import { getMailSettings, sendMail } from "./mail";
 // Das Anliegen bestimmt das Postfach (content/site.ts, „mailboxes“). Verschickt wird über das Postfach
 // aus dem Backend („E-Mail und Anmeldungen“), dasselbe wie bei Anmeldungen. Steht dort „Kontaktanfragen
 // umleiten an“, gehen alle Anfragen dorthin (zum Testen).
+// Anfragen an die Frauenberatungsstelle bekommt die Gleichstellungsstelle in Blindkopie (BCC),
+// Wunsch Steffen 31.10.2026. Bei aktiver Umleitung gibt es keine Blindkopie, damit Tests intern bleiben.
 
 export type ContactInput = { concern: string; message: string; name?: string; replyTo?: string };
 
@@ -35,11 +37,13 @@ export async function sendContact(payload: Payload, input: ContactInput): Promis
 
   const settings = await getMailSettings(payload);
   const to = settings.contactRedirect ?? defaultSite.mailboxes[concern.mailbox].email;
+  const bcc = !settings.contactRedirect && concern.mailbox === "help" ? defaultSite.mailboxes.information.email : undefined;
   const replyTo = input.replyTo?.trim();
   const name = input.name?.trim();
 
   const result = await sendMail(settings, {
     to,
+    bcc,
     // Antworten gehen direkt an die Person, wenn sie eine E-Mail-Adresse angegeben hat
     replyTo: replyTo && EMAIL.test(replyTo) ? replyTo : undefined,
     subject: `Kontaktanfrage über die Website: ${concern.label}`,
