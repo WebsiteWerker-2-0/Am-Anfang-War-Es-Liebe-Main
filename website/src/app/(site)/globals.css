@@ -894,6 +894,54 @@ a:hover {
 }
 
 /* ------------------------------------------------------------------
+   Große Abschnitte einer langen Seite (Hilfe): Farbfläche mit Überschrift.
+   Schrift immer --c-ink. Magenta erreicht keinen Textkontrast, daher nur als Kante auf Sand.
+   ------------------------------------------------------------------ */
+.chapter {
+  scroll-margin-block-start: var(--space-7);
+}
+
+.chapter__title {
+  padding: var(--space-4) var(--space-5);
+  margin-block-end: var(--space-4);
+  background: var(--c-brand-surface);
+  border-inline-start: 0.5rem solid var(--chapter-color);
+}
+
+.chapter--cyan { --chapter-color: var(--c-brand-primary); }
+.chapter--orange { --chapter-color: var(--c-brand-secondary); }
+.chapter--magenta { --chapter-color: var(--c-brand-accent); }
+.chapter--sand { --chapter-color: var(--c-ink-muted); }
+
+/* Unter der Farbfläche braucht der erste Eintrag keine eigene Linie, Einträge trennt eine feine Linie */
+.chapter .service {
+  border-block-start-color: var(--c-line);
+  padding-block: var(--space-5);
+}
+
+.chapter__title + div > .service:first-child,
+.chapter__title + .service,
+.chapter__title + .group {
+  border-block-start: 0;
+}
+
+.group summary h3 {
+  margin: 0;
+  font: inherit;
+}
+
+.service__more {
+  margin-block-start: var(--space-4);
+  border-block: 1px solid var(--c-line);
+  padding-block: var(--space-3);
+}
+
+.service__more summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------
    Anlaufstelle im Detail
    ------------------------------------------------------------------ */
 .service {
