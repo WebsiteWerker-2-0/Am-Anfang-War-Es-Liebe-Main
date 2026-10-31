@@ -918,21 +918,17 @@ main :where(h1, h2, h3) {
   color: var(--tone-ink);
 }
 
-/* Farben der Abschnitte. Schrift je nach Fläche hell oder dunkel, Kontrast mindestens 5:1 */
-.tone-teal { --tone: #007a78; --tone-ink: #ffffff; }
-.tone-orange { --tone: #f17e01; --tone-ink: #111111; }
-.tone-magenta { --tone: #b5116f; --tone-ink: #ffffff; }
-.tone-cyan { --tone: #00a3d3; --tone-ink: #111111; }
-
-.tone-teal, .tone-orange, .tone-magenta, .tone-cyan, .chapter .service {
-  --tone-tint: color-mix(in srgb, var(--tone) 12%, var(--c-paper));
-}
+/* Farben der Abschnitte: Teal der Website und die Farben der Broschüre (farben.md).
+   Weiß auf Magenta erreicht 4,25:1 und steht deshalb nur in der großen Überschrift. */
+.tone-teal { --tone: var(--c-brand-secondary); --tone-ink: var(--c-paper); }
+.tone-orange { --tone: #f17e01; --tone-ink: var(--c-ink-strong); }
+.tone-magenta { --tone: #ec008c; --tone-ink: #ffffff; }
+.tone-cyan { --tone: #00a3d3; --tone-ink: var(--c-ink-strong); }
 
 /* Wegweiser in den Farben der Abschnitte */
 .paths li[class*="tone-"] {
   border-block-end: 0;
-  border-inline-start: 0.5rem solid var(--tone);
-  background: var(--tone-tint);
+  border-inline-start: 0.25rem solid var(--tone);
   margin-block-start: var(--space-2);
 }
 
@@ -944,17 +940,10 @@ main :where(h1, h2, h3) {
   border-block-start: 0;
 }
 
-/* Die vier Anlaufstellen: jede Institution hat ihre eigene Farbe */
-.chapter #hilfetelefon { --tone: #00a3d3; }
-.chapter #frauenberatungsstelle { --tone: #b5116f; }
-.chapter #schutzhaus { --tone: #f17e01; }
-.chapter #polizei { --tone: #1a5fb4; }
-
+/* Die vier Anlaufstellen: feine Linie in der Farbe des Abschnitts */
 .chapter__title + div > .service {
-  background: var(--tone-tint);
-  border-block-start: 0.5rem solid var(--tone);
-  padding: var(--space-5);
-  margin-block-end: var(--space-5);
+  border-block-start: 0.25rem solid var(--tone);
+  padding-block: var(--space-4) var(--space-6);
 }
 
 .chapter__title + .service {
@@ -970,7 +959,6 @@ main :where(h1, h2, h3) {
 /* Kontaktdaten als schlichte Tabelle */
 .chapter .facts {
   gap: 0;
-  background: var(--c-paper);
   border: 1px solid var(--c-line);
   border-radius: 6px;
 }
@@ -1017,8 +1005,7 @@ main :where(h1, h2, h3) {
 }
 
 .chapter .group > summary {
-  background: var(--tone-tint);
-  border-inline-start: 0.5rem solid var(--tone);
+  border-inline-start: 0.25rem solid var(--tone);
   padding-inline: var(--space-4);
 }
 
@@ -1190,7 +1177,7 @@ main :where(h1, h2, h3) {
 }
 
 .emergency {
-  background: oklch(93% 0.05 190);
+  background: var(--c-brand-surface);
   padding: var(--space-5);
   display: grid;
   gap: var(--space-3);

@@ -2,10 +2,10 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
-## 31.10.2026 – Hilfe: mehr Farbe, Kontaktdaten als Tabelle, alles eingeklappt
+## 31.10.2026 – Hilfe: Farbe nur aus den Abschnittsüberschriften, Kontaktdaten als Tabelle, alles eingeklappt
 
-- **Entscheidung:** Die vier Abschnitte, der Wegweiser und die aufklappbaren Einträge tragen je eine Farbe (Teal, Orange, Magenta `#b5116f`, Cyan). Die vier Anlaufstellen haben eigene Farben: Hilfetelefon Cyan, Frauenberatungsstelle Magenta, Schutzhaus Orange, Polizei Blau `#1a5fb4`. Kontaktdaten stehen in einer schlichten Tabelle, Beschreibung und Angebote hinter „Mehr dazu“. Auch die Spurensicherung ist zugeklappt; das ersetzt die frühere Festlegung, sie offen zu lassen.
-- **Begründung:** Wunsch von Enrico: Die Seite wirkte schwarz-weiß und mit Text überflutet. Ergänzt die Palette aus dem Ink-Eintrag für diese Seite.
+- **Entscheidung:** Die vier Abschnittsüberschriften sind farbige Bänder aus der vorhandenen Palette: Teal, Orange `#f17e01`, Magenta `#ec008c`, Cyan `#00a3d3`. Innerhalb eines Abschnitts erscheint nur dessen Farbe, als feine Linie an Wegweiser, Anlaufstellen und aufklappbaren Einträgen, keine getönten Flächen. Keine eigenen Farben je Institution. Kontaktdaten stehen in einer schlichten Tabelle, Beschreibung und Angebote hinter „Mehr dazu“. Auch die Spurensicherung ist zugeklappt; das ersetzt die frühere Festlegung, sie offen zu lassen.
+- **Begründung:** Wunsch von Enrico: erst zu schwarz-weiß und textlastig, ein erster Entwurf mit Flächen je Institution war zu viel.
 - **Datei:** `website/src/app/(site)/globals.css`, `components/SupportService.tsx`, `content/pages/help.ts`
 - **Von:** Enrico (mit Claude)
 
