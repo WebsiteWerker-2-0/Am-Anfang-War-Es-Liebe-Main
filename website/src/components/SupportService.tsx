@@ -6,16 +6,17 @@ import { PhoneLink } from "./PhoneLink";
 export function SupportServiceSection({
   service,
   level = 2,
-  collapseOffers = false,
+  collapseDetails = false,
 }: {
   service: SupportService;
   level?: 2 | 3;
-  collapseOffers?: boolean;
+  collapseDetails?: boolean;
 }) {
   const emails = [service.email ?? []].flat();
   const Heading = level === 2 ? "h2" : "h3";
   const headingId = `anlaufstelle-${service.id}`;
 
+  const description = service.description && <p className="measure">{service.description}</p>;
   const offers = (
     <>
       {service.topics && (
@@ -119,14 +120,17 @@ export function SupportServiceSection({
           </>
         )}
       </dl>
-      {service.description && <p className="measure">{service.description}</p>}
-      {collapseOffers && (service.topics || service.offers) ? (
+      {collapseDetails && (service.description || service.topics || service.offers) ? (
         <details className="service__more measure">
-          <summary>Mehr zu den Angeboten</summary>
+          <summary>Mehr dazu</summary>
+          {description}
           {offers}
         </details>
       ) : (
-        offers
+        <>
+          {description}
+          {offers}
+        </>
       )}
     </section>
   );

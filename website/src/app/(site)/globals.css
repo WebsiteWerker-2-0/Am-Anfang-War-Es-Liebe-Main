@@ -914,20 +914,121 @@ main :where(h1, h2, h3) {
 .chapter__title {
   padding: var(--space-4) var(--space-5);
   margin-block-end: var(--space-4);
-  background: var(--c-ink-strong);
-  color: var(--c-paper);
+  background: var(--tone);
+  color: var(--tone-ink);
 }
 
-/* Unter der Farbfläche braucht der erste Eintrag keine eigene Linie, Einträge trennt eine feine Linie */
-.chapter .service {
+/* Farben der Abschnitte. Schrift je nach Fläche hell oder dunkel, Kontrast mindestens 5:1 */
+.tone-teal { --tone: #007a78; --tone-ink: #ffffff; }
+.tone-orange { --tone: #f17e01; --tone-ink: #111111; }
+.tone-magenta { --tone: #b5116f; --tone-ink: #ffffff; }
+.tone-cyan { --tone: #00a3d3; --tone-ink: #111111; }
+
+.tone-teal, .tone-orange, .tone-magenta, .tone-cyan, .chapter .service {
+  --tone-tint: color-mix(in srgb, var(--tone) 12%, var(--c-paper));
+}
+
+/* Wegweiser in den Farben der Abschnitte */
+.paths li[class*="tone-"] {
+  border-block-end: 0;
+  border-inline-start: 0.5rem solid var(--tone);
+  background: var(--tone-tint);
+  margin-block-start: var(--space-2);
+}
+
+.paths li[class*="tone-"] a {
+  padding-inline: var(--space-4);
+}
+
+.paths:has(> li[class*="tone-"]) {
+  border-block-start: 0;
+}
+
+/* Die vier Anlaufstellen: jede Institution hat ihre eigene Farbe */
+.chapter #hilfetelefon { --tone: #00a3d3; }
+.chapter #frauenberatungsstelle { --tone: #b5116f; }
+.chapter #schutzhaus { --tone: #f17e01; }
+.chapter #polizei { --tone: #1a5fb4; }
+
+.chapter__title + div > .service {
+  background: var(--tone-tint);
+  border-block-start: 0.5rem solid var(--tone);
+  padding: var(--space-5);
+  margin-block-end: var(--space-5);
+}
+
+.chapter__title + .service {
+  border-block-start: 0;
+  padding-block-start: var(--space-2);
+}
+
+.chapter .group__content .service {
   border-block-start-color: var(--c-line);
   padding-block: var(--space-5);
 }
 
-.chapter__title + div > .service:first-child,
-.chapter__title + .service,
-.chapter__title + .group {
+/* Kontaktdaten als schlichte Tabelle */
+.chapter .facts {
+  gap: 0;
+  background: var(--c-paper);
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+}
+
+.chapter .facts dt,
+.chapter .facts dd {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+}
+
+.chapter .facts dt {
+  border-block-start: 1px solid var(--c-line);
+  padding-block-end: 0;
+}
+
+.chapter .facts dt:first-child {
   border-block-start: 0;
+}
+
+.chapter .facts dd {
+  padding-block-start: 0;
+}
+
+@media (min-width: 40em) {
+  .chapter .facts {
+    grid-template-columns: 10rem 1fr;
+  }
+  .chapter .facts dt,
+  .chapter .facts dd {
+    padding-block: var(--space-2);
+  }
+  .chapter .facts dd {
+    border-block-start: 1px solid var(--c-line);
+  }
+  .chapter .facts dt:first-child + dd {
+    border-block-start: 0;
+  }
+}
+
+/* Aufklappbare Einträge in der Farbe ihres Abschnitts */
+.chapter .group {
+  border-block-start: 0;
+  margin-block-end: var(--space-2);
+}
+
+.chapter .group > summary {
+  background: var(--tone-tint);
+  border-inline-start: 0.5rem solid var(--tone);
+  padding-inline: var(--space-4);
+}
+
+.chapter .group > .group__content {
+  padding-block-start: var(--space-4);
+}
+
+.chapter dl.stack > div {
+  border-inline-start: 0.25rem solid var(--tone);
+  padding-inline-start: var(--space-3);
 }
 
 .group summary h3 {
@@ -937,8 +1038,10 @@ main :where(h1, h2, h3) {
 
 .service__more {
   margin-block-start: var(--space-4);
-  border-block: 1px solid var(--c-line);
-  padding-block: var(--space-3);
+}
+
+.service__more > p {
+  margin-block-start: var(--space-3);
 }
 
 .service__more summary {
@@ -1087,7 +1190,7 @@ main :where(h1, h2, h3) {
 }
 
 .emergency {
-  background: var(--c-brand-surface);
+  background: oklch(93% 0.05 190);
   padding: var(--space-5);
   display: grid;
   gap: var(--space-3);
