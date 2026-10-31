@@ -29,12 +29,12 @@ export const Courses: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     group: "Termine",
-    defaultColumns: ["title", "startsAt", "booked", "capacity", "status"],
+    defaultColumns: ["title", "startsAt", "status"],
     listSearchableFields: ["title", "location"],
     // Auge-Symbol: Vorschau des Termins, wie er auf der Website erscheint
     livePreview: { url: ({ data }) => `/vorschau/termine/${data.id}` },
     description:
-      "Termine mit Anmeldung, zum Beispiel Kurstermine oder Aktionen. Mit „Speichern“ erscheint der Termin sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.",
+      "Termine mit Anmeldung, zum Beispiel Kurstermine oder Aktionen. Mit „Speichern“ erscheint der Termin sofort mit Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.",
   },
   access: {
     read: publishedOrLoggedIn,
@@ -99,8 +99,18 @@ export const Courses: CollectionConfig = {
           "Zum Beispiel Ablauf, Mitbringen, Hinweise. Datei oder Bild an einer bestimmten Stelle einfügen: im Text an die Stelle klicken, dann in der Leiste ganz links auf das erste Symbol und „Datei oder Bild“ wählen.",
       },
     },
+    // Wie der Download-Bereich bei Aktuelles: Plätze, Belegung und Warteliste erscheinen erst mit Häkchen.
+    // Ohne Häkchen gibt es keine Grenze und keine Angaben zu Plätzen, weder hier noch auf der Website.
+    {
+      name: "limitSeats",
+      type: "checkbox",
+      label: "Teilnehmerzahl begrenzen",
+      defaultValue: false,
+      admin: { description: "Mit Häkchen legen Sie die Zahl der Plätze fest. Die Website zeigt dann die freien Plätze und auf Wunsch eine Warteliste." },
+    },
     {
       type: "row",
+      admin: { condition: (data) => Boolean(data?.limitSeats) },
       fields: [
         {
           name: "capacity",
@@ -147,7 +157,7 @@ export const Courses: CollectionConfig = {
           type: "checkbox",
           label: "Warteliste anbieten, wenn alle Plätze belegt sind",
           defaultValue: true,
-          admin: { width: "50%" },
+          admin: { width: "50%", condition: (data) => Boolean(data?.limitSeats) },
         },
       ],
     },

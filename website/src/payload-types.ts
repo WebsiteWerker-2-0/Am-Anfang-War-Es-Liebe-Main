@@ -243,7 +243,7 @@ export interface Media {
   };
 }
 /**
- * Termine mit Anmeldung, zum Beispiel Kurstermine oder Aktionen. Mit „Speichern“ erscheint der Termin sofort mit freien Plätzen und Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.
+ * Termine mit Anmeldung, zum Beispiel Kurstermine oder Aktionen. Mit „Speichern“ erscheint der Termin sofort mit Anmeldeformular auf der Website (Status „Veröffentlicht“). Mit dem Auge-Symbol oben sehen Sie die Vorschau.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses".
@@ -278,6 +278,10 @@ export interface Course {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Mit Häkchen legen Sie die Zahl der Plätze fest. Die Website zeigt dann die freien Plätze und auf Wunsch eine Warteliste.
+   */
+  limitSeats?: boolean | null;
   capacity: number;
   /**
    * Zählt die Anmeldungen über die Website mit. Anmeldungen per Telefon oder E-Mail tragen Sie hier dazu: einfach die Zahl erhöhen.
@@ -557,6 +561,7 @@ export interface CoursesSelect<T extends boolean = true> {
   location?: T;
   description?: T;
   details?: T;
+  limitSeats?: T;
   capacity?: T;
   booked?: T;
   extraBooked?: T;

@@ -93,7 +93,9 @@ export function register(payload: Payload, input: RegistrationInput, origin: str
           `Termin: ${course.title}`,
           `Termin: ${dateFormat.format(new Date(course.startsAt))}`,
           course.location ? `Ort: ${course.location}` : "",
-          `Plätze: ${Math.min(taken + (status === "confirmed" ? 1 : 0), course.capacity)} von ${course.capacity} belegt${left === 0 && status === "confirmed" ? " (jetzt voll)" : ""}`,
+          course.limitSeats
+            ? `Plätze: ${Math.min(taken + (status === "confirmed" ? 1 : 0), course.capacity)} von ${course.capacity} belegt${left === 0 && status === "confirmed" ? " (jetzt voll)" : ""}`
+            : "",
           "",
           `Name: ${input.name.trim()}`,
           `E-Mail: ${email}`,

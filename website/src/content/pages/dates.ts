@@ -1,6 +1,6 @@
 import type { PageData } from "../model";
 
-// Termine: datierte Angebote mit freien Plätzen und Anmeldung, gepflegt im Backend unter „Termine“
+// Termine: datierte Angebote mit Anmeldung (Plätze nur, wenn begrenzt), gepflegt im Backend unter „Termine“
 export const dates: PageData = {
   slug: "termine",
   title: "Termine",

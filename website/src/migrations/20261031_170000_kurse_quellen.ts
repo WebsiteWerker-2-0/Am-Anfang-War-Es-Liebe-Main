@@ -48,8 +48,13 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   const paragraph = (html: string) =>
     (convertHTMLToLexical({ editorConfig, html, JSDOM }).root.children[0] as unknown) as Node
 
+  // Neue Datenbank: Es gibt noch keine Kurse (die legt erst cms/seed.ts an), also nichts zu ändern.
+  // Wichtig, weil spätere Felder (z. B. „Kurzfassung“) hier noch keine Spalte haben.
+  if ((await payload.count({ collection: 'course-offers', req })).totalDocs === 0) return
+
   const { docs } = await payload.find({
     collection: 'course-offers',
+    select: { title: true, slug: true, content: true },
     where: { slug: { in: ['krav-maga', 'wen-do'] } },
     depth: 0,
     limit: 10,

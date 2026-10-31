@@ -69,7 +69,7 @@ export async function getPost(slug: string) {
   return (await getAllPosts()).find((post) => post.slug === slug) ?? null;
 }
 
-/** Veröffentlichte Termine mit freien Plätzen; ohne CMS gibt es keine */
+/** Veröffentlichte, noch nicht vergangene Termine; ohne CMS gibt es keine */
 export const getPublicCourses = cache(async (): Promise<PublicCourse[]> => {
   const cms = await getCms();
   if (!cms) return [];

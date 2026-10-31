@@ -2,7 +2,8 @@ import type { Payload } from "payload";
 import type { Course } from "@/payload-types";
 import { richToHtml } from "./rich-html";
 
-// Kurse für die Website: nur Veröffentlichtes, dessen Termin noch nicht vorbei ist, mit freien Plätzen.
+// Kurse für die Website: nur Veröffentlichtes, dessen Termin noch nicht vorbei ist.
+// Plätze zählen nur, wenn die Teilnehmerzahl begrenzt ist (Häkchen „Teilnehmerzahl begrenzen“).
 
 export type CourseState = "open" | "waitlist" | "full" | "closed";
 
@@ -18,15 +19,20 @@ export type PublicCourse = {
   audience: string;
   price: string;
   instructor: string;
+  /** Teilnehmerzahl begrenzt; sonst gibt es keine Platzangaben und keine Warteliste */
+  limited: boolean;
   capacity: number;
   taken: number;
   free: number;
   state: CourseState;
 };
 
-export function courseState(course: { registrationOpen?: boolean | null; waitlist?: boolean | null }, free: number): CourseState {
+export function courseState(
+  course: { registrationOpen?: boolean | null; waitlist?: boolean | null; limitSeats?: boolean | null },
+  free: number,
+): CourseState {
   if (course.registrationOpen === false) return "closed";
-  if (free > 0) return "open";
+  if (!course.limitSeats || free > 0) return "open";
   return course.waitlist === false ? "full" : "waitlist";
 }
 
@@ -92,6 +98,7 @@ export function toPublicCourse(doc: Course, used: number): PublicCourse {
     audience: doc.audience ?? "",
     price: doc.price ?? "",
     instructor: doc.instructor ?? "",
+    limited: Boolean(doc.limitSeats),
     capacity: doc.capacity,
     taken: used,
     free,

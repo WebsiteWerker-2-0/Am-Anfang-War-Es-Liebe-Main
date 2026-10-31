@@ -42,10 +42,10 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 
 1. Auf der Startseite **Neuen Termin anlegen** wählen.
 2. **Name**, **Wann beginnt es?** und **Wo findet es statt?** eintragen, bei **Worum geht es?** einen kurzen Text.
-3. Bei **Wie viele Plätze gibt es?** die Teilnehmerzahl eintragen. **Schon angemeldet** zählt die Anmeldungen über die Website selbst. Wer sich per Telefon oder E-Mail anmeldet, zählen Sie dazu, indem Sie die Zahl erhöhen. Die Website zeigt dann entsprechend weniger freie Plätze.
-4. **Warteliste anbieten** schalten Sie ein, wenn sich auch bei vollen Plätzen Interessentinnen eintragen dürfen.
+3. Soll die Zahl der Teilnehmenden begrenzt sein, setzen Sie das Häkchen bei **Teilnehmerzahl begrenzen**. Ohne Häkchen gibt es keine Grenze, und weder das Backend noch die Website zeigen Plätze an. Mit Häkchen tragen Sie bei **Wie viele Plätze gibt es?** die Teilnehmerzahl ein. **Schon angemeldet** zählt die Anmeldungen über die Website selbst. Wer sich per Telefon oder E-Mail anmeldet, zählen Sie dazu, indem Sie die Zahl erhöhen. Die Website zeigt dann entsprechend weniger freie Plätze.
+4. **Warteliste anbieten** (nur mit begrenzter Teilnehmerzahl) schalten Sie ein, wenn sich auch bei vollen Plätzen Interessentinnen eintragen dürfen.
 5. Bei **Ausführlicher Text** (optional) Ablauf oder Hinweise schreiben, auch mit Datei oder Bild an einer Stelle im Text (wie bei Aktuelles).
-6. **Speichern**. Der Status steht schon auf **Veröffentlicht**. Der Termin erscheint auf der Seite „Termine“ mit den freien Plätzen und einem Anmeldeformular. Die Anzeige aktualisiert sich von selbst, wenn sich jemand anmeldet.
+6. **Speichern**. Der Status steht schon auf **Veröffentlicht**. Der Termin erscheint auf der Seite „Termine“ mit einem Anmeldeformular, bei begrenzter Teilnehmerzahl auch mit den freien Plätzen. Die Anzeige aktualisiert sich von selbst, wenn sich jemand anmeldet.
 
 Unter **Weitere Angaben (optional)** stehen Ende, Zielgruppe, Kosten, Leitung und abweichende E-Mail-Adressen für die Anmeldungen. Mehrere Adressen trennen Sie mit Komma, zum Beispiel `kurse@beispiel.de, leitung@beispiel.de`.
 

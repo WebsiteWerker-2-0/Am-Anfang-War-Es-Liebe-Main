@@ -24,6 +24,10 @@ function when(course: PublicCourse) {
 }
 
 function Places({ course }: { course: PublicCourse }) {
+  // Ohne Begrenzung keine Platzangaben, nur der Hinweis, wenn die Anmeldung geschlossen ist
+  if (!course.limited) {
+    return course.state === "closed" ? <p className="places places--closed">Anmeldung nicht möglich</p> : null;
+  }
   const text: Record<CourseState, string> = {
     open: course.free === 1 ? "Noch 1 Platz frei" : `Noch ${course.free} Plätze frei`,
     waitlist: "Ausgebucht, Anmeldung für die Warteliste möglich",
