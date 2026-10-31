@@ -125,6 +125,15 @@ export type PageBlock =
       panels: { image: ImageValue; title: string }[];
     }
   | { blockType: "courseList"; anchor?: string; heading: string; emptyNotice: Rich }
+  /** Wegweiser zu Bereichen dieser oder anderer Seiten (Optik wie „Sie sind hier, weil …“) */
+  | { blockType: "linkHub"; ariaLabel: string; items: { label: string; note?: string; href: string }[] }
+  /** Grafiken zum Ansehen und Herunterladen, z. B. Rad der Gewalt */
+  | {
+      blockType: "graphics";
+      anchor?: string;
+      heading: string;
+      items: { image: ImageValue; alt: string; title: string; file: FileValue; meta?: string }[];
+    }
   /** Kurse (Krav Maga, WenDo …) aus dem Backend, Sprungmarken oben und je Kurs ein Abschnitt */
   | { blockType: "courseOffers"; datesLink?: { label: string; href: string } }
   | { blockType: "newsList"; variant: "page" | "teaser"; anchor?: string; heading?: string; linkLabel?: string; count?: number }

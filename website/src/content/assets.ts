@@ -21,12 +21,16 @@ import img18 from "@/assets/illustrations/sun.jpg";
 import img19 from "@/assets/illustrations/thoughts.jpg";
 import img20 from "@/assets/logos/mkjfgfi-nrw.png";
 import img21 from "@/assets/photos/working-group.jpg";
+import img22 from "@/assets/infos/rad-der-gewalt.jpg";
+import img23 from "@/assets/infos/gewaltspirale.jpg";
 
 // Bilder der Website als Schlüssel für die Standardinhalte (`content/pages/`).
 // Im CMS liegen dieselben Bilder als Dateien und werden dort ausgetauscht.
 // Nur im Next.js-Laufzeitcode importieren: Die Bilder sind Webpack-/Turbopack-Importe.
 export const staticImages: Record<string, StaticImageData> = {
   "campaigns/anonymous-evidence-collection-poster": img00,
+  "infos/rad-der-gewalt": img22,
+  "infos/gewaltspirale": img23,
   "exhibition/panel-01": img01,
   "exhibition/panel-02": img02,
   "exhibition/panel-03": img03,

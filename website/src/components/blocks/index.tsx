@@ -362,6 +362,53 @@ async function CourseListBlock({ block }: { block: Block<"courseList"> }) {
   return <CourseList initial={courses} heading={block.heading} anchor={block.anchor} empty={empty} />;
 }
 
+// Wegweiser: große Links mit kurzer Erklärung, wie „Sie sind hier, weil …“ auf der Startseite
+function LinkHub({ block }: { block: Block<"linkHub"> }) {
+  return (
+    <nav aria-label={block.ariaLabel} className="measure">
+      <ul className="paths">
+        {block.items.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href}>
+              <span className="paths__reason">{item.label}</span>
+              {item.note && <span className="paths__target">{item.note}</span>}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+// Grafiken (z. B. Rad der Gewalt): Vorschau in fester Breite, ein Klick öffnet die Datei in voller Größe
+function Graphics({ block }: { block: Block<"graphics"> }) {
+  return (
+    <section aria-labelledby={block.anchor}>
+      <h2 id={block.anchor} style={{ marginBlockEnd: "var(--space-4)" }}>
+        {block.heading}
+      </h2>
+      <div className="graphics">
+        {block.items.map((item) => {
+          const image = toImg(item.image);
+          return (
+            <figure key={item.file}>
+              <a href={item.file}>
+                {image && <Image src={image} alt={item.alt} sizes="(min-width: 40em) 22rem, 100vw" />}
+              </a>
+              <figcaption>
+                <a href={item.file} download>
+                  {item.title} herunterladen
+                </a>
+                {item.meta && <span className="small muted"> ({item.meta})</span>}
+              </figcaption>
+            </figure>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 // Kurse aus dem Backend: Sprungmarken zu jedem Kurs, dann je Kurs ein Abschnitt (Gestaltung wie Anlaufstellen)
 async function CourseOffersBlock({ block }: { block: Block<"courseOffers"> }) {
   const offers = await getCourseOffers();
@@ -604,6 +651,10 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
             return <CourseListBlock key={index} block={block} />;
           case "courseOffers":
             return <CourseOffersBlock key={index} block={block} />;
+          case "linkHub":
+            return <LinkHub key={index} block={block} />;
+          case "graphics":
+            return <Graphics key={index} block={block} />;
           case "newsList":
             return <NewsList key={index} block={block} />;
           case "entry":

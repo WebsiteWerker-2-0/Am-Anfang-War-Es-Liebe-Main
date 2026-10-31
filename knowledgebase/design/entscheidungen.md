@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Infos als Navigationsseite
+
+- **Entscheidung:** Infos bekommt keine Unterseiten. Oben stehen Wegweiser in der Optik von „Sie sind hier, weil …“ zu Spurensicherung, Broschüren und Flyer, weiterführenden Informationen und der Wanderausstellung (Startseite). Rad der Gewalt und Gewaltspirale als Vorschau mit Download.
+- **Begründung:** Wunsch der Frauenberatungsstelle nach Unterpunkten, Entscheidung Steffen: eine Seite, die zu den Bereichen führt.
+- **Datei:** `website/src/content/pages/info.ts`, Blöcke `linkHub` und `graphics`
+- **Von:** Steffen (mit Claude)
+
 ## 31.10.2026 – Seitenköpfe Hilfe und Infos getauscht
 
 - **Entscheidung:** Hilfe zeigt das pinke Band mit der Rechtsanwältin, die Frau und Kind schützt (band-p12), Infos das orangefarbene Band mit Frau und Kind auf dem Weg (band-p07). Ton und Grundfarbe der Bänder wandern mit.

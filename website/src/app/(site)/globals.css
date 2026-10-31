@@ -1589,6 +1589,28 @@ a:hover {
   font-weight: 600;
 }
 
+/* Grafiken zum Ansehen und Herunterladen (Infos: Rad der Gewalt, Gewaltspirale) */
+.graphics {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 22rem));
+}
+
+.graphics img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  border: 1px solid var(--c-line);
+}
+
+.graphics figcaption {
+  margin-block-start: var(--space-2);
+}
+
+.graphics figcaption a {
+  font-weight: 600;
+}
+
 /* ------------------------------------------------------------------
    Downloads unter einem Beitrag
    ------------------------------------------------------------------ */
