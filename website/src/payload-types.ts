@@ -725,7 +725,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Hier legen Sie fest, an welche Adresse Anmeldungen geschickt werden, und mit welchem Postfach die E-Mail verschickt wird.
+ * Hier legen Sie fest, an welche Adresse Anmeldungen geschickt werden, und mit welchem Postfach die Website E-Mails verschickt (Anmeldungen und Kontaktformular).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "mail".
@@ -736,6 +736,10 @@ export interface Mail {
    * Zu jeder Anmeldung erhalten diese Adressen eine E-Mail mit Name, Kontakt und Termin. Mehrere Adressen mit Komma trennen.
    */
   courseRecipient?: string | null;
+  /**
+   * Leer lassen: Kontaktanfragen gehen je nach Anliegen an die Frauenberatungsstelle oder die Gleichstellungsstelle. Mit Adresse: alle Kontaktanfragen gehen nur dorthin. Mehrere Adressen mit Komma trennen.
+   */
+  contactRedirect?: string | null;
   /**
    * Bei Hostinger zum Beispiel smtp.hostinger.com. Die Angaben stehen beim E-Mail-Postfach in hPanel.
    */
@@ -758,6 +762,7 @@ export interface Mail {
  */
 export interface MailSelect<T extends boolean = true> {
   courseRecipient?: T;
+  contactRedirect?: T;
   smtpHost?: T;
   smtpPort?: T;
   smtpSecure?: T;

@@ -82,7 +82,7 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 
 - Löschfrist für Anmeldungen mit dem Arbeitskreis festlegen (Pflichtenheft § 13), Datenschutzerklärung und AVV um Anmeldungen und E-Mail-Versand ergänzen.
 - Vertrag: Das Pflichtenheft nennt WordPress auf Hetzner. Next.js und Hostinger brauchen die schriftliche Abstimmung mit dem Kunden und die AVV-Information (Frist 4 Wochen, § 5 Abs. 2).
-- Seiteninhalte in fünf Sprachen (F-03) sind nicht gebaut. Das Kontaktformular (F-04) hat noch keinen Versand.
+- Seiteninhalte in fünf Sprachen (F-03) sind nicht gebaut. Das Kontaktformular (F-04) verschickt über das Postfach aus „E-Mail und Anmeldungen“ an das Postfach des Anliegens (`content/site.ts`, `mailboxes`), ohne zu speichern (`lib/contact.ts`, `/api/kontakt`). Zum Testen alle Anfragen umleiten: Feld „Kontaktanfragen umleiten an“.
 - Passwort-zurücksetzen-E-Mails des CMS gehen mangels Mailadapter in die Konsole. Admins setzen Passwörter von Hand zurück.
 - Farben warten auf die Druckdaten (Z-06), Texte und Daten auf die Freigaben des Kunden (siehe `// OFFEN:` im Code).
 - Das Liquid-Glass-Design ist nach eigenem Ermessen gebaut: Soll es einer Vorlage („Portfolio Dashboard“) näherkommen, Screenshot dazulegen und `custom.css` anpassen.

@@ -1,12 +1,14 @@
 import nodemailer from "nodemailer";
 import type { Payload } from "payload";
 
-// Versand von E-Mails an den Arbeitskreis. Die Zugangsdaten stehen im Backend unter
+// Versand von E-Mails an den Arbeitskreis (Anmeldungen und Kontaktanfragen). Die Zugangsdaten stehen im Backend unter
 // „E-Mail und Anmeldungen“ (nur für Admins sichtbar); Umgebungsvariablen SMTP_HOST, SMTP_PORT,
 // SMTP_SECURE, SMTP_USER, SMTP_PASSWORD, MAIL_FROM haben Vorrang.
 
 export type MailSettings = {
   courseRecipient?: string;
+  /** Alle Kontaktanfragen an diese Adresse(n) statt an das Postfach des Anliegens (zum Testen) */
+  contactRedirect?: string;
   fromName?: string;
   fromAddress?: string;
   host?: string;
@@ -22,6 +24,7 @@ export async function getMailSettings(payload: Payload): Promise<MailSettings> {
   const port = Number(process.env.SMTP_PORT ?? doc.smtpPort ?? 465);
   return {
     courseRecipient: text(doc.courseRecipient),
+    contactRedirect: text(doc.contactRedirect),
     fromName: text(doc.fromName),
     fromAddress: text(process.env.MAIL_FROM) ?? text(doc.fromAddress) ?? text(doc.smtpUser),
     host: text(process.env.SMTP_HOST) ?? text(doc.smtpHost),

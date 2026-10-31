@@ -12,6 +12,7 @@ import * as migration_20261031_180000_mitglieder from './20261031_180000_mitglie
 import * as migration_20261031_190000_kurse_sprache from './20261031_190000_kurse_sprache';
 import * as migration_20261031_200000_kurse_kurzfassung from './20261031_200000_kurse_kurzfassung';
 import * as migration_20261031_210000_termine_begrenzen from './20261031_210000_termine_begrenzen';
+import * as migration_20261031_220000_kontakt_umleitung from './20261031_220000_kontakt_umleitung';
 
 export const migrations = [
   {
@@ -83,5 +84,10 @@ export const migrations = [
     up: migration_20261031_210000_termine_begrenzen.up,
     down: migration_20261031_210000_termine_begrenzen.down,
     name: '20261031_210000_termine_begrenzen',
+  },
+  {
+    up: migration_20261031_220000_kontakt_umleitung.up,
+    down: migration_20261031_220000_kontakt_umleitung.down,
+    name: '20261031_220000_kontakt_umleitung',
   },
 ];

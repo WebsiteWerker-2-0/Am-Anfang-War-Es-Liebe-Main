@@ -5,7 +5,7 @@ import { decryptSecret, encryptSecret, isEncrypted } from "@/lib/secret";
 import { SECRET_STORED } from "../secret-marker";
 import { getMailSettings, sendMail } from "../../lib/mail";
 
-// Wohin Kursanmeldungen gehen und wie die E-Mail verschickt wird. Nur Admins sehen diesen Bereich,
+// Wohin Kursanmeldungen gehen und wie die E-Mail verschickt wird (auch die Kontaktanfragen, lib/contact.ts). Nur Admins sehen diesen Bereich,
 // weil hier das Passwort des Postfachs steht.
 export const Mail: GlobalConfig = {
   slug: "mail",
@@ -14,7 +14,7 @@ export const Mail: GlobalConfig = {
     group: "Verwaltung",
     hidden: ({ user }) => user?.role !== "admin",
     description:
-      "Hier legen Sie fest, an welche Adresse Anmeldungen geschickt werden, und mit welchem Postfach die E-Mail verschickt wird.",
+      "Hier legen Sie fest, an welche Adresse Anmeldungen geschickt werden, und mit welchem Postfach die Website E-Mails verschickt (Anmeldungen und Kontaktformular).",
   },
   access: { read: isAdmin, update: isAdmin },
   endpoints: [
@@ -44,6 +44,12 @@ export const Mail: GlobalConfig = {
       name: "courseRecipient",
       label: "Anmeldungen gehen an diese E-Mail-Adresse(n)",
       description: "Zu jeder Anmeldung erhalten diese Adressen eine E-Mail mit Name, Kontakt und Termin.",
+    }),
+    emailListField({
+      name: "contactRedirect",
+      label: "Kontaktanfragen umleiten an (nur zum Testen)",
+      description:
+        "Leer lassen: Kontaktanfragen gehen je nach Anliegen an die Frauenberatungsstelle oder die Gleichstellungsstelle. Mit Adresse: alle Kontaktanfragen gehen nur dorthin.",
     }),
     {
       type: "collapsible",
