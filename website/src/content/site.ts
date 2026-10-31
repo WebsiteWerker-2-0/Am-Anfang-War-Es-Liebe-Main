@@ -1,6 +1,5 @@
 import type { SiteData } from "./model";
 import { tel } from "./pages/helpers";
-import { infoSections } from "./pages/info";
 
 // Seitenrahmen: Navigation, Sprachwahl, Hilfetelefon in der Hilfeleiste, Postfächer, Fuß.
 // Ziel und Beschriftung des Notausgangs stehen bewusst im Code (components/QuickExit.tsx), nicht im CMS.
@@ -11,11 +10,8 @@ export const defaultSite: SiteData = {
     { href: "/aktuelles", label: "Aktuelles" },
     { href: "/termine", label: "Termine" },
     { href: "/kurse", label: "Kurse" },
-    {
-      href: "/infos",
-      label: "Infos",
-      children: infoSections.map((section) => ({ href: `/${section.slug}`, label: section.menuLabel })),
-    },
+    // Ohne Unterpunkte: Die Seite Infos führt mit Wegweisern zu ihren Bereichen (Entscheidung Steffen 31.10.2026)
+    { href: "/infos", label: "Infos" },
     { href: "/arbeitskreis", label: "Arbeitskreis" },
     { href: "/kontakt", label: "Kontakt" },
   ],

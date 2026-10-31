@@ -36,7 +36,7 @@ Unten steht, was wir geändert haben, was uns dabei aufgefallen ist und wo wir e
 - Daneben gibt es neu **Kurse**: Krav Maga / Kids Krav Maga und Wen Do mit eurem Text. Die Kurse könnt ihr im Redaktionsbereich selbst bearbeiten.
 
 **Infos**
-- Infos ist jetzt eine Übersichtsseite mit vier Bereichen, jeder mit eigener Seite: Vertrauliche Spurensicherung, Broschüren und Flyer zum Download, Weiterführende Informationen, Unsere Wanderausstellung. Die vier Bereiche stehen auch als Unterpunkte im Menü.
+- Infos ist jetzt eine Übersichtsseite mit vier Bereichen, jeder mit eigener Seite: Vertrauliche Spurensicherung, Broschüren und Flyer zum Download, Weiterführende Informationen, Unsere Wanderausstellung.
 - Überschrift „Infos und Broschüren“, Einleitung „… Flyer zum Herunterladen …“.
 - Neu zum Download: Flyer der Frauenberatungsstelle, Flyer des Frauen- und Kinderschutzhauses [Enrico: „Sicher feiern“], „Das Rad der Gewalt“ und „Die Gewaltspirale“ (mit Vorschau).
 - Weiterführende Informationen neu gegliedert: für Erwachsene, für Kinder und Jugendliche, zu digitaler Gewalt, mit euren Vorschlägen (z. B. juuuport.de, frauen-info-netz.de, sicher-gegen-digitale-gewalt.org).
