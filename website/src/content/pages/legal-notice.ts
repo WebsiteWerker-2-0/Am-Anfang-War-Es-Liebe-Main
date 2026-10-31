@@ -18,13 +18,5 @@ export const legalNotice: PageData = {
         },
       ],
     },
-    {
-      blockType: "section",
-      variant: "plain",
-      heading: "Gestaltung",
-      items: [
-        { blockType: "rich", content: `<p>Illustrationen und Gestaltung der Broschüre: fien-design, Höxter</p>` },
-      ],
-    },
   ],
 };

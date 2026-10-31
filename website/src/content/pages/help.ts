@@ -19,23 +19,24 @@ export const help: PageData = {
       blockType: "linkHub",
       ariaLabel: "Bereiche dieser Seite",
       items: [
-        { label: "Hier bekommen Sie Hilfe", note: "Hilfetelefon, Frauenberatungsstelle, Schutzhaus, Polizei", href: "#anlaufstellen" },
-        { label: "Was Sie jetzt tun können", note: "Spuren sichern, erste Schritte, Stalking", href: "#was-tun" },
-        { label: "Wenn Sie helfen möchten", note: "Für Nachbar*innen, Angehörige und Freund*innen", href: "#helfen" },
-        { label: "Weitere Anlaufstellen", note: "Familie, Kreis und Städte, junge Frauen, Telefon und online", href: "#weitere" },
+        { label: "Hier bekommen Sie Hilfe", note: "Hilfetelefon, Frauenberatungsstelle, Schutzhaus, Polizei", href: "#anlaufstellen", tone: "teal" },
+        { label: "Was Sie jetzt tun können", note: "Spuren sichern, erste Schritte, Stalking", href: "#was-tun", tone: "orange" },
+        { label: "Wenn Sie helfen möchten", note: "Für Nachbar*innen, Angehörige und Freund*innen", href: "#helfen", tone: "magenta" },
+        { label: "Weitere Anlaufstellen", note: "Familie, Kreis und Städte, junge Frauen, Telefon und online", href: "#weitere", tone: "cyan" },
       ],
     },
-    { blockType: "chapter", anchor: "anlaufstellen", heading: "Hier bekommen Sie Hilfe", blocks: [{ blockType: "supportServices" }] },
+    { blockType: "chapter", anchor: "anlaufstellen", heading: "Hier bekommen Sie Hilfe", tone: "teal", blocks: [{ blockType: "supportServices" }] },
     {
       blockType: "chapter",
       anchor: "was-tun",
       heading: "Was Sie jetzt tun können",
+      tone: "orange",
       blocks: [
         {
           blockType: "section",
           variant: "service",
           anchor: "spurensicherung",
-          collapsible: "open",
+          collapsible: "closed",
           heading: "Was sollen Sie nach einer Sexualstraftat tun, um Beweise zu sichern?",
           items: [
             {
@@ -91,6 +92,7 @@ export const help: PageData = {
       blockType: "chapter",
       anchor: "helfen",
       heading: "Wenn Sie helfen möchten",
+      tone: "magenta",
       blocks: [
         {
           blockType: "section",
@@ -137,11 +139,9 @@ export const help: PageData = {
       blockType: "chapter",
       anchor: "weitere",
       heading: "Weitere Anlaufstellen",
+      tone: "cyan",
       blocks: [
-        {
-          blockType: "serviceGroups",
-          note: "Stand der Angaben: Übernahme von der bisherigen Website. Alle Nummern und Zeiten werden vor der Veröffentlichung geprüft.",
-        },
+        { blockType: "serviceGroups" },
       ],
     },
   ],
