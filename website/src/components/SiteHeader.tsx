@@ -30,6 +30,17 @@ function NavigationList({
           >
             {item.label}
           </Link>
+          {item.children && (
+            <ul className="nav-sub">
+              {item.children.map((child) => (
+                <li key={child.href}>
+                  <Link href={child.href} onClick={onNavigate}>
+                    {child.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
       ))}
     </ul>

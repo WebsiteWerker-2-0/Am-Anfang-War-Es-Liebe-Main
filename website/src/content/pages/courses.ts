@@ -42,8 +42,9 @@ export const courses: PageData = {
       items: [
         {
           blockType: "rich",
-          content: `<p>WenDo bedeutet „Weg der Frauen“. Es ist kein Kampfsport, sondern ein Programm zur Vorbeugung gegen Gewalt: Selbstbehauptung und Selbstverteidigung für Frauen und Mädchen.</p>
-<p>Die Kurse richten sich nach den Teilnehmerinnen und verbinden einfache Techniken mit Rollenspielen und Wahrnehmungsübungen. Sie lernen, bedrohliche Situationen früh zu erkennen, wenn möglich zu entschärfen und handlungsfähig zu bleiben.</p>
+          content: `<p>WenDo ist feministische Selbstbehauptung und Selbstverteidigung für Frauen und Mädchen. Der Name setzt sich zusammen aus „Wen“ für das englische „women“ (Frauen) und dem japanischen „Do“ (Weg) und bedeutet „Weg der Frauen“. WenDo ist kein Kampfsport, sondern ein Programm zur Vorbeugung gegen Gewalt.</p>
+<p>Anders als im klassischen Kampfsport geht es im Training auch um gesellschaftliche Machtverhältnisse und um erlernte Rollenbilder. Die Kurse stärken die Teilnehmerinnen und zeigen Möglichkeiten für ein selbstbestimmtes Leben.</p>
+<p>Die Kurse richten sich nach den Bedürfnissen der Teilnehmerinnen und verbinden wirksame Techniken mit Rollenspielen und Wahrnehmungsübungen. Ein Schwerpunkt: Konflikte, Übergriffe und Gewaltsituationen früh erkennen, wenn möglich entschärfen und handlungsfähig bleiben, um die eigene Unversehrtheit zu schützen.</p>
 <p>2019 hat der Arbeitskreis zehn WenDo-Kurse im ganzen Kreis angeboten, rund 120 Frauen und Mädchen haben teilgenommen.</p>`,
         },
       ],

@@ -19,6 +19,10 @@ const statements = [
   "droht, Sie im Internet bloßzustellen, oder tut es bereits",
   "akzeptiert die Trennung nicht und belästigt Sie selbst oder über Bekannte",
   "verfolgt Sie oder terrorisiert Sie per Telefon, Handy oder auf anderen Wegen",
+  "überwacht Sie mit Technik, zum Beispiel über Handy, Kameras, Alexa, Tracker oder Smart Home",
+  "spielt die Kinder gegen Sie aus oder benutzt sie als Boten, auch nach einer Trennung",
+  "nutzt das Besuchsrecht für Drohungen oder um Sie zu kontrollieren",
+  "droht, die Kinder zu entführen oder Ihnen wegzunehmen",
 ];
 
 export const selfCheck: PageData = {

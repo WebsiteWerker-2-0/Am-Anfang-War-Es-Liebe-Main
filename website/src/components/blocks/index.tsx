@@ -241,7 +241,15 @@ function PeopleList({ block }: { block: Block<"peopleList"> }) {
       <ul className="people">
         {block.people.map((person, index) => (
           <li key={index}>
-            <strong>{person.name}</strong>
+            <strong>
+              {person.url ? (
+                <a href={person.url} rel="noreferrer">
+                  {person.name}
+                </a>
+              ) : (
+                person.name
+              )}
+            </strong>
             {person.role && (
               <>
                 <br />
@@ -346,6 +354,11 @@ function Exhibition({ block }: { block: Block<"exhibition"> }) {
         </p>
       )}
       <ExhibitionSlider panels={panels} />
+      {block.note && (
+        <p className="measure" style={{ marginBlockStart: "var(--space-5)" }}>
+          <RichInline value={block.note} />
+        </p>
+      )}
     </section>
   );
 }
@@ -447,7 +460,11 @@ async function QuickAccess({ block }: { block: Block<"quickAccess"> }) {
           <li key={service.id}>
             <span className="service-list__name">{service.quick?.label ?? service.name}</span>
             {service.quick && <span className="muted">{service.quick.note}</span>}
-            <PhoneLink number={service.phones[0].number} className="service-list__number" />
+            <span className="service-list__numbers">
+              {(service.quick?.allPhones ? service.phones : service.phones.slice(0, 1)).map((phone) => (
+                <PhoneLink key={phone.number} number={phone.number} className="service-list__number" />
+              ))}
+            </span>
           </li>
         ))}
       </ul>

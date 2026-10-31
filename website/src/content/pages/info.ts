@@ -1,11 +1,11 @@
 import type { PageData } from "../model";
-import { tel } from "./helpers";
+import { exhibitionBooking, exhibitionPanels, tel } from "./helpers";
 
 export const info: PageData = {
   slug: "infos",
-  title: "Infos und Dokumente",
+  title: "Infos und Broschüren",
   description: "Broschüre, Flyer und weiterführende Informationen zu Gewalt gegen Frauen und Kinder.",
-  intro: "Die Broschüre des Arbeitskreises, Flyer zum Mitnehmen und weiterführende Informationen.",
+  intro: "Die Broschüre des Arbeitskreises, Flyer zum Herunterladen und weiterführende Informationen.",
   band: "info",
   layout: "stack-lg",
   blocks: [
@@ -32,7 +32,7 @@ export const info: PageData = {
     {
       blockType: "documentList",
       anchor: "downloads",
-      heading: "Zum Herunterladen",
+      heading: "Broschüren und Flyer zum Herunterladen",
       // Dokumente nach Abschnitt 6.8: Titel, Dateityp, Größe, Sprache, Stand
       items: [
         {
@@ -44,6 +44,31 @@ export const info: PageData = {
           title: "Flyer „Lass Spuren sichern“: anonyme Spurensicherung im Kreis Höxter",
           file: "/downloads/flyer-lass-spuren-sichern-2017.pdf",
           meta: "PDF, 2,7 MB · Deutsch · Stand: 2017",
+        },
+        {
+          title: "Flyer der Frauenberatungsstelle der AWO",
+          file: "/downloads/flyer-frauenberatungsstelle-2026.pdf",
+          meta: "PDF, 1,2 MB · Deutsch · Stand: 2026",
+        },
+        {
+          title: "Flyer des Frauen- und Kinderschutzhauses im Kreis Höxter",
+          file: "/downloads/flyer-frauenhaus.pdf",
+          meta: "PDF, 0,8 MB · Deutsch · Stand: ohne Datum",
+        },
+        {
+          title: "Flyer „Sicher feiern“: Tipps für dich und deine Freund*innen",
+          file: "/downloads/flyer-sicher-feiern.pdf",
+          meta: "PDF, 1,3 MB · Deutsch · Stand: 2026",
+        },
+        {
+          title: "Das Rad der Gewalt: Gewalt ist keine Privatsache",
+          file: "/downloads/rad-der-gewalt.pdf",
+          meta: "PDF, 0,5 MB · Deutsch · Stand: 2026",
+        },
+        {
+          title: "Die Gewaltspirale bei häuslicher Gewalt",
+          file: "/downloads/gewaltspirale.pdf",
+          meta: "PDF, 0,5 MB · Deutsch · Stand: 2026",
         },
         {
           title: "Flyer des Weissen Rings zu K.-o.-Tropfen",
@@ -63,24 +88,39 @@ export const info: PageData = {
       heading: "Weiterführende Informationen",
       topics: [
         {
-          title: "Informationen in vielen Sprachen",
-          links: [{ url: "https://www.gewaltschutz.info", label: "gewaltschutz.info" }],
-        },
-        {
-          title: "Gewalt im Internet",
+          title: "Für Frauen und Erwachsene, etwa zu den Formen von Gewalt",
           links: [
-            { url: "https://www.buendnis-gegen-cybermobbing.de", label: "buendnis-gegen-cybermobbing.de" },
-            { url: "https://www.klicksafe.de", label: "klicksafe.de" },
+            { url: "https://frauen-info-netz.de", label: "frauen-info-netz.de" },
+            { url: "https://www.frauen-gegen-gewalt.de", label: "frauen-gegen-gewalt.de" },
+            { url: "https://www.frauenhauskoordinierung.de", label: "frauenhauskoordinierung.de" },
+            { url: "https://www.big-berlin.info", label: "big-berlin.info" },
           ],
         },
         {
           title: "Für Kinder und Jugendliche",
           links: [
-            { url: "http://gewalt-ist-nie-okay.de", label: "gewalt-ist-nie-okay.de" },
+            { url: "https://www.klicksafe.de", label: "klicksafe.de" },
             { url: "https://www.trau-dich.de", label: "trau-dich.de" },
+            { url: "https://www.juuuport.de", label: "juuuport.de" },
+          ],
+        },
+        {
+          title: "Bei digitaler Gewalt",
+          links: [
+            { url: "https://sicher-gegen-digitale-gewalt.org", label: "sicher-gegen-digitale-gewalt.org" },
+            { url: "https://www.buendnis-gegen-cybermobbing.de", label: "buendnis-gegen-cybermobbing.de" },
           ],
         },
       ],
+    },
+    {
+      blockType: "exhibition",
+      anchor: "wanderausstellung",
+      heading: "Unsere Wanderausstellung",
+      intro:
+        "„Am Anfang war es Liebe … Wege aus der körperlichen und seelischen Gewalt“ ist seit 2022 im ganzen Kreis Höxter unterwegs, in Rathäusern, Banken und Gesundheitszentren.",
+      panels: exhibitionPanels,
+      note: exhibitionBooking,
     },
   ],
 };

@@ -8,7 +8,7 @@ Eine Frage pro Schritt, keine eigene Adresse und kein Verlaufseintrag je Frage.
 
 1. „Sind Sie oder ist jemand anderes gerade in Gefahr?“ Ja / Nein / Weiß nicht. Bei Ja kommt zuerst ein Hilfeschritt mit 110 und Hilfetelefon, danach geht es auf Wunsch weiter.
 2. „Um wen geht es?“ Mich selbst / eine Frau, die ich kenne / ein Kind oder eine*n Jugendliche*n.
-3. Bereich wählen (nicht bei Kindern): Kontrolle und seelische Gewalt, Körperliche Gewalt und Drohungen, Sexuelle Gewalt, Geld und Arbeit, Stalking und Gewalt im Internet. Oder „Alle Bereiche nacheinander“.
+3. Bereich wählen (nicht bei Kindern): Kontrolle und seelische Gewalt, Körperliche Gewalt und Drohungen, Sexuelle Gewalt, Geld und Arbeit, Stalking und digitale Gewalt, Druck über die Kinder. Oder „Alle Bereiche nacheinander“.
 4. Die Aussagen des Bereichs einzeln: Ja / Nein / Weiß nicht, dazu „Überspringen“. Nach einem Bereich: weitere Bereiche oder „Zum Ergebnis“.
 5. Ergebnis als Ampel mit Hilfe passend zu den Bereichen, in denen etwas zutraf.
 

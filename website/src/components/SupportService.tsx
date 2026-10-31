@@ -4,6 +4,7 @@ import { PhoneLink } from "./PhoneLink";
 // Eine Anlaufstelle. Feste Reihenfolge der Daten: Name, Träger, Telefon,
 // Erreichbarkeit, Adresse, E-Mail, Website (Abschnitt 6.4)
 export function SupportServiceSection({ service, level = 2 }: { service: SupportService; level?: 2 | 3 }) {
+  const emails = [service.email ?? []].flat();
   const Heading = level === 2 ? "h2" : "h3";
   const headingId = `anlaufstelle-${service.id}`;
 
@@ -16,6 +17,12 @@ export function SupportServiceSection({ service, level = 2 }: { service: Support
           <>
             <dt>Träger</dt>
             <dd>{service.provider}</dd>
+          </>
+        )}
+        {service.audience && (
+          <>
+            <dt>Für wen</dt>
+            <dd>{service.audience}</dd>
           </>
         )}
         <dt>Telefon</dt>
@@ -45,14 +52,22 @@ export function SupportServiceSection({ service, level = 2 }: { service: Support
                   <li key={address}>{address}</li>
                 ))}
               </ul>
+              {service.addressNote && <p className="small muted">{service.addressNote}</p>}
             </dd>
           </>
         )}
-        {service.email && (
+        {emails.length > 0 && (
           <>
             <dt>E-Mail</dt>
             <dd>
-              <a href={`mailto:${service.email}`}>{service.email}</a>
+              <ul>
+                {emails.map((email) => (
+                  <li key={email}>
+                    <a href={`mailto:${email}`}>{email}</a>
+                    {service.emailNote && <span className="muted"> ({service.emailNote})</span>}
+                  </li>
+                ))}
+              </ul>
             </dd>
           </>
         )}
@@ -68,9 +83,19 @@ export function SupportServiceSection({ service, level = 2 }: { service: Support
         )}
       </dl>
       {service.description && <p className="measure">{service.description}</p>}
+      {service.topics && (
+        <div className="measure service__offers">
+          <p>Beratung zu:</p>
+          <ul className="list-bullets">
+            {service.topics.map((topic) => (
+              <li key={topic}>{topic}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       {service.offers && (
         <div className="measure service__offers">
-          <p>Die Beraterinnen bieten:</p>
+          <p>{service.offersLabel ?? "Die Beraterinnen bieten:"}</p>
           <ul className="list-bullets">
             {service.offers.map((offer) => (
               <li key={offer}>{offer}</li>

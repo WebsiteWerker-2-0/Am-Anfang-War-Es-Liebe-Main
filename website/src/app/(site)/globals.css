@@ -433,6 +433,51 @@ a:hover {
   font-size: var(--fs-md);
 }
 
+/* Unterpunkte: am Desktop bei Zeigen oder Tastaturfokus, mobil immer sichtbar und eingerückt */
+.nav-desktop li {
+  position: relative;
+}
+
+.nav-desktop .nav-sub {
+  display: none;
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: calc(-1 * var(--space-4));
+  z-index: 40;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: max-content;
+  max-width: 22rem;
+  padding: var(--space-2) var(--space-4);
+  background: var(--c-paper);
+  border: 1px solid var(--c-line);
+}
+
+.nav-desktop li:hover > .nav-sub,
+.nav-desktop li:focus-within > .nav-sub {
+  display: flex;
+}
+
+.nav-mobile .nav-sub {
+  position: static;
+  z-index: auto;
+  margin: 0;
+  padding: 0 0 var(--space-2);
+  padding-inline-start: var(--space-4);
+  border: 0;
+  background: none;
+}
+
+.nav-mobile .nav-sub li + li {
+  border: 0;
+}
+
+.nav-mobile .nav-sub a {
+  padding-block: var(--space-2);
+  font-size: var(--fs-base);
+}
+
 @media (min-width: 64em) {
   .nav-desktop {
     display: block;
@@ -684,14 +729,22 @@ a:hover {
   text-decoration: underline;
 }
 
+.service-list__numbers {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+}
+
 @media (min-width: 40em) {
   .service-list li {
     grid-template-columns: 1fr auto;
     align-items: center;
   }
-  .service-list__number {
+  .service-list__numbers,
+  .service-list li > .service-list__number {
     grid-row: 1 / span 2;
     grid-column: 2;
+    justify-items: end;
     text-align: end;
   }
 }

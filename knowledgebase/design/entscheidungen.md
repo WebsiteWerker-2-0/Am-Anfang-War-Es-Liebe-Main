@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Bänder von Hilfe und Infos getauscht, Unterpunkte im Menü
+
+- **Entscheidung:** Hilfe zeigt das pinke Band mit der Rechtsanwältin, Infos das orangefarbene mit Frau und Kind. „Veranstaltungen“ und „Infos“ haben Unterpunkte: am Desktop beim Zeigen oder per Tastaturfokus, mobil immer sichtbar und eingerückt. Die Mitgliederliste nennt nur Einrichtungen, keine Namen.
+- **Begründung:** Wünsche der Frauenberatungsstelle (21.10.2026) und des AG (28.10.2026).
+- **Dateien:** `website/src/content/page-bands.ts`, `website/src/content/site.ts`, `website/src/components/SiteHeader.tsx`, `website/src/content/pages/working-group.ts`
+- **Von:** Auftraggeber, umgesetzt mit Claude
+
 ## 17.10.2026 – Bilder im Beitrag, Downloads, Archiv auf Aktuelles
 
 - **Entscheidung:** Bilder im Text mittig in voller Textbreite oder links/rechts in halber Breite (3:2 zugeschnitten, Text daneben, mobil volle Breite), unabhängig von der Auflösung der Datei. Downloads als Liste unter dem Beitrag: Vorschaubild oder PDF-Symbol, Name, „PDF, Größe“, dunkler Knopf „Download“. Archivierte Beiträge eingeklappt („Archiv (n)“) am Ende von Aktuelles, im Stil der Anlaufstellen-Gruppen.

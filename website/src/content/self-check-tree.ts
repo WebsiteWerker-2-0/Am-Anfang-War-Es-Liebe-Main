@@ -8,7 +8,7 @@
 
 export type Subject = "self" | "other" | "child";
 export type Level = "green" | "yellow" | "red";
-export type AreaId = "control" | "physical" | "sexual" | "economic" | "stalking" | "child";
+export type AreaId = "control" | "physical" | "sexual" | "economic" | "stalking" | "children" | "child";
 
 export type Statement = {
   id: string;
@@ -218,8 +218,8 @@ export const AREAS: Area[] = [
   },
   {
     id: "stalking",
-    label: "Stalking und Gewalt im Internet",
-    description: "Verfolgen, Belästigen nach der Trennung, Bloßstellen im Netz",
+    label: "Stalking und digitale Gewalt",
+    description: "Verfolgen, Belästigen nach der Trennung, Überwachen mit Technik, Bloßstellen im Netz",
     help: [HELP.stalking, HELP.counselling, HELP.helpline],
     statements: [
       {
@@ -247,6 +247,44 @@ export const AREAS: Area[] = [
         self: "droht, Sie im Internet bloßzustellen, oder tut es bereits",
         other: "droht, sie im Internet bloßzustellen, oder tut es bereits",
         weight: 2,
+      },
+      {
+        id: "digital",
+        self: "überwacht Sie mit Technik, zum Beispiel über Handy, Kameras, Alexa, Tracker oder Smart Home",
+        other: "überwacht sie mit Technik, zum Beispiel über Handy, Kameras, Alexa, Tracker oder Smart Home",
+        weight: 2,
+        added: true,
+      },
+    ],
+  },
+  // Wunsch der Frauenberatungsstelle vom 21.10.2026. OFFEN: Gewichte und Warnzeichen fachlich bestätigen lassen (Z-02)
+  {
+    id: "children",
+    label: "Druck über die Kinder",
+    description: "Kinder ausspielen, Besuchsrecht für Drohungen nutzen, mit Entführung drohen",
+    help: [HELP.counselling, HELP.youthOffice, HELP.helpline],
+    statements: [
+      {
+        id: "turnAgainst",
+        self: "spielt die Kinder gegen Sie aus oder benutzt sie als Boten, auch nach einer Trennung",
+        other: "spielt die Kinder gegen sie aus oder benutzt sie als Boten, auch nach einer Trennung",
+        weight: 2,
+        added: true,
+      },
+      {
+        id: "visitation",
+        self: "nutzt das Besuchsrecht für Drohungen oder um Sie zu kontrollieren",
+        other: "nutzt das Besuchsrecht für Drohungen oder um sie zu kontrollieren",
+        weight: 2,
+        added: true,
+      },
+      {
+        id: "abduction",
+        self: "droht, die Kinder zu entführen oder Ihnen wegzunehmen",
+        other: "droht, die Kinder zu entführen oder ihr wegzunehmen",
+        weight: 3,
+        warning: true,
+        added: true,
       },
     ],
   },
@@ -278,7 +316,7 @@ export const AREAS: Area[] = [
 ];
 
 /** Bereiche, die bei „mich selbst“ und „eine Person, die ich kenne“ zur Wahl stehen */
-export const ADULT_AREAS: AreaId[] = ["control", "physical", "sexual", "economic", "stalking"];
+export const ADULT_AREAS: AreaId[] = ["control", "physical", "sexual", "economic", "stalking", "children"];
 
 export const TEXTS = {
   dangerQuestion: "Sind Sie oder ist jemand anderes gerade in Gefahr?",

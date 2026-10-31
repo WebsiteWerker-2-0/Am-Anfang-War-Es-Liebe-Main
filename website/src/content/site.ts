@@ -8,8 +8,25 @@ export const defaultSite: SiteData = {
     { href: "/hilfe", label: "Hilfe" },
     { href: "/selbstcheck", label: "Selbstcheck" },
     { href: "/aktuelles", label: "Aktuelles" },
-    { href: "/kurse", label: "Veranstaltungen" },
-    { href: "/infos", label: "Infos" },
+    {
+      href: "/kurse",
+      label: "Veranstaltungen",
+      children: [
+        { href: "/kurse#termine", label: "Termine und Anmeldung" },
+        { href: "/kurse#krav-maga", label: "Krav Maga" },
+        { href: "/kurse#wendo", label: "WenDo" },
+      ],
+    },
+    {
+      href: "/infos",
+      label: "Infos",
+      children: [
+        { href: "/infos#spurensicherung", label: "Vertrauliche Spurensicherung" },
+        { href: "/infos#downloads", label: "Broschüren und Flyer" },
+        { href: "/infos#links", label: "Weiterführende Informationen" },
+        { href: "/infos#wanderausstellung", label: "Unsere Wanderausstellung" },
+      ],
+    },
     { href: "/arbeitskreis", label: "Arbeitskreis" },
     { href: "/kontakt", label: "Kontakt" },
   ],
