@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { PageData } from "@/content/model";
 import { getPage } from "@/lib/content";
+import type { NewsPagingParams } from "@/lib/news-paging";
 import { pageBands } from "@/content/page-bands";
 import { PageBlocks } from "./blocks";
 import { PageHeader } from "./PageHeader";
@@ -25,11 +26,11 @@ export async function metadataFor(slug: string): Promise<Metadata> {
   return metadata;
 }
 
-export async function CmsPage({ slug }: { slug: string }) {
+export async function CmsPage({ slug, newsParams }: { slug: string; newsParams?: NewsPagingParams }) {
   const page = await getPage(slug);
   if (!page) notFound();
 
-  const blocks = <PageBlocks blocks={page.blocks} />;
+  const blocks = <PageBlocks blocks={page.blocks} newsParams={newsParams} />;
   if (page.layout === "home") return blocks;
 
   return (

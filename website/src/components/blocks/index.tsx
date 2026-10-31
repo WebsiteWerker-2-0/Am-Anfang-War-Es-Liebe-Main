@@ -14,6 +14,7 @@ import { PhoneLink } from "../PhoneLink";
 import { PostList } from "../PostList";
 import { QuickExitLink } from "../QuickExit";
 import { SelfCheck } from "../SelfCheck";
+import { newsPageHref, newsPaging, PER_PAGE_OPTIONS, type NewsPaging, type NewsPagingParams } from "@/lib/news-paging";
 import { OpenDetailsOnHash } from "../OpenDetailsOnHash";
 import { SupportServiceSection } from "../SupportService";
 
@@ -465,13 +466,53 @@ async function CourseOffersBlock({ block }: { block: Block<"courseOffers"> }) {
   );
 }
 
-async function NewsList({ block }: { block: Block<"newsList"> }) {
+function NewsPager({ paging, total }: { paging: NewsPaging; total: number }) {
+  return (
+    <nav className="news-pager" aria-label="Weitere Seiten mit Beiträgen">
+      {paging.page > 1 ? (
+        <Link href={newsPageHref(paging.perPage, paging.page - 1)}>Zurück</Link>
+      ) : (
+        <span />
+      )}
+      <span>
+        Seite {paging.page} von {paging.pageCount} ({total} Beiträge)
+      </span>
+      {paging.page < paging.pageCount ? (
+        <Link href={newsPageHref(paging.perPage, paging.page + 1)}>Weiter</Link>
+      ) : (
+        <span />
+      )}
+    </nav>
+  );
+}
+
+function NewsPerPage({ perPage }: { perPage: number }) {
+  return (
+    <nav className="news-per-page" aria-label="Anzahl der Beiträge pro Seite">
+      <span>Beiträge pro Seite:</span>
+      {PER_PAGE_OPTIONS.map((option) => (
+        <Link key={option} href={newsPageHref(option, 1)} aria-current={option === perPage ? "true" : undefined}>
+          {option}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+
+async function NewsList({ block, newsParams }: { block: Block<"newsList">; newsParams?: NewsPagingParams }) {
   const posts = await getPosts();
   if (block.variant === "page") {
     const archived = await getArchivedPosts();
+    const paging = newsPaging(posts.length, newsParams);
+    // Die Auswahl erscheint erst, wenn die Beiträge nicht mehr auf eine Seite passen
+    const paged = posts.length > PER_PAGE_OPTIONS[0];
     return (
       <>
-        <PostList posts={posts} />
+        <div id="beitraege" className="news-list">
+          {paged && <NewsPerPage perPage={paging.perPage} />}
+          <PostList posts={posts.slice(paging.start, paging.end)} />
+          {paged && paging.pageCount > 1 && <NewsPager paging={paging} total={posts.length} />}
+        </div>
         {archived.length > 0 && (
           // Archivierte Beiträge: eingeklappt am Ende der Seite
           <details className="group archive">
@@ -645,7 +686,7 @@ function Chapter({ block }: { block: Block<"chapter"> }) {
   );
 }
 
-export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
+export function PageBlocks({ blocks, newsParams }: { blocks: PageBlock[]; newsParams?: NewsPagingParams }) {
   return (
     <>
       {blocks.map((block, index) => {
@@ -692,7 +733,7 @@ export function PageBlocks({ blocks }: { blocks: PageBlock[] }) {
           case "graphics":
             return <Graphics key={index} block={block} />;
           case "newsList":
-            return <NewsList key={index} block={block} />;
+            return <NewsList key={index} block={block} newsParams={newsParams} />;
           case "entry":
             return <Entry key={index} block={block} />;
           case "promises":

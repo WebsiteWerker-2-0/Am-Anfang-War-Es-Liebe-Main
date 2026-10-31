@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Aktuelles mit Seitenauswahl, Durchstreichen im Editor
+
+- **Entscheidung:** Auf Aktuelles wählen Besucher*innen 10, 25 oder 50 Beiträge pro Seite und blättern. Die Auswahl steht als Link in der Adresse (`?anzahl=25&seite=2`), funktioniert ohne JavaScript und speichert nichts im Browser. Sie erscheint erst ab elf Beiträgen. Der Editor kann durchstreichen. Mittige Bilder werden nicht mehr über ihre Originalgröße vergrößert und nicht höher als 80 % des Bildschirms.
+- **Begründung:** Wunsch von Enrico; die Bildregeln sind Ergebnis des Tests mit zehn Beiträgen.
+- **Datei:** `website/src/lib/news-paging.ts`, `components/blocks/index.tsx`, `cms/editors.ts`, `app/(site)/globals.css`
+- **Von:** Enrico (mit Claude)
+
 ## 31.10.2026 – Farben nach Hallmark-Theme „Ink“
 
 - **Entscheidung:** Die Website übernimmt die Farben des Hallmark-Themes Ink (github.com/nutlope/hallmark): weißes Papier, Schwarz ohne Farbton, Teal als einzige Akzentfarbe. Nur Farben, Schriften und Aufbau bleiben. Die Abschnitte der Hilfe stehen als Bänder in Tinte statt mit farbiger Kante. Illustrationen und Bänder im Seitenkopf behalten ihre Farben, der Notausgang bleibt rot, die Ampel bleibt.

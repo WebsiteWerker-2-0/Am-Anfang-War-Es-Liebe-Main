@@ -8,6 +8,7 @@ import {
   LinkFeature,
   OrderedListFeature,
   ParagraphFeature,
+  StrikethroughFeature,
   UnderlineFeature,
   UnorderedListFeature,
   lexicalEditor,
@@ -15,7 +16,7 @@ import {
 import { FileBlock } from "./blocks/datei";
 
 // Nur die Formate, die das Design der Website kennt: Absatz, Zwischenüberschrift,
-// Liste, Nummerierung, fett, kursiv, unterstrichen, Link und Datei/Bild an einer Stelle im Text.
+// Liste, Nummerierung, fett, kursiv, unterstrichen, durchgestrichen, Link und Datei/Bild an einer Stelle im Text.
 // Schriftart, -größe und Farbe lassen sich bewusst nicht ändern: Die Website gestaltet den Text einheitlich.
 export const bodyEditor = lexicalEditor({
   features: [
@@ -26,6 +27,7 @@ export const bodyEditor = lexicalEditor({
     BoldFeature(),
     ItalicFeature(),
     UnderlineFeature(),
+    StrikethroughFeature(),
     LinkFeature(),
     BlocksFeature({ blocks: [FileBlock] }),
     FixedToolbarFeature(),

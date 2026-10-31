@@ -5,6 +5,6 @@ export const revalidate = 60;
 
 export const generateMetadata = () => metadataFor("aktuelles");
 
-export default function NewsPage() {
-  return <CmsPage slug="aktuelles" />;
+export default async function NewsPage({ searchParams }: PageProps<"/aktuelles">) {
+  return <CmsPage slug="aktuelles" newsParams={await searchParams} />;
 }

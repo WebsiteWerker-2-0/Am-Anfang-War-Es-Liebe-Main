@@ -29,7 +29,7 @@ Texte der festen Seiten (Hilfe, Selbstcheck, Kontakt …), Anlaufstellen, Menü 
 
 **Datei oder Bild mitten im Text:** Im Text an die gewünschte Stelle klicken, in der Leiste über dem Text ganz links auf das erste Symbol klicken und **Datei oder Bild** wählen. Dann eine Datei aus dem Archiv wählen oder neu hochladen, optional eine Beschriftung eintragen. Bilder erscheinen als Bild, PDFs und andere Dateien als Download-Link genau an dieser Stelle. Bei Bildern wählen Sie die **Position**: **Mittig** (volle Breite), **Links** oder **Rechts** (halbe Breite, Text und Listen stehen daneben). Zwei Bilder „Links“ direkt hintereinander stehen nebeneinander. Die Größe legt die Website fest, egal wie groß die Datei ist; links und rechts wird das Bild auf das Format 3:2 zugeschnitten.
 
-**Text gestalten:** fett, kursiv, unterstrichen, Zwischenüberschrift, Listen, Links. Schriftart, Größe und Farbe legt die Website fest, damit alles einheitlich aussieht.
+**Text gestalten:** fett, kursiv, unterstrichen, durchgestrichen, Zwischenüberschrift, Listen, Links. Schriftart, Größe und Farbe legt die Website fest, damit alles einheitlich aussieht.
 
 **Reihenfolge ändern:** In der Liste „Aktuelles“ die Zeilen am Griff links ziehen.
 
