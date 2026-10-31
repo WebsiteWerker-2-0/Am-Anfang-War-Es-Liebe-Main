@@ -557,3 +557,43 @@ select:focus-visible,
 .list-header__title-actions .btn {
   margin: 0;
 }
+
+/* Werkzeugleiste im Textfeld: Symbole kräftig, und beim Darüberfahren ein deutscher Hinweis,
+   damit die Redaktion „S“ (durchgestrichen) und die anderen Knöpfe sicher erkennt */
+.fixed-toolbar .toolbar-popup__button {
+  position: relative;
+  color: var(--aal-ink);
+}
+
+.fixed-toolbar .toolbar-popup__button svg {
+  color: var(--aal-ink);
+}
+
+.fixed-toolbar .toolbar-popup__button::after {
+  position: absolute;
+  inset-block-start: calc(100% + 6px);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--aal-primary);
+  color: var(--aal-primary-text);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.fixed-toolbar .toolbar-popup__button:hover::after,
+.fixed-toolbar .toolbar-popup__button:focus-visible::after {
+  opacity: 1;
+}
+
+.fixed-toolbar .toolbar-popup__button-bold::after { content: "Fett"; }
+.fixed-toolbar .toolbar-popup__button-italic::after { content: "Kursiv"; }
+.fixed-toolbar .toolbar-popup__button-underline::after { content: "Unterstrichen"; }
+.fixed-toolbar .toolbar-popup__button-strikethrough::after { content: "Durchgestrichen"; }
+.fixed-toolbar .toolbar-popup__button-link::after { content: "Link einfügen"; }

@@ -48,6 +48,6 @@ export const defaultSite: SiteData = {
     fundingAlt:
       "Ministerium für Kinder, Jugend, Familie, Gleichstellung, Flucht und Integration des Landes Nordrhein-Westfalen",
     draftNote:
-      "Entwurf, Stand 11.10.2026. Inhalte und Gestaltung sind noch nicht freigegeben. Illustrationen: fien-design, Höxter.",
+      "Illustrationen: fien-design, Höxter.",
   },
 };

@@ -5,7 +5,10 @@ import type { PageData } from "../model";
 // Die Termine mit Anmeldung stehen auf der eigenen Seite „Termine“ (content/pages/dates.ts).
 export const courses: PageData = {
   slug: "kurse",
-  title: courseOffersHeading,
+  // Kurz und allgemein, damit die Überschrift auf eine Zeile passt (Wunsch Steffen 31.10.2026);
+  // die Überschrift aus dem Dokument des AG steht darunter als Einleitung
+  title: "Unsere Kurse",
+  intro: `${courseOffersHeading} für Frauen, Mädchen und Kinder im Kreis Höxter.`,
   description: "Krav Maga und WenDo: Kurse für Frauen, Mädchen und Kinder im Kreis Höxter.",
   band: "courses",
   layout: "stack-lg",
