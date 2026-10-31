@@ -6,7 +6,7 @@ export const dates: PageData = {
   title: "Termine",
   description: "Termine des Arbeitskreises gegen Gewalt an Frauen und Kindern im Kreis Höxter, mit Anmeldung.",
   intro: "Hier finden Sie die nächsten Termine. Wo es eine Anmeldung gibt, melden Sie sich direkt hier an.",
-  band: "courses",
+  band: "dates",
   layout: "stack-lg",
   blocks: [
     {

@@ -2,12 +2,26 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Backend: Haus statt „A“, Auswahl „Übersicht/Layout“ entfernt
+
+- **Entscheidung:** Links oben im Backend steht ein Haus-Symbol statt des Buchstabens „A“. Die Auswahl „Übersicht/Layout“ auf der Startseite ist ausgeblendet.
+- **Begründung:** Wunsch von Enrico; das Haus ist als Weg zur Startseite verständlicher, die Auswahl braucht die Redaktion nicht.
+- **Datei:** `website/src/cms/components/Logo.tsx`, `website/src/app/(payload)/custom.css`
+- **Von:** Enrico (mit Claude)
+
 ## 31.10.2026 – Aktuelles mit Seitenauswahl, Durchstreichen im Editor
 
 - **Entscheidung:** Auf Aktuelles wählen Besucher*innen 10, 25 oder 50 Beiträge pro Seite und blättern. Die Auswahl steht als Link in der Adresse (`?anzahl=25&seite=2`), funktioniert ohne JavaScript und speichert nichts im Browser. Sie erscheint erst ab elf Beiträgen. Der Editor kann durchstreichen. Mittige Bilder werden nicht mehr über ihre Originalgröße vergrößert und nicht höher als 80 % des Bildschirms.
 - **Begründung:** Wunsch von Enrico; die Bildregeln sind Ergebnis des Tests mit zehn Beiträgen.
 - **Datei:** `website/src/lib/news-paging.ts`, `components/blocks/index.tsx`, `cms/editors.ts`, `app/(site)/globals.css`
 - **Von:** Enrico (mit Claude)
+
+## 31.10.2026 – Eigenes Kopfbild für Termine
+
+- **Entscheidung:** Termine zeigt ein eigenes Band: zwei Frauen am Tisch aus der Broschüre (S. 14), Grund Magenta `#c62f7c` wie in der Broschüre an dieser Stelle. Kurse behält das sandfarbene Band.
+- **Begründung:** Termine und Kurse hatten dasselbe Bild (Wunsch Steffen).
+- **Datei:** `website/src/assets/illustrations/band-p08.jpg`, `website/src/content/page-bands.ts`
+- **Von:** Steffen (mit Claude)
 
 ## 31.10.2026 – Farben nach Hallmark-Theme „Ink“
 
@@ -32,7 +46,7 @@ Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzli
 
 ## 31.10.2026 – Infos mit eigenen Seiten je Bereich
 
-- **Entscheidung:** Infos ist eine Navigationsseite mit vier Wegweisern. Jeder Bereich hat eine eigene Seite: `/infos/spurensicherung`, `/infos/broschueren-und-flyer`, `/infos/weiterfuehrende-informationen`, `/infos/wanderausstellung`. Wegweiser und Unterpunkte im Menü kommen aus derselben Liste (`infoSections`). Ersetzt den Eintrag „Infos als Navigationsseite“ vom selben Tag.
+- **Entscheidung:** Infos ist eine Navigationsseite mit vier Wegweisern. Jeder Bereich hat eine eigene Seite: `/infos/spurensicherung`, `/infos/broschueren-und-flyer`, `/infos/weiterfuehrende-informationen`, `/infos/wanderausstellung`. Im Menü steht nur „Infos“ ohne Aufklappmenü (Unterpunkte entfernt, weil die Seite selbst die Navigation ist). Die Wegweiser kommen aus `infoSections`. Ersetzt den Eintrag „Infos als Navigationsseite“ vom selben Tag.
 - **Begründung:** Entscheidung Steffen: kein One-Pager.
 - **Datei:** `website/src/content/pages/info.ts`, `website/src/content/site.ts`
 - **Von:** Steffen (mit Claude)

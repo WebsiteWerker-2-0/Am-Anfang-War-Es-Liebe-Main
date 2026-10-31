@@ -8,10 +8,13 @@ export function Logo() {
   );
 }
 
+// Links oben im Backend: führt zur Startseite des Backends
 export function Icon() {
   return (
-    <span style={{ fontFamily: "Georgia, serif", fontWeight: 700, fontSize: "1.1rem" }} aria-hidden="true">
-      A
-    </span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 11.5 12 4l9 7.5" />
+      <path d="M5.5 9.5V20h13V9.5" />
+      <path d="M10 20v-6h4v6" />
+    </svg>
   );
 }

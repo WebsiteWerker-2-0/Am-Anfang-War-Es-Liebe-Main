@@ -4,6 +4,7 @@ import { convertHTMLToLexical, editorConfigFactory } from "@payloadcms/richtext-
 import { JSDOM } from "jsdom";
 import type { Payload } from "payload";
 import { defaultCourseOffers } from "@/content/course-offers";
+import { defaultMembers } from "@/content/members";
 import posts from "@/content/posts.json";
 
 // Spielt die Beiträge der Altseite (src/content/posts.json) mit Bildern und Dokumenten (public/medien)
@@ -32,6 +33,7 @@ function resolvePublicFile(webPath: string) {
 
 export async function seedExistingContent(payload: Payload) {
   await seedCourseOffers(payload);
+  await seedMembers(payload);
   if ((await payload.count({ collection: "posts" })).totalDocs > 0) return;
 
   const editorConfig = await editorConfigFactory.default({ config: payload.config });
@@ -156,4 +158,17 @@ async function seedCourseOffers(payload: Payload) {
     }
   }
   payload.logger.info(`${defaultCourseOffers.length} Kurse eingespielt.`);
+}
+
+// Mitglieder des Arbeitskreises aus der Lieferung vom 28.10.2026, nur solange es noch keine gibt.
+async function seedMembers(payload: Payload) {
+  if ((await payload.count({ collection: "members" })).totalDocs > 0) return;
+  for (const member of defaultMembers) {
+    try {
+      await payload.create({ collection: "members", data: { name: member.name, role: member.role, url: member.url } });
+    } catch (error) {
+      payload.logger.error({ err: error, msg: `Einspielen des Mitglieds ${member.name} fehlgeschlagen.` });
+    }
+  }
+  payload.logger.info(`${defaultMembers.length} Mitglieder eingespielt.`);
 }

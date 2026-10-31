@@ -3,6 +3,8 @@
 import type { StaticImageData } from "next/image";
 import type { BandKey } from "./band-keys";
 import courses from "@/assets/illustrations/band-p06.jpg";
+// Termine: zwei Frauen am Tisch (Broschüre S. 14), eigenes Band seit 31.10.2026, damit Termine und Kurse sich unterscheiden
+import dates from "@/assets/illustrations/band-p08.jpg";
 // Hilfe: Rechtsanwältin schützt Frau und Kind (pink), Infos: Frau mit Kind auf dem Weg (orange),
 // getauscht auf Wunsch der Frauenberatungsstelle (21.10.2026)
 import help from "@/assets/illustrations/band-p12.jpg";
@@ -23,6 +25,7 @@ export type PageBand = {
 export const pageBands = {
   help: { image: help, tone: "magenta", field: "#ff038a", position: "75% bottom" },
   courses: { image: courses, tone: "sand", field: "#f5ddb9", position: "50% bottom" },
+  dates: { image: dates, tone: "magenta", field: "#c62f7c", position: "right bottom" },
   info: { image: info, tone: "orange", field: "#ff7f00", position: "right bottom" },
   workingGroup: { image: workingGroup, tone: "orange", field: "#ff7d01", position: "right bottom" },
   news: { image: news, tone: "magenta", field: "#ff038a", position: "right bottom" },

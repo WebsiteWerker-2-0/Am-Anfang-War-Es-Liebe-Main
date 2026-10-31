@@ -2,32 +2,28 @@ import type { PageData } from "../model";
 import { exhibitionBooking, exhibitionPanels, tel } from "./helpers";
 
 // Infos: Navigationsseite mit vier Wegweisern, jeder Bereich hat eine eigene Seite unter /infos/…
-// (Wunsch Frauenberatungsstelle 21.10.2026, Entscheidung Steffen 31.10.2026). Die Unterpunkte im Menü
-// (content/site.ts) und die Wegweiser kommen beide aus `infoSections`.
+// (Wunsch Frauenberatungsstelle 21.10.2026, Entscheidung Steffen 31.10.2026). Im Menü steht nur „Infos“,
+// ohne Unterpunkte; die Wegweiser kommen aus `infoSections`.
 
 export const infoSections = [
   {
     slug: "infos/spurensicherung",
     label: "Vertrauliche Spurensicherung im Kreis Höxter",
-    menuLabel: "Vertrauliche Spurensicherung",
     note: "Nach sexueller Gewalt Spuren sichern lassen, auch ohne Anzeige",
   },
   {
     slug: "infos/broschueren-und-flyer",
     label: "Broschüren und Flyer zum Download",
-    menuLabel: "Broschüren und Flyer",
     note: "Broschüre des Arbeitskreises, Flyer, Rad der Gewalt und Gewaltspirale",
   },
   {
     slug: "infos/weiterfuehrende-informationen",
     label: "Weiterführende Informationen",
-    menuLabel: "Weiterführende Informationen",
     note: "Für Erwachsene, für Kinder und Jugendliche, zu digitaler Gewalt",
   },
   {
     slug: "infos/wanderausstellung",
     label: "Unsere Wanderausstellung",
-    menuLabel: "Unsere Wanderausstellung",
     note: "Alle zwölf Tafeln ansehen und die Ausstellung buchen",
   },
 ] as const;
@@ -112,7 +108,7 @@ export const brochures: PageData = {
         {
           title: "Flyer des Frauen- und Kinderschutzhauses im Kreis Höxter",
           file: "/downloads/flyer-frauenhaus.pdf",
-          meta: "PDF, 0,8 MB · Deutsch · Stand: ohne Datum",
+          meta: "PDF, 0,8 MB · Deutsch · Stand: 2026",
         },
         {
           title: "Flyer „Sicher feiern“: Tipps für dich und deine Freund*innen",
@@ -122,7 +118,7 @@ export const brochures: PageData = {
         {
           title: "Flyer des Weissen Rings zu K.-o.-Tropfen",
           file: "/downloads/flyer-ko-tropfen-weisser-ring.pdf",
-          meta: "PDF, 0,3 MB · Deutsch · Stand: ohne Datum",
+          meta: "PDF, 0,3 MB · Deutsch · Stand: 2017",
         },
         {
           title: "Plakat zur Wanderausstellung „Am Anfang war es Liebe …“",

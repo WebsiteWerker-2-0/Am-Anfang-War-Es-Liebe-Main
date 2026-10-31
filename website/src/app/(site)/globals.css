@@ -87,7 +87,8 @@ main {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--font-display);
   overflow-wrap: break-word;
   line-height: 1.15;
@@ -104,6 +105,9 @@ h2 {
 }
 h3 {
   font-size: var(--fs-lg);
+}
+h4 {
+  font-size: var(--fs-md);
 }
 
 p,
@@ -1482,10 +1486,23 @@ main :where(h1, h2, h3) {
   margin-block-start: var(--space-4);
 }
 
+/* Zwischenüberschriften im Text aus dem Backend: 2 > 3 > 4, deutlich abgestuft */
 .prose h2,
-.prose h3 {
+.prose h3,
+.prose h4 {
   margin-block-start: var(--space-6);
+}
+
+.prose h2 {
+  font-size: var(--fs-xl);
+}
+
+.prose h3 {
   font-size: var(--fs-lg);
+}
+
+.prose h4 {
+  font-size: var(--fs-md);
 }
 
 .prose ul,

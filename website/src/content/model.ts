@@ -94,7 +94,9 @@ export type PageBlock =
       heading: string;
       topics: { title: string; links: { label: string; url: string }[] }[];
     }
-  | { blockType: "peopleList"; anchor?: string; heading: string; people: { name: string; role?: string; url?: string }[] }
+  | { blockType: "peopleList"; anchor?: string; heading: string; people: MemberData[] }
+  /** Mitglieder des Arbeitskreises aus dem Backend (Bereich „Mitglieder“), Darstellung wie peopleList */
+  | { blockType: "memberList"; anchor?: string; heading: string }
   | {
       blockType: "campaign";
       anchor?: string;
@@ -235,3 +237,6 @@ export type CourseOfferData = {
   html?: string;
   content?: Rich;
 };
+
+/** Mitglied des Arbeitskreises: Einrichtung, Bereich oder Funktion, Internetseite */
+export type MemberData = { name: string; role?: string; url?: string };
