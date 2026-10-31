@@ -2,6 +2,14 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Schrift Epilogue und Kopf als Pille
+
+- **Entscheidung:** Aus dem Hallmark-Entwurf (`design/hallmark-redesign`) kommen nur Schrift und Kopfbereich: Epilogue statt Literata und IBM Plex Sans, Überschriften fett und eng gesetzt; Hilfeleiste weiß mit Linie und Marke „rund um die Uhr“; Logo und Menü in einer gerahmten Pille, aktuelle Seite als schwarze Fläche. Das Wort „Liebe“ im Logo ist nicht mehr farbig. Aufbau und Größen der übrigen Seiten bleiben.
+- **Begründung:** Wunsch von Enrico nach Durchsicht des Vergleichs. Kyrillisch bleibt in IBM Plex Sans, weil Epilogue es nicht hat; Arabisch ohne enge Laufweite, sonst reißen die Buchstaben auseinander.
+- **Backend:** Der Texteditor schreibt ebenfalls in Epilogue, die übrige Backend-Oberfläche bleibt unverändert.
+- **Datei:** `website/src/components/SiteDocument.tsx`, `components/SiteHeader.tsx`, `app/(site)/globals.css`, `app/(payload)/layout.tsx`, `app/(payload)/custom.css`, `knowledgebase/design/typografie.md`
+- **Von:** Enrico (mit Claude)
+
 ## 31.10.2026 – Kurse aufgebaut wie Aktuelles
 
 - **Entscheidung:** Die Seite „Kurse“ zeigt eine Übersicht wie Aktuelles (Liste mit Linien, Name als Link, Kurzfassung darunter, ohne Datumsspalte). Jeder Kurs hat eine eigene Seite unter `/kurse/<kurs>` im Aufbau eines Beitrags (Rücklink „Kurse“, Überschrift, Titelbild, Text), darunter der Knopf „Termine und Anmeldung“. Im Backend haben Kurse wie Beiträge die Felder „Kurzfassung“ und „Titelbild“. Die Sprungmarken oben auf der Seite entfallen.

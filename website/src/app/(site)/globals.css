@@ -11,7 +11,9 @@
   --c-brand-primary: oklch(94% 0.006 100); /* Helle Fläche für große Bänder, immer mit --c-ink als Schrift */
   --c-brand-secondary: oklch(50% 0.095 188); /* Teal: Logo-Wort, Unterstreichungen, Balken */
   --c-brand-accent: oklch(50% 0.095 188);
-  --c-brand-surface: oklch(97% 0.004 100); /* Helle Fläche: Hinweise, Hilfeleiste */
+  --c-brand-surface: oklch(97% 0.004 100); /* Helle Fläche: Hinweise */
+  --c-tag: oklch(93% 0.05 190); /* Marke „rund um die Uhr“ in der Hilfeleiste */
+  --c-tag-ink: oklch(27% 0.045 190);
   --c-illustration-ground: #f5ddb9; /* Gemessener Grund der Illustrationen, sonst entsteht eine Kante am Bild */
 
   /* Funktionsrollen */
@@ -33,8 +35,10 @@
   --c-exit-bg: #b00020; /* Rot: Funktionsfarbe, bewusst nicht aus der Broschüre (Kontrast zu Weiß 7,3:1) */
   --c-exit-fg: #ffffff;
 
-  --font-display: var(--font-literata), var(--font-naskh), Georgia, serif;
-  --font-text: var(--font-plex), var(--font-plex-arabic), system-ui, sans-serif;
+  --font-display: var(--font-epilogue), var(--font-plex), var(--font-naskh), ui-sans-serif, system-ui, sans-serif;
+  --font-text: var(--font-epilogue), var(--font-plex), var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
+  --tracking-display: -0.04em;
+  --tracking-title: -0.02em;
 
   --fs-xs: 0.833rem;
   --fs-sm: 0.889rem;
@@ -56,6 +60,8 @@
   --space-9: 6rem;
 
   --radius-control: 6px;
+  --radius-card: 12px;
+  --radius-pill: 999px;
   --wide: min(72rem, 100% - 2 * var(--space-5));
   --measure: 68ch;
 }
@@ -75,7 +81,8 @@ body {
   color: var(--c-ink);
   font-family: var(--font-text);
   font-size: var(--fs-base);
-  line-height: 1.6;
+  line-height: 1.55;
+  font-synthesis: none;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -91,8 +98,9 @@ h3,
 h4 {
   font-family: var(--font-display);
   overflow-wrap: break-word;
-  line-height: 1.15;
-  font-weight: 600;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
   text-wrap: balance;
   hyphens: manual;
 }
@@ -105,9 +113,13 @@ h2 {
 }
 h3 {
   font-size: var(--fs-lg);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-title);
 }
 h4 {
   font-size: var(--fs-md);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-title);
 }
 
 p,
@@ -204,18 +216,19 @@ a:hover {
   transform: none;
 }
 
-/* Sandfläche setzt die Hilfeleiste vom weißen Kopf ab (farben.md: Hinweisflächen) */
+/* Hilfeleiste: die Zeile, die stehen bleibt. Hilfetelefon mit Marke, Sprachen, Notausgang. */
 .help-bar {
-  background: var(--c-brand-surface);
-  color: var(--c-ink-muted);
-  font-size: var(--fs-xs);
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-size: var(--fs-sm);
+  border-block-end: 1px solid var(--c-line);
 }
 
 /* Desktop: Hilfeleiste (mit Notausgang) bleibt beim Scrollen sichtbar. Mobil übernimmt
    das der fixierte Knopf unten rechts. Sprungmarken werden nicht verdeckt. */
 @media (min-width: 64em) {
   html {
-    scroll-padding-block-start: 4.5rem;
+    scroll-padding-block-start: 5rem;
   }
   .help-bar {
     position: sticky;
@@ -226,7 +239,7 @@ a:hover {
 
 .help-bar__inner {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
     "telefon exit"
     "sprachen sprachen";
@@ -238,17 +251,42 @@ a:hover {
 .help-bar__phone {
   grid-area: telefon;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
 }
 
 .help-bar__phone a {
-  color: var(--c-ink);
-  font-weight: 600;
+  color: var(--c-ink-strong);
+  font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .help-bar__phone a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--c-brand-secondary);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--c-tag);
+  color: var(--c-tag-ink);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Sehr schmale Telefone: Der Notausgang behält seine volle Breite, die Marke bricht um */
+@media (max-width: 24em) {
+  .tag {
+    white-space: normal;
+  }
 }
 
 .help-bar__languages {
@@ -262,14 +300,19 @@ a:hover {
 }
 
 .help-bar__languages a {
-  color: inherit;
+  color: var(--c-ink);
   text-decoration: none;
   display: inline-block;
   padding-block: var(--space-2);
 }
 
+.help-bar__languages a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--c-brand-secondary);
+}
+
 .help-bar__languages a[aria-current="true"] {
-  color: var(--c-ink);
+  color: var(--c-ink-strong);
   font-weight: 600;
   text-decoration: underline;
 }
@@ -280,7 +323,7 @@ a:hover {
 
 @media (min-width: 40em) {
   .help-bar__inner {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas: "telefon sprachen exit";
     gap: var(--space-5);
   }
@@ -337,35 +380,72 @@ a:hover {
   }
 }
 
+/* Schwebende Pille: Wortmarke und Menü in einer gerahmten Zeile auf dem Papier */
+.site-header {
+  padding-block-start: var(--space-3);
+}
+
 .site-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-5);
-  padding-block: var(--space-4);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-card);
+  background: var(--c-paper);
+}
+
+@media (min-width: 64em) {
+  .site-header {
+    padding-block-start: var(--space-4);
+  }
+  .site-header__inner {
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5);
+    border-radius: var(--radius-pill);
+  }
 }
 
 .logo {
   display: inline-flex;
   flex-direction: column;
+  min-width: 0;
   text-decoration: none;
-  line-height: 1.1;
+  color: var(--c-ink-strong);
+}
+
+.logo:hover .logo__title {
+  text-decoration: underline;
+  text-decoration-color: var(--c-brand-secondary);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
 }
 
 .logo__title {
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
-  font-weight: 600;
-}
-
-.logo__title span {
-  color: var(--c-brand-secondary);
+  font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .logo__subtitle {
-  font-size: var(--fs-sm);
+  max-width: 32ch;
+  font-size: var(--fs-xs);
+  line-height: 1.35;
   color: var(--c-ink-muted);
-  margin-block-start: var(--space-1);
+}
+
+
+/* Schmale Telefone: kleinere Wortmarke, der Untertitel erst ab 30em */
+@media (max-width: 29.99em) {
+  .logo__title {
+    font-size: 1rem;
+  }
+  .logo__subtitle {
+    display: none;
+  }
 }
 
 .nav-desktop {
@@ -374,28 +454,53 @@ a:hover {
 
 .nav-desktop ul {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-5);
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: var(--space-1);
 }
 
-.nav-desktop a,
-.nav-mobile a {
+.nav-desktop a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  color: var(--c-ink);
+  font-size: 1.0625rem;
   text-decoration: none;
-  display: inline-block;
-  padding-block: var(--space-2);
+  white-space: nowrap;
 }
 
-.nav-desktop a:hover,
-.nav-mobile a:hover {
-  text-decoration: underline;
+.nav-desktop a:hover {
+  background: var(--c-brand-surface);
+  color: var(--c-ink-strong);
 }
 
-.nav-desktop a[aria-current="page"],
-.nav-mobile a[aria-current="page"] {
+.nav-desktop a:active {
+  background: var(--c-brand-primary);
+}
+
+.nav-desktop a[aria-current="page"] {
+  background: var(--c-ink-strong);
+  color: var(--c-paper);
   font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--c-brand-secondary);
-  text-decoration-thickness: 3px;
+}
+
+/* Enge Desktopbreite: Die acht Menüpunkte brauchen den Platz, der Untertitel kommt erst ab 80em dazu */
+@media (min-width: 64em) and (max-width: 79.99em) {
+  .logo {
+    flex: none;
+  }
+  .logo__title {
+    white-space: nowrap;
+  }
+  .logo__subtitle {
+    display: none;
+  }
+  .nav-desktop a {
+    padding-inline: var(--space-2);
+    font-size: 1rem;
+  }
 }
 
 .nav-mobile summary {
@@ -404,29 +509,30 @@ a:hover {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--c-ink);
-  border-radius: var(--radius-control);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--c-ink-strong);
+  color: var(--c-paper);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .nav-mobile summary::-webkit-details-marker {
   display: none;
 }
 
-.nav-mobile[open] summary {
+.nav-mobile summary:active {
   background: var(--c-ink);
-  color: var(--c-paper);
 }
 
 .nav-mobile ul {
   position: absolute;
-  inset-inline: 0;
+  inset-inline: var(--space-5);
   z-index: 40;
   background: var(--c-paper);
-  border-block: 1px solid var(--c-line);
-  padding: var(--space-3) var(--space-5) var(--space-5);
+  border-radius: var(--radius-card);
+  box-shadow: 0 20px 40px oklch(20% 0 0 / 0.16);
+  padding: var(--space-3) var(--space-5) var(--space-4);
   margin-block-start: var(--space-4);
 }
 
@@ -438,6 +544,19 @@ a:hover {
   display: block;
   padding-block: var(--space-3);
   font-size: var(--fs-md);
+  font-weight: 700;
+  letter-spacing: var(--tracking-title);
+  text-decoration: none;
+}
+
+.nav-mobile a:hover {
+  text-decoration: underline;
+}
+
+.nav-mobile a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--c-brand-secondary);
+  text-decoration-thickness: 3px;
 }
 
 /* Unterpunkte: am Desktop bei Zeigen oder Tastaturfokus, mobil immer sichtbar und eingerückt */
@@ -505,8 +624,8 @@ a:hover {
 
 .entry__title {
   font-size: var(--fs-hero);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
   margin-block-end: var(--space-5);
 }
 
@@ -528,8 +647,10 @@ a:hover {
 .paths__reason {
   hyphens: manual;
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-md);
-  line-height: 1.3;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .paths__target {
@@ -595,8 +716,9 @@ a:hover {
 
 .promises strong {
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-md);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 @media (min-width: 40em) {
@@ -730,8 +852,9 @@ a:hover {
 
 .service-list__number {
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-lg);
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -1117,8 +1240,9 @@ main :where(h1, h2, h3) {
 .list-steps li::before {
   content: counter(step);
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-lg);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -1134,8 +1258,9 @@ main :where(h1, h2, h3) {
   cursor: pointer;
   padding-block: var(--space-4);
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-lg);
-  font-weight: 600;
+  font-weight: 700;
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -1177,8 +1302,9 @@ main :where(h1, h2, h3) {
 
 .emergency__number {
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-2xl);
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   line-height: 1;
 }
@@ -1194,8 +1320,9 @@ main :where(h1, h2, h3) {
 
 .self-check legend {
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-lg);
-  font-weight: 600;
+  font-weight: 700;
   margin-block-end: var(--space-4);
 }
 
@@ -1477,6 +1604,11 @@ main :where(h1, h2, h3) {
 }
 
 /* Kurse: dieselbe Liste wie Aktuelles, ohne Datumsspalte */
+/* Lange Wörter in Titeln dürfen die Spalte nicht aufdehnen */
+.post-list li > * {
+  min-width: 0;
+}
+
 .post-list--plain li {
   grid-template-columns: 1fr;
 }
@@ -1490,8 +1622,9 @@ main :where(h1, h2, h3) {
 
 .date__day {
   font-family: var(--font-display);
+  letter-spacing: var(--tracking-title);
   font-size: var(--fs-xl);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .date__month,
@@ -2144,4 +2277,14 @@ main :where(h1, h2, h3) {
 
 .course .places {
   margin-block-start: var(--space-4);
+}
+
+/* Enge Laufweite nur für Lateinisch und Kyrillisch: sie würde arabische Buchstaben auseinanderreißen */
+[lang="ar"],
+[lang="ar"] * {
+  letter-spacing: 0;
+}
+
+[lang="ru"] :is(h1, h2, h3, h4) {
+  letter-spacing: -0.01em;
 }

@@ -136,6 +136,8 @@ Nicht vorgesehen. `color-scheme: light` setzen.
 
 Alle Schriften stehen unter SIL Open Font License, werden als WOFF2 lokal unter `assets/fonts/` gehostet und je Schriftsystem per `unicode-range` getrennt, sodass arabische oder kyrillische Dateien nur geladen werden, wenn entsprechende Zeichen vorkommen.
 
+> **Überholt am 31.10.2026:** Latein und Überschriften stehen in Epilogue, siehe `typografie.md` und `entscheidungen.md`.
+
 | Rolle | Latein, Kyrillisch (DE, EN, TR, RU) | Arabisch (AR) |
 |---|---|---|
 | Überschriften, Einstieg „Sie sind hier, weil …“ | **Literata** (variabel, optische Größen) | **Noto Naskh Arabic** 600 |

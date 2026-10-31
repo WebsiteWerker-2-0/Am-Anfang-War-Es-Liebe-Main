@@ -597,3 +597,14 @@ select:focus-visible,
 .fixed-toolbar .toolbar-popup__button-underline::after { content: "Unterstrichen"; }
 .fixed-toolbar .toolbar-popup__button-strikethrough::after { content: "Durchgestrichen"; }
 .fixed-toolbar .toolbar-popup__button-link::after { content: "Link einfügen"; }
+
+/* Texteditor: Text und Überschriften wie später auf der Website (Epilogue) */
+.rich-text-lexical .ContentEditable__root {
+  font-family: var(--font-epilogue), ui-sans-serif, system-ui, sans-serif;
+}
+
+.rich-text-lexical .ContentEditable__root :is(h2, h3, h4) {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}

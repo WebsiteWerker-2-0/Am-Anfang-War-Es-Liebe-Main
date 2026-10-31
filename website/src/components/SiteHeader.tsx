@@ -81,7 +81,7 @@ export function SiteHeader({ site }: { site: Pick<SiteData, "navigation" | "lang
           <p className="help-bar__phone">
             Hilfetelefon{" "}
             <a href={`tel:${site.helpline.number.replace(/[^\d+]/g, "")}`}>{site.helpline.number.replace(/ /g, "\u202f")}</a>
-            {site.helpline.suffix && <span className="wide-only">{site.helpline.suffix}</span>}
+            {site.helpline.suffix && <span className="tag">{site.helpline.suffix.replace(/^,\s*/, "")}</span>}
           </p>
         </div>
       </div>
@@ -90,7 +90,7 @@ export function SiteHeader({ site }: { site: Pick<SiteData, "navigation" | "lang
         <div className="site-header__inner wide">
           <Link href="/" className="logo">
             <span className="logo__title">
-              Am Anfang war es <span>Liebe …</span>
+              Am Anfang war es Liebe …
             </span>
             <span className="logo__subtitle">Arbeitskreis gegen Gewalt an Frauen und Kindern im Kreis Höxter</span>
           </Link>

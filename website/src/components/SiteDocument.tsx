@@ -1,4 +1,4 @@
-import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic, Literata, Noto_Naskh_Arabic } from "next/font/google";
+import { Epilogue, IBM_Plex_Sans, IBM_Plex_Sans_Arabic, Noto_Naskh_Arabic } from "next/font/google";
 import type { ReactNode } from "react";
 import { QuickExitBehavior, QuickExitLink } from "@/components/QuickExit";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -8,17 +8,21 @@ import { getSite } from "@/lib/content";
 // Schriften werden von next/font beim Build geladen und vom eigenen Server
 // ausgeliefert, der Browser fragt nie bei Google an (ADR-0002).
 // Vorgeladen wird nur Latein; Kyrillisch und Arabisch kommen per unicode-range.
-const literata = Literata({
-  subsets: ["latin"],
-  variable: "--font-literata",
+// Epilogue trägt Überschriften und Text. Sie hat kein Kyrillisch, dafür springt IBM Plex Sans ein,
+// für Arabisch Plex Sans Arabic und Noto Naskh.
+const epilogue = Epilogue({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "600", "700"],
+  variable: "--font-epilogue",
   display: "swap",
 });
 
 const plex = IBM_Plex_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   weight: ["400", "600"],
   variable: "--font-plex",
   display: "swap",
+  preload: false,
 });
 
 const naskh = Noto_Naskh_Arabic({
@@ -45,7 +49,7 @@ export async function SiteDocument({ children }: { children: ReactNode }) {
     <html
       lang="de"
       dir="ltr"
-      className={`${literata.variable} ${plex.variable} ${naskh.variable} ${plexArabic.variable}`}
+      className={`${epilogue.variable} ${plex.variable} ${naskh.variable} ${plexArabic.variable}`}
     >
       <body>
         <QuickExitBehavior />
