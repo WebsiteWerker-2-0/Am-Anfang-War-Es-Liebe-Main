@@ -1,6 +1,7 @@
 import type { PageData } from "../model";
+import { exhibitionBooking, exhibitionPanels } from "./helpers";
 
-// Startseite. OFFEN: Formulierungen der Wege auf Basis der Broschüre, Textfreigabe durch den AG (Z-01)
+// Startseite. Formulierungen der Wege von der Frauenberatungsstelle, 21.10.2026
 export const home: PageData = {
   slug: "start",
   title: "Sie sind hier, weil …",
@@ -11,12 +12,12 @@ export const home: PageData = {
       title: "Sie sind hier, weil …",
       paths: [
         {
-          reason: "Sie in Ihrer (Ex-) Beziehung oder durch eine andere Person erniedrigt, verletzt, bedroht oder kontrolliert werden oder wurden",
+          reason: "Sie in Ihrer (Ex-)Beziehung oder durch eine andere Person erniedrigt, verletzt, bedroht oder kontrolliert werden oder wurden",
           target: "Selbstcheck und Hilfe",
           href: "/selbstcheck",
         },
         {
-          reason: "Sie von Ihrem (Ex-) Partner oder einer anderen Person verfolgt oder belästigt werden",
+          reason: "Sie von Ihrem (Ex-)Partner oder einer anderen Person verfolgt oder belästigt werden",
           target: "Anlaufstellen und Ihre Rechte",
           href: "/hilfe#stalking",
         },
@@ -37,7 +38,7 @@ export const home: PageData = {
       blockType: "promises",
       items: [
         { title: "Vertraulich", text: "Die Beraterinnen haben Schweigepflicht." },
-        { title: "Kostenlos", text: "Beratung kostet Sie nichts." },
+        { title: "Kostenlos", text: "Die Beratung kostet Sie nichts." },
         { title: "Sie entscheiden", text: "Niemand drängt Sie zu einem Schritt, den Sie nicht wollen." },
       ],
     },
@@ -64,23 +65,8 @@ export const home: PageData = {
       heading: "Unsere Wanderausstellung",
       intro:
         "„Am Anfang war es Liebe … Wege aus der körperlichen und seelischen Gewalt“ ist seit 2022 im ganzen Kreis Höxter unterwegs, in Rathäusern, Banken und Gesundheitszentren. Hier sehen Sie alle zwölf Tafeln.",
-      booking: { text: "Sie möchten die Ausstellung bei sich zeigen? Buchen Sie sie bei der Gleichstellungsstelle des Kreises Höxter:", email: "gleichstellung@kreis-hoexter.de" },
-      // Tafeln der Wanderausstellung 2022, gerendert aus dem Ausstellungs-PDF der Altseite.
-      // OFFEN: Kurztexte und Alternativtexte vom AG (Z-07)
-      panels: [
-        { image: { asset: "exhibition/panel-01" }, title: "Am Anfang war es Liebe …" },
-        { image: { asset: "exhibition/panel-02" }, title: "Häusliche Gewalt ist durch nichts zu rechtfertigen" },
-        { image: { asset: "exhibition/panel-03" }, title: "Formen von häuslicher Gewalt erkennen" },
-        { image: { asset: "exhibition/panel-04" }, title: "Hilfen aus der Gewalt" },
-        { image: { asset: "exhibition/panel-05" }, title: "Erste Unterstützung für Frauen in Not" },
-        { image: { asset: "exhibition/panel-06" }, title: "Beratung für Frauen und Mädchen in der Region" },
-        { image: { asset: "exhibition/panel-07" }, title: "Wer schlägt, der geht! Ruf 110" },
-        { image: { asset: "exhibition/panel-08" }, title: "Wenn das Kindeswohl gefährdet ist" },
-        { image: { asset: "exhibition/panel-09" }, title: "Das liebe Geld: Es geht auch ohne ihn" },
-        { image: { asset: "exhibition/panel-10" }, title: "Du hast eine Vermutung?" },
-        { image: { asset: "exhibition/panel-11" }, title: "Was Sie selbst tun können" },
-        { image: { asset: "exhibition/panel-12" }, title: "Die Idee des Arbeitskreises" },
-      ],
+      booking: exhibitionBooking,
+      panels: exhibitionPanels,
     },
     {
       blockType: "newsList",

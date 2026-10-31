@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Unterpunkte im Menü, Mitgliederliste ohne Namen
+
+- **Entscheidung:** „Infos“ hat Unterpunkte: am Desktop beim Zeigen oder per Tastaturfokus, mobil immer sichtbar und eingerückt. Die Mitgliederliste nennt nur Einrichtungen, keine Namen.
+- **Begründung:** Wünsche der Frauenberatungsstelle (21.10.2026) und des AG (28.10.2026).
+- **Dateien:** `website/src/content/site.ts`, `website/src/components/SiteHeader.tsx`, `website/src/content/pages/working-group.ts`
+- **Von:** Auftraggeber, umgesetzt mit Claude
+
 ## 31.10.2026 – Seitenköpfe Hilfe und Infos getauscht
 
 - **Entscheidung:** Hilfe zeigt das pinke Band mit der Rechtsanwältin, die Frau und Kind schützt (band-p12), Infos das orangefarbene Band mit Frau und Kind auf dem Weg (band-p07). Ton und Grundfarbe der Bänder wandern mit.

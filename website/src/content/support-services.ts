@@ -1,5 +1,7 @@
 // Anlaufstellen im Kreis Höxter.
-// OFFEN: Daten stammen von der Altseite (Stand 2026) und aus der Broschüre 2016.
+// Hauptanlaufstellen und Caritas: Texte der Stellen selbst, geliefert vom AG am 28.10.2026.
+// Korrekturen der Frauenberatungsstelle vom 21.10.2026 sind eingearbeitet.
+// OFFEN: Die übrigen Daten stammen von der Altseite (Stand 2026) und aus der Broschüre 2016.
 // Nummern, Zeiten und Adressen vor Livegang vom AG bestätigen lassen (Z-03).
 
 export type Phone = { label?: string; number: string; note?: string };
@@ -10,14 +12,24 @@ export type SupportService = {
   question?: string;
   name: string;
   provider?: string;
+  /** Zielgruppe oder Voraussetzungen */
+  audience?: string;
   phones: Phone[];
   availability?: string;
   addresses?: string[];
-  email?: string;
+  /** Hinweis unter den Standorten */
+  addressNote?: string;
+  email?: string | string[];
+  /** Kurzer Zusatz hinter der E-Mail-Adresse */
+  emailNote?: string;
   website?: { url: string; label: string };
   description?: string;
+  /** Themen der Beratung, als Liste */
+  topics?: string[];
   /** Was die Beraterinnen anbieten, als Liste */
   offers?: string[];
+  /** Einleitung der Liste `offers`, wenn sie von „Die Beraterinnen bieten:“ abweicht */
+  offersLabel?: string;
   /** Kurzfassung für den Schnellzugriff der Startseite: die ersten `phoneCount` Nummern (Standard 1) */
   quick?: { label: string; note: string; phoneCount?: number };
 };
@@ -50,27 +62,50 @@ const counselling: SupportService = {
   question: "Was kann die Frauenberatungsstelle für Sie tun?",
   name: "Frauenberatungsstelle der AWO für den Kreis Höxter",
   provider: "Arbeiterwohlfahrt Kreisverband Höxter e.V., Beratungsstelle gegen Gewalt an Frauen",
-  phones: [{ number: "0160 93793030" }, { number: "0160 93793035" }],
+  audience:
+    "Frauen ab 18 Jahren, die Gewalt erleben oder von Gewalt bedroht sind, außerdem unterstützende Personen, Angehörige und Fachkräfte",
+  phones: [
+    { number: "0160 93793030", note: "auch Signal" },
+    { number: "0160 93793035", note: "auch Signal" },
+  ],
   availability:
-    "Montag bis Donnerstag 9 bis 17 Uhr, Freitag 9 bis 12:30 Uhr. Termine nach Vereinbarung per Telefon, E-Mail oder Signal-Messenger.",
+    "Montag bis Donnerstag 9 bis 17 Uhr, Freitag 9 bis 12:30 Uhr. Kurzfristig telefonische oder persönliche Beratung und Beratung per E-Mail.",
   addresses: [
     "AWO Familienstützpunkt, Gartenstraße 7, 37671 Höxter",
     "AWO Beratungsstellen, Caspar-Heinrich-Straße 7, 33014 Bad Driburg",
     "AWO Familienstützpunkt, Pyrmonter Straße 8, 32839 Steinheim",
+    "Rathaus Peckelsheim, Abdinghofweg 1, 34439 Willebadessen-Peckelsheim",
   ],
-  email: "frauenberatungsstelle@awo-hoexter.de", // vom AG bestätigt 11.10.2026
+  addressNote:
+    "Termine nach Vereinbarung, nach Absprache auch an weiteren Orten im Kreis Höxter. An allen Standorten ist nach vorheriger Absprache eine barrierefreie Beratung möglich.",
+  email: "fbs@awo-hoexter.de", // laut Text der Beratungsstelle, Flyer 2026 und Mitgliederliste (28.10.2026)
   website: {
     url: "https://awo-hx.de/einrichtungen/beratungsstellen/frauenberatung/",
     label: "awo-hx.de",
   },
   description:
-    "Die Frauenberatungsstelle ist ein sicherer Ort für Frauen, die Gewalt erleben oder erlebt haben. Die Beratung ist vertraulich und kostenfrei, die Beraterinnen haben Schweigepflicht. Sie werden zu nichts gedrängt: Sie entscheiden selbst, was Sie möchten, wann Sie es möchten und ob Sie es möchten.",
+    "In einem geschützten Rahmen werden Ihre persönlichen Ziele zur Stärkung und zum Schutz herausgearbeitet und Ihnen Wege aufgezeigt, diese zu erreichen. Ihre Entscheidungen bestimmen den weiteren Verlauf. Solange wie nötig werden Sie während dieses Beratungsprozesses begleitet, bestärkt und unterstützt. Die Beratung ist parteilich, vertraulich und kostenfrei.",
+  topics: [
+    "Häusliche Gewalt: Gewalt zwischen Menschen, die in nahen Beziehungen zueinander stehen oder standen. Sie zeigt sich zum Beispiel durch Drohungen, Erniedrigungen, soziale Kontrolle und Isolation, Schlagen, Tritte, Einsperren, Kontaktverbote, Kontrolle der Finanzen oder das Erzwingen sexueller Handlungen",
+    "Sexualisierte Gewalt wie Vergewaltigung und sexuelle Nötigung oder Belästigung",
+    "Sexueller Missbrauch in der Kindheit und Jugend",
+    "Digitale Gewalt",
+    "Stalking",
+    "Zwangsheirat",
+    "Gewalt im Namen der Ehre",
+  ],
+  offersLabel: "Die Beraterinnen unterstützen Sie:",
   offers: [
-    "Begleitung in der akuten Krise und bei der Verarbeitung des Erlebten",
-    "Ein Schutz- und Sicherheitsplan für Sie und Ihre Kinder, auch wenn Sie bei Ihrem Partner bleiben",
-    "Informationen zu Ihren Rechten, Unterstützung bei Anträgen nach dem Gewaltschutzgesetz (Kontaktverbot, Wohnungszuweisung)",
-    "Hilfe im Umgang mit Behörden und bei der Klärung Ihrer finanziellen Lage",
-    "Vermittlung an weitere Anlaufstellen",
+    "bei der Bewältigung akuter Krisensituationen",
+    "bei der Aufarbeitung des Gewaltgeschehens",
+    "bei Ihrer individuellen Schutz- und Sicherheitsplanung",
+    "bei der Beantragung einer Schutzanordnung nach dem Gewaltschutzgesetz",
+    "bei der Informationssuche zum Gewaltschutz und zu Opferrechten",
+    "bei Ihrer Existenzsicherung",
+    "bei gerichtlichen Angelegenheiten",
+    "bei Gesprächen mit Rechtsanwält*innen, Ärzt*innen und anderen",
+    "bei der Kontaktaufnahme zu Frauenhäusern",
+    "bei der Vermittlung an andere Beratungs- und Fachdienste",
   ],
   quick: {
     label: "Frauenberatungsstelle der AWO",
@@ -84,12 +119,15 @@ const shelter: SupportService = {
   id: "schutzhaus",
   question: "Was kann das Frauen- und Kinderschutzhaus für Sie tun?",
   name: "Frauen- und Kinderschutzhaus im Kreis Höxter",
-  provider: "Sozialdienst katholischer Frauen e.V. Warburg",
+  provider: "Sozialdienst katholischer Frauen e.V., 34414 Warburg",
+  audience:
+    "Voraussetzungen für die Aufnahme: Sie sind mindestens 18 Jahre alt und haben seelische, körperliche, sexualisierte und/oder finanzielle Gewalt erlebt.",
   phones: [{ number: "0171 5430155", note: "rund um die Uhr" }],
-  availability: "Telefonisch 24 Stunden am Tag, an jedem Tag im Jahr",
+  availability: "Täglich, 24 Stunden",
+  email: "Frauenhaus@skf-warburg.de",
   website: { url: "https://www.skf-warburg.de", label: "skf-warburg.de" },
   description:
-    "Das Schutzhaus bietet Ihnen und Ihren Kindern Zuflucht, Schutz und Unterstützung. Sie können so lange bleiben, bis Sie entschieden haben, wie es für Sie weitergeht. Die Mitarbeiterinnen helfen bei allen Fragen, auch bei Behördenkontakten. Die Adresse des Schutzhauses wird zu Ihrer Sicherheit nicht veröffentlicht.",
+    "Das Frauen- und Kinderschutzhaus im Kreis Höxter bietet Schutz, Beratung und Begleitung auf dem Weg in ein gewaltfreies Leben. Die Beratung ist absolut vertraulich. Die Anschrift des Frauenhauses bleibt zum Schutz der dort wohnenden Frauen anonym, Sie erreichen es telefonisch oder per E-Mail.",
   quick: {
     label: "Frauen- und Kinderschutzhaus im Kreis Höxter",
     note: "Rund um die Uhr erreichbar",
@@ -103,12 +141,14 @@ const police: SupportService = {
   phones: [
     { label: "Im Notfall", number: "110" },
     { label: "In allen anderen Fällen", number: "05271 962-0" },
-    { label: "Opferschutzbeauftragte", number: "05271 9621350" },
+    { label: "Opferschutz, Judith Fabeck, Kriminalhauptkommissarin und Opferschutzbeauftragte", number: "05271 9621350", note: "zu Bürozeiten" },
   ],
   addresses: ["Bismarckstraße 18, 37671 Höxter"],
+  email: "judith.fabeck@polizei.nrw.de",
+  emailNote: "Opferschutz",
   website: { url: "https://hoexter.polizei.nrw", label: "hoexter.polizei.nrw" },
   description:
-    "Wenn Sie oder Ihre Kinder bedroht werden, können Sie sich jederzeit an die Polizei wenden. Die Polizei kann die gewalttätige Person für zehn Tage aus der Wohnung verweisen und ein Rückkehrverbot aussprechen, auch wenn die Wohnung ihr gehört.",
+    "Wenn Sie oder Ihre Kinder bedroht werden, können Sie sich jederzeit an die Polizei wenden. Die Polizei kann die gewalttätige Person für zehn Tage aus der Wohnung verweisen und ein Rückkehrverbot aussprechen, auch wenn die Wohnung ihr gehört. Der polizeiliche Opferschutz informiert Sie über den Ablauf eines Strafverfahrens, Ihre Rechte als Opfer sowie Antrags- und Entschädigungsmöglichkeiten. Sie erfahren, welche Hilfseinrichtungen es gibt, und werden bei Bedarf zeitnah an professionelle Hilfe vermittelt.",
   quick: {
     label: "Polizei im Notfall",
     note: "Wenn Sie oder Ihre Kinder in Gefahr sind",
@@ -137,12 +177,22 @@ export const serviceGroups: ServiceGroup[] = [
       {
         id: "caritas-eb",
         name: "Beratungsstelle für Eltern, Kinder und Jugendliche",
-        provider: "Beratungszentrum der Caritas für den Kreis Höxter",
-        phones: [{ number: "05272 371460" }],
+        provider: "Caritasverband für den Kreis Höxter e.V.",
+        audience: "Eltern, Kinder, Jugendliche und junge Erwachsene bis zum 21. Lebensjahr",
+        phones: [
+          { label: "Zentrale", number: "05272 371460", note: "werktags 9 bis 15 Uhr" },
+          { label: "Verwaltung der Beratungsstelle", number: "05272 371435" },
+        ],
         addresses: ["Kirchplatz 2, 33034 Brakel"],
+        email: ["eb@caritas-hx.de", "info-bz@caritas-hx.de"],
         website: { url: "https://www.caritas-hx.de", label: "caritas-hx.de" },
         description:
-          "Hilfe bei der Frage, wie sich Gewalt auf Ihre Kinder auswirkt, sowie bei Fragen zu Sorge- und Umgangsrecht.",
+          "Allgemeine Beratung zu allen Fragen und Problemen, die in Kindheit, Jugend, Elternschaft und Familienleben auftreten können.",
+        offersLabel: "Zusätzlich Fachberatungsstelle bei sexualisierter Gewalt an Kindern, Jugendlichen und jungen Erwachsenen:",
+        offers: [
+          "Beratung für betroffene Kinder, Jugendliche und junge Erwachsene bis zum 27. Lebensjahr, ihre Angehörigen und Fachkräfte",
+          "Präventionsangebote und Schulungen für Fachkräfte und Institutionen",
+        ],
       },
       {
         id: "diakonie",
@@ -225,6 +275,27 @@ export const serviceGroups: ServiceGroup[] = [
     title: "Telefonische Beratung / Online Beratung",
     services: [
       {
+        id: "big-hotline",
+        name: "BIG Hotline",
+        provider: "Berlin, bei häuslicher Gewalt, Stalking und mehr",
+        phones: [{ number: "030 6110300" }],
+        website: { url: "https://www.big-hotline.de", label: "big-hotline.de" },
+      },
+      {
+        id: "hilfe-telefon-missbrauch",
+        name: "Hilfe-Telefon Sexueller Missbrauch",
+        phones: [{ number: "0800 2255530" }],
+        description: "Bei sexuellem Missbrauch.",
+        website: { url: "https://www.hilfe-portal-missbrauch.de/hilfe-telefon", label: "hilfe-portal-missbrauch.de" },
+      },
+      {
+        id: "opfer-telefon",
+        name: "Opfer-Telefon des Weissen Rings",
+        provider: "Für Opfer einer Straftat",
+        phones: [{ number: "116 006" }],
+        website: { url: "https://weisser-ring.de/hilfe-fuer-opfer/opfer-telefon", label: "weisser-ring.de" },
+      },
+      {
         id: "telefonseelsorge",
         name: "Telefonseelsorge",
         phones: [{ number: "0800 1110111" }, { number: "0800 1110222" }],
@@ -235,28 +306,6 @@ export const serviceGroups: ServiceGroup[] = [
         name: "Sorgentelefon für Kinder, Jugendliche und Erwachsene",
         phones: [{ number: "0800 1110444" }],
         availability: "Kostenlos",
-      },
-      // Ergänzt auf Wunsch der Frauenberatungsstelle (21.10.2026), nur mit Link; Nummern stehen auf den Seiten
-      {
-        id: "big-hotline",
-        name: "BIG Hotline",
-        phones: [],
-        description: "Bei häuslicher Gewalt, Stalking, etc.",
-        website: { url: "https://www.big-hotline.de", label: "big-hotline.de" },
-      },
-      {
-        id: "hilfe-telefon-missbrauch",
-        name: "Hilfe-Telefon Sexueller Missbrauch",
-        phones: [],
-        description: "Bei sexuellem Missbrauch.",
-        website: { url: "https://www.hilfe-portal-missbrauch.de/hilfe-telefon", label: "hilfe-portal-missbrauch.de" },
-      },
-      {
-        id: "opfer-telefon",
-        name: "Opfer-Telefon des Weissen Rings",
-        phones: [],
-        description: "Für Opfer einer Straftat.",
-        website: { url: "https://weisser-ring.de/hilfe-fuer-opfer/opfer-telefon", label: "weisser-ring.de" },
       },
     ],
   },

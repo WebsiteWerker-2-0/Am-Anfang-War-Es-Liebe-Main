@@ -89,7 +89,7 @@ export type PageBlock =
       heading: string;
       topics: { title: string; links: { label: string; url: string }[] }[];
     }
-  | { blockType: "peopleList"; anchor?: string; heading: string; people: { name: string; role?: string }[] }
+  | { blockType: "peopleList"; anchor?: string; heading: string; people: { name: string; role?: string; url?: string }[] }
   | {
       blockType: "campaign";
       anchor?: string;
@@ -196,7 +196,7 @@ export type PostDocument = {
 };
 
 export type SiteData = {
-  navigation: { label: string; href: string }[];
+  navigation: { label: string; href: string; children?: { label: string; href: string }[] }[];
   languages: { code: string; label: string; href: string }[];
   helpline: { number: string; suffix: string };
   mailboxes: Record<Mailbox, { label: string; email: string }>;

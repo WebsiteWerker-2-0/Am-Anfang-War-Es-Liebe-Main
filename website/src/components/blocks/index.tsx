@@ -241,7 +241,15 @@ function PeopleList({ block }: { block: Block<"peopleList"> }) {
       <ul className="people">
         {block.people.map((person, index) => (
           <li key={index}>
-            <strong>{person.name}</strong>
+            <strong>
+              {person.url ? (
+                <a href={person.url} rel="noreferrer">
+                  {person.name}
+                </a>
+              ) : (
+                person.name
+              )}
+            </strong>
             {person.role && (
               <>
                 <br />
