@@ -3,9 +3,9 @@ import { tel } from "./helpers";
 
 export const info: PageData = {
   slug: "infos",
-  title: "Infos und Dokumente",
+  title: "Infos und Broschüren",
   description: "Broschüre, Flyer und weiterführende Informationen zu Gewalt gegen Frauen und Kinder.",
-  intro: "Die Broschüre des Arbeitskreises, Flyer zum Mitnehmen und weiterführende Informationen.",
+  intro: "Die Broschüre des Arbeitskreises, Flyer zum Herunterladen und weiterführende Informationen.",
   band: "info",
   layout: "stack-lg",
   blocks: [
@@ -46,6 +46,11 @@ export const info: PageData = {
           meta: "PDF, 2,7 MB · Deutsch · Stand: 2017",
         },
         {
+          title: "Flyer der Frauenberatungsstelle der AWO für den Kreis Höxter „Neue Wege ohne Gewalt“",
+          file: "/downloads/flyer-frauenberatungsstelle-awo-2026.pdf",
+          meta: "PDF, 1,2 MB · Deutsch · Stand: 2026",
+        },
+        {
           title: "Flyer des Weissen Rings zu K.-o.-Tropfen",
           file: "/downloads/flyer-ko-tropfen-weisser-ring.pdf",
           meta: "PDF, 0,3 MB · Deutsch · Stand: ohne Datum",
@@ -61,23 +66,30 @@ export const info: PageData = {
       blockType: "topicLinks",
       anchor: "links",
       heading: "Weiterführende Informationen",
+      // Links nach Vorschlag der Frauenberatungsstelle (21.10.2026); gewaltschutz.info entfernt (veraltet)
       topics: [
         {
-          title: "Informationen in vielen Sprachen",
-          links: [{ url: "https://www.gewaltschutz.info", label: "gewaltschutz.info" }],
-        },
-        {
-          title: "Gewalt im Internet",
+          title: "Für Erwachsene, z. B. ausführliche Infos zu den verschiedenen Gewaltformen",
           links: [
-            { url: "https://www.buendnis-gegen-cybermobbing.de", label: "buendnis-gegen-cybermobbing.de" },
-            { url: "https://www.klicksafe.de", label: "klicksafe.de" },
+            { url: "https://frauen-info-netz.de", label: "frauen-info-netz.de" },
+            { url: "https://www.frauen-gegen-gewalt.de", label: "frauen-gegen-gewalt.de" },
+            { url: "https://www.frauenhauskoordinierung.de", label: "frauenhauskoordinierung.de" },
           ],
         },
         {
           title: "Für Kinder und Jugendliche",
           links: [
-            { url: "http://gewalt-ist-nie-okay.de", label: "gewalt-ist-nie-okay.de" },
+            { url: "https://www.klicksafe.de", label: "klicksafe.de" },
             { url: "https://www.trau-dich.de", label: "trau-dich.de" },
+            { url: "http://gewalt-ist-nie-okay.de", label: "gewalt-ist-nie-okay.de" },
+            { url: "https://www.juuuport.de", label: "juuuport.de" },
+          ],
+        },
+        {
+          title: "Digitale Gewalt",
+          links: [
+            { url: "https://sicher-gegen-digitale-gewalt.org", label: "sicher-gegen-digitale-gewalt.org" },
+            { url: "https://buendnis-gegen-cybermobbing.de", label: "buendnis-gegen-cybermobbing.de" },
           ],
         },
       ],

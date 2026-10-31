@@ -18,8 +18,8 @@ export type SupportService = {
   description?: string;
   /** Was die Beraterinnen anbieten, als Liste */
   offers?: string[];
-  /** Kurzfassung für den Schnellzugriff der Startseite, gewählt wird die erste Nummer */
-  quick?: { label: string; note: string };
+  /** Kurzfassung für den Schnellzugriff der Startseite: die ersten `phoneCount` Nummern (Standard 1) */
+  quick?: { label: string; note: string; phoneCount?: number };
 };
 
 export type ServiceGroup = { title: string; services: SupportService[] };
@@ -75,6 +75,8 @@ const counselling: SupportService = {
   quick: {
     label: "Frauenberatungsstelle der AWO",
     note: "Montag bis Donnerstag 9 bis 17 Uhr, Freitag 9 bis 12:30 Uhr",
+    // Beide Nummern auf der Startseite (Wunsch Frauenberatungsstelle, 21.10.2026)
+    phoneCount: 2,
   },
 };
 
@@ -146,16 +148,14 @@ export const serviceGroups: ServiceGroup[] = [
         id: "diakonie",
         name: "Familien- und Lebensberatung",
         provider: "Diakonie Paderborn-Höxter e.V.",
-        phones: [
-          { label: "Höxter", number: "05271 921983" },
-          { label: "Warburg", number: "05641 788810" },
-        ],
-        addresses: ["Brüderstraße 7, 37671 Höxter", "Sternstraße 19, 34414 Warburg"],
-        website: { url: "https://www.diakonie-pbhx.de", label: "diakonie-pbhx.de" },
+        // Nur noch in Warburg (Frauenberatungsstelle, 21.10.2026)
+        phones: [{ label: "Warburg", number: "05641 788810" }],
+        addresses: ["Sternstraße 19, 34414 Warburg"],
+        website: { url: "https://www.diakonie-pbhx.de/familien-und-lebensberatung/", label: "diakonie-pbhx.de" },
       },
       {
         id: "awo-schwangerschaft",
-        name: "Beratungsstelle für Schwangerschaft, Partnerschaft und Sexualität",
+        name: "Beratungsstelle für Schwangerschaft, Partnerschaft und Sexualität der AWO – anerkannte Schwangerschaftskonfliktberatungsstelle gem. §9 SchKG",
         provider: "Arbeiterwohlfahrt Kreisverband Höxter e.V.",
         phones: [
           { label: "Höxter", number: "05271 966389" },
@@ -166,7 +166,7 @@ export const serviceGroups: ServiceGroup[] = [
           "Caspar-Heinrich-Straße 7, 33014 Bad Driburg",
           "Pyrmonter Straße 8, 32839 Steinheim",
         ],
-        website: { url: "https://awo-hx.de", label: "awo-hx.de" },
+        website: { url: "https://awo-hx.de/einrichtungen/beratungsstellen/schwangerschaftsberatung/", label: "awo-hx.de" },
       },
       {
         id: "donum-vitae",
@@ -182,13 +182,13 @@ export const serviceGroups: ServiceGroup[] = [
     services: [
       {
         id: "asd",
-        name: "Allgemeiner Sozialer Dienst des Kreises Höxter",
+        name: "Allgemeiner Sozialer Dienst im Jugendamt des Kreises Höxter",
         phones: [{ number: "05271 965-3306" }],
         availability:
           "Montag bis Freitag 8:30 bis 12:30 Uhr, Montag bis Donnerstag 14 bis 16 Uhr oder nach Vereinbarung",
         addresses: ["Kreishaus, Moltkestraße 12, 37671 Höxter"],
         description:
-          "Hilfe in akuten Krisen, etwa bei sexuellem Missbrauch und Misshandlung, bei Trennung und Scheidung, Sorgerecht und Umgang.",
+          "Der Hauptzweck des ASD ist es, Kinder, Jugendliche und Familien in schwierigen Lebenslagen (z.B. bei Erziehungsfragen, familiären Konflikten, Trennung oder Scheidung) zu unterstützen, zu beraten und den Schutz von Minderjährigen sicherzustellen.",
       },
       {
         id: "gleichstellung",
@@ -199,7 +199,7 @@ export const serviceGroups: ServiceGroup[] = [
       {
         id: "weisser-ring",
         name: "Weisser Ring, Außenstelle Höxter",
-        phones: [{ number: "0151 55164762" }],
+        phones: [{ number: "0152 04786213" }],
         website: { url: "https://www.weisser-ring.de", label: "weisser-ring.de" },
         description:
           "Hilfe für Opfer von Straftaten: menschlicher Beistand, Begleitung zu Behörden, Übernahme von Anwaltskosten und finanzielle Unterstützung.",
@@ -222,7 +222,7 @@ export const serviceGroups: ServiceGroup[] = [
     ],
   },
   {
-    title: "Telefonische Beratung",
+    title: "Telefonische Beratung / Online Beratung",
     services: [
       {
         id: "telefonseelsorge",
@@ -235,6 +235,28 @@ export const serviceGroups: ServiceGroup[] = [
         name: "Sorgentelefon für Kinder, Jugendliche und Erwachsene",
         phones: [{ number: "0800 1110444" }],
         availability: "Kostenlos",
+      },
+      // Ergänzt auf Wunsch der Frauenberatungsstelle (21.10.2026), nur mit Link; Nummern stehen auf den Seiten
+      {
+        id: "big-hotline",
+        name: "BIG Hotline",
+        phones: [],
+        description: "Bei häuslicher Gewalt, Stalking, etc.",
+        website: { url: "https://www.big-hotline.de", label: "big-hotline.de" },
+      },
+      {
+        id: "hilfe-telefon-missbrauch",
+        name: "Hilfe-Telefon Sexueller Missbrauch",
+        phones: [],
+        description: "Bei sexuellem Missbrauch.",
+        website: { url: "https://www.hilfe-portal-missbrauch.de/hilfe-telefon", label: "hilfe-portal-missbrauch.de" },
+      },
+      {
+        id: "opfer-telefon",
+        name: "Opfer-Telefon des Weissen Rings",
+        phones: [],
+        description: "Für Opfer einer Straftat.",
+        website: { url: "https://weisser-ring.de/hilfe-fuer-opfer/opfer-telefon", label: "weisser-ring.de" },
       },
     ],
   },

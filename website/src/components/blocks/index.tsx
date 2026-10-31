@@ -346,6 +346,11 @@ function Exhibition({ block }: { block: Block<"exhibition"> }) {
         </p>
       )}
       <ExhibitionSlider panels={panels} />
+      {block.booking && (
+        <p className="measure" style={{ marginBlockStart: "var(--space-5)" }}>
+          {block.booking.text} <a href={`mailto:${block.booking.email}`}>{block.booking.email}</a>
+        </p>
+      )}
     </section>
   );
 }
@@ -481,7 +486,14 @@ async function QuickAccess({ block }: { block: Block<"quickAccess"> }) {
           <li key={service.id}>
             <span className="service-list__name">{service.quick?.label ?? service.name}</span>
             {service.quick && <span className="muted">{service.quick.note}</span>}
-            <PhoneLink number={service.phones[0].number} className="service-list__number" />
+            <span className="service-list__number">
+              {service.phones.slice(0, service.quick?.phoneCount ?? 1).map((phone, index) => (
+                <span key={phone.number}>
+                  {index > 0 && <br />}
+                  <PhoneLink number={phone.number} className="" />
+                </span>
+              ))}
+            </span>
           </li>
         ))}
       </ul>

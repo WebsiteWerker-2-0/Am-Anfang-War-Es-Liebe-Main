@@ -18,18 +18,22 @@ export function SupportServiceSection({ service, level = 2 }: { service: Support
             <dd>{service.provider}</dd>
           </>
         )}
-        <dt>Telefon</dt>
-        <dd>
-          <ul>
-            {service.phones.map((phone) => (
-              <li key={phone.number}>
-                {phone.label && <>{phone.label}: </>}
-                <PhoneLink number={phone.number} />
-                {phone.note && <span className="muted"> ({phone.note})</span>}
-              </li>
-            ))}
-          </ul>
-        </dd>
+        {service.phones.length > 0 && (
+          <>
+            <dt>Telefon</dt>
+            <dd>
+              <ul>
+                {service.phones.map((phone) => (
+                  <li key={phone.number}>
+                    {phone.label && <>{phone.label}: </>}
+                    <PhoneLink number={phone.number} />
+                    {phone.note && <span className="muted"> ({phone.note})</span>}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </>
+        )}
         {service.availability && (
           <>
             <dt>Erreichbarkeit</dt>

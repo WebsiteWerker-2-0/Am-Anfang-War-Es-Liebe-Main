@@ -120,6 +120,8 @@ export type PageBlock =
       anchor?: string;
       heading: string;
       intro?: string;
+      /** Hinweis zum Ausleihen der Ausstellung mit E-Mail-Adresse */
+      booking?: { text: string; email: string };
       panels: { image: ImageValue; title: string }[];
     }
   | { blockType: "courseList"; anchor?: string; heading: string; emptyNotice: Rich }

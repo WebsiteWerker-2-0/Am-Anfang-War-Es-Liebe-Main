@@ -11,12 +11,12 @@ export const home: PageData = {
       title: "Sie sind hier, weil …",
       paths: [
         {
-          reason: "Sie in Ihrer Beziehung verletzt, bedroht oder kontrolliert werden",
+          reason: "Sie in Ihrer (Ex-) Beziehung oder durch eine andere Person erniedrigt, verletzt, bedroht oder kontrolliert werden oder wurden",
           target: "Selbstcheck und Hilfe",
           href: "/selbstcheck",
         },
         {
-          reason: "Sie von Ihrem Ex-Partner verfolgt oder belästigt werden",
+          reason: "Sie von Ihrem (Ex-) Partner oder einer anderen Person verfolgt oder belästigt werden",
           target: "Anlaufstellen und Ihre Rechte",
           href: "/hilfe#stalking",
         },
@@ -37,7 +37,7 @@ export const home: PageData = {
       blockType: "promises",
       items: [
         { title: "Vertraulich", text: "Die Beraterinnen haben Schweigepflicht." },
-        { title: "Kostenlos", text: "Beratung und Schutz kosten Sie nichts." },
+        { title: "Kostenlos", text: "Beratung kostet Sie nichts." },
         { title: "Sie entscheiden", text: "Niemand drängt Sie zu einem Schritt, den Sie nicht wollen." },
       ],
     },
@@ -61,9 +61,10 @@ export const home: PageData = {
     {
       blockType: "exhibition",
       anchor: "ausstellung-titel",
-      heading: "Die Wanderausstellung",
+      heading: "Unsere Wanderausstellung",
       intro:
         "„Am Anfang war es Liebe … Wege aus der körperlichen und seelischen Gewalt“ ist seit 2022 im ganzen Kreis Höxter unterwegs, in Rathäusern, Banken und Gesundheitszentren. Hier sehen Sie alle zwölf Tafeln.",
+      booking: { text: "Sie möchten die Ausstellung bei sich zeigen? Buchen Sie sie bei der Gleichstellungsstelle des Kreises Höxter:", email: "gleichstellung@kreis-hoexter.de" },
       // Tafeln der Wanderausstellung 2022, gerendert aus dem Ausstellungs-PDF der Altseite.
       // OFFEN: Kurztexte und Alternativtexte vom AG (Z-07)
       panels: [

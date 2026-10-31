@@ -2,6 +2,13 @@
 
 Neueste Einträge oben. Jede Festlegung bekommt einen Eintrag und wird zusätzlich in die passende Themendatei übernommen.
 
+## 31.10.2026 – Seitenköpfe Hilfe und Infos getauscht
+
+- **Entscheidung:** Hilfe zeigt das pinke Band mit der Rechtsanwältin, die Frau und Kind schützt (band-p12), Infos das orangefarbene Band mit Frau und Kind auf dem Weg (band-p07). Ton und Grundfarbe der Bänder wandern mit.
+- **Begründung:** Wunsch der Frauenberatungsstelle (Anmerkungen vom 21.10.2026).
+- **Datei:** `website/src/content/page-bands.ts`
+- **Von:** Steffen (mit Claude)
+
 ## 17.10.2026 – Bilder im Beitrag, Downloads, Archiv auf Aktuelles
 
 - **Entscheidung:** Bilder im Text mittig in voller Textbreite oder links/rechts in halber Breite (3:2 zugeschnitten, Text daneben, mobil volle Breite), unabhängig von der Auflösung der Datei. Downloads als Liste unter dem Beitrag: Vorschaubild oder PDF-Symbol, Name, „PDF, Größe“, dunkler Knopf „Download“. Archivierte Beiträge eingeklappt („Archiv (n)“) am Ende von Aktuelles, im Stil der Anlaufstellen-Gruppen.
