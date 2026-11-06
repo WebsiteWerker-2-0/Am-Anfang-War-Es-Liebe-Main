@@ -38,7 +38,7 @@ export const home: PageData = {
       blockType: "promises",
       items: [
         { title: "Vertraulich", text: "Die Beraterinnen haben Schweigepflicht." },
-        { title: "Kostenlos", text: "Die Beratung kostet Sie nichts." },
+        { title: "Kostenlos", text: "Beratung ist für Sie kostenlos." },
         { title: "Sie entscheiden", text: "Niemand drängt Sie zu einem Schritt, den Sie nicht wollen." },
       ],
     },

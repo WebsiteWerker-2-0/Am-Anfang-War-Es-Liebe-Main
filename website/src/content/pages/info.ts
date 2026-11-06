@@ -14,7 +14,7 @@ export const infoSections = [
   {
     slug: "infos/broschueren-und-flyer",
     label: "Broschüren und Flyer zum Download",
-    note: "Broschüre des Arbeitskreises, Flyer, Rad der Gewalt und Gewaltspirale",
+    note: "Broschüren und Flyer des Arbeitskreises, weitere Flyer, Das Rad der Gewalt, Die Gewaltspirale",
   },
   {
     slug: "infos/weiterfuehrende-informationen",
@@ -164,10 +164,12 @@ export const furtherInformation: PageData = {
       blockType: "topicLinks",
       anchor: "links",
       heading: "Empfohlene Internetseiten",
-      // Links nach Vorschlag der Frauenberatungsstelle (21.10.2026); gewaltschutz.info entfernt (veraltet)
+      // Links nach Vorschlag der Frauenberatungsstelle (21.10.2026); gewaltschutz.info entfernt (veraltet).
+      // 06.11.2026 (Frauenberatungsstelle): Frauenhaus-Suche in der Überschrift, gewalt-ist-nie-ok.de wieder aufgenommen
+      // (neue Adresse; die alte gewalt-ist-nie-okay.de leitet auf eine vertippte Domain weiter)
       topics: [
         {
-          title: "Für Erwachsene, z. B. ausführliche Infos zu den verschiedenen Gewaltformen",
+          title: "Für Erwachsene, z. B. ausführliche Infos zu den verschiedenen Gewaltformen, Suche nach einem Platz im Frauen- und Kinderschutzhaus",
           links: [
             { url: "https://frauen-info-netz.de", label: "frauen-info-netz.de" },
             { url: "https://www.frauen-gegen-gewalt.de", label: "frauen-gegen-gewalt.de" },
@@ -180,6 +182,7 @@ export const furtherInformation: PageData = {
           links: [
             { url: "https://www.klicksafe.de", label: "klicksafe.de" },
             { url: "https://www.trau-dich.de", label: "trau-dich.de" },
+            { url: "https://www.gewalt-ist-nie-ok.de/de", label: "gewalt-ist-nie-ok.de" },
             { url: "https://www.juuuport.de", label: "juuuport.de" },
           ],
         },

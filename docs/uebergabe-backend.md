@@ -114,3 +114,9 @@ Darstellung: `src/components/blocks/index.tsx` (Blöcke), `CmsPage.tsx` (Seitenr
 - Migration `…_kurse`: nur neue Tabellen und eine Spalte in `payload_locked_documents_rels` (von Payload so erzeugt, unverändert übernommen). An Daten im Serverstand geprüft.
 - Vorschau: `/vorschau/termine/<id>` (vorher `/vorschau/veranstaltungen`), `/vorschau/kurse/<id>`.
 - Anmerkungen der Frauenberatungsstelle (21.10.2026) umgesetzt, soweit eindeutig: Startseite (Gründe, „Beratung kostet Sie nichts“, beide Nummern der Frauenberatungsstelle im Schnellzugriff, „Unsere Wanderausstellung“ mit Buchungsadresse), Hilfe (AWO-Schwangerschaftsberatung, Diakonie nur Warburg, ASD, Weisser Ring neue Nummer, drei Online-/Telefonangebote nur mit Link), Infos (Überschrift, Einleitung, Flyer der Frauenberatungsstelle, Links neu gegliedert, gewaltschutz.info entfernt), Bänder Hilfe/Infos getauscht. Offene Rückfragen stehen im Chat vom 31.10.
+
+## Nachtrag 06.11.2026: Rückmeldung der Frauenberatungsstelle
+
+- Startseite „Beratung ist für Sie kostenlos.“, Hilfe: Sorgentelefon durch Nummer gegen Kummer (116 111) ersetzt, Telefonseelsorge mit Link, Infos: Frauenhaus-Suche in der Überschrift, gewalt-ist-nie-ok.de wieder aufgenommen, Kurzbeschreibung „Broschüren und Flyer“ nach Wortlaut des AG.
+- Migration `20261106_120000_kurse_rueckmeldung` (nur Daten): Kurstitel „Krav Maga: Selbstverteidigung …“ und „Kids Krav Maga: Selbstverteidigung …“ (AG schlug „Krav Maga - Selbstverteidigung“ vor, Doppelpunkt statt Strich), Satz zu laufenden Kursen und Workshops entfernt (Angebote von KMC Höxter). An einer Datenbank im Stand von `main` geprüft, zweimal angewendet ohne doppelte Wirkung.
+- Offen bei Anna Lütkefend: Wendo-Anbieter, Nachweis fien-design, Datenschutzerklärung, Logo. Selbstcheck-Vorlage ging nicht mit, neu schicken.
