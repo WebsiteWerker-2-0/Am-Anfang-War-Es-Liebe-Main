@@ -51,7 +51,7 @@ const HELP = {
   stalking: { label: "Was Sie gegen Stalking tun können", href: "/hilfe#stalking" },
   relatives: { label: "Was Angehörige und Freund*innen tun können", href: "/hilfe#angehoerige" },
   youthOffice: { label: "Allgemeiner Sozialer Dienst (Jugendamt) des Kreises Höxter", href: "/hilfe#asd" },
-  childLine: { label: "Nummer gegen Kummer für Kinder, Jugendliche und Eltern", href: "/hilfe#nummer-gegen-kummer" },
+  childLine: { label: "Nummer gegen Kummer für Kinder, Jugendliche und junge Erwachsene", href: "/hilfe#nummer-gegen-kummer" },
   girlsHouse: { label: "Mädchenhaus", href: "/hilfe#maedchenhaus" },
   traces: { label: "Spuren dieses Besuchs im Browser löschen", href: "/internetspuren" },
 } satisfies Record<string, HelpLink>;
